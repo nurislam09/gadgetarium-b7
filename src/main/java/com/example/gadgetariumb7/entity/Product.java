@@ -42,22 +42,24 @@ public class Product {
     private String PDF;
 
     private String description;
+
     private ProductStatus productStatus;
+
     private Byte productRating;
-    private LocalDate createAt;
+
     private Color color;
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private Discount discount;
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST})
     private Brand brand;
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST})
     private Category category;
 
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST})
     private SubCategory subCategory;
 
     @ElementCollection
@@ -65,18 +67,17 @@ public class Product {
     @Column(name = "image_url")
     List<String> productImages;
 
-    @OneToMany(cascade = {ALL}, fetch = FetchType.EAGER, mappedBy = "product")
+    @OneToMany(cascade = {ALL}, mappedBy = "product")
     List<Review> usersReviews;
 
-    @OneToMany(cascade = {ALL}, fetch = FetchType.EAGER, mappedBy = "product")
+    @OneToMany(cascade = {ALL}, mappedBy = "product")
     List<SubProduct> subproducts;
 
-    @ManyToMany(cascade = {MERGE, REFRESH, DETACH}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {MERGE, REFRESH, DETACH})
     @JoinTable(
             name = "orders_products",
             joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
     private List<Order> orders;
 
     //PHONE
@@ -85,27 +86,27 @@ public class Product {
     private byte ramOfPhone;
 
     //TABLET
-    private String screenResolutionTablet; //(разрешение экрана)
-    private double screenSizeTablet; //(размер экрана)
-    private int memoryOfTablet; //(об.памяти)
-    private byte ramOfTablet; // (оп.память)
-    private double ScreenDiagonal; //(диоганаль экрана)
-    private int batteryPowerty; //(емкость.аккум)
+    private String screenResolutionTablet;
+    private double screenSizeTablet;
+    private int memoryOfTablet;
+    private byte ramOfTablet;
+    private double ScreenDiagonal;
+    private int batteryPowerty;
 
     //LAPTOP
-    private String laptopCPU; //(процессор ноутбука)
-    private String screenResolutionLaptop; //(разрешение экрана)
-    private String appointmentOfLaptop; //(назначение)
-    private Byte ramOfLaptop; // (оп.память)
+    private String laptopCPU;
+    private String screenResolutionLaptop;
+    private String appointmentOfLaptop;
+    private Byte ramOfLaptop;
     private byte videoCardMemory;
     private double screenSizeLaptop;
 
     //SMARTWATCH
-    private String wirelessInterface;//(беспроводные интерфейсы)
+    private String wirelessInterface;
     private int memory;
-    private String caseShape;//(форма корпуса
+    private String caseShape;
     private String braceletMaterial;
-    private String watchMaterial;// (м.часы)
+    private String watchMaterial;
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;

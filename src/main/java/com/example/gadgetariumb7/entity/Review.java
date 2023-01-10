@@ -28,9 +28,9 @@ public class Review {
 
     private boolean statusOfResponse;
 
-    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     private User user;
 
-    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     private Product product;
 }

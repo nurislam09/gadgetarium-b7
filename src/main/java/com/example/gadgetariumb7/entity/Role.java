@@ -21,7 +21,7 @@ public class Role {
     @SequenceGenerator(name = "product_seq", sequenceName = "product_seq", allocationSize = 1)
     private Long id;
 
-    private  String roleName;
+    private String roleName;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "role")
     private List<User> users = new ArrayList<>();

@@ -28,27 +28,27 @@ public class User {
     private String address;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
-    private List<Product> basketList;                            // (корзина)
+    private List<Product> basketList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
-    private List<Product> favoritesList;                         // (избранные)
+    private List<Product> favoritesList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH, REMOVE}, mappedBy = "user")
-    private List<Review> userReviews;                            // (отзывы покупателя)
+    private List<Review> userReviews;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
-    private List<Product> compareProductsList;                   // (товары для сравнения)
+    private List<Product> compareProductsList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
-    private List<Product> orderHistoryList;                      // (История заказов)
+    private List<Product> orderHistoryList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
-    private List<Product> viewedProductsList;                    // (просмотренные товары)
+    private List<Product> viewedProductsList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "user")
     private List<Order> orders;
 
-    @ManyToOne(cascade = {PERSIST, REFRESH, MERGE,DETACH})
+    @ManyToOne(cascade = {PERSIST, REFRESH, MERGE, DETACH})
     @JoinColumn(name = "role_id")
     private Role role;
 

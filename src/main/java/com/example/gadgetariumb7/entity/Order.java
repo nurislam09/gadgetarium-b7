@@ -22,11 +22,11 @@ import static jakarta.persistence.CascadeType.*;
 @NoArgsConstructor
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "order_seq")
-    @SequenceGenerator(name = "order_seq", sequenceName = "order_seq",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
+    @SequenceGenerator(name = "order_seq", sequenceName = "order_seq", allocationSize = 1)
     private Long id;
 
-    private String  firstName;
+    private String firstName;
 
     private String lastName;
 
@@ -58,7 +58,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
 
-    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     private User user;
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")

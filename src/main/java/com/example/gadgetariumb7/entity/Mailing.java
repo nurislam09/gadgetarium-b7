@@ -25,5 +25,6 @@ public class Mailing {
     private String image;
 
     private LocalDate stockDateOfStart;
+
     private LocalDate stockDateOfEnd;
 }
