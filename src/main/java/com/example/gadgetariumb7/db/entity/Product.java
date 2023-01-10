@@ -1,15 +1,14 @@
-package com.example.gadgetariumb7.entity;
+package com.example.gadgetariumb7.db.entity;
 
 
-import com.example.gadgetariumb7.entity.enums.Gender;
-import com.example.gadgetariumb7.entity.enums.ProductStatus;
+import com.example.gadgetariumb7.db.enums.Gender;
+import com.example.gadgetariumb7.db.enums.ProductStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.awt.*;
-import java.time.LocalDate;
 import java.util.List;
 
 import static jakarta.persistence.CascadeType.*;
@@ -60,7 +59,7 @@ public class Product {
 
 
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST})
-    private SubCategory subCategory;
+    private Subcategory subCategory;
 
     @ElementCollection
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "id"))
@@ -71,7 +70,7 @@ public class Product {
     List<Review> usersReviews;
 
     @OneToMany(cascade = {ALL}, mappedBy = "product")
-    List<SubProduct> subproducts;
+    List<Subproduct> subproducts;
 
     @ManyToMany(cascade = {MERGE, REFRESH, DETACH})
     @JoinTable(
@@ -80,20 +79,17 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "order_id"))
     private List<Order> orders;
 
-    //PHONE
     private String simCard;
     private int memoryOfPhone;
     private byte ramOfPhone;
 
-    //TABLET
     private String screenResolutionTablet;
     private double screenSizeTablet;
     private int memoryOfTablet;
     private byte ramOfTablet;
     private double ScreenDiagonal;
-    private int batteryPowerty;
+    private int batteryCapacity;
 
-    //LAPTOP
     private String laptopCPU;
     private String screenResolutionLaptop;
     private String appointmentOfLaptop;
@@ -101,9 +97,8 @@ public class Product {
     private byte videoCardMemory;
     private double screenSizeLaptop;
 
-    //SMARTWATCH
     private String wirelessInterface;
-    private int memory;
+    private int memoryOfSmartWatch;
     private String caseShape;
     private String braceletMaterial;
     private String watchMaterial;

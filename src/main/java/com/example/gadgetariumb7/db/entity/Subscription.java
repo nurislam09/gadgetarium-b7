@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.entity;
+package com.example.gadgetariumb7.db.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,5 +16,4 @@ public class Subscription {
     @SequenceGenerator(name = "subscription_seq", sequenceName = "subscription_seq", allocationSize = 1)
     private Long id;
     private String email;
-
 }

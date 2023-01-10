@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.entity;
+package com.example.gadgetariumb7.db.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,8 +17,8 @@ import static jakarta.persistence.CascadeType.*;
 @NoArgsConstructor
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
-    @SequenceGenerator(name = "product_seq", sequenceName = "product_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
+    @SequenceGenerator(name = "role_seq", sequenceName = "role_seq", allocationSize = 1)
     private Long id;
 
     private String roleName;

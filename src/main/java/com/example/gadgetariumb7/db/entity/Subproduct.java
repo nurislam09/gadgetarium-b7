@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.entity;
+package com.example.gadgetariumb7.db.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,14 +16,14 @@ import static jakarta.persistence.CascadeType.REFRESH;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SubProduct {
+public class Subproduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subproduct-seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subproduct_seq")
     @SequenceGenerator(name = "subproduct_seq", sequenceName = "subproduct_seq", allocationSize = 1)
     private Long id;
     private int price;
     private int memory;
-    private String laptopCPU; //(процессор ноутбука)
+    private String laptopCPU;
 
     private Color color;
     @ElementCollection

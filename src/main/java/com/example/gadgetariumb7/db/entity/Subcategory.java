@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.entity;
+package com.example.gadgetariumb7.db.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import static jakarta.persistence.CascadeType.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SubCategory {
+public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subcategory_seq")
     @SequenceGenerator(name = "subcategory_seq", sequenceName = "subcategory_seq", allocationSize = 1)

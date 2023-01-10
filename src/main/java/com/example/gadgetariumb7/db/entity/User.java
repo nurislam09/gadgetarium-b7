@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.entity;
+package com.example.gadgetariumb7.db.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -51,5 +51,4 @@ public class User {
     @ManyToOne(cascade = {PERSIST, REFRESH, MERGE, DETACH})
     @JoinColumn(name = "role_id")
     private Role role;
-
 }

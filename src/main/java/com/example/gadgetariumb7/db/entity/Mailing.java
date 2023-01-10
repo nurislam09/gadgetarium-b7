@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.entity;
+package com.example.gadgetariumb7.db.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class Mailing {
 
     private String image;
 
-    private LocalDate stockDateOfStart;
+    private LocalDate mailingDateOfStart;
 
-    private LocalDate stockDateOfEnd;
+    private LocalDate mailingDateOfEnd;
 }

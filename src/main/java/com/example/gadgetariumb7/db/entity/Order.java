@@ -1,10 +1,10 @@
-package com.example.gadgetariumb7.entity;
+package com.example.gadgetariumb7.db.entity;
 
-import com.example.gadgetariumb7.entity.enums.DeliveryStatus;
-import com.example.gadgetariumb7.entity.enums.OrderStatus;
-import com.example.gadgetariumb7.entity.enums.OrderType;
+import com.example.gadgetariumb7.db.enums.DeliveryStatus;
+import com.example.gadgetariumb7.db.enums.OrderStatus;
+import com.example.gadgetariumb7.db.enums.OrderType;
 
-import com.example.gadgetariumb7.entity.enums.Payment;
+import com.example.gadgetariumb7.db.enums.Payment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +36,7 @@ public class Order {
 
     private String address;
 
-    private int count;
+    private int countOfProduct;
 
     private int totalSum;
 
@@ -63,6 +63,4 @@ public class Order {
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")
     private List<Product> products;
-
-
 }
