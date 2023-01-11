@@ -53,13 +53,13 @@ public class Product {
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;
 
-    @ManyToOne(cascade = {DETACH, REFRESH, PERSIST})
+    @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
     private Brand brand;
 
-    @ManyToOne(cascade = {DETACH, REFRESH, PERSIST})
+    @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
     private Category category;
 
-    @ManyToOne(cascade = {DETACH, REFRESH, PERSIST})
+    @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
     private Subcategory subCategory;
 
     @ElementCollection
@@ -70,7 +70,7 @@ public class Product {
     @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")
     List<Review> usersReviews;
 
-    @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")
+    @OneToMany(cascade = {ALL}, mappedBy = "product")
     List<Subproduct> subproducts;
 
     @ManyToMany(cascade = {MERGE, REFRESH, DETACH})

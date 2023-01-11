@@ -60,9 +60,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
 
-    @ManyToOne(cascade = {DETACH, PERSIST, REFRESH})
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private User user;
 
-    @ManyToMany(cascade = {PERSIST, DETACH, REFRESH}, mappedBy = "orders")
+    @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")
     private List<Product> products;
 }
