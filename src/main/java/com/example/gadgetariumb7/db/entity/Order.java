@@ -5,7 +5,9 @@ import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.enums.OrderType;
 
 import com.example.gadgetariumb7.db.enums.Payment;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +15,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.*;
+import static javax.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "orders")
@@ -58,9 +60,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
 
-    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH})
+    @ManyToOne(cascade = {DETACH, PERSIST, REFRESH})
     private User user;
 
-    @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")
+    @ManyToMany(cascade = {PERSIST, DETACH, REFRESH}, mappedBy = "orders")
     private List<Product> products;
 }

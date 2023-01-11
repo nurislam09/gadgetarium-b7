@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.db.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,5 +24,4 @@ public class Discount {
     private LocalDate discountStartDate;
 
     private LocalDate discountEndDate;
-
 }

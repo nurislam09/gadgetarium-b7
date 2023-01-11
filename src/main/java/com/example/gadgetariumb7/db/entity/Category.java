@@ -1,11 +1,15 @@
 package com.example.gadgetariumb7.db.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
+import static javax.persistence.CascadeType.*;
+
 
 @Entity
 @Table(name = "categories")
@@ -20,6 +24,6 @@ public class Category {
 
     private String categoryName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
+    @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "category")
     private List<Subcategory> subcategories;
 }

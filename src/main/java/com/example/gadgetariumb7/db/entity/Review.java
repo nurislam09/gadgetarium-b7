@@ -1,13 +1,14 @@
 package com.example.gadgetariumb7.db.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-import static jakarta.persistence.CascadeType.*;
+import static javax.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "reviews")
@@ -28,9 +29,9 @@ public class Review {
 
     private boolean statusOfResponse;
 
-    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH})
+    @ManyToOne(cascade = {DETACH, PERSIST, REFRESH})
     private User user;
 
-    @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH})
+    @ManyToOne(cascade = {DETACH, PERSIST, REFRESH})
     private Product product;
 }

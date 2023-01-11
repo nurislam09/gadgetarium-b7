@@ -3,7 +3,9 @@ package com.example.gadgetariumb7.db.entity;
 
 import com.example.gadgetariumb7.db.enums.Gender;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +13,7 @@ import lombok.Setter;
 import java.awt.*;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.*;
+import static javax.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "products")
@@ -48,17 +50,16 @@ public class Product {
 
     private Color color;
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST})
+    @ManyToOne(cascade = {DETACH, REFRESH, PERSIST})
     private Brand brand;
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST})
+    @ManyToOne(cascade = {DETACH, REFRESH, PERSIST})
     private Category category;
 
-
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, PERSIST})
+    @ManyToOne(cascade = {DETACH, REFRESH, PERSIST})
     private Subcategory subCategory;
 
     @ElementCollection
@@ -66,10 +67,10 @@ public class Product {
     @Column(name = "image_url")
     List<String> productImages;
 
-    @OneToMany(cascade = {ALL}, mappedBy = "product")
+    @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")
     List<Review> usersReviews;
 
-    @OneToMany(cascade = {ALL}, mappedBy = "product")
+    @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")
     List<Subproduct> subproducts;
 
     @ManyToMany(cascade = {MERGE, REFRESH, DETACH})
@@ -105,5 +106,4 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
-
 }
