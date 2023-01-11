@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Mailing {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mailing_seq")
-    @SequenceGenerator(name = "mailing_seq", sequenceName = "mailing_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mailing_gen")
+    @SequenceGenerator(name = "mailing_gen", sequenceName = "mailing_seq", allocationSize = 1)
     private Long id;
 
     private String mailingName;

@@ -18,8 +18,8 @@ import static javax.persistence.CascadeType.*;
 @NoArgsConstructor
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
-    @SequenceGenerator(name = "role_seq", sequenceName = "role_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_gen")
+    @SequenceGenerator(name = "role_gen", sequenceName = "role_seq", allocationSize = 1)
     private Long id;
 
     private String roleName;

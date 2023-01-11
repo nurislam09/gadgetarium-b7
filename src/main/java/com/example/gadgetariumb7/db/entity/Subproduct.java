@@ -18,8 +18,8 @@ import static javax.persistence.CascadeType.*;
 @NoArgsConstructor
 public class Subproduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subproduct_seq")
-    @SequenceGenerator(name = "subproduct_seq", sequenceName = "subproduct_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subproduct_gen")
+    @SequenceGenerator(name = "subproduct_gen", sequenceName = "subproduct_seq", allocationSize = 1)
     private Long id;
     private int price;
     private int memory;

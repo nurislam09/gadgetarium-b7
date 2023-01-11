@@ -13,8 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Contact {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_seq")
-    @SequenceGenerator(name = "contact_seq", sequenceName = "contact_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_gen")
+    @SequenceGenerator(name = "contact_gen", sequenceName = "contact_seq", allocationSize = 1)
     private Long id;
 
     private String firstName;
