@@ -1,13 +1,12 @@
-package com.example.gadgetariumb7.service;
+package com.example.gadgetariumb7.db.service;
 
-import com.example.gadgetariumb7.config.JwtService;
-import com.example.gadgetariumb7.db.entity.Role;
+import com.example.gadgetariumb7.config.jwt.JwtService;
 import com.example.gadgetariumb7.db.entity.User;
+import com.example.gadgetariumb7.db.repository.RoleRepository;
+import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.dto.request.AuthenticationRequest;
 import com.example.gadgetariumb7.dto.request.RegisterRequest;
 import com.example.gadgetariumb7.dto.response.AuthenticationResponse;
-import com.example.gadgetariumb7.repository.RoleRepository;
-import com.example.gadgetariumb7.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,6 +35,8 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .roleName(user.getRole().getRoleName())
+                .email(user.getEmail())
                 .build();
     }
 
@@ -48,9 +49,11 @@ public class AuthenticationService {
         );
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
+        String jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .roleName(user.getRole().getRoleName())
+                .email(user.getEmail())
                 .build();
     }
 }

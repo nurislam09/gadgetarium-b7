@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.repository;
+package com.example.gadgetariumb7.db.repository;
 
 import com.example.gadgetariumb7.db.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

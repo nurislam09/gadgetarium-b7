@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.config;
+package com.example.gadgetariumb7.config.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;

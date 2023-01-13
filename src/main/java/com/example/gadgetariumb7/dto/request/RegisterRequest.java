@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Valid
 public class RegisterRequest {
+
   @NotNull(message = "First name should be not null")
   @Size(min = 2,max = 25)
   private String firstname;
@@ -34,4 +35,5 @@ public class RegisterRequest {
 
   @PasswordValid
   private String password;
+
 }
