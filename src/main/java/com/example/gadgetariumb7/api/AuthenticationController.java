@@ -8,7 +8,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import com.google.firebase.auth.FirebaseAuthException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -36,7 +39,7 @@ public class AuthenticationController {
     ) {
         return service.authenticate(request);
     }
-    
+
     @PostMapping("/auth-google")
     public AuthenticationResponse authWithGoogle(String tokenId) throws FirebaseAuthException {
         return service.authWithGoogle(tokenId);
