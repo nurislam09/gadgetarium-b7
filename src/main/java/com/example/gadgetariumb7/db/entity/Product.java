@@ -106,4 +106,5 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
+
 }
