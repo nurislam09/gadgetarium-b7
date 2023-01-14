@@ -3,6 +3,10 @@ VALUES (1, 'Admin');
 insert into roles(id, role_name)
 VALUES (2, 'Customer');
 
+insert into users(id, address, email, first_name, image, last_name, password, phone_number, role_id)
+VALUES (1,null,'nurislam@gmail.com','Nurislam','jds','Mamytov','$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq','+996222219743',1);
+
+
 
 insert into brands(id, brand_name, image)
 VALUES (1, 'Apple', 'https://www.meme-arsenal.com/memes/37c2ffed98992565b0596eca5286c7b6.jpg'),
