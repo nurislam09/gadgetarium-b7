@@ -21,6 +21,6 @@ public class Banner {
 
     @ElementCollection
     @CollectionTable(name = "banner_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url")
+    @Column(name = "image_url",length = 10000)
     List<String> images;
 }

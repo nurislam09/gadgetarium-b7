@@ -19,5 +19,6 @@ public class Brand {
 
     private String brandName;
 
+    @Column(length = 10000)
     private String image;
 }
