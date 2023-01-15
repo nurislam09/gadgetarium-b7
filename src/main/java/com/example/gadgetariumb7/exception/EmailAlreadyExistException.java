@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.mailing;
+package com.example.gadgetariumb7.exception;
 
 public class EmailAlreadyExistException extends RuntimeException {
     public EmailAlreadyExistException(String message) {

@@ -5,7 +5,7 @@ import com.example.gadgetariumb7.db.service.MailingService;
 import com.example.gadgetariumb7.db.service.SubscriptionService;
 import com.example.gadgetariumb7.dto.request.MailingRequest;
 import com.example.gadgetariumb7.dto.request.SubscriptionRequest;
-import com.example.gadgetariumb7.mailing.EmailAlreadyExistException;
+import com.example.gadgetariumb7.exception.EmailAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -31,11 +31,10 @@ public class MailingController {
         }
         return new ResponseEntity<>("Successfully subscribed", HttpStatus.CREATED);
     }
-
     @PostMapping("/message")
     public ResponseEntity<Mailing> sendEmail(@RequestBody MailingRequest mailingRequest) {
     Mailing mailing = new Mailing();
-        BeanUtils.copyProperties(mailingRequest,mailing);
+        BeanUtils.copyProperties(mailingRequest, mailing);
         emailService.sendMailing(mailing);
         return new ResponseEntity<>(mailing, HttpStatus.CREATED);
     }

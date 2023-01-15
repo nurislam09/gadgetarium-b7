@@ -4,7 +4,7 @@ import com.example.gadgetariumb7.converter.SubscriptionRequestConverter;
 import com.example.gadgetariumb7.db.entity.Subscription;
 import com.example.gadgetariumb7.db.repository.SubscriptionRepository;
 import com.example.gadgetariumb7.dto.request.SubscriptionRequest;
-import com.example.gadgetariumb7.mailing.EmailAlreadyExistException;
+import com.example.gadgetariumb7.exception.EmailAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class SubscriptionService {
 
     public void save(SubscriptionRequest subscriptionRequest) {
         Subscription subscription = subscriptionRequestConverter.createSubscription(subscriptionRequest);
-        if(subscriptionRepository.existsByEmail(subscription.getEmail())){
+        if (subscriptionRepository.existsByEmail(subscription.getEmail())) {
             throw new EmailAlreadyExistException("Email already registered");
         }
         subscriptionRepository.save(subscription);
