@@ -28,7 +28,6 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class AuthenticationService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -36,7 +35,6 @@ public class AuthenticationService {
     private final RoleRepository roleRepository;
     private final AuthenticationManager authenticationManager;
 
-    private final Role role;
 
     @PostConstruct
     void init() throws IOException {
@@ -85,7 +83,6 @@ public class AuthenticationService {
 
     public AuthenticationResponse authWithGoogle(String tokenId) throws FirebaseAuthException {
         FirebaseToken firebaseToken = FirebaseAuth.getInstance().verifyIdToken(tokenId);
-        User user;
         if (!repository.existsByEmail(firebaseToken.getEmail())) {
             User newUser = new User();
             String[] name = firebaseToken.getName().split(" ");
@@ -93,18 +90,15 @@ public class AuthenticationService {
             newUser.setLastName(name[1]);
             newUser.setEmail(firebaseToken.getEmail());
             newUser.setPassword(firebaseToken.getEmail());
-            if (role.getRoleName().equals("User")) {
-                newUser.setRole(role);
-            }
-            user=repository.save(newUser);
+            newUser.setRole(roleRepository.getById(2L));
+
+            repository.save(newUser);
         }
-        user=repository.findByEmail(firebaseToken.getEmail()).orElseThrow(()->{
-            log.error("User with email:{} not found ", firebaseToken.getEmail());
-            throw new NotFoundException(String.format("Пользователь с таким электронным адрессом %s не найден!",firebaseToken.getEmail()));
+       User user = repository.findByEmail(firebaseToken.getEmail()).orElseThrow(() -> {
+            throw new NotFoundException(String.format("Пользователь с таким электронным адрессом %s не найден!", firebaseToken.getEmail()));
         });
-        String token =jwtService.generateToken(user);
-        log.info("User with email: {} successfully authenticate with google ",firebaseToken.getEmail());
-        return new AuthenticationResponse(token , role.getRoleName(), user.getEmail());
+        String token = jwtService.generateToken(user);
+        return new AuthenticationResponse(token, user.getRole().getRoleName(), user.getEmail());
     }
 
 
