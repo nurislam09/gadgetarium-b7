@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.db.service;
 
 import com.example.gadgetariumb7.config.jwt.JwtService;
+import com.example.gadgetariumb7.db.entity.Role;
 import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.RoleRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
@@ -12,6 +13,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -55,5 +60,26 @@ public class AuthenticationService {
                 .roleName(user.getRole().getRoleName())
                 .email(user.getEmail())
                 .build();
+    }
+    @PostConstruct
+    public void initMethod() {
+        Role role1 = new Role();
+        role1.setRoleName("Admin");
+        Role role2 = new Role();
+        role2.setRoleName("User");
+        var user = User.builder()
+                .firstName("Admin")
+                .lastName("Admin")
+                .email("zhumataev.03@gmail.com")
+            .password(passwordEncoder.encode("1234567"))
+                .role(role1)
+                .build();
+        repository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        repository.save(user);
+        user.setRole(role1);
+        role1.setUsers(List.of(user));
+        roleRepository.save(role1);
+        roleRepository.save(role2);
     }
 }

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +32,11 @@ public class MailingController {
         }
         return new ResponseEntity<>("Successfully subscribed", HttpStatus.CREATED);
     }
+
     @PostMapping("/message")
+    @PreAuthorize("hasAuthority('Admin')")
     public ResponseEntity<Mailing> sendEmail(@RequestBody MailingRequest mailingRequest) {
-    Mailing mailing = new Mailing();
-        BeanUtils.copyProperties(mailingRequest, mailing);
-        emailService.sendMailing(mailing);
-        return new ResponseEntity<>(mailing, HttpStatus.CREATED);
+        emailService.sendMailing(mailingRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
