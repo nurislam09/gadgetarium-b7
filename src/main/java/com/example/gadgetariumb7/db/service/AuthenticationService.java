@@ -1,7 +1,6 @@
 package com.example.gadgetariumb7.db.service;
 
 import com.example.gadgetariumb7.config.jwt.JwtService;
-import com.example.gadgetariumb7.db.entity.Role;
 import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.RoleRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
@@ -16,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
