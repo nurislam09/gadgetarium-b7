@@ -29,6 +29,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .antMatchers("/api/auth/**")
                 .permitAll()
+                .antMatchers("/api-docs","/v3/api-docs","/swagger-ui/index.html")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -39,4 +41,6 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+
 }

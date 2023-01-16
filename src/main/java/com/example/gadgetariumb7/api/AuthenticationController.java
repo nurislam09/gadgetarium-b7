@@ -4,21 +4,23 @@ import com.example.gadgetariumb7.dto.request.AuthenticationRequest;
 import com.example.gadgetariumb7.dto.request.RegisterRequest;
 import com.example.gadgetariumb7.dto.response.AuthenticationResponse;
 import com.example.gadgetariumb7.db.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*",maxAge = 3600)
+@Tag(name="Auth API")
 public class AuthenticationController {
 
     private final AuthenticationService service;
 
+    @Operation(summary = "sign up", description = "Any user can register")
     @PostMapping("/register")
     public AuthenticationResponse register(
             @RequestBody @Valid RegisterRequest request
@@ -26,11 +28,11 @@ public class AuthenticationController {
         return service.register(request);
     }
 
+    @Operation(summary = "sign in", description = "Any user can login")
     @PostMapping("/login")
     public AuthenticationResponse authenticate(
             @RequestBody AuthenticationRequest request
     ) {
         return service.authenticate(request);
     }
-
 }
