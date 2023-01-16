@@ -193,5 +193,10 @@ values (11,'pdf',13.3,0.0,'Ofice',53,null,null,E'\\320\\170'::bytea,'fddfgd',
         0,'sdfsfd',null,null,null,1,2,null,8);
 
 
+insert into banners(id) values (1);
+
+insert into banner_images(id, image_url)  values (1,'https://www.budetsdelano.ru/upload/iblock/be0/sale_web.jpg');
+
+
 
 
