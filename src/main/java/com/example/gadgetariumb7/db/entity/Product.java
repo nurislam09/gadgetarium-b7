@@ -9,8 +9,10 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -50,6 +52,8 @@ public class Product {
     private ProductStatus productStatus;
 
     private Byte productRating;
+
+    private LocalDateTime createAt;
 
     private Color color;
 
