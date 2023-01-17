@@ -4,7 +4,7 @@ WORKDIR /onroad/build
 
 COPY . /onroad/build
 
-RUN mvn clean install -DskiptTests=true
+RUN ./mvnw clean package -DskipTests=true
 
 FROM openjdk:17.0.2-jdk-slim
 WORKDIR /onroad/app
