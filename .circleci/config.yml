@@ -7,9 +7,17 @@ orbs:
 commands:
   build-image: aws-ecr/build-image
 
+jobs:
+  chmod_mvnw:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run: chmod +x mvnw
+
 workflows:
   deploy-to-development:
     jobs:
+      - chmod_mvnw
       - aws-ecr/build-and-push-image:
           name: "build-and-push-image"
           context:
