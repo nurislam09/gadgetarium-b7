@@ -29,6 +29,7 @@ workflows:
             branches:
               only:
                 - main
+
 #      - aws-ecs/deploy-service-update:
 #          context:
 #            - TAIGAN_CONTEXT
