@@ -22,7 +22,7 @@ workflows:
           no-output-timeout: 20m
           path: ./
           region: AWS_DEFAULT_REGION
-          repo: gadgetarium-b7
+          repo: gadgetarium-b7-repo
           skip-when-tags-exist: false
           tag: main-$CIRCLE_SHA1
           filters:
