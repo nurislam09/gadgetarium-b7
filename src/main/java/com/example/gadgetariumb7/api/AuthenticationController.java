@@ -4,6 +4,7 @@ import com.example.gadgetariumb7.dto.request.AuthenticationRequest;
 import com.example.gadgetariumb7.dto.request.RegisterRequest;
 import com.example.gadgetariumb7.dto.response.AuthenticationResponse;
 import com.example.gadgetariumb7.db.service.AuthenticationService;
+import com.google.firebase.auth.FirebaseAuthException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,5 +33,11 @@ public class AuthenticationController {
     ) {
         return service.authenticate(request);
     }
+
+    @PostMapping("/auth-google")
+    public AuthenticationResponse authWithGoogle(String tokenId) throws FirebaseAuthException {
+        return service.authWithGoogle(tokenId);
+    }
+
 
 }
