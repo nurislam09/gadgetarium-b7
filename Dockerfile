@@ -3,7 +3,7 @@ FROM openjdk:17 AS build
 WORKDIR /test/build
 
 COPY . /test/build
-
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests=true
 
 FROM openjdk:17.0.2-jdk-slim
