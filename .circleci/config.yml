@@ -12,7 +12,7 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
-      - run: chmod +x mvnw
+      - run: ./chmod +x mvnw
 
 workflows:
   deploy-to-development:
