@@ -6,11 +6,13 @@ import com.example.gadgetariumb7.db.enums.ProductStatus;
 
 import javax.persistence.*;
 
+import com.example.gadgetariumb7.dto.request.ProductRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -88,7 +90,7 @@ public class Product {
     private double screenSizeTablet;
     private int memoryOfTablet;
     private byte ramOfTablet;
-    private double ScreenDiagonal;
+    private double screenDiagonal;
     private int batteryCapacity;
 
     private String laptopCPU;
@@ -105,5 +107,73 @@ public class Product {
     private String watchMaterial;
     private Gender gender;
     private String waterProof;
-    private double ScreenDisplay;
+    private double screenDisplay;
+    private double sizeOfWatch;
+
+    public Product(ProductRequest productRequest, String productName) {
+        this.productName = productRequest.getProductName();
+        this.category = productRequest.getCategory();
+        this.subCategory = productRequest.getSubCategory();
+        this.brand = productRequest.getBrand();
+        this.guarantee = productRequest.getGuarantee();
+        this.memoryOfPhone = productRequest.getMemoryOfPhone();
+        this.color = productRequest.getColor();
+        this.ramOfPhone = productRequest.getRamOfPhone();
+        this.simCard = productRequest.getSimCard();
+        this.productImages = new ArrayList<>(productRequest.getProductImages());
+    }
+
+    public Product(ProductRequest productRequest, Gender gender) {
+        this.productName = productRequest.getProductName();
+        this.category = productRequest.getCategory();
+        this.subCategory = productRequest.getSubCategory();
+        this.brand = productRequest.getBrand();
+        this.guarantee = productRequest.getGuarantee();
+        this.memoryOfSmartWatch = productRequest.getMemoryOfSmartWatch();
+        this.color = productRequest.getColor();
+        this.braceletMaterial = productRequest.getBraceletMaterial();
+        this.watchMaterial = productRequest.getWatchMaterial();
+        this.sizeOfWatch = productRequest.getSizeOfWatch();
+        this.screenDisplay = productRequest.getScreenDisplay();
+        this.gender = productRequest.getGender();
+        this.waterProof = productRequest.getWaterProof();
+        this.caseShape = productRequest.getCaseShape();
+        this.wirelessInterface = productRequest.getWirelessInterface();
+        this.productImages = new ArrayList<>(productRequest.getProductImages());
+    }
+
+    public Product(ProductRequest productRequest, Double screenDiagonal) {
+        this.productName = productRequest.getProductName();
+        this.category = productRequest.getCategory();
+        this.subCategory = productRequest.getSubCategory();
+        this.brand = productRequest.getBrand();
+        this.guarantee = productRequest.getGuarantee();
+        this.color = productRequest.getColor();
+        this.screenResolutionTablet = productRequest.getScreenResolutionTablet();
+        this.screenSizeTablet = productRequest.getScreenSizeTablet();
+        this.memoryOfTablet = productRequest.getMemoryOfTablet();
+        this.ramOfTablet = productRequest.getRamOfTablet();
+        this.screenDiagonal = productRequest.getScreenDiagonal();
+        this.batteryCapacity = productRequest.getBatteryCapacity();
+        this.productImages = new ArrayList<>(productRequest.getProductImages());
+    }
+
+    public Product(ProductRequest productRequest, byte videoCardMemory) {
+        this.productName = productRequest.getProductName();
+        this.category = productRequest.getCategory();
+        this.subCategory = productRequest.getSubCategory();
+        this.brand = productRequest.getBrand();
+        this.guarantee = productRequest.getGuarantee();
+        this.color = productRequest.getColor();
+        this.screenResolutionLaptop = productRequest.getScreenResolutionLaptop();
+        this.laptopCPU = productRequest.getLaptopCPU();
+        this.videoCardMemory = productRequest.getVideoCardMemory();
+        this.ramOfLaptop = productRequest.getRamOfLaptop();
+        this.screenSizeLaptop = productRequest.getScreenSizeLaptop();
+        this.appointmentOfLaptop = productRequest.getAppointmentOfLaptop();
+        this.productImages = new ArrayList<>(productRequest.getProductImages());
+    }
 }
+
+
+
