@@ -2,7 +2,6 @@ package com.example.gadgetariumb7.db.service;
 
 import com.example.gadgetariumb7.db.entity.Discount;
 import com.example.gadgetariumb7.db.entity.Product;
-import com.example.gadgetariumb7.db.repository.DiscountRepository;
 import com.example.gadgetariumb7.db.repository.ProductRepository;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductServiceImpl {
     private final ProductRepository productRepository;
-    private final DiscountRepository discountRepository;
 
     public List<ProductAdminResponse> productAdminResponses() {
         List<ProductAdminResponse> productAdminResponses = productRepository.getAllProductsAdmin();
@@ -27,21 +25,20 @@ public class ProductServiceImpl {
 
     @PostConstruct
     public void initProduct() {
-        Discount discount = new Discount();
-        discount.setAmountOfDiscount((byte) 50);
-        discount.setDiscountStartDate(LocalDate.now());
-        discount.setDiscountEndDate(LocalDate.of(2023, 9, 12));
+//        Discount discount = new Discount();
+//        discount.setAmountOfDiscount((byte) 50);
+//        discount.setDiscountStartDate(LocalDate.now());
+//        discount.setDiscountEndDate(LocalDate.of(2023, 9, 12));
 
         Product product = new Product("Iphone", 9000, 12, 1234, 12, Arrays.asList("image1", "image2", "image3"));
         Product product1 = new Product("Laptop", 8000, 13, 4321, 12, Arrays.asList("image4", "image5", "image6"));
         Product product2 = new Product("Iphone", 3000, 11, 987, 12, Arrays.asList("image7", "image8", "image9"));
 
 
-        product.setDiscount(discount);
-        product1.setDiscount(discount);
-        product2.setDiscount(discount);
+//        product.setDiscount(discount);
+//        product1.setDiscount(discount);
+//        product2.setDiscount(discount);
 
-        discountRepository.save(discount);
         productRepository.save(product);
         productRepository.save(product1);
         productRepository.save(product2);
