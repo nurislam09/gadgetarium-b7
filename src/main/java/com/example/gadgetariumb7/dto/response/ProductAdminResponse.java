@@ -1,24 +1,36 @@
 package com.example.gadgetariumb7.dto.response;
 
-import com.example.gadgetariumb7.db.entity.Discount;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class ProductAdminResponse {
     private Long id;
-    private String image;
+    private String productImages;
     private int productVendorCode;
+    private String productName;
     private int productCount;
-    private LocalDateTime createAt;
+    private int countSubproducts;
+//    private LocalDateTime createAt;
     private int productPrice;
     private int currentPrice;
-    private Discount discount;
+    private byte discountPrice;
+
+    public ProductAdminResponse(Long id, int productVendorCode, String productName, int productCount, int countSubproducts, int productPrice, int currentPrice, byte discountPrice) {
+        this.id = id;
+        this.productVendorCode = productVendorCode;
+        this.productName = productName;
+        this.productCount = productCount;
+        this.countSubproducts = countSubproducts;
+        this.productPrice = productPrice;
+        this.currentPrice = currentPrice;
+        this.discountPrice = discountPrice;
+    }
 }

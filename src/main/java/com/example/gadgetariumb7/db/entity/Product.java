@@ -106,4 +106,13 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
+
+    public Product(String productName, int productPrice, int orderCount, int productVendorCode, int productCount, List<String> images) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.orderCount = orderCount;
+        this.productVendorCode = productVendorCode;
+        this.productCount = productCount;
+        this.productImages = images;
+    }
 }
