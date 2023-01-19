@@ -29,17 +29,17 @@ workflows:
             branches:
               only:
                 - main
-#      - aws-ecs/deploy-service-update:
-#          context:
-#            - TAIGAN_CONTEXT
-#          cluster: taigan-backend-dev
-#          container-image-name-updates: 'container=taiganbackenddevcontainer,tag=${CIRCLE_SHA1}'
-#          family: taigan-backend-dev
-#          service-name: taiganbackenddevservice1
-#          force-new-deployment: true
-#          filters:
-#            branches:
-#              only:
-#                - main
-#          requires:
-#            - build-and-push-image
+      - aws-ecs/deploy-service-update:
+          context:
+            - GADGETARIUM_CONTEXT
+          cluster: gadgetarium-main-cluster
+          container-image-name-updates: 'container=gadgetarium-main-container,tag=${CIRCLE_SHA1}'
+          family: gatgetarium-main-dev
+          service-name: gadgetarium-main-service
+          force-new-deployment: true
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build-and-push-image
