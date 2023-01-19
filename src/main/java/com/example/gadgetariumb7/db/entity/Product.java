@@ -114,4 +114,8 @@ public class Product {
     private String waterProof;
     private double ScreenDisplay;
 
+    public Product(String productName, int productPrice) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+    }
 }
