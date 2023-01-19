@@ -23,13 +23,15 @@ import static javax.persistence.CascadeType.*;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
-    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1)
+    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 3)
     private Long id;
     private String password;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String email;
+
+    @Column(length = 10000)
     private String image;
     private String address;
 
