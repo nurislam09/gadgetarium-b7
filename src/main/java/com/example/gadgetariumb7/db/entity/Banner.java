@@ -16,7 +16,7 @@ import java.util.List;
 public class Banner {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "banner_gen")
-    @SequenceGenerator(name = "banner_gen", sequenceName = "banner_seq", allocationSize = 1)
+    @SequenceGenerator(name = "banner_gen", sequenceName = "banner_seq", allocationSize = 10)
     private Long id;
 
     @ElementCollection
