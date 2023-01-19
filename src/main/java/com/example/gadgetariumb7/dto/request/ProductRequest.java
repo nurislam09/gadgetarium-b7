@@ -37,41 +37,41 @@ public class ProductRequest{
 
     private Color color;
 
-    private Brand brand;
+    private Long brandId;
 
-    private Category category;
+    private Long categoryId;
 
-    private Subcategory subCategory;
+    private Long subCategoryId;
+//
+//    List<String> productImages;
+//
+//    List<Subproduct> subproducts;
+//
+//    private String simCard;
+//    private int memoryOfPhone;
+//    private byte ramOfPhone;
 
-    List<String> productImages;
-
-    List<Subproduct> subproducts;
-
-    private String simCard;
-    private int memoryOfPhone;
-    private byte ramOfPhone;
-
-    private String screenResolutionTablet;
-    private double screenSizeTablet;
-    private int memoryOfTablet;
-    private byte ramOfTablet;
-    private double ScreenDiagonal;
-    private int batteryCapacity;
-
-    private String laptopCPU;
-    private String screenResolutionLaptop;
-    private String appointmentOfLaptop;
-    private Byte ramOfLaptop;
-    private byte videoCardMemory;
-    private double screenSizeLaptop;
-
-    private String wirelessInterface;
-    private int memoryOfSmartWatch;
-    private String caseShape;
-    private String braceletMaterial;
-    private String watchMaterial;
-    private Gender gender;
-    private String waterProof;
-    private double ScreenDisplay;
-    private double sizeOfWatch;
+//    private String screenResolutionTablet;
+//    private double screenSizeTablet;
+//    private int memoryOfTablet;
+//    private byte ramOfTablet;
+//    private double ScreenDiagonal;
+//    private int batteryCapacity;
+//
+//    private String laptopCPU;
+//    private String screenResolutionLaptop;
+//    private String appointmentOfLaptop;
+//    private Byte ramOfLaptop;
+//    private byte videoCardMemory;
+//    private double screenSizeLaptop;
+//
+//    private String wirelessInterface;
+//    private int memoryOfSmartWatch;
+//    private String caseShape;
+//    private String braceletMaterial;
+//    private String watchMaterial;
+//    private Gender gender;
+//    private String waterProof;
+//    private double ScreenDisplay;
+//    private double sizeOfWatch;
 }
