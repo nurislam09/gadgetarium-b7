@@ -14,7 +14,7 @@ import lombok.Setter;
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_gen")
-    @SequenceGenerator(name = "contact_gen", sequenceName = "contact_seq", allocationSize = 1)
+    @SequenceGenerator(name = "contact_gen", sequenceName = "contact_seq", allocationSize = 10)
     private Long id;
 
     private String firstName;

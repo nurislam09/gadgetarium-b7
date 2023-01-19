@@ -14,7 +14,7 @@ import lombok.Setter;
 public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subscription_gen")
-    @SequenceGenerator(name = "subscription_gen", sequenceName = "subscription_seq", allocationSize = 1)
+    @SequenceGenerator(name = "subscription_gen", sequenceName = "subscription_seq", allocationSize = 10)
     private Long id;
     private String email;
 }
