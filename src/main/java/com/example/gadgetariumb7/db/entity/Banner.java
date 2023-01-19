@@ -16,11 +16,11 @@ import java.util.List;
 public class Banner {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "banner_gen")
-    @SequenceGenerator(name = "banner_gen", sequenceName = "banner_seq", allocationSize = 1)
+    @SequenceGenerator(name = "banner_gen", sequenceName = "banner_seq", allocationSize = 10)
     private Long id;
 
     @ElementCollection
     @CollectionTable(name = "banner_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url")
+    @Column(name = "image_url",length = 10000)
     List<String> images;
 }
