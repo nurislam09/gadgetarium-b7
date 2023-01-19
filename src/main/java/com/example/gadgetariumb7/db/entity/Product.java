@@ -6,12 +6,12 @@ import com.example.gadgetariumb7.db.enums.ProductStatus;
 
 import javax.persistence.*;
 
-import com.example.gadgetariumb7.dto.request.ProductRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +25,7 @@ import static javax.persistence.CascadeType.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
-    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1)
+    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 10)
     private Long id;
 
     private String productName;
@@ -40,15 +40,20 @@ public class Product {
 
     private Byte guarantee;
 
+    @Column(length = 10000)
     private String videoReview;
 
+    @Column(length = 10000)
     private String PDF;
 
+    @Column(length = 10000)
     private String description;
 
     private ProductStatus productStatus;
 
     private Byte productRating;
+
+    private LocalDateTime createAt;
 
     private Color color;
 
@@ -90,7 +95,7 @@ public class Product {
     private double screenSizeTablet;
     private int memoryOfTablet;
     private byte ramOfTablet;
-    private double screenDiagonal;
+    private double ScreenDiagonal;
     private int batteryCapacity;
 
     private String laptopCPU;
@@ -107,7 +112,7 @@ public class Product {
     private String watchMaterial;
     private Gender gender;
     private String waterProof;
-    private double screenDisplay;
+    private double ScreenDisplay;
     private double sizeOfWatch;
 
     public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory) {
