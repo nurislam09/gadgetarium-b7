@@ -20,7 +20,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
              "o.countOfProduct," +
              "o.totalSum ," +
              "o.orderType," +
-             "o.orderStatus) from Order o " +
-             "where o.orderStatus= :orderStatus ")
+             "o.orderStatus) from Order o")
     List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus);
 }

@@ -1,5 +1,7 @@
 package com.example.gadgetariumb7.db.service.impl;
 
+import com.example.gadgetariumb7.db.entity.Order;
+import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
@@ -19,5 +21,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus) {
         return orderRepository.findAllOrdersByStatus(orderStatus);
+    }
+
+    public void initOrders() {
+        Order order =new Order();
+        
     }
 }
