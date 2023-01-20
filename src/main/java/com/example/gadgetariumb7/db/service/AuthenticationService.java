@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.db.service;
 
 import com.example.gadgetariumb7.config.jwt.JwtService;
+import com.example.gadgetariumb7.db.entity.Role;
 import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.RoleRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
@@ -22,6 +23,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+
+import java.util.Arrays;
+import java.util.List;
 import java.io.IOException;
 
 @Service
@@ -78,7 +82,7 @@ public class AuthenticationService {
                 .email(user.getEmail())
                 .build();
     }
-
+    
     public AuthenticationResponse authWithGoogle(String tokenId) throws FirebaseAuthException {
         FirebaseToken firebaseToken = FirebaseAuth.getInstance().verifyIdToken(tokenId);
         if (!repository.existsByEmail(firebaseToken.getEmail())) {
@@ -98,6 +102,5 @@ public class AuthenticationService {
         String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token, user.getRole().getRoleName(), user.getEmail());
     }
-
 
 }

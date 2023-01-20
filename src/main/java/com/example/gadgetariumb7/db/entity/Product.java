@@ -9,6 +9,7 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.awt.*;
 import java.time.LocalDateTime;
@@ -39,10 +40,13 @@ public class Product {
 
     private Byte guarantee;
 
+    @Column(length = 10000)
     private String videoReview;
 
+    @Column(length = 10000)
     private String PDF;
 
+    @Column(length = 10000)
     private String description;
 
     private ProductStatus productStatus;
@@ -119,4 +123,5 @@ public class Product {
         this.productImages = images;
         this.createAt = createAt;
     }
+
 }

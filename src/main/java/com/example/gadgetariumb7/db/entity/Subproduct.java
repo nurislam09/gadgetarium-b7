@@ -19,7 +19,7 @@ import static javax.persistence.CascadeType.*;
 public class Subproduct {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subproduct_gen")
-    @SequenceGenerator(name = "subproduct_gen", sequenceName = "subproduct_seq", allocationSize = 1)
+    @SequenceGenerator(name = "subproduct_gen", sequenceName = "subproduct_seq", allocationSize = 10)
     private Long id;
     private int price;
     private int memory;
@@ -28,7 +28,7 @@ public class Subproduct {
     private Color color;
     @ElementCollection
     @CollectionTable(name = "subproduct_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url")
+    @Column(name = "image_url",length = 10000)
     List<String> images;
 
     @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
