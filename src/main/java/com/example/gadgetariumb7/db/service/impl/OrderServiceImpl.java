@@ -3,22 +3,15 @@ package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.entity.Product;
-import com.example.gadgetariumb7.db.enums.DeliveryStatus;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
-import com.example.gadgetariumb7.db.enums.OrderType;
-import com.example.gadgetariumb7.db.enums.Payment;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
-import com.example.gadgetariumb7.db.repository.ProductRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,29 +20,10 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-
-//    @Override
-//    public List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus) {
-//        List<OrderResponse>orderResponses= orderRepository.findAllOrdersByStatus(orderStatus);
-//        for (OrderResponse orderResponse:orderResponses) {
-//            Order order = orderRepository.getById(orderResponse.getId());
-//            orderResponse.setCountOfProduct(order.getProducts().size());
-//            int totalSum=0;
-//            for (Product product: order.getProducts()) {
-//                if(product.getDiscount()!= null) {
-//                    totalSum += product.getProductPrice()-((product.getProductPrice() * product.getDiscount()
-//                            .getAmountOfDiscount())/100);
-//                } else totalSum += product.getProductPrice();
-//            }
-//            orderResponse.setTotalSum(totalSum);
-//        }
-
-//        return orderResponses;
-
-
         @Override
-        public List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus) {
-        List<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus(orderStatus);
+        public Page<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable) {
+        Page<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus
+                (orderStatus,pageable);
         for (OrderResponse orderResponse : orderResponses) {
             Optional<Order> orderOptional = orderRepository.findById(orderResponse.getId());
             if (orderOptional.isPresent()) {
@@ -69,6 +43,11 @@ public class OrderServiceImpl implements OrderService {
             return orderResponses;
 
         }
+
+    @Override
+    public void deleteOrderById(Long id) {
+          orderRepository.deleteById(id);
+    }
 
 
 //        @PostConstruct
@@ -96,6 +75,6 @@ public class OrderServiceImpl implements OrderService {
 //            order.setCountOfProduct(order.getProducts().size());
 //            order.setTotalSum(product.getProductPrice() * order.getProducts().size());
 //        }
-//
+
    }
 
