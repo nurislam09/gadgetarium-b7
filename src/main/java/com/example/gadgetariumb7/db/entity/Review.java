@@ -29,6 +29,8 @@ public class Review {
 
     private boolean statusOfResponse;
 
+
+
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private User user;
 
