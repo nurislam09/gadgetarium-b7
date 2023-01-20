@@ -1,14 +1,10 @@
 package com.example.gadgetariumb7.db.service;
 
-import com.example.gadgetariumb7.db.entity.Discount;
-import com.example.gadgetariumb7.db.entity.Product;
-import com.example.gadgetariumb7.db.entity.Subproduct;
-import com.example.gadgetariumb7.db.repository.DiscountRepository;
-import com.example.gadgetariumb7.db.repository.ProductRepository;
-import com.example.gadgetariumb7.db.repository.SubproductRepository;
-import com.example.gadgetariumb7.db.repository.UserRepository;
+import com.example.gadgetariumb7.db.entity.*;
+import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -26,8 +22,10 @@ public class ProductServiceImpl {
     private final DiscountRepository discountRepository;
     private final SubproductRepository subproductRepository;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public List<ProductAdminResponse> productAdminResponses(String productType,String fieldToSort, LocalDate startDate, LocalDate endDate) {
+    public List<ProductAdminResponse> productAdminResponses(String productType, String fieldToSort, LocalDate startDate, LocalDate endDate) {
         List<ProductAdminResponse> productAdminResponses = productRepository.getAllProductsAdmin();
         setImageAndDiscount(productAdminResponses);
         sort(fieldToSort, productAdminResponses);
@@ -38,9 +36,11 @@ public class ProductServiceImpl {
                 return productAdminResponses;
             }
             case "В продаже" -> {
-//                return productAdminResponses.stream()
+                return productAdminResponses.stream().filter(x -> x.getProductCount() > 0).toList();
             }
-//            case ""
+            case "В избранном" -> {
+//                return productRepository.getAllProductsAdminFromBasketList();
+            }
         }
 
         return productAdminResponses;
@@ -68,6 +68,9 @@ public class ProductServiceImpl {
 
     @PostConstruct
     public void initProduct() {
+        Role role = new Role();
+        role.setRoleName("user");
+
         Discount discount = new Discount();
         discount.setAmountOfDiscount((byte) 50);
         discount.setDiscountStartDate(LocalDate.now());
@@ -92,6 +95,17 @@ public class ProductServiceImpl {
         subproduct2.setProduct(product);
         subproduct3.setProduct(product);
 
+
+       User user = new User();
+       user.setFirstName("Syimyk");
+       user.setLastName("Ravshanbekov");
+       user.setPassword(passwordEncoder.encode("12345678"));
+       user.setEmail("syimyk@gmail.com");
+       user.setRole(role);
+        role.setUsers(Arrays.asList(user));
+
+        user.setBasketList(Arrays.asList(product, product1));
+
         discountRepository.save(discount);
         productRepository.save(product);
         productRepository.save(product1);
@@ -101,6 +115,8 @@ public class ProductServiceImpl {
         subproductRepository.save(subproduct1);
         subproductRepository.save(subproduct2);
         subproductRepository.save(subproduct3);
+        roleRepository.save(role);
+        userRepository.save(user);
     }
 
 

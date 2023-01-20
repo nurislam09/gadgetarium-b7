@@ -18,10 +18,11 @@ public class ProductAdminController {
 
     @GetMapping("/getAllProducts")
     private List<ProductAdminResponse> getAllProduct(
+            @RequestParam(value = "productType") String productType,
             @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate){
-        return productService.productAdminResponses(fieldToSort, startDate, endDate);
+        return productService.productAdminResponses(productType, fieldToSort, startDate, endDate);
     }
 
     @DeleteMapping("/delete/{id}")
