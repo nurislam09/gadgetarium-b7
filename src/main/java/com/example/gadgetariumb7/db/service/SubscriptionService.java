@@ -4,7 +4,7 @@ import com.example.gadgetariumb7.converter.SubscriptionRequestConverter;
 import com.example.gadgetariumb7.db.entity.Subscription;
 import com.example.gadgetariumb7.db.repository.SubscriptionRepository;
 import com.example.gadgetariumb7.dto.request.SubscriptionRequest;
-import com.example.gadgetariumb7.exception.EmailAlreadyExistException;
+import com.example.gadgetariumb7.exceptions.EmailAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
