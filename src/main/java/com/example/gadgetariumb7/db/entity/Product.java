@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -47,6 +48,8 @@ public class Product {
     private ProductStatus productStatus;
 
     private Byte productRating;
+
+    private LocalDateTime createAt;
 
     private Color color;
 
@@ -107,12 +110,13 @@ public class Product {
     private String waterProof;
     private double ScreenDisplay;
 
-    public Product(String productName, int productPrice, int orderCount, int productVendorCode, int productCount, List<String> images) {
+    public Product(String productName, int productPrice, int orderCount, int productVendorCode, int productCount, LocalDateTime createAt, List<String> images) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.orderCount = orderCount;
         this.productVendorCode = productVendorCode;
         this.productCount = productCount;
         this.productImages = images;
+        this.createAt = createAt;
     }
 }
