@@ -1,5 +1,6 @@
 package com.example.gadgetariumb7.db.repository;
 
+import com.example.gadgetariumb7.db.entity.Discount;
 import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,16 +12,16 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-//    @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
-//            "(p.id," +
-//            "p.productName, " +
-//            "p.productCount," +
-//            "p.productPrice," +
-//            "p.productPrice * ((100 - p.discount.amountOfDiscount) / 100)," +
-//            "p.productStatus," +
-//            "p.productRating)" +
-//            " from Product p where p.c ")
-//    List<Product> getAllNewProduct();
+    @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
+            "(p.id," +
+            "p.productName, " +
+            "p.productCount," +
+            "p.productPrice," +
+            "p.productPrice," +
+            "p.productStatus," +
+            "p.productRating)" +
+            "from Product p ORDER BY p.createAt")
+    List<ProductCardResponse> getAllNewProduct();
 
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
@@ -28,11 +29,26 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productName, " +
             "p.productCount," +
             "p.productPrice," +
-            "p.productPrice * ((100 - p.discount.amountOfDiscount) / 100)," +
+            "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            " from Product p where p.discount is not null ")
+            "from Product p where p.discount is not null")
     List<ProductCardResponse> getAllDiscountProduct();
 
-    List<Product> getAllRecomindationProduct();
+    @Query(nativeQuery = true, value = "select image_url from product_images where id = :id limit 1")
+    String getFirstImage(Long id);
+
+    @Query(nativeQuery = true, value = "select  p.product_price - ((p.product_price * discounts.amount_of_discount) /100) from discounts,products p  where p.id =:id;")
+    int getDiscountPrice(Long id);
+
+    @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
+            "(p.id," +
+            "p.productName, " +
+            "p.productCount," +
+            "p.productPrice," +
+            "p.productPrice," +
+            "p.productStatus," +
+            "p.productRating)" +
+            " from Product p where p.productStatus = 1")
+    List<ProductCardResponse> getAllRecommendationProduct();
 }
