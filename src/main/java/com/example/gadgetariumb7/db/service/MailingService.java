@@ -42,6 +42,6 @@ public class MailingService {
         message.setText(mailing.getDescription() + "\n" + mailing.getImage()
                 + "\n" + "Дата начала акции: " + mailing.getMailingDateOfStart() + "\n" + "Дата окончании акции: " + mailing.getMailingDateOfEnd());
         message.setBcc();
-        this.emailSender.send(message);
+        emailSender.send(message);
     }
 }

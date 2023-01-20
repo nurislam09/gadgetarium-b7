@@ -36,7 +36,7 @@ public class AuthenticationController {
     ) {
         return service.authenticate(request);
     }
-
+    @Operation(summary = "authorization with google", description = "You can register by google account")
     @PostMapping("/auth-google")
     public AuthenticationResponse authWithGoogle(String tokenId) throws FirebaseAuthException {
         return service.authWithGoogle(tokenId);
