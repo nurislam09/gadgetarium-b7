@@ -16,7 +16,7 @@ import static javax.persistence.CascadeType.*;
 public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subcategory_gen")
-    @SequenceGenerator(name = "subcategory_gen", sequenceName = "subcategory_seq", allocationSize = 10)
+    @SequenceGenerator(name = "subcategory_gen", sequenceName = "subcategory_seq", allocationSize = 1, initialValue = 20)
     private Long id;
 
     private String subCategoryName;

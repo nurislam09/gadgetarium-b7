@@ -25,7 +25,7 @@ import static javax.persistence.CascadeType.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_gen")
-    @SequenceGenerator(name = "order_gen", sequenceName = "order_seq", allocationSize = 10)
+    @SequenceGenerator(name = "order_gen", sequenceName = "order_seq", allocationSize = 1)
     private Long id;
 
     private String firstName;

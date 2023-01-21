@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class Mailing {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mailing_gen")
-    @SequenceGenerator(name = "mailing_gen", sequenceName = "mailing_seq", allocationSize = 10)
+    @SequenceGenerator(name = "mailing_gen", sequenceName = "mailing_seq", allocationSize = 1)
     private Long id;
 
     private String mailingName;
