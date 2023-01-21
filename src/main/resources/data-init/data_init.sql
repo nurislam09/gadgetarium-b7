@@ -46,8 +46,8 @@ VALUES (17, 'Смарт-часы Apple watch', 3),
        (19, 'Умные часы для детей', 3),
        (20, 'Фитнес браслет', 3);
 
-insert into discounts(id, amount_of_discount, discount_end_date, discount_start_date) VALUES (1,5,'2023-01-20','2023-02-01');
-
+insert into discounts(id, amount_of_discount, discount_end_date, discount_start_date)
+VALUES (1, 5, '2023-01-20', '2023-02-01');
 
 
 

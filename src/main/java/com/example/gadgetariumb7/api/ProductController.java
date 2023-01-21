@@ -1,6 +1,6 @@
 package com.example.gadgetariumb7.api;
 
-import com.example.gadgetariumb7.db.service.ProductServiceImpl;
+import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/product/")
 public class ProductController {
 
-    private final ProductServiceImpl productService;
+    private final ProductService productService;
 
     @GetMapping("getDis")
     @Operation(summary = "get product with discount")

@@ -17,10 +17,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productName, " +
             "p.productCount," +
             "p.productPrice," +
-            "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            "from Product p ORDER BY p.createAt")
+            "from Product p where p.productStatus = 0 ORDER BY p.createAt ")
     List<ProductCardResponse> getAllNewProduct();
 
 
@@ -28,7 +27,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(p.id," +
             "p.productName, " +
             "p.productCount," +
-            "p.productPrice," +
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
@@ -38,7 +36,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(nativeQuery = true, value = "select image_url from product_images where id = :id limit 1")
     String getFirstImage(Long id);
 
-    @Query(nativeQuery = true, value = "select  p.product_price - ((p.product_price * discounts.amount_of_discount) /100) from discounts,products p  where p.id =:id;")
+    @Query("select (p.productPrice -((p.productPrice * p.discount.amountOfDiscount) /100)) from Product p  where p.id = :id ")
     int getDiscountPrice(Long id);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
@@ -46,9 +44,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productName, " +
             "p.productCount," +
             "p.productPrice," +
-            "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            " from Product p where p.productStatus = 1")
+            " from Product p where p.productStatus = 1 and p.productRating > 4")
     List<ProductCardResponse> getAllRecommendationProduct();
 }
