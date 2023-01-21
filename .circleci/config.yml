@@ -33,9 +33,9 @@ workflows:
           context:
             - GADGETARIUM_CONTEXT
           cluster: gadgetarium-server-cluster
-          container-image-name-updates: 'container=gadgetarium-server-container,tag=${CIRCLE_SHA1}'
-          family: gadgetarium-server-task
-          service-name: gadgetarium-server-service
+          container-image-name-updates: 'container=gadgetarium-servers-container,tag=${CIRCLE_SHA1}'
+          family: gadgetarium-servers-task
+          service-name: gadgetarium-servers-service
           force-new-deployment: true
           filters:
             branches:
