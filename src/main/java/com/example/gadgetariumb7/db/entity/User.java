@@ -35,8 +35,8 @@ public class User implements UserDetails {
     private String image;
     private String address;
 
-    @OneToMany(cascade = {MERGE, DETACH, REFRESH})
-    private List<Product> basketList;
+    @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
+    private List<Product> basketList = new ArrayList<>();
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> favoritesList;

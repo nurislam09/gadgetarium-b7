@@ -31,7 +31,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //            "p.subproducts.size," +
 //            "p.createAt," +
 //            "p.productPrice" +
-//            ") from User.basketList p")
+//            ") from Product p")
 //    List<ProductAdminResponse> getAllProductsAdminFromBasketList();
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
