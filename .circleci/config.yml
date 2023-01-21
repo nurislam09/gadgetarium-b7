@@ -32,7 +32,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           context:
             - GADGETARIUM_CONTEXT
-          cluster: gadgetarium-server-cluster
+          cluster: gadgetarium-servers-cluster
           container-image-name-updates: 'container=gadgetarium-servers-container,tag=${CIRCLE_SHA1}'
           family: gadgetarium-servers-task
           service-name: gadgetarium-servers-service
