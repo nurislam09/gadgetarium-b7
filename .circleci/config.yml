@@ -25,7 +25,7 @@ workflows:
           cluster: gadgetarium-cluster
           container-image-name-updates: 'container=gadgetarium-servers-container,tag=${CIRCLE_SHA1}'
           family: gadgetarium-servers-task
-          service-name: medcheck-servers-service
+          service-name: gadgetarium-service
           force-new-deployment: true
           requires:
             - build-and-push-image
