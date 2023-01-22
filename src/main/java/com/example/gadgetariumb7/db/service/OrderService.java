@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface OrderService {
 
-      Page<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus,Pageable pageable);
+//      Page<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus,Pageable pageable);
+
+      List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus);
 
       void deleteOrderById(Long id);
 

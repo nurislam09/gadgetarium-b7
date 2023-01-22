@@ -9,9 +9,12 @@ import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,14 +23,41 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-        @Override
-        public Page<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable) {
-        Page<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus
-                (orderStatus,pageable);
+//        @Override
+//        public Page<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable) {
+//            Pageable newPageable= PageRequest.of(pageable.getPageNumber()-1,5);
+//        Page<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus(orderStatus,newPageable);
+//        for (OrderResponse orderResponse : orderResponses) {
+//            Optional<Order> orderOptional = orderRepository.findById(orderResponse.getId());
+//            if (orderOptional.isPresent()) {
+//                Order order = orderOptional.get();
+//                int countOfProduct = order.getProducts().size();
+//                int totalSum = 0;
+//                for (Product product : order.getProducts()) {
+//                    if (product.getDiscount() != null) {
+//                        totalSum += product.getProductPrice() - ((product.getProductPrice() * product.getDiscount()
+//                                .getAmountOfDiscount()) / 100);
+//                    } else totalSum += product.getProductPrice();
+//                }
+//                    orderResponse.setCountOfProduct(countOfProduct);
+//                    orderResponse.setTotalSum(totalSum);
+//                }
+//            }
+//            return orderResponses;
+
+//        }
+
+    @Override
+    public List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus) {
+        List<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus(orderStatus);
+        int countOfOrderStatus = 0;
         for (OrderResponse orderResponse : orderResponses) {
             Optional<Order> orderOptional = orderRepository.findById(orderResponse.getId());
             if (orderOptional.isPresent()) {
                 Order order = orderOptional.get();
+                if (order.getOrderStatus() == orderStatus) {
+                    countOfOrderStatus++;
+                }
                 int countOfProduct = order.getProducts().size();
                 int totalSum = 0;
                 for (Product product : order.getProducts()) {
@@ -35,19 +65,26 @@ public class OrderServiceImpl implements OrderService {
                         totalSum += product.getProductPrice() - ((product.getProductPrice() * product.getDiscount()
                                 .getAmountOfDiscount()) / 100);
                     } else totalSum += product.getProductPrice();
-                }
-                    orderResponse.setCountOfProduct(countOfProduct);
-                    orderResponse.setTotalSum(totalSum);
-                }
-            }
-            return orderResponses;
 
+                }
+                orderResponse.setCountOfProduct(countOfProduct);
+                orderResponse.setTotalSum(totalSum);
+            }
         }
+        return orderResponses;
+
+    }
+
+
+
 
     @Override
     public void deleteOrderById(Long id) {
           orderRepository.deleteById(id);
     }
+
+
+
 
 
 //        @PostConstruct

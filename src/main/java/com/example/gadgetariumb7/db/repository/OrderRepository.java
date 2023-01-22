@@ -15,6 +15,18 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
 
+//     @Query("select new com.example.gadgetariumb7.dto.response.OrderResponse(o.id," +
+//             "o.firstName," +
+//             "o.lastName," +
+//             "o.orderNumber," +
+//             "o.dateOfOrder," +
+//             "o.countOfProduct ," +
+//             "o.totalSum ," +
+//             "o.orderType," +
+//             "o.orderStatus) from Order o where o.orderStatus=:orderStatus")
+//     Page<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable);
+
+
      @Query("select new com.example.gadgetariumb7.dto.response.OrderResponse(o.id," +
              "o.firstName," +
              "o.lastName," +
@@ -24,7 +36,20 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
              "o.totalSum ," +
              "o.orderType," +
              "o.orderStatus) from Order o where o.orderStatus=:orderStatus")
-     Page<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable);
+     List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus);
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 //@Query(value = "select count(p) as countOfProduct , sum(p.productPrice) as totalSum

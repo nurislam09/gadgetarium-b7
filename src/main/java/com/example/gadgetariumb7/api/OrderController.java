@@ -22,16 +22,21 @@ public class OrderController {
 
    private final OrderService orderService;
 
-   @GetMapping
-    public Page<OrderResponse> findAll(@RequestParam OrderStatus orderStatus,
-                                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC)
-                                       Pageable pageable) {
-       Pageable newPageable= PageRequest.of(pageable.getPageNumber()-1,5 );
-       return orderService.findAllOrdersByStatus(orderStatus,newPageable);
-   }
-   @DeleteMapping("/{id}")
+//   @GetMapping
+//    public Page<OrderResponse> findAll(@RequestParam OrderStatus orderStatus,
+//                                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC)
+//                                       Pageable pageable) {
+//       return orderService.findAllOrdersByStatus(orderStatus,pageable);
+//   }
+
+    @GetMapping
+    public List<OrderResponse> findAll(@RequestParam OrderStatus orderStatus) {
+        return orderService.findAllOrdersByStatus(orderStatus);
+    }
+
+
+    @DeleteMapping("/{id}")
    public ResponseEntity deleteOrder(@PathVariable Long id) {
-       orderService.deleteOrderById(id);
      return ResponseEntity.status(HttpStatus.OK).body("Order with id :"+id+" successfully deleted!");
    }
 
