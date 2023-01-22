@@ -1,9 +1,12 @@
-package com.example.gadgetariumb7.db.service;
+package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.repository.*;
+import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
+import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -12,12 +15,15 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl {
+public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final DiscountRepository discountRepository;
+    private final SubproductRepository subproductRepository;
     private final UserRepository userRepository;
 
-    public List<ProductAdminResponse> productAdminResponses(String productType, String fieldToSort, LocalDate startDate, LocalDate endDate) {
-        List<ProductAdminResponse> productAdminResponses = sorting(fieldToSort, productRepository.getAllProductsAdmin(), startDate, endDate);
+    @Override
+    public List<ProductAdminResponse> getProductAdminResponses(String productType, String fieldToSort, LocalDate startDate, LocalDate endDate, int page, int size) {
+        List<ProductAdminResponse> productAdminResponses = sortingProduct(fieldToSort, productRepository.getAllProductsAdmin( PageRequest.of(page -1, size)), startDate, endDate);
 
         switch (productType){
             case "Все товары" -> {
@@ -26,7 +32,7 @@ public class ProductServiceImpl {
             case "В продаже" -> {
                 return productAdminResponses.stream().filter(x -> x.getProductCount() > 0).toList();
             }
-            case "В избранном" -> {
+            case "В корзине" -> {
                 List<Product> productList = new ArrayList<>();
                 List<ProductAdminResponse> responseList = new ArrayList<>();
 //                List<User> users = ;
@@ -41,32 +47,42 @@ public class ProductServiceImpl {
 //                }
                 userRepository.findAll().stream().filter(u -> u.getBasketList() != null).forEach(x -> x.getBasketList().stream().filter(p -> !productList.contains(p)).forEach(productList::add));
                 productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice())));
-                return sorting(fieldToSort, responseList, startDate, endDate);
+                return sortingProduct(fieldToSort, responseList, startDate, endDate);
+            }
+            case "В избранном" -> {
+                List<Product> productList = new ArrayList<>();
+                List<ProductAdminResponse> responseList = new ArrayList<>();
+                userRepository.findAll().stream().filter(u -> u.getFavoritesList() != null).forEach(x -> x.getFavoritesList().stream().filter(p -> !productList.contains(p)).forEach(productList::add));
+                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice())));
+                return sortingProduct(fieldToSort, responseList, startDate, endDate);
             }
         }
 
         return productAdminResponses;
     }
 
-    public void deleteById(Long id){
+    @Override
+    public SimpleResponse delete(Long id){
         Product product = productRepository.getById(id);
         product.setDiscount(null);
         productRepository.delete(product);
+        return new SimpleResponse("Product successfully deleted!", "ok");
     }
 
-    public void update(Long id, Integer vendorCode, Integer productCount, Integer productPrice){
+    @Override
+    public SimpleResponse update(Long id, Integer vendorCode, Integer productCount, Integer productPrice){
         Product product = productRepository.findById(id).get();
         if (vendorCode != null) product.setProductVendorCode(vendorCode);
         if (productCount != null) product.setProductCount(productCount);
         if (productPrice != null) product.setProductPrice(productPrice);
-
         productRepository.save(product);
+        return new SimpleResponse("Product successfully updated", "ok");
     }
 
-    public List<ProductAdminResponse> search(String text){
-        return productRepository.search(text);
+    @Override
+    public List<ProductAdminResponse> search(String text, int page, int size){
+        return sortingProduct(null, productRepository.search(text.toUpperCase(), PageRequest.of(page -1, size)), null, null);
     }
-
 
     @PostConstruct
     public void initProduct() {
@@ -94,15 +110,15 @@ public class ProductServiceImpl {
 //        subproduct2.setProduct(product);
 //        subproduct3.setProduct(product);
 //
-//
+////
 //        User user1 = userRepository.findById(2L).get();
 //        Product product = productRepository.getById(1L);
 //        Product product1 = productRepository.getById(4L);
 //        Product product2 = productRepository.getById(2L);
-//        User user2 = userRepository.findById(4L).get();
+//        User user2 = userRepository.findById(3L).get();
 //
-//        user1.setBasketList(Arrays.asList(product, product1));
-//        user2.setBasketList(Arrays.asList(product, product1, product2));
+//        user1.setFavoritesList(Arrays.asList(product, product1));
+//        user2.setFavoritesList(Arrays.asList(product, product1, product2));
 //
 //        discountRepository.save(discount);
 //        productRepository.save(product);
@@ -117,8 +133,7 @@ public class ProductServiceImpl {
 //        userRepository.save(user2);
     }
 
-
-    private List<ProductAdminResponse> sorting(String fieldToSort, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate){
+    private List<ProductAdminResponse> sortingProduct(String fieldToSort, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate){
         if (fieldToSort != null) {
             switch (fieldToSort) {
                 case "Наименование товара" -> products.sort(Comparator.comparingInt(ProductAdminResponse::getProductCount).reversed());
@@ -129,17 +144,30 @@ public class ProductServiceImpl {
             }
         }
 
-        for (ProductAdminResponse p : products) {
-            Product product = productRepository.getById(p.getId());
-            p.setProductImages(product.getProductImages().get(0));
-
-            if (product.getDiscount() != null) {
-                Discount discount = product.getDiscount();
-                p.setDiscountPrice(discount.getAmountOfDiscount());
-                p.setCurrentPrice((p.getProductPrice() * discount.getAmountOfDiscount()) / 100);
+//        products.forEach(p -> p.setProductImages(productRepository.getById(p.getId()).getProductImages().get(0)));
+//        products.stream().filter(p -> productRepository.getById(p.getId()).getDiscount() != null).forEach(x -> {
+//                    Discount d = productRepository.getById(x.getId()).getDiscount();
+//                    x.setDiscountPrice(d.getAmountOfDiscount());
+//                    x.setCurrentPrice((x.getProductPrice() * d.getAmountOfDiscount()) / 100); });
+        products.forEach(i -> {
+            Product p = productRepository.getById(i.getId());
+            i.setProductImages(p.getProductImages().get(0));
+            if (p.getDiscount() != null){
+                Discount d = p.getDiscount();
+                i.setDiscountPrice(d.getAmountOfDiscount());
+                i.setCurrentPrice((i.getProductPrice() * d.getAmountOfDiscount()) / 100);
             }
-        }
-
+        });
+//        for (ProductAdminResponse p : products) {
+//            Product product = productRepository.getById(p.getId());
+//            p.setProductImages(product.getProductImages().get(0));
+//
+//            if (product.getDiscount() != null) {
+//                Discount discount = product.getDiscount();
+//                p.setDiscountPrice(discount.getAmountOfDiscount());
+//                p.setCurrentPrice((p.getProductPrice() * discount.getAmountOfDiscount()) / 100);
+//            }
+//        }
         if (startDate != null && endDate != null) return products.stream().filter(p -> p.getCreateAt().toLocalDate().isAfter(startDate) && p.getCreateAt().toLocalDate().isBefore(endDate)).toList();
 
         return products;
