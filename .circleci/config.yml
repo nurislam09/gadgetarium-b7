@@ -22,10 +22,10 @@ workflows:
                 - main
       - aws-ecs/deploy-service-update:
           name: "deploy-service-update"
-          cluster: gadgetarium-cluster
+          cluster: gadgetarium-service-cluster
           container-image-name-updates: 'container=gadgetarium-servers-container,tag=${CIRCLE_SHA1}'
           family: gadgetarium-servers-task
-          service-name: gadgetarium-service
+          service-name: gadgetarium-servers-service
           force-new-deployment: true
           requires:
             - build-and-push-image
