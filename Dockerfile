@@ -1,16 +1,11 @@
-FROM openjdk:17 AS build
-
-WORKDIR /test/build
-
-COPY . /test/build
+FROM openjdk:17 as build
+WORKDIR /app
+COPY . ./
 RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests=true
+RUN ./mvnw clean package -DskipTests
 
 FROM openjdk:17.0.2-jdk-slim
-WORKDIR /test/app
-
-COPY --from=build /test/build/target/gadgetarium-b7-0.0.1-SNAPSHOT.jar /test/app/
-
-EXPOSE 7000
-
-ENTRYPOINT ["java","-jar","/test/app/gadgetarium-b7-0.0.1-SNAPSHOT.jar"]
+WORKDIR /app
+COPY --from=build /app/target/gadgetarium-b7-0.0.1-SNAPSHOT.jar .
+CMD ["java", "-jar", "gadgetarium-b7-0.0.1-SNAPSHOT.jar"]
+EXPOSE 2023
