@@ -18,7 +18,7 @@ VALUES (1, 'Apple', 'https://www.meme-arsenal.com/memes/37c2ffed98992565b0596eca
 insert into categories(id, category_name)
 VALUES (1, 'Смартфоны'),
        (2, 'Ноутбуки и планшеты'),
-       (3, 'Смарт-часы и планшеты');
+       (3, 'Смарт-часы и браслеты');
 
 insert into subcategories(id, sub_category_name, category_id)
 VALUES (1, 'Apple', 1),

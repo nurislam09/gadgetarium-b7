@@ -1,6 +1,5 @@
 package com.example.gadgetariumb7.db.repository;
 
-import com.example.gadgetariumb7.db.entity.Discount;
 import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -46,6 +45,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            " from Product p where p.productStatus = 1 and p.productRating > 4")
+            " from Product p where p.productStatus = 1")
     List<ProductCardResponse> getAllRecommendationProduct();
 }
