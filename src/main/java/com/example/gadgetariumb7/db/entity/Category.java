@@ -19,7 +19,7 @@ import static javax.persistence.CascadeType.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_gen")
-    @SequenceGenerator(name = "category_gen", sequenceName = "category_seq", allocationSize = 1)
+    @SequenceGenerator(name = "category_gen", sequenceName = "category_seq", allocationSize = 1, initialValue = 3)
     private Long id;
 
     private String categoryName;

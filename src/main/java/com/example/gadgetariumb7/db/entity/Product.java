@@ -25,7 +25,7 @@ import static javax.persistence.CascadeType.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
-    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1)
+    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1, initialValue = 12)
     private Long id;
 
     private String productName;
@@ -113,15 +113,5 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
-
-    public Product(String productName, int productPrice, int orderCount, int productVendorCode, int productCount, LocalDateTime createAt, List<String> images) {
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.orderCount = orderCount;
-        this.productVendorCode = productVendorCode;
-        this.productCount = productCount;
-        this.productImages = images;
-        this.createAt = createAt;
-    }
 
 }
