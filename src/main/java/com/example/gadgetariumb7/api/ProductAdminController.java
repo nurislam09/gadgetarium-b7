@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -62,5 +63,10 @@ public class ProductAdminController {
             @RequestParam int page,
             @RequestParam int size) {
         return productService.search(text, page, size);
+    }
+
+    @PostMapping("/color")
+    private void getColor(@RequestBody Color color){
+
     }
 }

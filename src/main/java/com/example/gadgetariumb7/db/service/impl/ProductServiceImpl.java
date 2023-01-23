@@ -5,6 +5,7 @@ import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public SimpleResponse delete(Long id){
-        Product product = productRepository.getById(id);
+        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product for delete not found!"));
         product.setDiscount(null);
         productRepository.delete(product);
         return new SimpleResponse("Product successfully deleted!", "ok");
@@ -71,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public SimpleResponse update(Long id, Integer vendorCode, Integer productCount, Integer productPrice){
-        Product product = productRepository.findById(id).get();
+        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product for delete not found!"));
         if (vendorCode != null) product.setProductVendorCode(vendorCode);
         if (productCount != null) product.setProductCount(productCount);
         if (productPrice != null) product.setProductPrice(productPrice);
@@ -144,11 +145,6 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
-//        products.forEach(p -> p.setProductImages(productRepository.getById(p.getId()).getProductImages().get(0)));
-//        products.stream().filter(p -> productRepository.getById(p.getId()).getDiscount() != null).forEach(x -> {
-//                    Discount d = productRepository.getById(x.getId()).getDiscount();
-//                    x.setDiscountPrice(d.getAmountOfDiscount());
-//                    x.setCurrentPrice((x.getProductPrice() * d.getAmountOfDiscount()) / 100); });
         products.forEach(i -> {
             Product p = productRepository.getById(i.getId());
             i.setProductImages(p.getProductImages().get(0));
@@ -158,16 +154,7 @@ public class ProductServiceImpl implements ProductService {
                 i.setCurrentPrice((i.getProductPrice() * d.getAmountOfDiscount()) / 100);
             }
         });
-//        for (ProductAdminResponse p : products) {
-//            Product product = productRepository.getById(p.getId());
-//            p.setProductImages(product.getProductImages().get(0));
-//
-//            if (product.getDiscount() != null) {
-//                Discount discount = product.getDiscount();
-//                p.setDiscountPrice(discount.getAmountOfDiscount());
-//                p.setCurrentPrice((p.getProductPrice() * discount.getAmountOfDiscount()) / 100);
-//            }
-//        }
+
         if (startDate != null && endDate != null) return products.stream().filter(p -> p.getCreateAt().toLocalDate().isAfter(startDate) && p.getCreateAt().toLocalDate().isBefore(endDate)).toList();
 
         return products;
