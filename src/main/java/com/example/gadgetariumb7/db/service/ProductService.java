@@ -1,14 +1,10 @@
 package com.example.gadgetariumb7.db.service;
 
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
+import com.example.gadgetariumb7.dto.response.AllProductResponse;
 
-import java.util.List;
 
 public interface ProductService {
 
-    List<ProductCardResponse> getAllNewProduct();
+    AllProductResponse getAllProductToMP();
 
-    List<ProductCardResponse> getAllDiscountProduct();
-
-    List<ProductCardResponse> getAllRecommendationProduct();
 }

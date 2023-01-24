@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            "from Product p where p.productStatus = 0 ORDER BY p.createAt ")
+            "from Product p where p.productStatus = 0 order by p.createAt")
     List<ProductCardResponse> getAllNewProduct();
 
 
