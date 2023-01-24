@@ -2,6 +2,7 @@ package com.example.gadgetariumb7.db.entity;
 
 import javax.persistence.*;
 
+import com.example.gadgetariumb7.dto.request.ReviewRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,10 +31,14 @@ public class Review {
     private boolean statusOfResponse;
 
 
-
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private User user;
 
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private Product product;
+
+
+    public Review(ReviewRequest reviewRequest) {
+        this.responseOfReview = reviewRequest.getResponseOfReview();
+    }
 }

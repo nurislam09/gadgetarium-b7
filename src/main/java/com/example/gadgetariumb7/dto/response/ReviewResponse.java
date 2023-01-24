@@ -2,30 +2,56 @@
 package com.example.gadgetariumb7.dto.response;
 
 import com.example.gadgetariumb7.db.entity.Product;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.example.gadgetariumb7.dto.request.ReviewRequest;
+import lombok.*;
 
 import java.util.List;
 
-@Builder
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class ReviewResponse {
     private Long id;
-    private List<String> photo;
+    private String productImage;
     private String name;
     private String responseOfReview;
+    private List<String> photo;
     private byte productGrade;
     private UserResponse userResponse;
+    private int productVendorCode;
 
-    public ReviewResponse(Product product) {
-        this.id = product.getId();
-        this.photo =product.getProductImages();
-        this.name=product.getProductName();
+    public ReviewResponse(Long id, String productImage, String name, String responseOfReview, List<String> photo, byte productGrade,int productVendorCode) {
+        this.id = id;
+        this.productImage = productImage;
+        this.name = name;
+        this.responseOfReview = responseOfReview;
+        this.photo = photo;
+        this.productGrade = productGrade;
+        this.productVendorCode=productVendorCode;
     }
+
+    public ReviewResponse(Long id, String name, String responseOfReview, List<String> photo, byte productGrade, int productVendorCode) {
+        this.id = id;
+        this.name = name;
+        this.responseOfReview = responseOfReview;
+        this.photo = photo;
+        this.productGrade = productGrade;
+        this.productVendorCode = productVendorCode;
+    }
+
+    public ReviewResponse(ReviewRequest responseOfReview) {
+        this.responseOfReview = responseOfReview.getResponseOfReview();
+    }
+
+    //    public ReviewResponse(Product product) {
+//        this.photo =product.getProductImages();
+//        this.name=product.getProductName();
+//        this.productImage= photo.get(0);
+//    }
+
+
+
+
 
 
 
