@@ -23,7 +23,7 @@ public class ProductAdminController {
     @Operation(summary = "This method for save product",
     description = "The save product with different types and options")
     @PostMapping("/saveProduct")
-//    @PreAuthorize("hasAuthority('Admin')")
+    @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse save (@RequestBody ProductRequest productRequest) throws IOException {
        return productService.addProduct(productRequest);
     }
