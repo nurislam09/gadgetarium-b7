@@ -34,6 +34,11 @@ public class OrderController {
         return orderService.findAllOrdersByStatus(orderStatus);
     }
 
+    @GetMapping("/count")
+    public int countOfOrderStatus (@RequestParam OrderStatus orderStatus) {
+        return orderService.countOfOrderStatus(orderStatus);
+    }
+
 
     @DeleteMapping("/{id}")
    public ResponseEntity deleteOrder(@PathVariable Long id) {

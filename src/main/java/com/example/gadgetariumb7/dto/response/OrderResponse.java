@@ -30,14 +30,13 @@ public class OrderResponse {
     private OrderStatus orderStatus;
 
 
-    public OrderResponse(Long id, String firstName, String lastName, int orderNumber, LocalDateTime dateOfOrder, int countOfProduct, int totalSum, OrderType orderType, OrderStatus orderStatus) {
+    public OrderResponse(Long id, String firstName, String lastName, int orderNumber,
+                         LocalDateTime dateOfOrder, OrderType orderType, OrderStatus orderStatus) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.orderNumber = orderNumber;
         this.dateOfOrder = dateOfOrder;
-        this.countOfProduct = countOfProduct;
-        this.totalSum = totalSum;
         this.orderType = orderType;
         this.orderStatus = orderStatus;
     }

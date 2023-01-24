@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -65,7 +66,7 @@ public class Order {
     private User user;
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
 
 }

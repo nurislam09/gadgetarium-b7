@@ -32,10 +32,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
              "o.lastName," +
              "o.orderNumber," +
              "o.dateOfOrder," +
-             "o.countOfProduct ," +
-             "o.totalSum ," +
              "o.orderType," +
-             "o.orderStatus) from Order o where o.orderStatus=:orderStatus")
+             "o.orderStatus) from Order o where o.orderStatus = :orderStatus")
      List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus);
 
 
@@ -52,6 +50,3 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
 }
 
-//@Query(value = "select count(p) as countOfProduct , sum(p.productPrice) as totalSum
-//    from Product p join p.orders o where o.id = :orderId")
-//    List<Object[]> findCountOfProductAndTotalSum(@Param("orderId") Long orderId);

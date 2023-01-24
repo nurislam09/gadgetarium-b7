@@ -13,6 +13,8 @@ public interface OrderService {
 
       List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus);
 
+      int countOfOrderStatus (OrderStatus orderStatus);
+
       void deleteOrderById(Long id);
 
 }
