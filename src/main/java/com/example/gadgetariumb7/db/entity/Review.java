@@ -18,7 +18,7 @@ import static javax.persistence.CascadeType.*;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_gen")
-    @SequenceGenerator(name = "review_gen", sequenceName = "review_seq", allocationSize = 10)
+    @SequenceGenerator(name = "review_gen", sequenceName = "review_seq", allocationSize = 1)
     private Long id;
 
     private LocalDateTime reviewTime;
