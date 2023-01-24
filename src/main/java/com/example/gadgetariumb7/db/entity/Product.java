@@ -6,11 +6,9 @@ import com.example.gadgetariumb7.db.enums.ProductStatus;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.awt.*;
 import java.time.LocalDateTime;
@@ -58,7 +56,6 @@ public class Product {
 
     private Color color;
 
-    @JsonIgnore
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;
 
