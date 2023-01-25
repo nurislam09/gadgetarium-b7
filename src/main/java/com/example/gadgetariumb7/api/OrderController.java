@@ -22,20 +22,22 @@ public class OrderController {
 
    private final OrderService orderService;
 
-//   @GetMapping
-//    public Page<OrderResponse> findAll(@RequestParam OrderStatus orderStatus,
-//                                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC)
-//                                       Pageable pageable) {
-//       return orderService.findAllOrdersByStatus(orderStatus,pageable);
-//   }
+    @GetMapping("/pagination/page")
+    public List<OrderResponse> findAll(@RequestParam OrderStatus orderStatus,
+                                       @RequestParam int page,
+                                       @RequestParam int size){
+        return orderService.findAllOrdersByStatus(orderStatus,page,size);
+    }
 
-    @GetMapping
-    public List<OrderResponse> findAll(@RequestParam OrderStatus orderStatus) {
-        return orderService.findAllOrdersByStatus(orderStatus);
+    @GetMapping()
+    public List<OrderResponse>search (@RequestParam String keyWord,
+                                      @RequestParam int page,
+                                      @RequestParam int size) {
+        return orderService.search(keyWord,page,size);
     }
 
     @GetMapping("/count")
-    public int countOfOrderStatus (@RequestParam OrderStatus orderStatus) {
+    public Long countOfOrderStatus (@RequestParam OrderStatus orderStatus) {
         return orderService.countOfOrderStatus(orderStatus);
     }
 

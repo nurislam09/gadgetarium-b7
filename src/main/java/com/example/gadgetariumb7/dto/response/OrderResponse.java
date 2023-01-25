@@ -13,9 +13,11 @@ public class OrderResponse {
 
     private Long  id;
 
-    private String firstName;
+//    private String firstName;
+//
+//    private String lastName;
 
-    private String lastName;
+    private String fullName;
 
     private int orderNumber;
 
@@ -30,11 +32,10 @@ public class OrderResponse {
     private OrderStatus orderStatus;
 
 
-    public OrderResponse(Long id, String firstName, String lastName, int orderNumber,
+    public OrderResponse(Long id, String fullName, int orderNumber,
                          LocalDateTime dateOfOrder, OrderType orderType, OrderStatus orderStatus) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.fullName = fullName;
         this.orderNumber = orderNumber;
         this.dateOfOrder = dateOfOrder;
         this.orderType = orderType;

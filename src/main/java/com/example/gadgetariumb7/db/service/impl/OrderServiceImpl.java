@@ -38,33 +38,10 @@ public class OrderServiceImpl implements OrderService {
     private final ProductRepository productRepository;
 
 
-//        @Override
-//        public Page<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable) {
-//            Pageable newPageable= PageRequest.of(pageable.getPageNumber()-1,5);
-//        Page<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus(orderStatus,newPageable);
-//        for (OrderResponse orderResponse : orderResponses) {
-//            Optional<Order> orderOptional = orderRepository.findById(orderResponse.getId());
-//            if (orderOptional.isPresent()) {
-//                Order order = orderOptional.get();
-//                int countOfProduct = order.getProducts().size();
-//                int totalSum = 0;
-//                for (Product product : order.getProducts()) {
-//                    if (product.getDiscount() != null) {
-//                        totalSum += product.getProductPrice() - ((product.getProductPrice() * product.getDiscount()
-//                                .getAmountOfDiscount()) / 100);
-//                    } else totalSum += product.getProductPrice();
-//                }
-//                    orderResponse.setCountOfProduct(countOfProduct);
-//                    orderResponse.setTotalSum(totalSum);
-//                }
-//            }
-//            return orderResponses;
-
-//        }
 
     @Override
-    public List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus) {
-        List<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus(orderStatus);
+    public  List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus,int page, int size) {
+        List<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus(orderStatus,PageRequest.of(page -1,size));
         for (OrderResponse orderResponse : orderResponses) {
             User user = orderRepository.getById(orderResponse.getId()).getUser();
 
@@ -84,7 +61,6 @@ public class OrderServiceImpl implements OrderService {
                     }else {
                         orderResponse.setTotalSum(totalSum);
                     }
-
                         orderResponse.setCountOfProduct(orderCount);
 
                 }
@@ -94,17 +70,18 @@ public class OrderServiceImpl implements OrderService {
 
         }
 
+    @Override
+    public List<OrderResponse> search(String keyWord, int page, int size) {
+        List<OrderResponse> orderResponses = orderRepository.search(keyWord,PageRequest.of(page -1,size));
 
-//if(LocalDate.now().isAfter(discountStartDate) && LocalDate.now().isBefore(discountEndDate)){
-//        orderResponse.setDiscountedTotalSum(discountedTotalSum);
-//    }else{
-//        orderResponse.setDiscountedTotalSum(totalSum);
-//    }
+        return orderResponses;
+    }
+
+
 
     @Override
-    public int countOfOrderStatus(OrderStatus orderStatus) {
-        int count = findAllOrdersByStatus(orderStatus).size();
-        return count;
+    public Long countOfOrderStatus(OrderStatus orderStatus) {
+        return orderRepository.countByOrderStatus(orderStatus);
     }
 
 
