@@ -9,8 +9,10 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -23,7 +25,7 @@ import static javax.persistence.CascadeType.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
-    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1)
+    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1, initialValue = 12)
     private Long id;
 
     private String productName;
@@ -38,15 +40,20 @@ public class Product {
 
     private Byte guarantee;
 
+    @Column(length = 10000)
     private String videoReview;
 
+    @Column(length = 10000)
     private String PDF;
 
+    @Column(length = 10000)
     private String description;
 
     private ProductStatus productStatus;
 
     private Byte productRating;
+
+    private LocalDateTime createAt;
 
     private Color color;
 
@@ -106,4 +113,5 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
+
 }

@@ -1,21 +1,12 @@
 version: 2.1
-
 orbs:
   aws-ecr: circleci/aws-ecr@7.0.0
   aws-ecs: circleci/aws-ecs@3.2
-
-commands:
-  build-image: aws-ecr/build-image
-
 workflows:
-  deploy-to-development:
+  deploy-to-ecs:
     jobs:
       - aws-ecr/build-and-push-image:
           name: "build-and-push-image"
-          context:
-            - GADGETARIUM_CONTEXT
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           account-url: AWS_ECR_URL
           create-repo: false
           dockerfile: Dockerfile
@@ -24,22 +15,21 @@ workflows:
           region: AWS_DEFAULT_REGION
           repo: gadgetarium-b7-repo
           skip-when-tags-exist: false
-          tag: main-$CIRCLE_SHA1
+          tag: $CIRCLE_SHA1
           filters:
             branches:
               only:
                 - main
-#      - aws-ecs/deploy-service-update:
-#          context:
-#            - TAIGAN_CONTEXT
-#          cluster: taigan-backend-dev
-#          container-image-name-updates: 'container=taiganbackenddevcontainer,tag=${CIRCLE_SHA1}'
-#          family: taigan-backend-dev
-#          service-name: taiganbackenddevservice1
-#          force-new-deployment: true
-#          filters:
-#            branches:
-#              only:
-#                - main
-#          requires:
-#            - build-and-push-image
+      - aws-ecs/deploy-service-update:
+          name: "deploy-service-update"
+          cluster: gadgetarium-servers-cluster
+          container-image-name-updates: 'container=gadgetarium-servers-container,tag=${CIRCLE_SHA1}'
+          family: gadgetarium-servers-task
+          service-name: gadgetarium-servers-service
+          force-new-deployment: true
+          requires:
+            - build-and-push-image
+          filters:
+            branches:
+              only:
+                - main
