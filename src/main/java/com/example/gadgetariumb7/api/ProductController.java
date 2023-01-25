@@ -20,7 +20,7 @@ public class ProductController {
 
     private final ProductService productService;
     @GetMapping()
-    @Operation(summary = "Get all products to main page" , description = "This endpoint return AllProductResponse which contains three different response array")
+    @Operation(summary = "Get all products to main page", description = "This endpoint return AllProductResponse which contains three different response array")
     public AllProductResponse getAllProductMainPage(){
         return productService.getAllProductToMP();
     }
