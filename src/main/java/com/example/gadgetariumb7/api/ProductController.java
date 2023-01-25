@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
     private final ProductService productService;
-    @GetMapping("/getAllToMP")
-    @Operation(summary = "get all products to main page" , description = "this endpoint return AllProductResponse which contains three different response array")
+    @GetMapping()
+    @Operation(summary = "Get all products to main page" , description = "This endpoint return AllProductResponse which contains three different response array")
     public AllProductResponse getAllProductMainPage(){
         return productService.getAllProductToMP();
     }

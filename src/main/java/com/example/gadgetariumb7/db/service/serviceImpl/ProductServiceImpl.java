@@ -16,31 +16,25 @@ public class ProductServiceImpl implements ProductService {
 
     public AllProductResponse getAllProductToMP() {
         List<ProductCardResponse> discountProducts = productRepository.getAllDiscountProduct();
-        List<ProductCardResponse> newProduct = productRepository.getAllNewProduct();
+        List<ProductCardResponse> newProducts = productRepository.getAllNewProduct();
         List<ProductCardResponse> recommendations = productRepository.getAllRecommendationProduct();
-        for (ProductCardResponse r : recommendations) {
-            for (ProductCardResponse n : newProduct) {
-                for (ProductCardResponse d : discountProducts) {
-                    r.setProductImage(productRepository.getFirstImage(r.getProductId()));
-                    n.setProductImage(productRepository.getFirstImage(n.getProductId()));
-                    d.setProductImage(productRepository.getFirstImage(d.getProductId()));
 
-                    d.setProductImage(productRepository.getFirstImage(d.getProductId()));
-                    d.setDiscountPrice(productRepository.getDiscountPrice(d.getProductId()));
-                    try {
-                        if (productRepository.getDiscountPrice(r.getProductId()) == 0 && productRepository.getDiscountPrice(n.getProductId()) == 0) {
-                            r.setDiscountPrice(r.getProductPrice());
-                            n.setDiscountPrice(n.getProductPrice());
-                        } else {
-                            r.setDiscountPrice(productRepository.getDiscountPrice(r.getProductId()));
-                            n.setDiscountPrice(productRepository.getDiscountPrice(n.getProductId()));
-                        }
-                    } catch (RuntimeException e) {
-                        System.out.println("null discount");
-                    }
-                }
+        recommendations.forEach(r -> {r.setProductImage(productRepository.getFirstImage(r.getProductId())); setDiscountToResponse(r);});
+        discountProducts.forEach(r -> {r.setProductImage(productRepository.getFirstImage(r.getProductId())); r.setDiscountPrice(productRepository.getDiscountPrice(r.getProductId()));});
+        newProducts.forEach(r -> {r.setProductImage(productRepository.getFirstImage(r.getProductId())); setDiscountToResponse(r);});
+
+        return new AllProductResponse(newProducts, recommendations, discountProducts);
+    }
+
+    private void setDiscountToResponse(ProductCardResponse productCardResponse) {
+        try {
+            if (productRepository.getDiscountPrice(productCardResponse.getProductId()) == 0) {
+                productCardResponse.setDiscountPrice(productCardResponse.getProductPrice());
+            } else {
+                productCardResponse.setDiscountPrice(productRepository.getDiscountPrice(productCardResponse.getProductId()));
             }
+        } catch (RuntimeException e) {
+            System.out.println("null discount");
         }
-        return new AllProductResponse(newProduct, recommendations, discountProducts);
     }
 }

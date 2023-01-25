@@ -7,8 +7,6 @@ insert into users(id, address, email, first_name, image, last_name, password, ph
 VALUES (1, null, 'nurislam@gmail.com', 'Nurislam', 'jds', 'Mamytov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996222219743', 1);
 
-
-
 insert into brands(id, brand_name, image)
 VALUES (1, 'Apple', 'https://www.meme-arsenal.com/memes/37c2ffed98992565b0596eca5286c7b6.jpg'),
        (2, 'Samsung',
@@ -76,7 +74,7 @@ VALUES ( 2, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , E'\\320\\170'::bytea, 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 pro ', 90990, 0, 1, 387456
        , null, 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, null, 1, '2011-04-17 18:20:03');
+       , 1, 1, 1, '2011-04-17 18:20:03');
 
 
 insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_laptop, battery_capacity,
@@ -90,7 +88,7 @@ VALUES ( 3, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , E'\\320\\170'::bytea, 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 ', 90990, 0, 1, 081056, null
        , 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, null, 1, '2011-04-17 18:20:03');
+       , 1, 1, 1, '2011-04-17 18:20:03');
 
 
 insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_laptop, battery_capacity,
@@ -104,7 +102,7 @@ VALUES ( 4, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , E'\\320\\170'::bytea, 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro max', 90990, 0, 1
        , 087478, null, 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, null, 1, '2011-04-17 18:20:03');
+       , 1, 1, 1, '2011-04-17 18:20:03');
 
 
 insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_laptop, battery_capacity,
@@ -202,7 +200,7 @@ values (11, 'https://mobile-review.com/news/wp-content/uploads/HONOR-MagicBook-P
         null, E'\\320\\170'::bytea, 'fddfgd',
         1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'HONOR Magic Book 15', 80999, 0, 0, 452365, 8, 0, 0, '2560x1600 пикс',
         null, 21.4, 0.0, null,
-        0, 'sdfsfd', null, null, null, 1, 2, 1, 8, '2011-04-17 18:20:03');
+        0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
 
 
 insert into banners(id)
