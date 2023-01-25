@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/products")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "product api")
+@Tag(name = "Product api")
 public class ProductController {
 
     private final ProductService productService;
+
     @GetMapping()
     @Operation(summary = "Get all products to main page", description = "This endpoint return AllProductResponse which contains three different response array")
     public AllProductResponse getAllProductMainPage(){
