@@ -19,7 +19,7 @@ import static javax.persistence.CascadeType.*;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_gen")
-    @SequenceGenerator(name = "role_gen", sequenceName = "role_seq", allocationSize = 1,initialValue = 2)
+    @SequenceGenerator(name = "role_gen", sequenceName = "role_seq", allocationSize = 1, initialValue = 2)
     private Long id;
 
     private String roleName;

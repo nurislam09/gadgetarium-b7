@@ -9,7 +9,6 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.awt.*;
 import java.time.LocalDateTime;
@@ -25,7 +24,7 @@ import static javax.persistence.CascadeType.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
-    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1,initialValue = 12)
+    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1, initialValue = 12)
     private Long id;
 
     private String productName;
@@ -71,7 +70,7 @@ public class Product {
 
     @ElementCollection
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url")
+    @Column(name = "image_url", length = 10000)
     List<String> productImages;
 
     @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")
@@ -113,6 +112,8 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
+
+
 
 
 }
