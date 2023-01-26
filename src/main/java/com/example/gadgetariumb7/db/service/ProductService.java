@@ -64,7 +64,7 @@ public class ProductService {
 
         List<Subproduct> subproducts = new ArrayList<>();
         for (SubProductRequest s : productRequest.getSubProductRequests()) {
-            if (categoryRepository.getById(productRequest.getCategoryId()).getCategoryName().equals("Ноутбуки и планшеты") &&
+            if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
                     productRequest.getLaptopCPU() != null) {
                 Subproduct subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages());
                 subproducts.add(subproduct);
