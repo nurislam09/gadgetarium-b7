@@ -1,23 +1,20 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
-import com.example.gadgetariumb7.db.service.impl.ProductServiceImpl;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Tag(name = "product API")
@@ -63,10 +60,5 @@ public class ProductAdminController {
             @RequestParam int page,
             @RequestParam int size) {
         return productService.search(text, page, size);
-    }
-
-    @PostMapping("/color")
-    private void getColor(@RequestBody Color color){
-
     }
 }
