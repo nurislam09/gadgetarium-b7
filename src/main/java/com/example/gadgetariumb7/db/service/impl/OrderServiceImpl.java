@@ -1,82 +1,62 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 
-import com.example.gadgetariumb7.db.entity.Discount;
-import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.entity.User;
-import com.example.gadgetariumb7.db.enums.DeliveryStatus;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
-import com.example.gadgetariumb7.db.enums.OrderType;
-import com.example.gadgetariumb7.db.enums.Payment;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
-import com.example.gadgetariumb7.db.repository.ProductRepository;
-import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.TreeSet;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-    private final UserRepository userRepository;
-    private final ProductRepository productRepository;
-
 
 
     @Override
-    public  List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus,int page, int size) {
-        List<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus(orderStatus,PageRequest.of(page -1,size));
+    public List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, int page, int size) {
+        List<OrderResponse> orderResponses = orderRepository.findAllOrdersByStatus(orderStatus, PageRequest.of(page - 1, size));
         for (OrderResponse orderResponse : orderResponses) {
             User user = orderRepository.getById(orderResponse.getId()).getUser();
 
-                    int orderCount = user.getBasketList().stream().mapToInt(Product::getOrderCount).sum();
-                    int totalSum = user.getBasketList().stream().filter(p ->p.getDiscount() == null).map(p -> p.getOrderCount() * p.getProductPrice()).reduce(0, Integer::sum);
+            int orderCount = user.getBasketList().stream().mapToInt(Product::getOrderCount).sum();
+            int totalSum = user.getBasketList().stream().filter(p -> p.getDiscount() == null).map(p -> p.getOrderCount() * p.getProductPrice())
+                    .reduce(0, Integer::sum);
 
-                    int  totalSumWithDiscount = user.getBasketList().stream().filter(p ->p.getDiscount() != null)
-                                    .map(p -> p.getOrderCount()*(p.getProductPrice()-(p.getProductPrice()*p.getDiscount().getAmountOfDiscount()/100)))
-                                            .reduce(0,Integer::sum);
+            int totalSumWithDiscount = user.getBasketList().stream().filter(p -> p.getDiscount() != null)
+                    .map(p -> p.getOrderCount() * (p.getProductPrice() - (p.getProductPrice() * p.getDiscount().getAmountOfDiscount() / 100)))
+                    .reduce(0, Integer::sum);
 
-                    int totalSumAndTotalSumWithDiscount = totalSum+totalSumWithDiscount;
+            int totalSumAndTotalSumWithDiscount = totalSum + totalSumWithDiscount;
 
-                    if (totalSumWithDiscount !=0 && totalSum !=0) {
-                        orderResponse.setTotalSum(totalSumAndTotalSumWithDiscount);
-                    }else if (totalSumWithDiscount !=0 ){
-                        orderResponse.setTotalSum(totalSumWithDiscount);
-                    }else {
-                        orderResponse.setTotalSum(totalSum);
-                    }
-                        orderResponse.setCountOfProduct(orderCount);
-
-                }
-
-
-            return orderResponses;
+            if (totalSumWithDiscount != 0 && totalSum != 0) {
+                orderResponse.setTotalSum(totalSumAndTotalSumWithDiscount);
+            } else if (totalSumWithDiscount != 0) {
+                orderResponse.setTotalSum(totalSumWithDiscount);
+            } else {
+                orderResponse.setTotalSum(totalSum);
+            }
+            orderResponse.setCountOfProduct(orderCount);
 
         }
 
+        return orderResponses;
+
+    }
+
     @Override
     public List<OrderResponse> search(String keyWord, int page, int size) {
-        List<OrderResponse> orderResponses = orderRepository.search(keyWord,PageRequest.of(page -1,size));
+        List<OrderResponse> orderResponses = orderRepository.search(keyWord, PageRequest.of(page - 1, size));
 
         return orderResponses;
     }
-
 
 
     @Override

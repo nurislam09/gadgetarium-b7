@@ -13,10 +13,6 @@ public class OrderResponse {
 
     private Long  id;
 
-//    private String firstName;
-//
-//    private String lastName;
-
     private String fullName;
 
     private int orderNumber;
