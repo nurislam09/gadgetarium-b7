@@ -1,14 +1,10 @@
 package com.example.gadgetariumb7.dto.response;
 
-import com.example.gadgetariumb7.db.entity.Discount;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Getter
@@ -16,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductAdminResponse {
     private Long id;
-    private String productImages;
+    private String productImage;
     private int productVendorCode;
     private String productName;
     private int productCount;
@@ -24,7 +20,7 @@ public class ProductAdminResponse {
     private LocalDateTime createAt;
     private int productPrice;
     private int currentPrice;
-    private byte discountPrice;
+    private int discountPrice;
 
     public ProductAdminResponse(Long id, int productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice) {
         this.id = id;
