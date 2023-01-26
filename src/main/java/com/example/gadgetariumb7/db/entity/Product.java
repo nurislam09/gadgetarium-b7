@@ -116,23 +116,6 @@ public class Product {
     private double ScreenDisplay;
     private double sizeOfWatch;
 
-    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory) {
-        this.productName = productRequest.getProductName();
-        this.productPrice = productRequest.getProductPrice();
-        this.productVendorCode = productRequest.getProductVendorCode();
-        this.productCount = productRequest.getProductCount();
-        this.guarantee = productRequest.getGuarantee();
-        this.videoReview = productRequest.getVideoReview();
-        this.PDF = productRequest.getPDF();
-        this.description = productRequest.getDescription();
-        this.color = productRequest.getColor();
-        this.productImages = productRequest.getProductImages();
-        this.brand = brand;
-        this.category = category;
-        this.subCategory = subCategory;
-        this.productImages = productRequest.getProductImages();
-    }
-
     public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, String productName) {
         this.productName = productRequest.getProductName();
         this.productPrice = productRequest.getProductPrice();
