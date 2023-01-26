@@ -1,6 +1,6 @@
 package com.example.gadgetariumb7.api;
 
-import com.example.gadgetariumb7.db.service.impl.ProductServiceImpl;
+import com.example.gadgetariumb7.db.service.impl.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -15,10 +15,10 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/product")
-public class ProductAdminController {
+@RequestMapping("/api/products")
+public class ProductController {
 
-    private final ProductServiceImpl productService;
+    private final ProductService productService;
 
     @Operation(summary = "This method for save product",
     description = "The save product with different types and options")

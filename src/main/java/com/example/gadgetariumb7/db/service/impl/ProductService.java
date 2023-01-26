@@ -3,7 +3,6 @@ package com.example.gadgetariumb7.db.service.impl;
 import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.Gender;
 import com.example.gadgetariumb7.db.repository.*;
-import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.SubProductRequest;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -19,7 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService {
+public class ProductService {
     private final ProductRepository repository;
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
@@ -27,7 +26,6 @@ public class ProductServiceImpl implements ProductService {
     private final SubProductRepository subProductRepository;
 
 
-    @Override
     public SimpleResponse addProduct(ProductRequest productRequest) throws IOException {
         Brand brand = brandRepository.findById(productRequest.getBrandId()).get();
         Category category = categoryRepository.findById(productRequest.getCategoryId()).get();
