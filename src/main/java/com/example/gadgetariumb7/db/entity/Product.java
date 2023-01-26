@@ -72,7 +72,7 @@ public class Product {
 
     @ElementCollection
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url")
+    @Column(name = "image_url", length = 10000)
     List<String> productImages;
 
     @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")
@@ -223,6 +223,9 @@ public class Product {
         this.videoCardMemory = productRequest.getVideoCardMemory();
         this.screenSizeLaptop = productRequest.getScreenSizeLaptop();
     }
+
+
+
 
 
 }
