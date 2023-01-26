@@ -2,17 +2,13 @@ package com.example.gadgetariumb7.dto.response;
 
 import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.Gender;
-import com.example.gadgetariumb7.db.enums.ProductStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.awt.*;
 import java.util.List;
-
-import static javax.persistence.CascadeType.*;
 
 @Getter
 @Setter

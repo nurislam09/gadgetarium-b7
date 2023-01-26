@@ -1,6 +1,5 @@
 package com.example.gadgetariumb7.dto.request;
 
-import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductRequest{
+public class ProductRequest {
     private String productName;
 
     private int productPrice;

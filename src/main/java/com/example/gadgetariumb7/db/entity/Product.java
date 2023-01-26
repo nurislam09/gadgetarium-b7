@@ -1,6 +1,5 @@
 package com.example.gadgetariumb7.db.entity;
 
-
 import com.example.gadgetariumb7.db.enums.Gender;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 
@@ -13,7 +12,6 @@ import lombok.Setter;
 
 import java.awt.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -136,7 +134,7 @@ public class Product {
         this.simCard = productRequest.getSimCard();
     }
 
-    public Product(ProductRequest productRequest, Brand brand, Category category,Subcategory subCategory, Gender gender) {
+    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, Gender gender) {
         this.productName = productRequest.getProductName();
         this.productPrice = productRequest.getProductPrice();
         this.productVendorCode = productRequest.getProductVendorCode();
@@ -160,7 +158,6 @@ public class Product {
         this.ScreenDisplay = productRequest.getScreenDisplay();
         this.sizeOfWatch = productRequest.getSizeOfWatch();
     }
-
 
     public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, int batteryCapacity, Double screenDiagonal) {
         this.productName = productRequest.getProductName();
@@ -206,11 +203,6 @@ public class Product {
         this.videoCardMemory = productRequest.getVideoCardMemory();
         this.screenSizeLaptop = productRequest.getScreenSizeLaptop();
     }
-
-
-
-
-
 }
 
 
