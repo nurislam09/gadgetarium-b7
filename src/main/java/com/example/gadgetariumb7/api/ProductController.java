@@ -16,7 +16,7 @@ import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import java.io.IOException;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -34,11 +34,11 @@ public class ProductController {
     }
 
     @Operation(summary = "This method for save product",
-    description = "The save product with different types and options")
+            description = "The save product with different types and options")
     @PostMapping("/saveProduct")
     @PreAuthorize("hasAuthority('Admin')")
-    public SimpleResponse save (@RequestBody ProductRequest productRequest) throws IOException {
-       return productService.addProduct(productRequest);
+    public SimpleResponse save(@RequestBody ProductRequest productRequest) {
+        return productService.addProduct(productRequest);
     }
 
 }
