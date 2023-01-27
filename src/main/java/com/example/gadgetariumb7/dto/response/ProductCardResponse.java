@@ -18,6 +18,7 @@ public class ProductCardResponse {
     private int discountPrice;
     private ProductStatus productStatus;
     private Byte productRating;
+    private int countFeedback;
 
     public ProductCardResponse(Long productId, String productName, int count, int productPrice, ProductStatus productStatus, Byte productRating) {
         this.productId = productId;
@@ -28,4 +29,15 @@ public class ProductCardResponse {
         this.productRating = productRating;
     }
 
+    public ProductCardResponse(Long productId, String productImage, String productName, int count, int productPrice, int discountPrice, ProductStatus productStatus, Byte productRating, int countFeedback) {
+        this.productId = productId;
+        this.productImage = productImage;
+        this.productName = productName;
+        this.count = count;
+        this.productPrice = productPrice;
+        this.discountPrice = discountPrice;
+        this.productStatus = productStatus;
+        this.productRating = productRating;
+        this.countFeedback = countFeedback;
+    }
 }
