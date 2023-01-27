@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.awt.*;
 import java.util.List;
 
 @Repository
@@ -63,6 +64,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.memoryOfPhone = :memory or " +
             "p.memoryOfSmartWatch = :memory or " +
             "p.memoryOfTablet =: memory or ")
-    @Query(" FROM Product c WHERE (:category is null or c.category = :category) AND (:minPrice is null or c.price >= :minPrice) AND (:maxPrice is null or c.price <= :maxPrice) AND (:colors is null or c.color IN :colors) AND (:memory is null or c.memory = :memory) AND (:ram is null or c.ram = :ram)")
+//    @Query(" FROM Product c WHERE (:category is null or c.category = :category) AND (:minPrice is null or c.price >= :minPrice) AND (:maxPrice is null or c.price <= :maxPrice) AND (:colors is null or c.color IN :colors) AND (:memory is null or c.memory = :memory) AND (:ram is null or c.ram = :ram)")
     List<Product> filterByParameters(String categoryName, String subCategoryName, int minPrice, int maxPrice, List<Color> colors, int memory, Byte ram);
 }
