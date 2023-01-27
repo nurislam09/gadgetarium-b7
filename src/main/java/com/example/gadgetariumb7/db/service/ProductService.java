@@ -8,6 +8,7 @@ import com.example.gadgetariumb7.dto.request.SubProductRequest;
 import com.example.gadgetariumb7.dto.response.AllProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -57,9 +58,9 @@ public class ProductService {
     }
 
     public SimpleResponse addProduct(ProductRequest productRequest) {
-        Brand brand = brandRepository.getById(productRequest.getBrandId());
-        Category category = categoryRepository.getById(productRequest.getCategoryId());
-        Subcategory subcategory = subcategoryRepository.getById(productRequest.getCategoryId());
+        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
+        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
+        Subcategory subcategory = subcategoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
 
         List<Subproduct> subproducts = new ArrayList<>();
         for (SubProductRequest s : productRequest.getSubProductRequests()) {
