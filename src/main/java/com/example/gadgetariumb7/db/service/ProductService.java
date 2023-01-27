@@ -22,7 +22,6 @@ public class ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
-    private final SubProductRepository subProductRepository;
 
     public AllProductResponse getAllProductToMP() {
         List<ProductCardResponse> discountProducts = productRepository.getAllDiscountProduct();
@@ -58,9 +57,9 @@ public class ProductService {
     }
 
     public SimpleResponse addProduct(ProductRequest productRequest) {
-        Brand brand = brandRepository.findById(productRequest.getBrandId()).get();
-        Category category = categoryRepository.findById(productRequest.getCategoryId()).get();
-        Subcategory subcategory = subcategoryRepository.findById(productRequest.getCategoryId()).get();
+        Brand brand = brandRepository.getById(productRequest.getBrandId());
+        Category category = categoryRepository.getById(productRequest.getCategoryId());
+        Subcategory subcategory = subcategoryRepository.getById(productRequest.getCategoryId());
 
         List<Subproduct> subproducts = new ArrayList<>();
         for (SubProductRequest s : productRequest.getSubProductRequests()) {
@@ -80,24 +79,18 @@ public class ProductService {
             product.setSubproducts(subproducts);
             subproducts.forEach(s -> s.setProduct(product));
             productRepository.save(product);
-            subProductRepository.saveAll(subproducts);
-
         } else if (category.getCategoryName().equals("Смарт-часы и браслеты")) {
             Product product = new Product(productRequest, brand, category, subcategory, Gender.MALE);
             product.setCreateAt(LocalDateTime.now());
             product.setSubproducts(subproducts);
             subproducts.forEach(s -> s.setProduct(product));
             productRepository.save(product);
-            subProductRepository.saveAll(subproducts);
-
         } else if (productRequest.getMemoryOfTablet() != 0) {
             Product product = new Product(productRequest, brand, category, subcategory, 1, 0.0);
             product.setCreateAt(LocalDateTime.now());
             product.setSubproducts(subproducts);
             subproducts.forEach(s -> s.setProduct(product));
             productRepository.save(product);
-            subProductRepository.saveAll(subproducts);
-
         } else {
             Product product = new Product(productRequest, brand, category, subcategory, (byte) 1);
             product.setCreateAt(LocalDateTime.now());
@@ -105,7 +98,7 @@ public class ProductService {
             subproducts.forEach(s -> s.setProduct(product));
             productRepository.save(product);
         }
+
         return new SimpleResponse("Product successfully saved", "ok");
     }
-
 }
