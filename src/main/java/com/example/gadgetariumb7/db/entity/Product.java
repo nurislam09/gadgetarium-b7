@@ -9,7 +9,6 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.awt.*;
 import java.time.LocalDateTime;
@@ -71,7 +70,7 @@ public class Product {
 
     @ElementCollection
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url")
+    @Column(name = "image_url", length = 10000)
     List<String> productImages;
 
     @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")
@@ -113,5 +112,8 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
+
+
+
 
 }
