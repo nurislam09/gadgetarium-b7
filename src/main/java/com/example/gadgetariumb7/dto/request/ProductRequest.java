@@ -38,9 +38,9 @@ public class ProductRequest {
 
     private Long subCategoryId;
 
-    List<String> productImages;
+    private List<String> productImages;
 
-    List<SubProductRequest> subProductRequests;
+    private List<SubProductRequest> subProductRequests;
 
     private String simCard;
     private int memoryOfPhone;

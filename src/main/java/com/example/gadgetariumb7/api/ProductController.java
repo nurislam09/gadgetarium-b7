@@ -35,7 +35,7 @@ public class ProductController {
 
     @Operation(summary = "This method for save product",
             description = "The save product with different types and options")
-    @PostMapping("/saveProduct")
+    @PostMapping()
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse save(@RequestBody ProductRequest productRequest) {
         return productService.addProduct(productRequest);
