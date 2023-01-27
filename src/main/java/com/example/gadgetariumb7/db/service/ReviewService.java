@@ -1,6 +1,5 @@
 package com.example.gadgetariumb7.db.service;
 
-import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.entity.Review;
 import com.example.gadgetariumb7.db.repository.ReviewRepository;
 import com.example.gadgetariumb7.dto.request.ReviewRequest;
@@ -11,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,59 +18,57 @@ import java.util.List;
 @Transactional
 public class ReviewService {
 
-   private final  ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
 
 
+    public void save(ReviewRequest reviewRequest) {
+        Review review = new Review(reviewRequest);
+        review.setStatusOfResponse(true);
+        reviewRepository.save(review);
+    }
 
-   public void save(ReviewRequest reviewRequest){
-      Review review=new Review(reviewRequest);
-      review.setStatusOfResponse(true);
-      reviewRepository.save(review);
-   }
+    List<ReviewResponse> answered() {
+        List<ReviewResponse> reviewResponses = getAll().stream().filter(p -> p.isStatusOfResponse() == true).toList();
+        return reviewResponses;
+    }
 
-   public ReviewResponse  updateReview(ReviewRequest reviewRequest){
-      return new ReviewResponse(reviewRequest);
-   }
+    List<ReviewResponse> unAnswered() {
+        List<ReviewResponse> reviewResponses = getAll().stream().filter(p -> p.isStatusOfResponse() == false).toList();
+        return reviewResponses;
+    }
 
-
-   public List<ReviewResponse> getAll(){
-      return reviewRepository.getAllReviews();
-   }
-
-
-   public ReviewResponse getById(Long id){
-      Review review = reviewRepository.findById(id).orElseThrow(
-              () -> new NotFoundException(String.format("not found!"))
-      );
-
-      ReviewResponse response =new ReviewResponse(review.getId(),review.getProduct().getProductImages().get(0),review.getProduct().getProductName(),
-              review.getResponseOfReview(),review.getProduct().getProductImages(),review.getProductGrade(),review.getProduct().getProductVendorCode());
-
-      UserResponse userResponse=new UserResponse(
-              review.getUser().getId(),
-              review.getUser().getFirstName(),review.getUser().getLastName(),
-              review.getUser().getEmail(),
-              review.getUser().getImage()
-      );
-      response.setUserResponse(userResponse);
-      return response;
-   }
-
-   public void deleteReviewById(Long id){
-      Review review = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("not found!")));
-      review.setUser(null);
-      review.setProduct(null);
-      reviewRepository.delete(review);
-   }
-
-  List <ReviewResponse> answered (){
+    public ReviewResponse updateReview(ReviewRequest reviewRequest) {
+        return new ReviewResponse(reviewRequest);
+    }
 
 
-     List<ReviewResponse> allReviews = reviewRepository.getAllReviews();
-     allReviews.forEach(i -> {
-        Review r =reviewRepository.getById(i.getId());
-        i.setProductImage(r.getProduct().getProductImages().get(0));
-     });
+    public List<ReviewResponse> getAll() {
+        return reviewRepository.getAllReviews();
+    }
 
-  }
+
+    public ReviewResponse getById(Long id) {
+        Review review = reviewRepository.findById(id).orElseThrow(
+                () -> new NotFoundException(String.format("not found!"))
+        );
+
+        ReviewResponse response = new ReviewResponse(review.getId(), review.getProduct().getProductImages().get(0), review.getProduct().getProductName(),
+                review.getResponseOfReview(), review.getProduct().getProductImages(), review.getProductGrade(), review.getProduct().getProductVendorCode());
+
+        UserResponse userResponse = new UserResponse(
+                review.getUser().getId(),
+                review.getUser().getFirstName(), review.getUser().getLastName(),
+                review.getUser().getEmail(),
+                review.getUser().getImage()
+        );
+        response.setUserResponse(userResponse);
+        return response;
+    }
+
+    public void deleteReviewById(Long id) {
+        Review review = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("not found!")));
+        review.setUser(null);
+        review.setProduct(null);
+        reviewRepository.delete(review);
+    }
 }

@@ -19,6 +19,8 @@ public class ReviewResponse {
     private byte productGrade;
     private UserResponse userResponse;
     private int productVendorCode;
+    private boolean statusOfResponse;
+
 
     public ReviewResponse(Long id, String productImage, String name, String responseOfReview, List<String> photo, byte productGrade,int productVendorCode) {
         this.id = id;
@@ -39,8 +41,9 @@ public class ReviewResponse {
         this.productVendorCode = productVendorCode;
     }
 
-    public ReviewResponse(ReviewRequest responseOfReview) {
-        this.responseOfReview = responseOfReview.getResponseOfReview();
+    public ReviewResponse(ReviewRequest reviewRequest) {
+        this.id=getId();
+        this.responseOfReview = reviewRequest.getResponseOfReview();
     }
 
     //    public ReviewResponse(Product product) {

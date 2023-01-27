@@ -11,18 +11,18 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review,Long> {
 
-    @Query("select count(productGrade) from Review group by productGrade order by productGrade")
-    void sortByGrade(byte productGrade);
+//    @Query("select count(productGrade) from Review group by productGrade order by productGrade")
+//    int sortByGrade(byte productGrade);
 
     @Query("select r from Review r")
     List<ReviewResponse> getAllReviews();
 
 
-    @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(o.id," +
-            " o.product.productName," +
-            "o.responseOfReview," +
-            "o.product.productImages, "+
-            "o.productGrade," +
-            "o.product.productVendorCode) from Review o")
-    List<ReviewResponse> findAllReviewsByStatus();
+//    @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(o.id," +
+//            " o.product.productName," +
+//            "o.responseOfReview," +
+//            "o.product.productImages, "+
+//            "o.productGrade," +
+//            "o.product.productVendorCode) from Review o")
+//    List<ReviewResponse> findAllReviewsByStatus();
 }
