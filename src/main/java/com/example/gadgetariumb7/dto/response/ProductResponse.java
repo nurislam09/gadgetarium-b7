@@ -32,7 +32,7 @@ public class ProductResponse {
 
     private String description;
 
-    private Color color;
+    private String color;
 
     private Brand brand;
 

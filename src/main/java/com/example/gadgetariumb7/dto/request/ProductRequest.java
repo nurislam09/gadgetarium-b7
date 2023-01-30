@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.awt.*;
 import java.util.List;
 
 @Getter
@@ -30,7 +29,7 @@ public class ProductRequest {
 
     private String description;
 
-    private Color color;
+    private String color;
 
     private Long brandId;
 
