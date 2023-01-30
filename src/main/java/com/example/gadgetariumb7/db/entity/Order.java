@@ -8,7 +8,6 @@ import com.example.gadgetariumb7.db.enums.Payment;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

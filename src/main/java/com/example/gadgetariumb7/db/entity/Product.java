@@ -113,7 +113,4 @@ public class Product {
     private String waterProof;
     private double ScreenDisplay;
 
-
-
-
 }
