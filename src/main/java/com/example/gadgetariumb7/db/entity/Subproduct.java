@@ -33,4 +33,17 @@ public class Subproduct {
 
     @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
     private Product product;
+
+    public Subproduct(int memory, Color color, List<String> images) {
+        this.memory = memory;
+        this.color = color;
+        this.images = images;
+    }
+
+    public Subproduct(String laptopCPU, Color color, List<String> images) {
+        this.laptopCPU = laptopCPU;
+        this.color = color;
+        this.images = images;
+    }
 }
+
