@@ -1,11 +1,11 @@
 package com.example.gadgetariumb7.db.entity;
 
-
 import com.example.gadgetariumb7.db.enums.Gender;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 
 import javax.persistence.*;
 
+import com.example.gadgetariumb7.dto.request.ProductRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -112,8 +112,98 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
+    private double sizeOfWatch;
 
+    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, String productName) {
+        this.productName = productRequest.getProductName();
+        this.productPrice = productRequest.getProductPrice();
+        this.productVendorCode = productRequest.getProductVendorCode();
+        this.productCount = productRequest.getProductCount();
+        this.guarantee = productRequest.getGuarantee();
+        this.videoReview = productRequest.getVideoReview();
+        this.PDF = productRequest.getPDF();
+        this.description = productRequest.getDescription();
+        this.productImages = productRequest.getProductImages();
+        this.color = productRequest.getColor();
+        this.productImages = productRequest.getProductImages();
+        this.brand = brand;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.memoryOfPhone = productRequest.getMemoryOfPhone();
+        this.ramOfPhone = productRequest.getRamOfPhone();
+        this.simCard = productRequest.getSimCard();
+    }
 
+    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, Gender gender) {
+        this.productName = productRequest.getProductName();
+        this.productPrice = productRequest.getProductPrice();
+        this.productVendorCode = productRequest.getProductVendorCode();
+        this.productCount = productRequest.getProductCount();
+        this.guarantee = productRequest.getGuarantee();
+        this.videoReview = productRequest.getVideoReview();
+        this.PDF = productRequest.getPDF();
+        this.description = productRequest.getDescription();
+        this.color = productRequest.getColor();
+        this.productImages = productRequest.getProductImages();
+        this.brand = brand;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.wirelessInterface = productRequest.getWirelessInterface();
+        this.memoryOfSmartWatch = productRequest.getMemoryOfSmartWatch();
+        this.caseShape = productRequest.getCaseShape();
+        this.braceletMaterial = productRequest.getBraceletMaterial();
+        this.watchMaterial = productRequest.getWatchMaterial();
+        this.gender = productRequest.getGender();
+        this.waterProof = productRequest.getWaterProof();
+        this.ScreenDisplay = productRequest.getScreenDisplay();
+        this.sizeOfWatch = productRequest.getSizeOfWatch();
+    }
 
+    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, int batteryCapacity, Double screenDiagonal) {
+        this.productName = productRequest.getProductName();
+        this.productPrice = productRequest.getProductPrice();
+        this.productVendorCode = productRequest.getProductVendorCode();
+        this.productCount = productRequest.getProductCount();
+        this.guarantee = productRequest.getGuarantee();
+        this.videoReview = productRequest.getVideoReview();
+        this.PDF = productRequest.getPDF();
+        this.description = productRequest.getDescription();
+        this.color = productRequest.getColor();
+        this.productImages = productRequest.getProductImages();
+        this.brand = brand;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.screenResolutionTablet = productRequest.getScreenResolutionTablet();
+        this.screenSizeTablet = productRequest.getScreenSizeTablet();
+        this.memoryOfTablet = productRequest.getMemoryOfTablet();
+        this.ramOfTablet = productRequest.getRamOfTablet();
+        this.ScreenDiagonal = productRequest.getScreenDiagonal();
+        this.batteryCapacity = productRequest.getBatteryCapacity();
 
+    }
+
+    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, byte videoCardMemory) {
+        this.productName = productRequest.getProductName();
+        this.productPrice = productRequest.getProductPrice();
+        this.productVendorCode = productRequest.getProductVendorCode();
+        this.productCount = productRequest.getProductCount();
+        this.guarantee = productRequest.getGuarantee();
+        this.videoReview = productRequest.getVideoReview();
+        this.PDF = productRequest.getPDF();
+        this.description = productRequest.getDescription();
+        this.color = productRequest.getColor();
+        this.productImages = productRequest.getProductImages();
+        this.brand = brand;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.laptopCPU = productRequest.getLaptopCPU();
+        this.screenResolutionLaptop = productRequest.getScreenResolutionLaptop();
+        this.appointmentOfLaptop = productRequest.getAppointmentOfLaptop();
+        this.ramOfLaptop = productRequest.getRamOfLaptop();
+        this.videoCardMemory = productRequest.getVideoCardMemory();
+        this.screenSizeLaptop = productRequest.getScreenSizeLaptop();
+    }
 }
+
+
+
