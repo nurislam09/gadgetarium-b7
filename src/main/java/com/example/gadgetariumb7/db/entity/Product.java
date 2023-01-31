@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class Product {
 
     private LocalDateTime createAt;
 
-    private Color color;
+    private String color;
 
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;

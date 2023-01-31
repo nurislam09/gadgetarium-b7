@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.awt.*;
 import java.util.List;
 
 @Getter
@@ -12,9 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubProductRequest {
-
     private int memory;
     private String laptopCPU;
-    private Color color;
+    private String color;
     private List<String> images;
 }
