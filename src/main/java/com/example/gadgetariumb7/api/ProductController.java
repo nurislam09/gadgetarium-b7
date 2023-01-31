@@ -7,17 +7,15 @@ import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import java.time.LocalDate;
+import java.util.List;
 
 
 @RestController
@@ -41,11 +39,12 @@ public class ProductController {
     private List<ProductAdminResponse> getAllProduct(
             @RequestParam(value = "productType") String productType,
             @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
+            @RequestParam(value = "discountField", required = false) String discountField,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam int page,
             @RequestParam int size) {
-        return productService.getProductAdminResponses(productType, fieldToSort, startDate, endDate, page, size);
+        return productService.getProductAdminResponses(productType, fieldToSort, discountField, startDate, endDate, page, size);
     }
 
     @Operation(summary = "delete product", description = "This endpoint delete product by id")

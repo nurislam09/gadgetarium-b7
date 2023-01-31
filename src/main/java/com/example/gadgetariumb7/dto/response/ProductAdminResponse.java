@@ -1,5 +1,7 @@
 package com.example.gadgetariumb7.dto.response;
 
+import com.example.gadgetariumb7.db.enums.ProductStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,9 +22,11 @@ public class ProductAdminResponse {
     private LocalDateTime createAt;
     private int productPrice;
     private int currentPrice;
-    private int discountPrice;
+    private int amountOfDiscount;
+    @JsonIgnore
+    private ProductStatus productStatus;
 
-    public ProductAdminResponse(Long id, int productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice) {
+    public ProductAdminResponse(Long id, int productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice, ProductStatus productStatus) {
         this.id = id;
         this.productVendorCode = productVendorCode;
         this.productName = productName;
@@ -30,5 +34,6 @@ public class ProductAdminResponse {
         this.countSubproducts = countSubproducts;
         this.createAt = createAt;
         this.productPrice = productPrice;
+        this.productStatus = productStatus;
     }
 }

@@ -58,7 +58,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "productCount," +
             "subproducts.size," +
             "createAt," +
-            "productPrice" +
+            "productPrice," +
+            "productStatus" +
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
@@ -70,9 +71,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productCount," +
             "p.subproducts.size," +
             "p.createAt," +
-            "p.productPrice" +
+            "p.productPrice," +
+            "p.productStatus" +
             ") from Product p where " +
             "cast(p.productVendorCode as string) like concat(:text, '%') or " +
             "upper(p.productName) like concat('%',:text,'%')")
     List<ProductAdminResponse> search(@Param("text") String text, Pageable pageable);
+
+    @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
+    int getAmountOfDiscount(Long id);
 }

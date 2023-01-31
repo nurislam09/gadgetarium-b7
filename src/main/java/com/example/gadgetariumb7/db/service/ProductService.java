@@ -11,9 +11,11 @@ import java.util.List;
 public interface ProductService {
 
     AllProductResponse getAllProductToMP();
-    List<ProductAdminResponse> getProductAdminResponses(String productType, String fieldToSort, LocalDate startDate, LocalDate endDate, int page, int size);
+
+    List<ProductAdminResponse> getProductAdminResponses(String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size);
 
     SimpleResponse addProduct(ProductRequest productRequest);
+
     SimpleResponse delete(Long id);
 
     SimpleResponse update(Long id, Integer vendorCode, Integer productCount, Integer productPrice);

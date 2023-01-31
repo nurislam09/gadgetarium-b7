@@ -2,6 +2,7 @@ package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.Gender;
+import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
@@ -15,21 +16,14 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import com.example.gadgetariumb7.db.repository.*;
-import com.example.gadgetariumb7.db.service.ProductService;
+
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
-import com.example.gadgetariumb7.exceptions.NotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
 
 import com.example.gadgetariumb7.db.repository.ProductRepository;
-import com.example.gadgetariumb7.dto.response.AllProductResponse;
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 
 
 import java.util.List;
@@ -44,8 +38,8 @@ public class ProductServiceImpl implements ProductService {
     private final SubcategoryRepository subcategoryRepository;
 
     @Override
-    public List<ProductAdminResponse> getProductAdminResponses(String productType, String fieldToSort, LocalDate startDate, LocalDate endDate, int page, int size) {
-        List<ProductAdminResponse> productAdminResponses = sortingProduct(fieldToSort, productRepository.getAllProductsAdmin(PageRequest.of(page - 1, size)), startDate, endDate);
+    public List<ProductAdminResponse> getProductAdminResponses(String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size) {
+        List<ProductAdminResponse> productAdminResponses = sortingProduct(fieldToSort, discountField, productRepository.getAllProductsAdmin(PageRequest.of(page - 1, size)), startDate, endDate);
 
         switch (productType) {
             case "Все товары" -> {
@@ -59,15 +53,17 @@ public class ProductServiceImpl implements ProductService {
                 List<ProductAdminResponse> responseList = new ArrayList<>();
 
                 userRepository.findAll().stream().filter(u -> u.getBasketList() != null).forEach(x -> x.getBasketList().stream().filter(p -> !productList.contains(p)).forEach(productList::add));
-                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice())));
-                return sortingProduct(fieldToSort, responseList, startDate, endDate);
+                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice(), p.getProductStatus())));
+                return sortingProduct(fieldToSort, discountField, responseList, startDate, endDate);
             }
             case "В избранном" -> {
                 List<Product> productList = new ArrayList<>();
                 List<ProductAdminResponse> responseList = new ArrayList<>();
+
                 userRepository.findAll().stream().filter(u -> u.getFavoritesList() != null).forEach(x -> x.getFavoritesList().stream().filter(p -> !productList.contains(p)).forEach(productList::add));
-                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice())));
-                return sortingProduct(fieldToSort, responseList, startDate, endDate);
+                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice(), p.getProductStatus())));
+
+                return sortingProduct(fieldToSort, discountField, responseList, startDate, endDate);
             }
         }
 
@@ -84,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public SimpleResponse update(Long id, Integer vendorCode, Integer productCount, Integer productPrice) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product for delete not found!"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product for update not found!"));
         if (vendorCode != null) product.setProductVendorCode(vendorCode);
         if (productCount != null) product.setProductCount(productCount);
         if (productPrice != null) product.setProductPrice(productPrice);
@@ -94,29 +90,39 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductAdminResponse> search(String text, int page, int size) {
-        return sortingProduct(null, productRepository.search(text.toUpperCase(), PageRequest.of(page - 1, size)), null, null);
+        return sortingProduct(null, null, productRepository.search(text.toUpperCase(), PageRequest.of(page - 1, size)), null, null);
     }
 
-    private List<ProductAdminResponse> sortingProduct(String fieldToSort, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
-        if (fieldToSort != null) {
-            switch (fieldToSort) {
-                case "Наименование товара" ->
-                        products.sort(Comparator.comparingInt(ProductAdminResponse::getProductCount).reversed());
-                case "Дата создания" ->
-                        products.sort(Comparator.comparing(ProductAdminResponse::getCreateAt).reversed());
-                case "Кол-во" ->
-                        products.sort(Comparator.comparing(ProductAdminResponse::getCountSubproducts).reversed());
-                case "Цена товара" ->
-                        products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice).reversed());
-                case "Текущая цена" ->
-                        products.sort(Comparator.comparing(ProductAdminResponse::getCurrentPrice).reversed());
-            }
-        }
-
+    private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
         products.forEach(r -> {
             r.setProductImage(productRepository.getFirstImage(r.getId()));
             setDiscountToResponse(null, r);
         });
+
+        if (fieldToSort != null) {
+            switch (fieldToSort) {
+                case "Новинки" ->
+                        products = products.stream().filter(x -> x.getProductStatus() == ProductStatus.NEW).toList();
+                case "По акции" -> {
+                    if (discountField != null) {
+                        switch (discountField) {
+                            case "Все акции" ->
+                                    products = products.stream().filter(x -> x.getAmountOfDiscount() > 0).toList();
+                            case "До 50%" ->
+                                    products = products.stream().filter(x -> x.getAmountOfDiscount() < 50 && x.getAmountOfDiscount() > 0).toList();
+                            case "Свыше 50%" ->
+                                    products = products.stream().filter(x -> x.getAmountOfDiscount() > 50).toList();
+                        }
+                    }
+                }
+                case "Рекомендуемые" ->
+                        products = products.stream().filter(x -> x.getProductStatus() == ProductStatus.RECOMMENDATION).toList();
+                case "По увеличению цены" ->
+                        products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice));
+                case "По уменьшению цены" ->
+                        products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice).reversed());
+            }
+        }
 
         if (startDate != null && endDate != null)
             return products.stream().filter(p -> p.getCreateAt().toLocalDate().isAfter(startDate) && p.getCreateAt().toLocalDate().isBefore(endDate)).toList();
@@ -153,13 +159,11 @@ public class ProductServiceImpl implements ProductService {
                 } else {
                     productCardResponse.setDiscountPrice((int) Math.floor(productRepository.getDiscountPrice(productCardResponse.getProductId())));
                 }
-            } else if (productAdminResponse != null){
+            } else if (productAdminResponse != null) {
                 if (productRepository.getDiscountPrice(productAdminResponse.getId()) == 0) {
-                    productAdminResponse.setDiscountPrice(productAdminResponse.getDiscountPrice());
+                    productAdminResponse.setAmountOfDiscount(productAdminResponse.getAmountOfDiscount());
                 } else {
-                    int discountPrice = productRepository.getDiscountPrice(productAdminResponse.getId());
-                    if (discountPrice % 2 > 0) discountPrice --;
-                    productAdminResponse.setDiscountPrice((productAdminResponse.getProductPrice() - discountPrice) * 100 /  productAdminResponse.getProductPrice());
+                    productAdminResponse.setAmountOfDiscount(productRepository.getAmountOfDiscount(productAdminResponse.getId()));
                     productAdminResponse.setCurrentPrice(productRepository.getDiscountPrice(productAdminResponse.getId()));
                 }
             }
