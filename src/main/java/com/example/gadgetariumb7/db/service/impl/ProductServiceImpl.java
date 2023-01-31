@@ -34,14 +34,17 @@ public class ProductServiceImpl implements ProductService {
         recommendations.forEach(r -> {
             r.setProductImage(productRepository.getFirstImage(r.getProductId()));
             setDiscountToResponse(r);
+            r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
         discountProducts.forEach(r -> {
             r.setProductImage(productRepository.getFirstImage(r.getProductId()));
             r.setDiscountPrice(productRepository.getDiscountPrice(r.getProductId()));
+            r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
         newProducts.forEach(r -> {
             r.setProductImage(productRepository.getFirstImage(r.getProductId()));
             setDiscountToResponse(r);
+            r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
 
         return new AllProductResponse(newProducts, recommendations, discountProducts);
