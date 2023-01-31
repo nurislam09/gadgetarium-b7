@@ -9,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ReviewRequest {
 
+    private Long id;
     private String responseOfReview;
 
 }
