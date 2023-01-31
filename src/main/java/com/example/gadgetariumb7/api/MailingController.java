@@ -5,7 +5,6 @@ import com.example.gadgetariumb7.db.service.MailingService;
 import com.example.gadgetariumb7.db.service.SubscriptionService;
 import com.example.gadgetariumb7.dto.request.MailingRequest;
 import com.example.gadgetariumb7.dto.request.SubscriptionRequest;
-import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.EmailAlreadyExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/mailings")
+@RequestMapping("/api/mailings")
 @Tag(name = "mailing api")
 public class MailingController {
     private final MailingService emailService;

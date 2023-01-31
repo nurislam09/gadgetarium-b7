@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.awt.*;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -24,8 +23,8 @@ public class Subproduct {
     private int price;
     private int memory;
     private String laptopCPU;
+    private String color;
 
-    private Color color;
     @ElementCollection
     @CollectionTable(name = "subproduct_images", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "image_url",length = 10000)
@@ -33,4 +32,17 @@ public class Subproduct {
 
     @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
     private Product product;
+
+    public Subproduct(int memory, String color, List<String> images) {
+        this.memory = memory;
+        this.color = color;
+        this.images = images;
+    }
+
+    public Subproduct(String laptopCPU, String color, List<String> images) {
+        this.laptopCPU = laptopCPU;
+        this.color = color;
+        this.images = images;
+    }
 }
+
