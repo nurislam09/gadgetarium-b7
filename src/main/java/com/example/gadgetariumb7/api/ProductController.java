@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -23,15 +24,9 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping()
-    @Operation(summary = "Get all products to main page", description = "This endpoint return AllProductResponse which contains three different response array")
-    public AllProductResponse getAllProductMainPage(){
-        return productService.getAllProductToMP();
-    }
-
-    @Operation(summary = "all products", description = "this endpoint return all products by product type for ADMIN")
+    @Operation(summary = "all products", description = "This endpoint return all products by product type for ADMIN")
     @GetMapping("/getAllProducts")
-//    @PreAuthorize("hasAuthority('Admin')")
+    @PreAuthorize("hasAuthority('Admin')")
     private List<ProductAdminResponse> getAllProduct(
             @RequestParam(value = "productType") String productType,
             @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
@@ -42,16 +37,16 @@ public class ProductController {
         return productService.getProductAdminResponses(productType, fieldToSort, startDate, endDate, page, size);
     }
 
-    @Operation(summary = "delete product", description = "this endpoint delete product by id")
-    @DeleteMapping("/delete/{id}")
-//    @PreAuthorize("hasAuthority('Admin')")
+    @Operation(summary = "delete product", description = "This endpoint delete product by id")
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     private SimpleResponse delete(@PathVariable Long id) {
         return productService.delete(id);
     }
 
-    @Operation(summary = "update product", description = "this endpoint update product by id")
-    @PutMapping("/update")
-//    @PreAuthorize("hasAuthority('Admin')")
+    @Operation(summary = "update product", description = "This endpoint update product by id")
+    @PutMapping()
+    @PreAuthorize("hasAuthority('Admin')")
     private SimpleResponse update(
             @RequestParam(value = "ID") Long id,
             @RequestParam(value = "Артикул", required = false) Integer vendorCode,
@@ -60,9 +55,9 @@ public class ProductController {
         return productService.update(id, vendorCode, productCount, productPrice);
     }
 
-    @Operation(summary = "search product", description = "in this endpoint ADMIN can search product by vendor code or product name")
+    @Operation(summary = "search product", description = "This endpoint ADMIN can search product by vendor code or product name")
     @GetMapping("/search")
-//    @PreAuthorize("hasAuthority('Admin')")
+    @PreAuthorize("hasAuthority('Admin')")
     private List<ProductAdminResponse> search(
             @RequestParam(value = "text", required = false) String text,
             @RequestParam int page,
