@@ -76,8 +76,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productPrice," +
             "p.productStatus" +
             ") from Product p where " +
-            "cast(p.productVendorCode as string) like concat(:text, '%') or " +
-            "upper(p.productName) like concat('%',:text,'%')")
+            "cast(p.productVendorCode as string) like upper(concat(:text, '%')) or " +
+            "upper(p.productName) like upper(concat('%',:text,'%'))")
     List<ProductAdminResponse> search(@Param("text") String text, Pageable pageable);
 
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")

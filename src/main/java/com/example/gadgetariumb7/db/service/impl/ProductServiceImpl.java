@@ -38,8 +38,12 @@ public class ProductServiceImpl implements ProductService {
     private final SubcategoryRepository subcategoryRepository;
 
     @Override
-    public List<ProductAdminResponse> getProductAdminResponses(String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size) {
-        List<ProductAdminResponse> productAdminResponses = sortingProduct(fieldToSort, discountField, productRepository.getAllProductsAdmin(PageRequest.of(page - 1, size)), startDate, endDate);
+    public List<ProductAdminResponse> getProductAdminResponses(String searchText, String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size) {
+        List<ProductAdminResponse> productAdminResponses;
+        if (searchText == null)
+            productAdminResponses = sortingProduct(fieldToSort, discountField, productRepository.getAllProductsAdmin(PageRequest.of(page - 1, size)), startDate, endDate);
+        else
+            productAdminResponses = sortingProduct(fieldToSort, discountField, productRepository.search(searchText, PageRequest.of(page - 1, size)), startDate, endDate);
 
         switch (productType) {
             case "Все товары" -> {
@@ -88,11 +92,6 @@ public class ProductServiceImpl implements ProductService {
         return new SimpleResponse("Product successfully updated", "ok");
     }
 
-    @Override
-    public List<ProductAdminResponse> search(String text, int page, int size) {
-        return sortingProduct(null, null, productRepository.search(text.toUpperCase(), PageRequest.of(page - 1, size)), null, null);
-    }
-
     private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
         products.forEach(r -> {
             r.setProductImage(productRepository.getFirstImage(r.getId()));
@@ -117,8 +116,7 @@ public class ProductServiceImpl implements ProductService {
                 }
                 case "Рекомендуемые" ->
                         products = products.stream().filter(x -> x.getProductStatus() == ProductStatus.RECOMMENDATION).toList();
-                case "По увеличению цены" ->
-                        products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice));
+                case "По увеличению цены" -> products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice));
                 case "По уменьшению цены" ->
                         products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice).reversed());
             }

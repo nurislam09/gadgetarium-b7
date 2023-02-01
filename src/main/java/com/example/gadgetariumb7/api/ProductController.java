@@ -33,18 +33,19 @@ public class ProductController {
         return productService.getAllProductToMP();
     }
 
-    @Operation(summary = "all products", description = "This endpoint return all products by product type for ADMIN")
+    @Operation(summary = "Get all products to admin page", description = "This endpoint return all products by product type for ADMIN")
     @GetMapping("/getAllProducts")
     @PreAuthorize("hasAuthority('Admin')")
     private List<ProductAdminResponse> getAllProduct(
             @RequestParam(value = "productType") String productType,
+            @RequestParam(value = "searchText", required = false) String searchText,
             @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
             @RequestParam(value = "discountField", required = false) String discountField,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam int page,
             @RequestParam int size) {
-        return productService.getProductAdminResponses(productType, fieldToSort, discountField, startDate, endDate, page, size);
+        return productService.getProductAdminResponses(searchText, productType, fieldToSort, discountField, startDate, endDate, page, size);
     }
 
     @Operation(summary = "delete product", description = "This endpoint delete product by id")
@@ -63,16 +64,6 @@ public class ProductController {
             @RequestParam(value = "Наименования товара", required = false) Integer productCount,
             @RequestParam(value = "Цена товара", required = false) Integer productPrice) {
         return productService.update(id, vendorCode, productCount, productPrice);
-    }
-
-    @Operation(summary = "search product", description = "This endpoint ADMIN can search product by vendor code or product name")
-    @GetMapping("/search")
-    @PreAuthorize("hasAuthority('Admin')")
-    private List<ProductAdminResponse> search(
-            @RequestParam(value = "text", required = false) String text,
-            @RequestParam int page,
-            @RequestParam int size) {
-        return productService.search(text, page, size);
     }
 
     @Operation(summary = "This method for save product",
