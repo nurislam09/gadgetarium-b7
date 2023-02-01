@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,22 +23,19 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @Operation(summary = "find all orders", description = "Orders with pagination")
+    @Operation(summary = "find all orders", description = "Orders with pagination and search")
     @GetMapping("/pagination/page")
     @PreAuthorize("hasAuthority('Admin')")
-    public List<OrderResponse> findAll(@RequestParam OrderStatus orderStatus,
-                                       @RequestParam int page,
-                                       @RequestParam int size) {
-        return orderService.findAllOrdersByStatus(orderStatus, page, size);
-    }
+    public ResponseEntity<List<OrderResponse>> findAllOrders(@RequestParam(required = false) OrderStatus orderStatus,
+                                                             @RequestParam(required = false) String keyWord,
+                                                             @RequestParam int page,
+                                                             @RequestParam int size,
+                                                             @RequestParam(required = false) LocalDate startDate,
+                                                             @RequestParam(required = false) LocalDate endDate) {
 
-    @Operation(summary = "search", description = "Search orders with pagination")
-    @GetMapping()
-    @PreAuthorize("hasAuthority('Admin')")
-    public List<OrderResponse> search(@RequestParam String keyWord,
-                                      @RequestParam int page,
-                                      @RequestParam int size) {
-        return orderService.searchOrders(keyWord, page, size);
+        List<OrderResponse> orderResponses = orderService.findAllOrders(orderStatus, keyWord, page, size, startDate, endDate);
+
+        return new ResponseEntity<>(orderResponses, HttpStatus.OK);
     }
 
     @Operation(summary = "count orders by status")
@@ -50,7 +48,7 @@ public class OrderController {
     @Operation(summary = "count all orders")
     @GetMapping("/count/all")
     @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<Long> countAllOrders () {
+    public ResponseEntity<Long> countAllOrders() {
         Long count = orderService.getCountOfOrders();
         return new ResponseEntity<>(count, HttpStatus.OK);
     }

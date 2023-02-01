@@ -20,10 +20,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "concat(o.firstName,' ', o.lastName ), " +
             "o.orderNumber," +
             "o.dateOfOrder," +
-            "o.countOfProduct,"+
-            "o.totalSum,"+
             "o.orderType," +
-            "o.orderStatus) from Order o where o.orderStatus = :orderStatus")
+            "o.orderStatus) from Order o where o.orderStatus=:orderStatus")
     List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable);
 
 
@@ -33,19 +31,21 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select count (o) from  Order  o")
     Long getCountOfOrders();
 
-//    @Query("select  sum (p.orderCount)from Order o join Product  p on o.id=p.order_id")
-//    int orderCount(Long id);
 
     @Query("select new com.example.gadgetariumb7.dto.response.OrderResponse(o.id," +
             "concat(o.firstName,' ', o.lastName ), " +
             "o.orderNumber," +
             "o.dateOfOrder," +
-            "o.countOfProduct," +
-            "o.totalSum," +
             "o.orderType," +
-            "o.orderStatus) from Order o where  concat( concat(o.firstName,' ', o.lastName ),' ', o.orderNumber," +
-            " ' ', o.orderType,' ', o.orderStatus) like %:keyWord%")
+            "o.orderStatus) from Order o where  concat( concat( o.firstName,' ', o.lastName),' ', o.orderNumber," +
+            " ' ', o.orderType,' ', o.orderStatus) like %:keyWord")
     List<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable);
+
+
+
+
+
+
 
 
 }
