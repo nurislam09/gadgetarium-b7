@@ -37,7 +37,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "o.orderNumber," +
             "o.dateOfOrder," +
             "o.orderType," +
-            "o.orderStatus) from Order o where  concat( concat( o.firstName,' ', o.lastName),' ', o.orderNumber," +
+            "o.orderStatus) from Order o where" +
+            "  concat( concat( o.firstName,' ', o.lastName),' ', o.orderNumber," +
             " ' ', o.orderType,' ', o.orderStatus) like %:keyWord")
     List<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable);
 
