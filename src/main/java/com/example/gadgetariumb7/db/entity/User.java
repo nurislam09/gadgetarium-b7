@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> basketList;
 
-    @OneToMany(cascade = {MERGE, DETACH, REFRESH})
+    @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> favoritesList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH, REMOVE}, mappedBy = "user")
