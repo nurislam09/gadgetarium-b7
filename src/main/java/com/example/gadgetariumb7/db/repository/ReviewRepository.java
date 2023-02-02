@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review,Long> {
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 
 //    @Query("select count(productGrade) from Review group by productGrade order by productGrade")
 //    List<Integer> sortByGrade(byte productGrade);
@@ -22,7 +22,8 @@ public interface ReviewRepository extends JpaRepository<Review,Long> {
     @Query("select r.user from Review r where r.id = :id")
     User getUserReview(Long id);
 
-    @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(r.id," +
+    @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
+            "r.id," +
             "r.statusOfResponse," +
             "r.responseOfReview," +
             "r.productGrade," +
@@ -30,12 +31,18 @@ public interface ReviewRepository extends JpaRepository<Review,Long> {
             "r.product.productName) from Review r")
     List<ReviewResponse> getAllByAdmin();
 
+    @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
+            "r.id," +
+            "r.statusOfResponse," +
+            "r.responseOfReview," +
+            "r.productGrade," +
+            "r.product.productVendorCode," +
+            "r.product.productName) from  Review  r where r.id=:id")
+    ReviewResponse getReviewById(Long id);
 
-//    @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(o.id," +
-//            " o.product.productName," +
-//            "o.responseOfReview," +
-//            "o.product.productImages, "+
-//            "o.productGrade," +
-//            "o.product.productVendorCode) from Review o")
-//    List<ReviewResponse> findAllReviewsByStatus();
+    @Query("delete  from Review r where r.id=:id")
+    Review deleteReview(Long id);
+
+    @Query("select r from Review r where  r.id=:id")
+    Review getOneReviewById(Long id);
 }

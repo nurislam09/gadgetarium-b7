@@ -2,6 +2,7 @@
 package com.example.gadgetariumb7.dto.response;
 
 import com.example.gadgetariumb7.db.entity.Product;
+import com.example.gadgetariumb7.db.entity.Review;
 import com.example.gadgetariumb7.dto.request.ReviewRequest;
 import lombok.*;
 
@@ -17,11 +18,10 @@ public class ReviewResponse {
     private String responseOfReview;
     private List<String> photo;
     private byte productGrade;
-
-    private UserResponse userResponse;
     private int productVendorCode;
     private boolean statusOfResponse;
 
+    private UserResponse userResponse;
     public ReviewResponse(Long id, boolean statusOfResponse, String responseOfReview, byte productGrade, int productVendorCode, String name) {
         this.id = id;
         this.statusOfResponse = statusOfResponse;
@@ -32,38 +32,17 @@ public class ReviewResponse {
 
     }
 
-    //    public ReviewResponse(Long id, String productImage, String name, String responseOfReview, List<String> photo, byte productGrade,
-//                          UserResponse userResponse, int productVendorCode, boolean statusOfResponse) {
-//        this.id = id;
-//        this.productImage = productImage;
-//        this.name = name;
-//        this.responseOfReview = responseOfReview;
-//        this.photo = photo;
-//        this.productGrade = productGrade;
-//        this.userResponse = userResponse;
-//        this.productVendorCode = productVendorCode;
-//        this.statusOfResponse = statusOfResponse;
-//    }
-//
-//    public ReviewResponse(Long id, String productImage, String name, String responseOfReview, List<String> photo, byte productGrade, int productVendorCode) {
-//        this.id = id;
-//        this.productImage = productImage;
-//        this.name = name;
-//        this.responseOfReview = responseOfReview;
-//        this.photo = photo;
-//        this.productGrade = productGrade;
-//        this.productVendorCode = productVendorCode;
-//    }
 
-    public ReviewResponse(Long id, String name, String responseOfReview, List<String> photo, byte productGrade, int productVendorCode, boolean statusOfResponse) {
-        this.id = id;
-        this.name = name;
-        this.responseOfReview = responseOfReview;
-        this.photo = photo;
-        this.productGrade = productGrade;
-        this.productVendorCode = productVendorCode;
-        this.statusOfResponse = statusOfResponse;
-
+    public ReviewResponse(Review review) {
+        this.id = review.getId();
+        this.productImage = review.getProduct().getProductImages().get(0);
+        this.name = review.getProduct().getProductName();
+        this.responseOfReview = review.getResponseOfReview();
+        this.photo = review.getProduct().getProductImages();
+        this.productGrade = review.getProductGrade();
+        this.productVendorCode = review.getProduct().getProductVendorCode();
+        this.statusOfResponse = review.isStatusOfResponse();
     }
+
 
 }
