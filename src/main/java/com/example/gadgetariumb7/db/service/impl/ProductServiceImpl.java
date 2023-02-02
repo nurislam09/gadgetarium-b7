@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
                 List<Product> productList = new ArrayList<>();
                 List<ProductAdminResponse> responseList = new ArrayList<>();
 
-                userRepository.findAll().stream().filter(u -> u.getBasketList() != null).forEach(x -> x.getBasketList().stream().filter(p -> !productList.contains(p)).forEach(productList::add));
+                userRepository.findAll().stream().filter(u -> u.getBasketList() != null).forEach(x -> x.getBasketList().keySet().stream().filter(p -> !productList.contains(p)).forEach(productList::add));
                 productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice(), p.getProductStatus())));
                 return sortingProduct(fieldToSort, discountField, responseList, startDate, endDate);
             }
