@@ -19,14 +19,12 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
-
     private final OrderRepository orderRepository;
-
 
     @Override
     public List<OrderResponse> findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate) {
         List<OrderResponse> orderResponses;
-        if (keyWord==null) {
+        if (keyWord == null) {
             orderResponses = orderRepository.findAllOrdersByStatus(orderStatus, PageRequest.of(page - 1, size));
         } else {
             orderResponses = orderRepository.search(keyWord, PageRequest.of(page - 1, size)).stream().filter(x -> x.getOrderStatus() == orderStatus).toList();
@@ -39,9 +37,9 @@ public class OrderServiceImpl implements OrderService {
             int totalSum = user.getBasketList().entrySet().stream().filter(entry -> entry.getKey().getDiscount() == null).mapToInt(entry -> entry.getValue() * entry.getKey()
                             .getProductPrice()).sum();
 
-            int totalSumWithDiscount= user.getBasketList().entrySet().stream().filter(entry->entry.getKey().getDiscount()!=null)
-                    .mapToInt(entry->entry.getValue()*(entry.getKey().getProductPrice()-(entry.getKey().getProductPrice()*entry.getKey().getDiscount()
-                            .getAmountOfDiscount()/100))).sum();
+            int totalSumWithDiscount = user.getBasketList().entrySet().stream().filter(entry -> entry.getKey().getDiscount() != null)
+                    .mapToInt(entry -> entry.getValue() * (entry.getKey().getProductPrice() - (entry.getKey().getProductPrice() * entry.getKey().getDiscount()
+                            .getAmountOfDiscount() / 100))).sum();
 
             int totalSumAndTotalSumWithDiscount = totalSum + totalSumWithDiscount;
 

@@ -21,19 +21,20 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "o.orderNumber," +
             "o.dateOfOrder," +
             "o.orderType," +
-            "o.orderStatus) from Order o where o.orderStatus=:orderStatus")
+            "o.orderStatus) from Order o where o.orderStatus = :orderStatus")
     List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable);
 
 
-    @Query("select  count (o) from  Order o where  o.orderStatus = :orderStatus")
+    @Query("select count (o) from Order o where o.orderStatus = :orderStatus")
     Long countByOrderStatus(OrderStatus orderStatus);
 
-    @Query("select count (o) from  Order  o")
+    @Query("select count (o) from Order o")
     Long getCountOfOrders();
 
 
 
-    @Query("SELECT NEW com.example.gadgetariumb7.dto.response.OrderResponse(o.id, " +
+    @Query("SELECT NEW com.example.gadgetariumb7.dto.response.OrderResponse" +
+            "(o.id, " +
             "CONCAT(o.firstName, ' ', o.lastName), " +
             "o.orderNumber, " +
             "o.dateOfOrder, " +

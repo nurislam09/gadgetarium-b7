@@ -367,7 +367,7 @@ values (11, 1);
 insert into user_basket_list(user_id, count_of_product, product_id)
 values (1,5,10);
 insert into user_basket_list(user_id, count_of_product, product_id)
-values (1,5,10);
+values (1,5,11);
 
 
 
