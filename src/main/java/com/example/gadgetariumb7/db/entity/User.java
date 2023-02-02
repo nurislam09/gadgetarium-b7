@@ -7,9 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static javax.persistence.CascadeType.*;
 
@@ -35,10 +33,13 @@ public class User implements UserDetails {
     private String image;
     private String address;
 
-    @OneToMany(cascade = {MERGE, DETACH, REFRESH})
-    private List<Product> basketList;
+    @ElementCollection
+    @CollectionTable(name="user_basket_list", joinColumns = @JoinColumn(name="user_id"))
+    @MapKeyJoinColumn(name="product_id")
+    @Column(name="count_of_product")
+    private Map<Product, Integer> basketList;
 
-    @OneToMany(cascade = {MERGE, DETACH, REFRESH})
+    @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> favoritesList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH, REMOVE}, mappedBy = "user")
