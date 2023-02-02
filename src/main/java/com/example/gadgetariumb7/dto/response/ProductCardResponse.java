@@ -20,8 +20,6 @@ public class ProductCardResponse {
     private int discountPrice;
     private ProductStatus productStatus;
     private Byte productRating;
-    private int countFeedback;
-
     private int countOfReview;
 
     public ProductCardResponse(Long productId, String productName, int count, int productPrice, ProductStatus productStatus, Byte productRating) {

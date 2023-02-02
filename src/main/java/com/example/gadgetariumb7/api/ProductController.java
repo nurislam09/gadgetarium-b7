@@ -3,6 +3,7 @@ package com.example.gadgetariumb7.api;
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.response.AllProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
+import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -72,6 +73,17 @@ public class ProductController {
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse save(@RequestBody ProductRequest productRequest) {
         return productService.addProduct(productRequest);
+    }
+
+    @GetMapping("/catalog")
+    public List<ProductCardResponse> filterByParameters(@RequestParam(value = "categoryName") String categoryName,
+                                                    @RequestParam(value = "subCategoryName", required = false) String subCategoryName,
+                                                    @RequestParam(value = "minPrice", required = false) Integer minPrice,
+                                                    @RequestParam(value = "maxPrice", required = false) Integer maxPrice,
+                                                    @RequestParam(value = "colors", required = false) List<String> colors,
+                                                    @RequestParam(value = "memory", required = false) Integer memory,
+                                                    @RequestParam(value = "ram", required = false) Byte ram) {
+        return productService.filterByParameters(categoryName, subCategoryName, minPrice, maxPrice, colors, memory, ram);
     }
 
 }

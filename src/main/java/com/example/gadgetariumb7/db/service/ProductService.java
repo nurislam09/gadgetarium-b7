@@ -3,6 +3,7 @@ package com.example.gadgetariumb7.db.service;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.response.AllProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
+import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 
 import java.time.LocalDate;
@@ -19,5 +20,7 @@ public interface ProductService {
     SimpleResponse delete(Long id);
 
     SimpleResponse update(Long id, Integer vendorCode, Integer productCount, Integer productPrice);
+
+    List<ProductCardResponse> filterByParameters(String categoryName, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram);
 
 }
