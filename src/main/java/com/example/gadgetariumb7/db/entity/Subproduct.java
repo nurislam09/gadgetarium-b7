@@ -25,7 +25,7 @@ public class Subproduct {
     private int memory;
     private String laptopCPU;
 
-    private Color color;
+    private String color;
     @ElementCollection
     @CollectionTable(name = "subproduct_images", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "image_url",length = 10000)

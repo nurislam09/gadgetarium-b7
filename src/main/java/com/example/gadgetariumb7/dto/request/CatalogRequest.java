@@ -3,6 +3,7 @@ package com.example.gadgetariumb7.dto.request;
 import lombok.*;
 
 import javax.validation.constraints.Max;
+import java.awt.*;
 import java.util.List;
 
 @Data
@@ -10,9 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 public class CatalogRequest {
     private String categoryName;
-    private Double minPrice;
-    private Double maxPrice;
-    private List<String> colors;
+    private String subCategoryName;
+    private int minPrice;
+    private int maxPrice;
+    private List<Color> colors;
     private String memory;
     private String ram;
 }

@@ -57,7 +57,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 VALUES ( 1, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, null, 3200, null, null
-       , E'\\320\\170'::bytea, 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 pro max', 90990, 0, 0
+       , 'green', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 pro max', 90990, 0, 0
        , 087456, null, 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, null, 1, '2011-04-17 18:20:03');
@@ -71,7 +71,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 VALUES ( 2, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, null, 3200, null, null
-       , E'\\320\\170'::bytea, 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 pro ', 90990, 0, 1, 387456
+       , 'red', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 pro ', 90990, 0, 1, 387456
        , null, 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, 1, 1, '2011-04-17 18:20:03');
@@ -85,7 +85,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 VALUES ( 3, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, null, 3200, null, null
-       , E'\\320\\170'::bytea, 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 ', 90990, 0, 1, 081056, null
+       , 'blue', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 ', 90990, 0, 1, 081056, null
        , 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, 1, 1, '2011-04-17 18:20:03');
@@ -99,7 +99,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 VALUES ( 4, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, null, 3200, null, null
-       , E'\\320\\170'::bytea, 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro max', 90990, 0, 1
+       , 'yellow', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro max', 90990, 0, 1
        , 087478, null, 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, 1, 1, '2011-04-17 18:20:03');
@@ -113,7 +113,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 VALUES ( 5, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, null, 3200, null, null
-       , E'\\320\\170'::bytea, 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro ', 90990, 0, 0, 045456
+       , 'red', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro ', 90990, 0, 0, 045456
        , null, 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, null, 1, '2011-04-17 18:20:03');
@@ -128,7 +128,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 values (6, 'https://softech.kg/image/cache/e5913ac2e5f9d99a5c796d3b43fc7b49.jpg', 0.0, 1.9, null, 308, 'silicone',
-        'square', E'\\320\\170'::bytea, 'dskjkdsjkljsd', 1, 12, null
+        'square', 'black', 'dskjkdsjkljsd', 1, 12, null
            , 0, 32, 0, 0, 1200, 'Apple Watch series 8', 42000, 0, 0, 675409, null, 0, 0, null, null, 0.0, 0.0, null,
         0, 'dgjk', 'Aluminium, ceramic, sapphire', 'yes', 'Bluetooth',
         1, 3, null, 17, '2011-04-17 18:20:03');
@@ -141,7 +141,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 values (7, 'https://softech.kg/image/cache/e5913ac2e5f9d99a5c796d3b43fc7b49.jpg', 0.0, 1.9, null, 308, 'silicone',
-        'square', E'\\320\\170'::bytea, 'dskjkdsjkljsd', 1, 12, null
+        'square', 'blue', 'dskjkdsjkljsd', 1, 12, null
            , 0, 32, 0, 0, 1200, 'Apple Watch series 7', 32000, 0, 0, 235409, null, 0, 0, null, null, 0.0, 0.0, null,
         0, 'fdjkh', 'Aluminium, ceramic, sapphire', 'yes', 'Bluetooth',
         1, 3, null, 17, '2011-04-17 18:20:03');
@@ -155,7 +155,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 values (8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd3TIGbiCZ0f1ryquFCYKpcrTuM-wqmW2BCg&usqp=CAU', 13.3,
-        0.0, 'Ofice', 53, null, null, E'\\320\\170'::bytea, 'fddfgd',
+        0.0, 'Ofice', 53, null, null, 'red', 'fddfgd',
         1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'Apple Mack Book Air M1', 80999, 0, 0, 457665, 8, 0, 0, '2560x1600 пикс',
         null, 21.4, 0.0, null,
         0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
@@ -169,7 +169,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 values (9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtTwyPynpyQ2ozvPKNsNUok_h2tEyM7ZPG2A&usqp=CAU', 13.3,
-        0.0, 'Ofice', 53, null, null, E'\\320\\170'::bytea, 'fddfgd',
+        0.0, 'Ofice', 53, null, null, 'blue', 'fddfgd',
         1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'Apple Mack Book Air M2', 80999, 0, 0, 120665, 8, 0, 0, '2560x1600 пикс',
         null, 21.4, 0.0, null,
         0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
@@ -183,7 +183,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 values (10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd7zYmmYlxRTw0_r4op0XPsxmN98DFaS0Hmw&usqp=CAU', 13.3,
-        0.0, 'Ofice', 53, null, null, E'\\320\\170'::bytea, 'fddfgd',
+        0.0, 'Ofice', 53, null, null, 'yellow', 'fddfgd',
         1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'Asus ROG G5', 80999, 0, 0, 452345, 8, 0, 0, '2560x1600 пикс',
         null, 21.4, 0.0, null,
         0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
@@ -197,7 +197,7 @@ insert into products(id, pdf, screen_diagonal, screen_display, appointment_of_la
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
 values (11, 'https://mobile-review.com/news/wp-content/uploads/HONOR-MagicBook-Pro.jpg', 13.3, 0.0, 'Ofice', 53, null,
-        null, E'\\320\\170'::bytea, 'fddfgd',
+        null, 'red', 'fddfgd',
         1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'HONOR Magic Book 15', 80999, 0, 0, 452365, 8, 0, 0, '2560x1600 пикс',
         null, 21.4, 0.0, null,
         0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');

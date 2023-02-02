@@ -4,9 +4,9 @@ import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.awt.*;
 import java.util.List;
 
 @Repository
@@ -49,21 +49,30 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             " from Product p where p.productStatus = 1")
     List<ProductCardResponse> getAllRecommendationProduct();
 
+    //Тебе нужно сделать так чтобы в зависимости от выбранной категории то и ram и memory были соответсвующими этому продукту
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
             "p.productName," +
             "p.productCount," +
             "p.productPrice," +
             "p.productStatus," +
-            "p.productRating)" +
+            "p.productRating" +
+            ") " +
             "from Product p " +
-            "where upper(p.category.categoryName) like upper(:categoryName) and " +
-            "upper(p.subCategory.subCategoryName) like upper(:subCategoryName) or " +
-            "p.productPrice between :minPrice and :maxPrice or " +
-            "p.color IN (:colors) or " +
-            "p.memoryOfPhone = :memory or " +
-            "p.memoryOfSmartWatch = :memory or " +
-            "p.memoryOfTablet =: memory or ")
-//    @Query(" FROM Product c WHERE (:category is null or c.category = :category) AND (:minPrice is null or c.price >= :minPrice) AND (:maxPrice is null or c.price <= :maxPrice) AND (:colors is null or c.color IN :colors) AND (:memory is null or c.memory = :memory) AND (:ram is null or c.ram = :ram)")
-    List<Product> filterByParameters(String categoryName, String subCategoryName, int minPrice, int maxPrice, List<Color> colors, int memory, Byte ram);
+            "where upper(p.category.categoryName) like :categoryName AND " +
+            "(upper(p.subCategory.subCategoryName) is null or upper(p.subCategory.subCategoryName) like %:subCategoryName%) AND " +
+            "(:minPrice is null or p.productPrice between :minPrice and :maxPrice) AND " +
+            "(:colors is null or p.color IN (:colors)) AND " +
+            "(:categoryName = 'СМАРТФОНЫ' and p.memoryOfPhone >= :memory or " +
+            ":categoryName = 'ПЛАНШЕТЫ' and p.memoryOfTablet >= :memory or " +
+            ":categoryName = 'НОУТБУКИ' and p.videoCardMemory >= :memory or " +
+            ":categoryName = 'CМАРТ-ЧАСЫ И БРАСЛЕТЫ' and p.memoryOfSmartWatch >= :memory) AND " +
+            "(:categoryName = 'СМАРТФОНЫ' and p.ramOfPhone >= :ram or " +
+            ":categoryName = 'ПЛАНШЕТЫ' and p.ramOfTablet >= :ram or " +
+            ":categoryName = 'НОУТБУКИ' and p.ramOfLaptop >= :ram) ")
+    List<ProductCardResponse> filterByParameters(@Param(value = "categoryName") String categoryName,
+                                                 @Param(value = "subCategoryName") String subCategoryName,
+                                                 @Param(value = "minPrice") Integer minPrice, @Param(value = "maxPrice") Integer maxPrice,
+                                                 @Param(value = "colors") List<String> colors, @Param(value = "memory") Integer memory,
+                                                 @Param(value = "ram") Byte ram);
 }

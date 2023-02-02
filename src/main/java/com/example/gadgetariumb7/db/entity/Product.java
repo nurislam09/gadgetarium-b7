@@ -1,6 +1,5 @@
 package com.example.gadgetariumb7.db.entity;
 
-
 import com.example.gadgetariumb7.db.enums.Gender;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 
@@ -10,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +22,7 @@ import static javax.persistence.CascadeType.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
-    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1, initialValue = 12)
+    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1, initialValue = 2)
     private Long id;
 
     private String productName;
@@ -54,7 +52,7 @@ public class Product {
 
     private LocalDateTime createAt;
 
-    private Color color;
+    private String color;
 
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;
@@ -88,12 +86,12 @@ public class Product {
 
     private String simCard;
     private int memoryOfPhone;
-    private byte ramOfPhone;
+    private Byte ramOfPhone;
 
     private String screenResolutionTablet;
     private double screenSizeTablet;
     private int memoryOfTablet;
-    private byte ramOfTablet;
+    private Byte ramOfTablet;
     private double ScreenDiagonal;
     private int batteryCapacity;
 
@@ -101,7 +99,8 @@ public class Product {
     private String screenResolutionLaptop;
     private String appointmentOfLaptop;
     private Byte ramOfLaptop;
-    private byte videoCardMemory;
+    //byte
+    private int videoCardMemory;
     private double screenSizeLaptop;
 
     private String wirelessInterface;
@@ -112,8 +111,6 @@ public class Product {
     private Gender gender;
     private String waterProof;
     private double ScreenDisplay;
-
-
 
 
 }
