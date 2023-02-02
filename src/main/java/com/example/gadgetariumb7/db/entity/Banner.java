@@ -20,5 +20,5 @@ public class Banner {
     private Long id;
 
     @Column(length = 10000)
-    String image;
+    private String image;
 }
