@@ -49,4 +49,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productRating)" +
             " from Product p where p.productStatus = 1")
     List<ProductCardResponse> getAllRecommendationProduct();
+    @Query(nativeQuery = true , value = "select sum (o.count_of_product) from orders o where o.order_status = 0 or 1 or 2")
+    int getSoldProducts();
 }

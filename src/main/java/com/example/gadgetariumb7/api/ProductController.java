@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
+import com.example.gadgetariumb7.dto.request.InforgraphicsRequest;
 import com.example.gadgetariumb7.dto.response.AllProductResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,6 +40,10 @@ public class ProductController {
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse save(@RequestBody ProductRequest productRequest) {
         return productService.addProduct(productRequest);
+    }
+    @GetMapping("/a")
+    public InforgraphicsRequest inforgraphic(){
+        return productService.inforgraphics();
     }
 
 }

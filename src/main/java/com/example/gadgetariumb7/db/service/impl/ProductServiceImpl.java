@@ -7,6 +7,7 @@ import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.SubProductRequest;
 import com.example.gadgetariumb7.dto.response.AllProductResponse;
+import com.example.gadgetariumb7.dto.request.InforgraphicsRequest;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
@@ -108,5 +109,12 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return new SimpleResponse("Product successfully saved", "ok");
+    }
+
+    @Override
+    public InforgraphicsRequest inforgraphics() {
+        InforgraphicsRequest inforgraphicsRequest = new InforgraphicsRequest();
+        inforgraphicsRequest.setSoldCount(productRepository.getSoldProducts());
+        return inforgraphicsRequest;
     }
 }
