@@ -2,7 +2,6 @@ package com.example.gadgetariumb7.db.service.impl;
 
 
 import com.example.gadgetariumb7.db.entity.Order;
-import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,20 +25,23 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderResponse> findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate) {
-        List<OrderResponse> orderResponses = new ArrayList<>();
-        if (orderStatus != null) {
+        List<OrderResponse> orderResponses;
+        if (keyWord==null) {
             orderResponses = orderRepository.findAllOrdersByStatus(orderStatus, PageRequest.of(page - 1, size));
-        } else if (keyWord != null) {
-            orderResponses = orderRepository.search(keyWord, PageRequest.of(page - 1, size));
+        } else {
+            orderResponses = orderRepository.search(keyWord, PageRequest.of(page - 1, size)).stream().filter(x -> x.getOrderStatus() == orderStatus).toList();
         }
+
         for (OrderResponse orderResponse : orderResponses) {
             User user = orderRepository.findById(orderResponse.getId()).orElseThrow(() -> new NotFoundException("Order not found")).getUser();
-            int orderCount = user.getBasketList().stream().mapToInt(Product::getOrderCount).sum();
-            int totalSum = user.getBasketList().stream().filter(p -> p.getDiscount() == null).map(p -> p.getOrderCount() * p.getProductPrice())
-                    .reduce(0, Integer::sum);
-            int totalSumWithDiscount = user.getBasketList().stream().filter(p -> p.getDiscount() != null)
-                    .map(p -> p.getOrderCount() * (p.getProductPrice() - (p.getProductPrice() * p.getDiscount().getAmountOfDiscount() / 100)))
-                    .reduce(0, Integer::sum);
+
+            int orderCount = user.getBasketList().values().stream().mapToInt(i -> i).sum();
+            int totalSum = user.getBasketList().entrySet().stream().filter(entry -> entry.getKey().getDiscount() == null).mapToInt(entry -> entry.getValue() * entry.getKey()
+                            .getProductPrice()).sum();
+
+            int totalSumWithDiscount= user.getBasketList().entrySet().stream().filter(entry->entry.getKey().getDiscount()!=null)
+                    .mapToInt(entry->entry.getValue()*(entry.getKey().getProductPrice()-(entry.getKey().getProductPrice()*entry.getKey().getDiscount()
+                            .getAmountOfDiscount()/100))).sum();
 
             int totalSumAndTotalSumWithDiscount = totalSum + totalSumWithDiscount;
 

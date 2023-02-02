@@ -32,21 +32,20 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Long getCountOfOrders();
 
 
-    @Query("select new com.example.gadgetariumb7.dto.response.OrderResponse(o.id," +
-            "concat(o.firstName,' ', o.lastName ), " +
-            "o.orderNumber," +
-            "o.dateOfOrder," +
-            "o.orderType," +
-            "o.orderStatus) from Order o where" +
-            "  concat( concat( o.firstName,' ', o.lastName),' ', o.orderNumber," +
-            " ' ', o.orderType,' ', o.orderStatus) like %:keyWord")
+
+    @Query("SELECT NEW com.example.gadgetariumb7.dto.response.OrderResponse(o.id, " +
+            "CONCAT(o.firstName, ' ', o.lastName), " +
+            "o.orderNumber, " +
+            "o.dateOfOrder, " +
+            "o.countOfProduct, " +
+            "o.totalSum, " +
+            "o.orderType, " +
+            "o.orderStatus) " +
+            "FROM Order o " +
+            "WHERE UPPER(CONCAT(o.firstName, ' ', o.lastName)) LIKE UPPER(CONCAT('%', :keyWord, '%')) " +
+            "OR CAST(o.orderNumber AS string) LIKE CONCAT('%', :keyWord) " +
+            "OR UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))")
     List<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable);
-
-
-
-
-
-
 
 
 }

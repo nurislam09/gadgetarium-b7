@@ -40,5 +40,15 @@ public class OrderResponse {
         this.orderStatus = orderStatus;
     }
 
-
+    public OrderResponse(Long id, String fullName, int orderNumber, LocalDateTime dateOfOrder,
+                         int countOfProduct, int totalSum, OrderType orderType,OrderStatus orderStatus) {
+        this.id = id;
+        this.fullName = fullName;
+        this.orderNumber = orderNumber;
+        this.dateOfOrder = dateOfOrder;
+        this.countOfProduct = countOfProduct;
+        this.totalSum = totalSum;
+        this.orderType = orderType;
+        this.orderStatus=orderStatus;
+    }
 }

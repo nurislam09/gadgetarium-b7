@@ -7,8 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderService {
-
-
     List<OrderResponse> findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate);
 
     Long countByOrderStatus(OrderStatus orderStatus);
@@ -16,6 +14,5 @@ public interface OrderService {
     SimpleResponse deleteOrderById(Long id);
 
     Long getCountOfOrders();
-
 
 }

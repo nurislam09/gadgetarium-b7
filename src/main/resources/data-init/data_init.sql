@@ -359,15 +359,15 @@ insert into orders(id, address, count_of_product, date_of_order, delivery_status
 values (1, 'Чуй 30', 0, '2011-04-17', 'WAITING', 'nurislam@gmail.com', 'Nurislam', 'Mamytov', 12345, 'WAITING',
         'DELIVERY', 'CASH', '+996222219743', 0, 0, 1);
 
-insert into users_basket_list(user_id, basket_list_id)
-values (1, 10);
-insert into users_basket_list(user_id, basket_list_id)
-values (1, 11);
-
 insert into orders_products(product_id, order_id)
 values (10, 1);
 insert into orders_products(product_id, order_id)
 values (11, 1);
+
+insert into user_basket_list(user_id, count_of_product, product_id)
+values (1,5,10);
+insert into user_basket_list(user_id, count_of_product, product_id)
+values (1,5,10);
 
 
 
