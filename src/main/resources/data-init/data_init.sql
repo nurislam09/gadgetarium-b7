@@ -208,10 +208,7 @@ values (11, 'https://mobile-review.com/news/wp-content/uploads/HONOR-MagicBook-P
         0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
 
 
-insert into banners(id)
-values (1);
-
-insert into banner_images(id, image_url)
+insert into banners(id, image)
 values (1, 'https://www.budetsdelano.ru/upload/iblock/be0/sale_web.jpg');
 
 insert into product_images(id, image_url)
