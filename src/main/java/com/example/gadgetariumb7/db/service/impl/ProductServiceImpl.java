@@ -12,7 +12,6 @@ import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -130,6 +129,7 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
+
     public AllProductResponse getAllProductToMP() {
         List<ProductCardResponse> discountProducts = productRepository.getAllDiscountProduct();
         List<ProductCardResponse> newProducts = productRepository.getAllNewProduct();
@@ -183,14 +183,14 @@ public class ProductServiceImpl implements ProductService {
 
         List<Subproduct> subproducts = new ArrayList<>();
         for (SubProductRequest s : productRequest.getSubProductRequests()) {
+            Subproduct subproduct;
             if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
                     productRequest.getLaptopCPU() != null) {
-                Subproduct subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages());
-                subproducts.add(subproduct);
+                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages());
             } else {
-                Subproduct subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages());
-                subproducts.add(subproduct);
+                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages());
             }
+            subproducts.add(subproduct);
         }
 
         if (category.getCategoryName().equals("Смартфоны")) {
@@ -222,21 +222,19 @@ public class ProductServiceImpl implements ProductService {
         return new SimpleResponse("Product successfully saved", "ok");
     }
 
-    public List<ProductCardResponse> filterByParameters(String categoryName, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram) throws NotFoundException{
 
+    public List<ProductCardResponse> filterByParameters(String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram) throws NotFoundException {
         List<Product> productList = productRepository.findAll();
-
-
-       List<ProductCardResponse> productCardResponses = productList.stream()
+        List<ProductCardResponse> productCardResponses = productList.stream()
                 .filter(p -> categoryName == null || p.getCategory().getCategoryName().toLowerCase().contains(categoryName.toLowerCase()))
                 .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().toLowerCase().contains(subCategoryName.toLowerCase()))
                 .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
                 .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
                 .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
                 .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("ноутбуки и планшеты") &&
-                                               (p.getMemoryOfTablet() >= memory || p.getVideoCardMemory() >= memory.byteValue()))
-                                            || (p.getCategory().getCategoryName().toLowerCase().equalsIgnoreCase("Cмартфоны") && p.getMemoryOfPhone() >= memory)
-                                            || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && p.getMemoryOfSmartWatch() >= memory))
+                        (p.getMemoryOfTablet() >= memory || p.getVideoCardMemory() >= memory.byteValue()))
+                        || (p.getCategory().getCategoryName().toLowerCase().equalsIgnoreCase("Cмартфоны") && p.getMemoryOfPhone() >= memory)
+                        || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && p.getMemoryOfSmartWatch() >= memory))
                 .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && p.getRamOfPhone() >= ram) ||
                         (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки и планшеты") && (p.getRamOfLaptop() >= ram || p.getRamOfTablet() >= ram)))
                 .map(p -> new ProductCardResponse(p.getId(),
@@ -263,34 +261,40 @@ public class ProductServiceImpl implements ProductService {
                 throw new NotFoundException();
             }
         }
-    return productCardResponses;
+
+        if (fieldToSort != null)
+            productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
+
+        return productCardResponses;
     }
 
+    private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
+        if (fieldToSort != null) {
+            switch (fieldToSort) {
+                case "Новинки" ->
+                        productCardResponses = productCardResponses.stream().filter(x -> x.getProductStatus() == ProductStatus.NEW).toList();
+                case "По акции" -> {
+                    if (discountField != null) {
+                        switch (discountField) {
+                            case "Все акции" ->
+                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() > 0).toList();
+                            case "До 50%" ->
+                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() < 50 && (x.getDiscountPrice() * 100) / x.getProductPrice() > 0).toList();
+                            case "Свыше 50%" ->
+                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() > 50).toList();
+                        }
+                    }
+                }
+                case "Рекомендуемые" ->
+                        productCardResponses = productCardResponses.stream().filter(x -> x.getProductStatus() == ProductStatus.RECOMMENDATION).toList();
+                case "По увеличению цены" ->
+                        productCardResponses.sort(Comparator.comparing(ProductCardResponse::getProductPrice));
+                case "По уменьшению цены" ->
+                        productCardResponses.sort(Comparator.comparing(ProductCardResponse::getProductPrice).reversed());
+            }
+        }
 
-
-
-
-
-
-
-//        List<ProductCardResponse> productCardResponses = productRepository.filterByParameters(categoryName.toUpperCase(), subCategoryName.toUpperCase(), minPrice, maxPrice, colors.stream().map(String::toUpperCase).toList(), memory, ram);
-//        for (ProductCardResponse productCardResponse : productCardResponses) {
-//            Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
-//            if (productOptional.isPresent()) {
-//                Product product = productOptional.get();
-//                if (product.getCategory().getCategoryName().toUpperCase().equalsIgnoreCase(categoryName)) {
-//                    if (productCardResponse.getDiscountPrice() != 0) {
-//                        productCardResponse.setDiscountPrice(productRepository.getDiscountPrice(productCardResponse.getProductId()));
-//                    }
-//                    int countFeedback = product.getUsersReviews().size();
-//                    productCardResponse.setCountOfReview(countFeedback);
-//                    productCardResponse.setProductImage(productRepository.getFirstImage(productCardResponse.getProductId()));
-//                    setDiscountToResponse(productCardResponse, null);
-//                }
-//            } else {
-//                return null;
-//            }
-//        }
-//        return productCardResponses;
+        return productCardResponses;
+    }
 
 }

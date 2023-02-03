@@ -75,15 +75,18 @@ public class ProductController {
         return productService.addProduct(productRequest);
     }
 
+    @Operation(summary = "get products from catalog", description = "the user can filter by 7 parameters and categoryName is always required, but others no because user shouldn't give them all")
     @GetMapping("/catalog")
     public List<ProductCardResponse> filterByParameters(@RequestParam(value = "categoryName") String categoryName,
-                                                    @RequestParam(value = "subCategoryName", required = false) String subCategoryName,
-                                                    @RequestParam(value = "minPrice", required = false) Integer minPrice,
-                                                    @RequestParam(value = "maxPrice", required = false) Integer maxPrice,
-                                                    @RequestParam(value = "colors", required = false) List<String> colors,
-                                                    @RequestParam(value = "memory", required = false) Integer memory,
-                                                    @RequestParam(value = "ram", required = false) Byte ram) {
-        return productService.filterByParameters(categoryName, subCategoryName, minPrice, maxPrice, colors, memory, ram);
+                                                        @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
+                                                        @RequestParam(value = "discountField", required = false) String discountField,
+                                                        @RequestParam(value = "subCategoryName", required = false) String subCategoryName,
+                                                        @RequestParam(value = "minPrice", required = false) Integer minPrice,
+                                                        @RequestParam(value = "maxPrice", required = false) Integer maxPrice,
+                                                        @RequestParam(value = "colors", required = false) List<String> colors,
+                                                        @RequestParam(value = "memory", required = false) Integer memory,
+                                                        @RequestParam(value = "ram", required = false) Byte ram) {
+        return productService.filterByParameters(categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram);
     }
 
 }

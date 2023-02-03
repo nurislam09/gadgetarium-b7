@@ -40,6 +40,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select (p.productPrice -((p.productPrice * p.discount.amountOfDiscount) /100)) from Product p  where p.id = :id ")
     int getDiscountPrice(Long id);
+
     @Query("select count (r.product) from Review r where r.product.id =:id")
     int getAmountOfFeedback(Long id);
 
@@ -65,7 +66,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
-
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(p.id," +
             "p.productVendorCode," +
@@ -82,31 +82,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);
-//    @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
-//            "(p.id," +
-//            "p.productName," +
-//            "p.productCount," +
-//            "p.productPrice," +
-//            "p.productStatus," +
-//            "p.productRating) FROM Product p " +
-//            "WHERE " +
-//            "(:categoryName IS NULL OR upper(p.category.categoryName) like concat('%',:categoryName,'%')) AND " +
-//            "(:subCategoryName IS NULL OR upper(p.subCategory.subCategoryName) like upper(concat('%',:subCategoryName, '%'))) AND " +
-//            "(:minPrice IS NULL OR p.productPrice >= :minPrice) AND " +
-//            "(:maxPrice IS NULL OR p.productPrice <= :maxPrice) AND " +
-//            "(:colors IS NULL OR :colors = '' OR upper(p.color) IN upper(:colors) ) AND " +
-//            "(:memory IS NULL OR ( upper(p.category.categoryName) ='СМАРТФОНЫ' and p.memoryOfPhone >= :memory or " +
-//            "upper(p.category.categoryName) ='НОУТБУКИ И ПЛАНШЕТЫ' and (p.memoryOfTablet >= :memory or p.videoCardMemory >= :memory)" +
-//            "or upper(p.category.categoryName) = 'СМАРТФОНЫ' and p.memoryOfSmartWatch >= :memory)) AND " +
-//            "(:ram IS NULL OR (upper(p.category.categoryName) ='СМАРТФОНЫ' and p.ramOfPhone >= :ram or " +
-//            "upper(p.category.categoryName) ='НОУТБУКИ И ПЛАНШЕТЫ' and p.ramOfLaptop >=: ram or " +
-//            "upper(p.category.categoryName) ='НОУТБУКИ И ПЛАНШЕТЫ' and p.ramOfTablet >=: ram ))")
-//    List<ProductCardResponse> filterByParameters(@Param("categoryName") String categoryName,
-//                                 @Param("subCategoryName") String subCategoryName,
-//                                 @Param("minPrice") Integer minPrice,
-//                                 @Param("maxPrice") Integer maxPrice,
-//                                 @Param("colors") List<String> colors,
-//                                 @Param("memory") Integer memory,
-//                                 @Param("ram") Byte ram);
-//    cast(:memory as byte)
 }
