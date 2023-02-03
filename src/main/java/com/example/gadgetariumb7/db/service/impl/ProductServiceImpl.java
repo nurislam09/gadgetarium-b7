@@ -176,18 +176,18 @@ public class ProductServiceImpl implements ProductService {
     public SimpleResponse addProduct(ProductRequest productRequest, int price) {
         Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
         Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
-        Subcategory subcategory = subcategoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
+        Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
 
         List<Subproduct> subproducts = new ArrayList<>();
         for (SubProductRequest s : productRequest.getSubProductRequests()) {
+            Subproduct subproduct;
             if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
                     productRequest.getLaptopCPU() != null) {
-                Subproduct subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages(), price);
-                subproducts.add(subproduct);
+                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages(), price);
             } else {
-                Subproduct subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages(), price);
-                subproducts.add(subproduct);
+                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages(), price);
             }
+            subproducts.add(subproduct);
         }
 
         Product product;
