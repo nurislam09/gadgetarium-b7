@@ -27,22 +27,24 @@ public class Subproduct {
 
     @ElementCollection
     @CollectionTable(name = "subproduct_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url",length = 10000)
+    @Column(name = "image_url", length = 10000)
     List<String> images;
 
     @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
     private Product product;
 
-    public Subproduct(int memory, String color, List<String> images) {
+    public Subproduct(int memory, String color, List<String> images, int price) {
         this.memory = memory;
         this.color = color;
         this.images = images;
+        this.price = price;
     }
 
-    public Subproduct(String laptopCPU, String color, List<String> images) {
+    public Subproduct(String laptopCPU, String color, List<String> images, int price) {
         this.laptopCPU = laptopCPU;
         this.color = color;
         this.images = images;
+        this.price = price;
     }
 }
 
