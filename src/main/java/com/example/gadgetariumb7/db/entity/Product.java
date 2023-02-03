@@ -55,7 +55,7 @@ public class Product {
 
     private String color;
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
+    @OneToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;
 
     @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
