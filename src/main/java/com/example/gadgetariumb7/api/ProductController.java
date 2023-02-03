@@ -36,7 +36,7 @@ public class ProductController {
     @Operation(summary = "Get all products to admin page", description = "This endpoint return all products by product type for ADMIN")
     @GetMapping("/getAllProducts")
     @PreAuthorize("hasAuthority('Admin')")
-    private List<ProductAdminResponse> getAllProduct(
+    public List<ProductAdminResponse> getAllProduct(
             @RequestParam(value = "productType") String productType,
             @RequestParam(value = "searchText", required = false) String searchText,
             @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
@@ -51,14 +51,14 @@ public class ProductController {
     @Operation(summary = "delete product", description = "This endpoint delete product by id")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('Admin')")
-    private SimpleResponse delete(@PathVariable Long id) {
+    public SimpleResponse delete(@PathVariable Long id) {
         return productService.delete(id);
     }
 
     @Operation(summary = "update product", description = "This endpoint update product by id")
     @PutMapping()
     @PreAuthorize("hasAuthority('Admin')")
-    private SimpleResponse update(
+    public SimpleResponse update(
             @RequestParam(value = "ID") Long id,
             @RequestParam(value = "Артикул", required = false) Integer vendorCode,
             @RequestParam(value = "Наименования товара", required = false) Integer productCount,

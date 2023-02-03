@@ -48,11 +48,6 @@ VALUES (17, 'Смарт-часы Apple watch', 3),
        (19, 'Умные часы для детей', 3),
        (20, 'Фитнес браслет', 3);
 
-insert into discounts(id, amount_of_discount, discount_end_date, discount_start_date)
-VALUES (1, 5, '2023-01-20', '2023-02-01');
-
-
-
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
                      bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
                      memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
@@ -66,6 +61,8 @@ VALUES ( 1, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, null, 1, '2011-04-17 18:20:03');
 
+insert into discounts(id, amount_of_discount, discount_end_date, discount_start_date)
+VALUES (1, 5, '2023-01-20', '2023-02-01');
 
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
                      bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
@@ -80,7 +77,6 @@ VALUES ( 2, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, 1, 1, '2011-04-17 18:20:03');
 
-
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
                      bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
                      memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
@@ -92,7 +88,7 @@ VALUES ( 3, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , 'Black', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 ', 90990, 0, 1, 081056, null
        , 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, 1, 1, '2011-04-17 18:20:03');
+       , 1, null, 1, '2011-04-17 18:20:03');
 
 
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
@@ -106,7 +102,7 @@ VALUES ( 4, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , 'Purple', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro max', 90990, 0, 1
        , 087478, null, 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, 1, 1, '2011-04-17 18:20:03');
+       , 1, null, 1, '2011-04-17 18:20:03');
 
 
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
