@@ -96,4 +96,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void addToFavorites(Product product) {
+        favoritesList.add(product);
+    }
 }
