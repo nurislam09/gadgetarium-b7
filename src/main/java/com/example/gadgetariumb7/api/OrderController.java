@@ -24,7 +24,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @Operation(summary = "find all orders", description = "Orders with pagination and search")
-    @GetMapping("/pagination/page")
+    @GetMapping()
     @PreAuthorize("hasAuthority('Admin')")
     public ResponseEntity<List<OrderResponse>> findAllOrders(@RequestParam(required = false) OrderStatus orderStatus,
                                                              @RequestParam(required = false) String keyWord,
