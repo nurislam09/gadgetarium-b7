@@ -6,7 +6,6 @@ import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
-import com.example.gadgetariumb7.dto.request.SubProductRequest;
 import com.example.gadgetariumb7.dto.response.AllProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -178,16 +177,7 @@ public class ProductServiceImpl implements ProductService {
         Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
 
         List<Subproduct> subproducts = new ArrayList<>();
-        for (SubProductRequest s : productRequest.getSubProductRequests()) {
-            Subproduct subproduct;
-            if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
-                    productRequest.getLaptopCPU() != null) {
-                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages(), price);
-            } else {
-                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages(), price);
-            }
-            subproducts.add(subproduct);
-        }
+        productRequest.getSubProductRequests().forEach(x -> subproducts.add(new Subproduct(x)));
 
         Product product;
         if (category.getCategoryName().equals("Смартфоны")) {
