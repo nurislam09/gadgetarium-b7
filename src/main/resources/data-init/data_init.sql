@@ -196,7 +196,8 @@ insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, ap
                      screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
-values (11, 'https://mobile-review.com/news/wp-content/uploads/HONOR-MagicBook-Pro.jpg', 13.3, 0.0, 0.0, 'Office', 53, null,
+values (11, 'https://mobile-review.com/news/wp-content/uploads/HONOR-MagicBook-Pro.jpg', 13.3, 0.0, 0.0, 'Office', 53,
+        null,
         null, 'Blue', 'fddfgd',
         1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'HONOR Magic Book 15', 80999, 0, 0, 452365, 8, 0, 0, '2560x1600 пикс',
         null, 21.4, 0.0, null,
@@ -346,11 +347,20 @@ VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9tR3imJ1fH7O
 insert into product_images(id, image_url)
 VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaTI2JEyoxUDdvj94c-FmKBIaaKdkxe-_vQ&usqp=CAU');
 
+insert into orders(id, address, count_of_product, date_of_order, delivery_status, email, first_name, last_name,
+                   order_number, order_status, order_type, payment, phone_number, total_discount, total_sum, user_id)
+values (1, 'Чуй 30', 0, '2011-04-17', 'WAITING', 'nurislam@gmail.com', 'Nurislam', 'Mamytov', 12345, 'WAITING',
+        'DELIVERY', 'CASH', '+996222219743', 0, 0, 1);
 
+insert into orders_products(product_id, order_id)
+values (10, 1);
+insert into orders_products(product_id, order_id)
+values (11, 1);
 
-
-
-
+insert into user_basket_list(user_id, count_of_product, product_id)
+values (1,5,10);
+insert into user_basket_list(user_id, count_of_product, product_id)
+values (1,5,11);
 
 
 
