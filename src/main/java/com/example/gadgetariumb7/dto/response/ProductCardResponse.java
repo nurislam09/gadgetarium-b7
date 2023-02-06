@@ -1,7 +1,6 @@
 package com.example.gadgetariumb7.dto.response;
 
 import com.example.gadgetariumb7.db.enums.ProductStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,6 @@ public class ProductCardResponse {
     private String productName;
     private int count;
     private int productPrice;
-
     private int discountPrice;
     private ProductStatus productStatus;
     private Byte productRating;
@@ -31,5 +29,4 @@ public class ProductCardResponse {
         this.productStatus = productStatus;
         this.productRating = productRating;
     }
-
 }

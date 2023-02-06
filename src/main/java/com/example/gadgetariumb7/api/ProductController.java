@@ -5,6 +5,7 @@ import com.example.gadgetariumb7.dto.response.AllProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.exceptions.NotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -75,7 +76,8 @@ public class ProductController {
         return productService.addProduct(productRequest);
     }
 
-    @Operation(summary = "get products from catalog", description = "the user can filter by 7 parameters and categoryName is always required, but others no because user shouldn't give them all")
+    @Operation(summary = "get products from catalog", description = "the user can filter by 7 parameters and categoryName is always required, but others no because user shouldn't give them all." +
+            "The field 'fieldToSort' is using if the user wants to sort the products by next fields: Новинки, По акции(if you choose this field you need to write also to discountField one of next three: Все акции, До 50%, Свыше 50%), Рекомендуемые, По увеличению цены, По уменьшению цены.'")
     @GetMapping("/catalog")
     public List<ProductCardResponse> filterByParameters(@RequestParam(value = "categoryName") String categoryName,
                                                         @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
@@ -85,7 +87,7 @@ public class ProductController {
                                                         @RequestParam(value = "maxPrice", required = false) Integer maxPrice,
                                                         @RequestParam(value = "colors", required = false) List<String> colors,
                                                         @RequestParam(value = "memory", required = false) Integer memory,
-                                                        @RequestParam(value = "ram", required = false) Byte ram) {
+                                                        @RequestParam(value = "ram", required = false) Byte ram) throws NotFoundException {
         return productService.filterByParameters(categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram);
     }
 

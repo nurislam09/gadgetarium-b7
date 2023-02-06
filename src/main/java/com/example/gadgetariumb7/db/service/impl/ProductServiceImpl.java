@@ -160,7 +160,7 @@ public class ProductServiceImpl implements ProductService {
                 if (productRepository.getDiscountPrice(productCardResponse.getProductId()) == 0) {
                     productCardResponse.setDiscountPrice(productCardResponse.getProductPrice());
                 } else {
-                    productCardResponse.setDiscountPrice((int) Math.floor(productRepository.getDiscountPrice(productCardResponse.getProductId())));
+                    productCardResponse.setDiscountPrice(Math.round(productRepository.getDiscountPrice(productCardResponse.getProductId())));
                 }
             } else if (productAdminResponse != null) {
                 if (productRepository.getDiscountPrice(productAdminResponse.getId()) == 0) {
@@ -226,17 +226,19 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductCardResponse> filterByParameters(String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram) throws NotFoundException {
         List<Product> productList = productRepository.findAll();
         List<ProductCardResponse> productCardResponses = productList.stream()
-                .filter(p -> categoryName == null || p.getCategory().getCategoryName().toLowerCase().contains(categoryName.toLowerCase()))
-                .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().toLowerCase().contains(subCategoryName.toLowerCase()))
+                .filter(p -> p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
+                .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
                 .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
                 .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
                 .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
-                .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("ноутбуки и планшеты") &&
-                        (p.getMemoryOfTablet() >= memory || p.getVideoCardMemory() >= memory.byteValue()))
-                        || (p.getCategory().getCategoryName().toLowerCase().equalsIgnoreCase("Cмартфоны") && p.getMemoryOfPhone() >= memory)
-                        || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && p.getMemoryOfSmartWatch() >= memory))
-                .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && p.getRamOfPhone() >= ram) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки и планшеты") && (p.getRamOfLaptop() >= ram || p.getRamOfTablet() >= ram)))
+                .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                        p.getVideoCardMemory() == memory.byteValue()) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
+                        p.getMemoryOfTablet() == memory) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && p.getMemoryOfPhone() == memory) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && p.getMemoryOfSmartWatch() == memory))
+                .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && p.getRamOfPhone() == ram) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && Objects.equals(p.getRamOfLaptop(), ram)) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && p.getRamOfTablet() == ram))
                 .map(p -> new ProductCardResponse(p.getId(),
                         p.getProductName(),
                         p.getProductCount(),
@@ -248,10 +250,7 @@ public class ProductServiceImpl implements ProductService {
             Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
             if (productOptional.isPresent()) {
                 Product product = productOptional.get();
-                if (product.getCategory().getCategoryName().toUpperCase().equalsIgnoreCase(categoryName)) {
-                    if (productCardResponse.getDiscountPrice() != 0) {
-                        productCardResponse.setDiscountPrice(productRepository.getDiscountPrice(productCardResponse.getProductId()));
-                    }
+                if (product.getCategory().getCategoryName().equalsIgnoreCase(categoryName)) {
                     int countFeedback = product.getUsersReviews().size();
                     productCardResponse.setCountOfReview(countFeedback);
                     productCardResponse.setProductImage(productRepository.getFirstImage(productCardResponse.getProductId()));
@@ -293,8 +292,6 @@ public class ProductServiceImpl implements ProductService {
                         productCardResponses.sort(Comparator.comparing(ProductCardResponse::getProductPrice).reversed());
             }
         }
-
         return productCardResponses;
     }
-
 }
