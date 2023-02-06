@@ -36,7 +36,7 @@ public class Product {
 
     private int productCount;
 
-    private Byte guarantee;
+    private byte guarantee;
 
     @Column(length = 10000)
     private String videoReview;
@@ -55,7 +55,7 @@ public class Product {
 
     private String color;
 
-    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
+    @OneToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;
 
     @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
@@ -113,9 +113,9 @@ public class Product {
     private double ScreenDisplay;
     private double sizeOfWatch;
 
-    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, String productName) {
+    public Product(ProductRequest productRequest, int productPrice, Brand brand, Category category, Subcategory subCategory, String productName) {
         this.productName = productRequest.getProductName();
-        this.productPrice = productRequest.getProductPrice();
+        this.productPrice = productPrice;
         this.productVendorCode = productRequest.getProductVendorCode();
         this.productCount = productRequest.getProductCount();
         this.guarantee = productRequest.getGuarantee();
@@ -133,9 +133,9 @@ public class Product {
         this.simCard = productRequest.getSimCard();
     }
 
-    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, Gender gender) {
+    public Product(ProductRequest productRequest, int productPrice, Brand brand, Category category, Subcategory subCategory, Gender gender) {
         this.productName = productRequest.getProductName();
-        this.productPrice = productRequest.getProductPrice();
+        this.productPrice = productPrice;
         this.productVendorCode = productRequest.getProductVendorCode();
         this.productCount = productRequest.getProductCount();
         this.guarantee = productRequest.getGuarantee();
@@ -158,9 +158,9 @@ public class Product {
         this.sizeOfWatch = productRequest.getSizeOfWatch();
     }
 
-    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, int batteryCapacity, Double screenDiagonal) {
+    public Product(ProductRequest productRequest, int productPrice, Brand brand, Category category, Subcategory subCategory, int batteryCapacity, Double screenDiagonal) {
         this.productName = productRequest.getProductName();
-        this.productPrice = productRequest.getProductPrice();
+        this.productPrice = productPrice;
         this.productVendorCode = productRequest.getProductVendorCode();
         this.productCount = productRequest.getProductCount();
         this.guarantee = productRequest.getGuarantee();
@@ -181,9 +181,9 @@ public class Product {
 
     }
 
-    public Product(ProductRequest productRequest, Brand brand, Category category, Subcategory subCategory, byte videoCardMemory) {
+    public Product(ProductRequest productRequest, int productPrice, Brand brand, Category category, Subcategory subCategory, byte videoCardMemory) {
         this.productName = productRequest.getProductName();
-        this.productPrice = productRequest.getProductPrice();
+        this.productPrice = productPrice;
         this.productVendorCode = productRequest.getProductVendorCode();
         this.productCount = productRequest.getProductCount();
         this.guarantee = productRequest.getGuarantee();

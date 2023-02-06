@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @Table(name = "banners")
@@ -16,11 +15,9 @@ import java.util.List;
 public class Banner {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "banner_gen")
-    @SequenceGenerator(name = "banner_gen", sequenceName = "banner_seq", allocationSize = 1)
+    @SequenceGenerator(name = "banner_gen", sequenceName = "banner_seq", allocationSize = 1, initialValue = 2)
     private Long id;
 
-    @ElementCollection
-    @CollectionTable(name = "banner_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url",length = 10000)
-    List<String> images;
+    @Column(length = 10000)
+    private String image;
 }
