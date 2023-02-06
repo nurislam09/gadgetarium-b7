@@ -71,14 +71,12 @@ public class ProductServiceImpl implements ProductService {
                 return sortingProduct(fieldToSort, discountField, responseList, startDate, endDate);
             }
         }
-
         return productAdminResponses;
     }
 
     @Override
     public SimpleResponse delete(Long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product for delete not found!"));
-        product.setDiscount(null);
         productRepository.delete(product);
         return new SimpleResponse("Product successfully deleted!", "ok");
     }
@@ -91,42 +89,6 @@ public class ProductServiceImpl implements ProductService {
         if (productPrice != null) product.setProductPrice(productPrice);
         productRepository.save(product);
         return new SimpleResponse("Product successfully updated", "ok");
-    }
-
-    @Override
-    public SimpleResponse addProduct(ProductRequest productRequest, int price) {
-        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
-        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
-        Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
-
-        List<Subproduct> subproducts = new ArrayList<>();
-        for (SubProductRequest s : productRequest.getSubProductRequests()) {
-            Subproduct subproduct;
-            if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
-                    productRequest.getLaptopCPU() != null) {
-                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages(), price);
-            } else {
-                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages(), price);
-            }
-            subproducts.add(subproduct);
-        }
-
-        Product product;
-        if (category.getCategoryName().equals("Смартфоны")) {
-            product = new Product(productRequest, price, brand, category, subcategory, "Смартфоны");
-        } else if (category.getCategoryName().equals("Смарт-часы и браслеты")) {
-            product = new Product(productRequest, price, brand, category, subcategory, Gender.MALE);
-        } else if (productRequest.getMemoryOfTablet() != 0) {
-            product = new Product(productRequest, price, brand, category, subcategory, 1, 0.0);
-        } else {
-            product = new Product(productRequest, price, brand, category, subcategory, (byte) 1);
-        }
-        product.setCreateAt(LocalDateTime.now());
-        product.setSubproducts(subproducts);
-        subproducts.forEach(s -> s.setProduct(product));
-        productRepository.save(product);
-
-        return new SimpleResponse("Product successfully saved", "ok");
     }
 
     private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
@@ -158,13 +120,11 @@ public class ProductServiceImpl implements ProductService {
                         products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice).reversed());
             }
         }
-
         if (startDate != null && endDate != null)
             return products.stream().filter(p -> p.getCreateAt().toLocalDate().isAfter(startDate) && p.getCreateAt().toLocalDate().isBefore(endDate)).toList();
 
         return products;
     }
-
 
     @Override
     public AllProductResponse getAllProductToMP() {
@@ -197,7 +157,7 @@ public class ProductServiceImpl implements ProductService {
                 if (productRepository.getDiscountPrice(productCardResponse.getProductId()) == 0) {
                     productCardResponse.setDiscountPrice(productCardResponse.getProductPrice());
                 } else {
-                    productCardResponse.setDiscountPrice((int) Math.floor(productRepository.getDiscountPrice(productCardResponse.getProductId())));
+                    productCardResponse.setDiscountPrice(Math.round(productRepository.getDiscountPrice(productCardResponse.getProductId())));
                 }
             } else if (productAdminResponse != null) {
                 if (productRepository.getDiscountPrice(productAdminResponse.getId()) == 0) {
@@ -213,6 +173,47 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public SimpleResponse addProduct(ProductRequest productRequest, int price) {
+        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
+        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
+        Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
+
+        List<Subproduct> subproducts = new ArrayList<>();
+        for (SubProductRequest s : productRequest.getSubProductRequests()) {
+            Subproduct subproduct;
+            if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
+                    productRequest.getLaptopCPU() != null) {
+
+                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages());
+            } else {
+                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages());
+
+                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages(), price);
+            } else {
+                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages(), price);
+            }
+            subproducts.add(subproduct);
+        }
+
+        Product product;
+        if (category.getCategoryName().equals("Смартфоны")) {
+            product = new Product(productRequest, price, brand, category, subcategory, "Смартфоны");
+        } else if (category.getCategoryName().equals("Смарт-часы и браслеты")) {
+            product = new Product(productRequest, price, brand, category, subcategory, Gender.MALE);
+        } else if (productRequest.getMemoryOfTablet() != 0) {
+            product = new Product(productRequest, price, brand, category, subcategory, 1, 0.0);
+        } else {
+            product = new Product(productRequest, price, brand, category, subcategory, (byte) 1);
+        }
+        product.setCreateAt(LocalDateTime.now());
+        product.setSubproducts(subproducts);
+        subproducts.forEach(s -> s.setProduct(product));
+        productRepository.save(product);
+
+        return new SimpleResponse("Product successfully saved", "ok");
+    }
+
+
     public List<ProductCardResponse> filterByParameters(String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram) throws NotFoundException {
         List<Product> productList = productRepository.findAll();
         List<ProductCardResponse> productCardResponses = productList.stream()
