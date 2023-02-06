@@ -183,17 +183,13 @@ public class ProductServiceImpl implements ProductService {
             Subproduct subproduct;
             if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
                     productRequest.getLaptopCPU() != null) {
-
-                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages());
-            } else {
-                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages());
-
                 subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages(), price);
             } else {
                 subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages(), price);
             }
             subproducts.add(subproduct);
         }
+
 
         Product product;
         if (category.getCategoryName().equals("Смартфоны")) {
