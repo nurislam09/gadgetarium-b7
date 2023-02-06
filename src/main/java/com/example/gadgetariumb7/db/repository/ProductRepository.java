@@ -24,7 +24,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "from Product p where p.productStatus = 0 order by p.createAt")
     List<ProductCardResponse> getAllNewProduct();
 
-
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
             "p.productName, " +
@@ -40,6 +39,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select (p.productPrice -((p.productPrice * p.discount.amountOfDiscount) /100)) from Product p  where p.id = :id ")
     int getDiscountPrice(Long id);
+
     @Query("select count (r.product) from Review r where r.product.id =:id")
     int getAmountOfFeedback(Long id);
 
@@ -52,9 +52,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productRating)" +
             " from Product p where p.productStatus = 1")
     List<ProductCardResponse> getAllRecommendationProduct();
-    @Query(nativeQuery = true , value = "select sum (o.count_of_product) from orders o where o.order_status = 0 or 1 or 2")
+
+    @Query(nativeQuery = true , value = "select sum(o.count_of_product) from orders o where o.order_status = 1")
     int getSoldProducts();
-}
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(id," +
@@ -67,7 +67,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "productStatus" +
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
-
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(p.id," +

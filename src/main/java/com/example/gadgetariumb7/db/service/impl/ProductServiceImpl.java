@@ -224,7 +224,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public InforgraphicsRequest inforgraphics() {
         InforgraphicsRequest inforgraphicsRequest = new InforgraphicsRequest();
-        inforgraphicsRequest.setSoldCount(productRepository.getSoldProducts());
         return inforgraphicsRequest;
     }
 }
