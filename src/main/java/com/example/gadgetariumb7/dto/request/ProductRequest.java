@@ -15,13 +15,11 @@ import java.util.List;
 public class ProductRequest {
     private String productName;
 
-    private int productPrice;
-
     private int productVendorCode;
 
     private int productCount;
 
-    private Byte guarantee;
+    private byte guarantee;
 
     private String videoReview;
 

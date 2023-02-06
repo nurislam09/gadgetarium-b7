@@ -15,12 +15,12 @@ public interface ProductService {
 
     List<ProductAdminResponse> getProductAdminResponses(String searchText, String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size);
 
-    SimpleResponse addProduct(ProductRequest productRequest);
+    SimpleResponse addProduct(ProductRequest productRequest, int price);
 
     SimpleResponse delete(Long id);
 
     SimpleResponse update(Long id, Integer vendorCode, Integer productCount, Integer productPrice);
 
-    List<ProductCardResponse> filterByParameters(String categoryName, String fieldSort, String discountField,  String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram);
+    List<ProductCardResponse> filterByParameters(String categoryName, String fieldSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram);
 
 }

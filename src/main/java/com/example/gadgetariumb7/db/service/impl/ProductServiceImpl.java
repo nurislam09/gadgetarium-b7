@@ -93,6 +93,42 @@ public class ProductServiceImpl implements ProductService {
         return new SimpleResponse("Product successfully updated", "ok");
     }
 
+    @Override
+    public SimpleResponse addProduct(ProductRequest productRequest, int price) {
+        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
+        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
+        Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
+
+        List<Subproduct> subproducts = new ArrayList<>();
+        for (SubProductRequest s : productRequest.getSubProductRequests()) {
+            Subproduct subproduct;
+            if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
+                    productRequest.getLaptopCPU() != null) {
+                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages(), price);
+            } else {
+                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages(), price);
+            }
+            subproducts.add(subproduct);
+        }
+
+        Product product;
+        if (category.getCategoryName().equals("Смартфоны")) {
+            product = new Product(productRequest, price, brand, category, subcategory, "Смартфоны");
+        } else if (category.getCategoryName().equals("Смарт-часы и браслеты")) {
+            product = new Product(productRequest, price, brand, category, subcategory, Gender.MALE);
+        } else if (productRequest.getMemoryOfTablet() != 0) {
+            product = new Product(productRequest, price, brand, category, subcategory, 1, 0.0);
+        } else {
+            product = new Product(productRequest, price, brand, category, subcategory, (byte) 1);
+        }
+        product.setCreateAt(LocalDateTime.now());
+        product.setSubproducts(subproducts);
+        subproducts.forEach(s -> s.setProduct(product));
+        productRepository.save(product);
+
+        return new SimpleResponse("Product successfully saved", "ok");
+    }
+
     private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
         products.forEach(r -> {
             r.setProductImage(productRepository.getFirstImage(r.getId()));
@@ -130,6 +166,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+    @Override
     public AllProductResponse getAllProductToMP() {
         List<ProductCardResponse> discountProducts = productRepository.getAllDiscountProduct();
         List<ProductCardResponse> newProducts = productRepository.getAllNewProduct();
@@ -160,7 +197,7 @@ public class ProductServiceImpl implements ProductService {
                 if (productRepository.getDiscountPrice(productCardResponse.getProductId()) == 0) {
                     productCardResponse.setDiscountPrice(productCardResponse.getProductPrice());
                 } else {
-                    productCardResponse.setDiscountPrice(Math.round(productRepository.getDiscountPrice(productCardResponse.getProductId())));
+                    productCardResponse.setDiscountPrice((int) Math.floor(productRepository.getDiscountPrice(productCardResponse.getProductId())));
                 }
             } else if (productAdminResponse != null) {
                 if (productRepository.getDiscountPrice(productAdminResponse.getId()) == 0) {
@@ -173,53 +210,6 @@ public class ProductServiceImpl implements ProductService {
         } catch (RuntimeException e) {
             System.out.println("null discount");
         }
-    }
-
-    @Override
-    public SimpleResponse addProduct(ProductRequest productRequest) {
-        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
-        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
-        Subcategory subcategory = subcategoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
-
-        List<Subproduct> subproducts = new ArrayList<>();
-        for (SubProductRequest s : productRequest.getSubProductRequests()) {
-            Subproduct subproduct;
-            if (category.getCategoryName().equals("Ноутбуки и планшеты") &&
-                    productRequest.getLaptopCPU() != null) {
-                subproduct = new Subproduct(s.getLaptopCPU(), s.getColor(), s.getImages());
-            } else {
-                subproduct = new Subproduct(s.getMemory(), s.getColor(), s.getImages());
-            }
-            subproducts.add(subproduct);
-        }
-
-        if (category.getCategoryName().equals("Смартфоны")) {
-            Product product = new Product(productRequest, brand, category, subcategory, "Смартфоны");
-            product.setCreateAt(LocalDateTime.now());
-            product.setSubproducts(subproducts);
-            subproducts.forEach(s -> s.setProduct(product));
-            productRepository.save(product);
-        } else if (category.getCategoryName().equals("Смарт-часы и браслеты")) {
-            Product product = new Product(productRequest, brand, category, subcategory, Gender.MALE);
-            product.setCreateAt(LocalDateTime.now());
-            product.setSubproducts(subproducts);
-            subproducts.forEach(s -> s.setProduct(product));
-            productRepository.save(product);
-        } else if (productRequest.getMemoryOfTablet() != 0) {
-            Product product = new Product(productRequest, brand, category, subcategory, 1, 0.0);
-            product.setCreateAt(LocalDateTime.now());
-            product.setSubproducts(subproducts);
-            subproducts.forEach(s -> s.setProduct(product));
-            productRepository.save(product);
-        } else {
-            Product product = new Product(productRequest, brand, category, subcategory, (byte) 1);
-            product.setCreateAt(LocalDateTime.now());
-            product.setSubproducts(subproducts);
-            subproducts.forEach(s -> s.setProduct(product));
-            productRepository.save(product);
-        }
-
-        return new SimpleResponse("Product successfully saved", "ok");
     }
 
     @Override

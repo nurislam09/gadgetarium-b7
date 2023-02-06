@@ -48,11 +48,6 @@ VALUES (17, 'Смарт-часы Apple watch', 3),
        (19, 'Умные часы для детей', 3),
        (20, 'Фитнес браслет', 3);
 
-insert into discounts(id, amount_of_discount, discount_end_date, discount_start_date)
-VALUES (1, 5, '2023-01-20', '2023-02-01');
-
-
-
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
                      bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
                      memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
@@ -66,6 +61,8 @@ VALUES ( 1, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, null, 1, '2011-04-17 18:20:03');
 
+insert into discounts(id, amount_of_discount, discount_end_date, discount_start_date)
+VALUES (1, 5, '2023-01-20', '2023-02-01');
 
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
                      bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
@@ -80,7 +77,6 @@ VALUES ( 2, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
        , 1, 1, 1, '2011-04-17 18:20:03');
 
-
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
                      bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
                      memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
@@ -92,7 +88,7 @@ VALUES ( 3, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , 'Black', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 ', 90990, 0, 1, 081056, null
        , 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, 1, 1, '2011-04-17 18:20:03');
+       , 1, null, 1, '2011-04-17 18:20:03');
 
 
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
@@ -106,7 +102,7 @@ VALUES ( 4, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg
        , 'Purple', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro max', 90990, 0, 1
        , 087478, null, 6
        , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, 1, 1, '2011-04-17 18:20:03');
+       , 1, null, 1, '2011-04-17 18:20:03');
 
 
 insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
@@ -200,17 +196,15 @@ insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, ap
                      screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
                      sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
                      brand_id, category_id, discount_id, sub_category_id, create_at)
-values (11, 'https://mobile-review.com/news/wp-content/uploads/HONOR-MagicBook-Pro.jpg', 13.3, 0.0, 0.0, 'Office', 53, null,
+values (11, 'https://mobile-review.com/news/wp-content/uploads/HONOR-MagicBook-Pro.jpg', 13.3, 0.0, 0.0, 'Office', 53,
+        null,
         null, 'Blue', 'fddfgd',
         1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'HONOR Magic Book 15', 80999, 0, 0, 452365, 8, 0, 0, '2560x1600 пикс',
         null, 21.4, 0.0, null,
         0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
 
 
-insert into banners(id)
-values (1);
-
-insert into banner_images(id, image_url)
+insert into banners(id, image)
 values (1, 'https://www.budetsdelano.ru/upload/iblock/be0/sale_web.jpg');
 
 insert into product_images(id, image_url)
@@ -353,11 +347,20 @@ VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9tR3imJ1fH7O
 insert into product_images(id, image_url)
 VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaTI2JEyoxUDdvj94c-FmKBIaaKdkxe-_vQ&usqp=CAU');
 
+insert into orders(id, address, count_of_product, date_of_order, delivery_status, email, first_name, last_name,
+                   order_number, order_status, order_type, payment, phone_number, total_discount, total_sum, user_id)
+values (1, 'Чуй 30', 0, '2011-04-17', 'WAITING', 'nurislam@gmail.com', 'Nurislam', 'Mamytov', 12345, 'WAITING',
+        'DELIVERY', 'CASH', '+996222219743', 0, 0, 1);
 
+insert into orders_products(product_id, order_id)
+values (10, 1);
+insert into orders_products(product_id, order_id)
+values (11, 1);
 
-
-
-
+insert into user_basket_list(user_id, count_of_product, product_id)
+values (1,5,10);
+insert into user_basket_list(user_id, count_of_product, product_id)
+values (1,5,11);
 
 
 
