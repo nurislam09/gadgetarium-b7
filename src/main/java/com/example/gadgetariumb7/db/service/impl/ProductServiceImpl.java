@@ -222,7 +222,7 @@ public class ProductServiceImpl implements ProductService {
         return new SimpleResponse("Product successfully saved", "ok");
     }
 
-
+    @Override
     public List<ProductCardResponse> filterByParameters(String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram) throws NotFoundException {
         List<Product> productList = productRepository.findAll();
         List<ProductCardResponse> productCardResponses = productList.stream()
