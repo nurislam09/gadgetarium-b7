@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AllProductResponse {
 
-    private List<ProductCardResponse> allNewProduct;
+    private  List<ProductCardResponse> allNewProduct;
     private List<ProductCardResponse> allRecProduct;
     private List<ProductCardResponse> allDiscountProduct;
 
