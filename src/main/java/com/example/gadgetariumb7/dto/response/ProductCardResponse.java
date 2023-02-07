@@ -20,6 +20,8 @@ public class ProductCardResponse {
     private ProductStatus productStatus;
     private Byte productRating;
     private int countOfReview;
+    private boolean isFavorite;
+    private boolean isCompared;
 
     public ProductCardResponse(Long productId, String productName, int count, int productPrice, ProductStatus productStatus, Byte productRating) {
         this.productId = productId;

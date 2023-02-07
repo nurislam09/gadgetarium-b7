@@ -12,6 +12,8 @@ import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,6 +39,12 @@ public class ProductServiceImpl implements ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
+
+    private User getAuthenticateUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+        return userRepository.findByEmail(login).orElseThrow(() -> new NotFoundException("User not found!"));
+    }
 
     @Override
     public List<ProductAdminResponse> getProductAdminResponses(String searchText, String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size) {
@@ -234,8 +242,15 @@ public class ProductServiceImpl implements ProductService {
                         p.getProductRating()))
                 .collect(Collectors.toList());
         for (ProductCardResponse productCardResponse : productCardResponses) {
+            User user = getAuthenticateUser();
             Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
             if (productOptional.isPresent()) {
+                if (user.getFavoritesList().contains(productOptional.get())) {
+                    productCardResponse.setFavorite(true);
+                }
+                if (user.getCompareProductsList().contains(productOptional.get())) {
+                    productCardResponse.setCompared(true);
+                }
                 Product product = productOptional.get();
                 if (product.getCategory().getCategoryName().equalsIgnoreCase(categoryName)) {
                     int countFeedback = product.getUsersReviews().size();
@@ -248,9 +263,9 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
-        if (fieldToSort != null)
+        if (fieldToSort != null) {
             productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
-
+        }
         return productCardResponses;
     }
 
