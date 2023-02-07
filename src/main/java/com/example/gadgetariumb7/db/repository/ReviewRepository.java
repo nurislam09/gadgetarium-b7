@@ -15,11 +15,14 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select count(productGrade) from Review where productGrade = :productGrade ")
     int countReviewByProductGrade(byte productGrade);
 
+
     @Query(nativeQuery = true, value = "select image_url from product_images where id = :id limit 1")
     String getFirstImage(Long id);
 
     @Query("select r.user from Review r where r.id = :id")
     User getUserReview(Long id);
+
+
 
     @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
             "r.id," +

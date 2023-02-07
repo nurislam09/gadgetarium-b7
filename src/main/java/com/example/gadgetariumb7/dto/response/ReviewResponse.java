@@ -27,7 +27,6 @@ public class ReviewResponse {
     private boolean statusOfResponse;
 
     private UserResponse userResponse;
-
     public ReviewResponse(Long id, boolean statusOfResponse, String responseOfReview, byte productGrade, int productVendorCode, String name) {
         this.id = id;
         this.statusOfResponse = statusOfResponse;

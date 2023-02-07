@@ -33,7 +33,6 @@ public class Review {
 
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private Product product;
-
     public Review(Long id, byte productGrade, String responseOfReview, boolean statusOfResponse, String image) {
         this.id = id;
         this.productGrade = productGrade;

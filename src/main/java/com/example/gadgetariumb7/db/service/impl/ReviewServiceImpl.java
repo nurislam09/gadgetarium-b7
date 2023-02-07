@@ -18,7 +18,6 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
-
     @Override
     public List<ReviewResponse> getAll(String statusOfReviews) {
         List<ReviewResponse> all = reviewRepository.getAllByAdmin();
@@ -68,7 +67,6 @@ public class ReviewServiceImpl implements ReviewService {
         review.setResponseOfReview(reviewRequest.getResponseOfReview());
         review.setStatusOfResponse(review.getResponseOfReview().length() != 0);
         reviewRepository.save(review);
-
         return new SimpleResponse("Answer successfully saved", "ok");
     }
 
