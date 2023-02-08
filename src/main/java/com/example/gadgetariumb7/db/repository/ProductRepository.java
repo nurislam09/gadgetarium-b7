@@ -66,7 +66,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
-
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(p.id," +
             "p.productImage," +
@@ -84,4 +83,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);
+
 }
