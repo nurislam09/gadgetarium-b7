@@ -40,6 +40,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select (p.productPrice -((p.productPrice * p.discount.amountOfDiscount) /100)) from Product p  where p.id = :id ")
     int getDiscountPrice(Long id);
+
     @Query("select count (r.product) from Review r where r.product.id =:id")
     int getAmountOfFeedback(Long id);
 
@@ -65,7 +66,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
-
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(p.id," +
             "p.productVendorCode," +
@@ -82,4 +82,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);
+
 }
