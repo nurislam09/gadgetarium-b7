@@ -29,7 +29,7 @@ public class Subproduct {
 
     @ElementCollection
     @CollectionTable(name = "characteristics_subproduct", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "value")
+    @Column(name = "characteristics_value")
     private Map<String, String> characteristics = new HashMap<>();
 
     @ElementCollection

@@ -14,7 +14,7 @@ public interface ProductService {
 
     List<ProductAdminResponse> getProductAdminResponses(String searchText, String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size);
 
-    SimpleResponse addProduct(ProductRequest productRequest, int price);
+    SimpleResponse addProduct(ProductRequest productRequest);
 
     SimpleResponse delete(Long id);
 

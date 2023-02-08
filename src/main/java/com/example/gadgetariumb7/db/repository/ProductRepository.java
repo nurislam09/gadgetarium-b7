@@ -17,6 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
             "p.productName, " +
+            "p.productImage," +
             "p.productCount," +
             "p.productPrice," +
             "p.productStatus," +
@@ -24,9 +25,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "from Product p where p.productStatus = 0 order by p.createAt")
     List<ProductCardResponse> getAllNewProduct();
 
-
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
+            "p.productImage," +
             "p.productName, " +
             "p.productCount," +
             "p.productPrice," +
@@ -35,17 +36,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "from Product p where p.discount is not null")
     List<ProductCardResponse> getAllDiscountProduct();
 
-    @Query(nativeQuery = true, value = "select image_url from product_images where id = :id limit 1")
-    String getFirstImage(Long id);
-
     @Query("select (p.productPrice -((p.productPrice * p.discount.amountOfDiscount) /100)) from Product p  where p.id = :id ")
     int getDiscountPrice(Long id);
+
     @Query("select count (r.product) from Review r where r.product.id =:id")
     int getAmountOfFeedback(Long id);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
             "p.productName, " +
+            "p.productImage," +
             "p.productCount," +
             "p.productPrice," +
             "p.productStatus," +
@@ -55,6 +55,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(id," +
+            "productImage," +
             "productVendorCode," +
             "productName," +
             "productCount," +
@@ -68,6 +69,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(p.id," +
+            "p.productImage," +
             "p.productVendorCode," +
             "p.productName," +
             "p.productCount," +

@@ -70,7 +70,7 @@ public class ProductController {
             description = "The save product with different types and options")
     @PostMapping()
     @PreAuthorize("hasAuthority('Admin')")
-    public SimpleResponse save(@RequestBody ProductRequest productRequest, @RequestParam(value = "price") int price) {
-        return productService.addProduct(productRequest, price);
+    public SimpleResponse save(@RequestBody ProductRequest productRequest) {
+        return productService.addProduct(productRequest);
     }
 }

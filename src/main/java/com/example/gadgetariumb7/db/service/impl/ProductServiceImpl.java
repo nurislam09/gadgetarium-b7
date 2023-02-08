@@ -1,7 +1,6 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.*;
-import com.example.gadgetariumb7.db.enums.Gender;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
@@ -56,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
                 List<ProductAdminResponse> responseList = new ArrayList<>();
 
                 userRepository.findAll().stream().filter(u -> u.getBasketList() != null).forEach(x -> x.getBasketList().keySet().stream().filter(p -> !productList.contains(p)).forEach(productList::add));
-                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice(), p.getProductStatus())));
+                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductImage(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice(), p.getProductStatus())));
                 return sortingProduct(fieldToSort, discountField, responseList, startDate, endDate);
             }
             case "В избранном" -> {
@@ -64,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
                 List<ProductAdminResponse> responseList = new ArrayList<>();
 
                 userRepository.findAll().stream().filter(u -> u.getFavoritesList() != null).forEach(x -> x.getFavoritesList().stream().filter(p -> !productList.contains(p)).forEach(productList::add));
-                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice(), p.getProductStatus())));
+                productList.forEach(p -> responseList.add(new ProductAdminResponse(p.getId(), p.getProductImage(), p.getProductVendorCode(), p.getProductName(), p.getProductCount(), p.getSubproducts().size(), p.getCreateAt(), p.getProductPrice(), p.getProductStatus())));
 
                 return sortingProduct(fieldToSort, discountField, responseList, startDate, endDate);
             }
@@ -91,7 +90,6 @@ public class ProductServiceImpl implements ProductService {
 
     private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
         products.forEach(r -> {
-            r.setProductImage(productRepository.getFirstImage(r.getId()));
             setDiscountToResponse(null, r);
         });
 
@@ -131,17 +129,14 @@ public class ProductServiceImpl implements ProductService {
         List<ProductCardResponse> recommendations = productRepository.getAllRecommendationProduct();
 
         recommendations.forEach(r -> {
-            r.setProductImage(productRepository.getFirstImage(r.getProductId()));
             setDiscountToResponse(r, null);
             r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
         discountProducts.forEach(r -> {
-            r.setProductImage(productRepository.getFirstImage(r.getProductId()));
             r.setDiscountPrice(productRepository.getDiscountPrice(r.getProductId()));
             r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
         newProducts.forEach(r -> {
-            r.setProductImage(productRepository.getFirstImage(r.getProductId()));
             setDiscountToResponse(r, null);
             r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
@@ -171,7 +166,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public SimpleResponse addProduct(ProductRequest productRequest, int price) {
+    public SimpleResponse addProduct(ProductRequest productRequest) {
         Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
         Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
         Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
@@ -179,17 +174,9 @@ public class ProductServiceImpl implements ProductService {
         List<Subproduct> subproducts = new ArrayList<>();
         productRequest.getSubProductRequests().forEach(x -> subproducts.add(new Subproduct(x)));
 
-        Product product;
-        if (category.getCategoryName().equals("Смартфоны")) {
-            product = new Product(productRequest, price, brand, category, subcategory, "Смартфоны");
-        } else if (category.getCategoryName().equals("Смарт-часы и браслеты")) {
-            product = new Product(productRequest, price, brand, category, subcategory, Gender.MALE);
-        } else if (productRequest.getMemoryOfTablet() != 0) {
-            product = new Product(productRequest, price, brand, category, subcategory, 1, 0.0);
-        } else {
-            product = new Product(productRequest, price, brand, category, subcategory, (byte) 1);
-        }
+        Product product = new Product(productRequest, subproducts, brand, category, subcategory);
         product.setCreateAt(LocalDateTime.now());
+        product.setProductStatus(ProductStatus.NEW);
         product.setSubproducts(subproducts);
         subproducts.forEach(s -> s.setProduct(product));
         productRepository.save(product);
