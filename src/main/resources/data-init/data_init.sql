@@ -800,3 +800,24 @@ values
     (1, 1, 1),
     (1, 1, 2),
     (1, 1, 3);
+
+insert into users_compare_products_list(user_id, compare_products_list_id)
+values
+    (2, 1),
+    (2, 2),
+    (2, 3),
+    (2, 4);
+
+insert into users_favorites_list(user_id, favorites_list_id)
+values
+    (2, 1),
+    (2, 2),
+    (2, 3),
+    (2, 4);
+
+insert into users_viewed_products_list(user_id, viewed_products_list_id)
+values
+    (2, 1),
+    (2, 2),
+    (2, 3),
+    (2, 4);
