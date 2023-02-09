@@ -217,8 +217,8 @@ public class ProductServiceImpl implements ProductService {
         return new SimpleResponse("Product successfully saved", "ok");
     }
 
-
-    public List<ProductCardResponse> filterByParameters(String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram) throws NotFoundException {
+    @Override
+    public List<ProductCardResponse> filterByParameters(String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int page, int size) throws NotFoundException {
         List<Product> productList = productRepository.findAll();
         List<ProductCardResponse> productCardResponses = productList.stream()
                 .filter(p -> p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
@@ -241,6 +241,11 @@ public class ProductServiceImpl implements ProductService {
                         p.getProductStatus(),
                         p.getProductRating()))
                 .collect(Collectors.toList());
+
+        int fromIndex = (page - 1) * size;
+        int toIndex = Math.min(fromIndex + size, productCardResponses.size());
+        productCardResponses = productCardResponses.subList(fromIndex, toIndex);
+
         for (ProductCardResponse productCardResponse : productCardResponses) {
             User user = getAuthenticateUser();
             Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
