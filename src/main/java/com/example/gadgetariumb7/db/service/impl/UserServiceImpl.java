@@ -5,6 +5,7 @@ import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.ProductRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.UserService;
+import com.example.gadgetariumb7.dto.response.ProductResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 @Service
@@ -44,4 +47,16 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return new SimpleResponse("Product successfully added to User's favorites", "ok");
     }
-}
+
+    @Override
+    public List<ProductResponse> getAllFavorites() {
+        User user = getAuthenticateUser();
+        List<ProductResponse> favorites = new ArrayList<>();
+        for (Long productId : userRepository.getAllFavoritesByUserId(user.getId())) {
+            favorites.add(productRepository.convertToResponse(productId));
+        }
+        return favorites;
+
+    }
+    }
+

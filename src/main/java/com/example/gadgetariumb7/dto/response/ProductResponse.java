@@ -71,4 +71,8 @@ public class ProductResponse {
     private String waterProof;
     private double ScreenDisplay;
     private double sizeOfWatch;
+
+    public ProductResponse(Long id) {
+        this.id = id;
+    }
 }
