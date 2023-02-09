@@ -74,8 +74,12 @@ public class ProductController {
     public SimpleResponse save(@RequestBody ProductRequest productRequest, @RequestParam(value = "price") int price) {
         return productService.addProduct(productRequest, price);
     }
-    @GetMapping("/a")
-    public InforgraphicsRequest inforgraphic(){
+
+    @Operation(summary = "this method for get information",
+            description = "get information with product status")
+    @GetMapping("/inf")
+    @PreAuthorize("hasAuthority('Admin')")
+    public InforgraphicsRequest inforgraphic() {
         return productService.inforgraphics();
     }
 

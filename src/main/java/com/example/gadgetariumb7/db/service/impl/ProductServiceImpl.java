@@ -37,6 +37,7 @@ public class ProductServiceImpl implements ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
+    private final OrderRepository orderRepository;
 
     @Override
     public List<ProductAdminResponse> getProductAdminResponses(String searchText, String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size) {
@@ -211,6 +212,19 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public InforgraphicsRequest inforgraphics() {
         InforgraphicsRequest inforgraphicsRequest = new InforgraphicsRequest();
+
+        inforgraphicsRequest.setSoldCount(productRepository.getCountSoldProducts());
+        inforgraphicsRequest.setSoldPrice(productRepository.getSoldProductPrice());
+        inforgraphicsRequest.setOrderCount(productRepository.getCountOrderProduct());
+        inforgraphicsRequest.setOrderPrice(productRepository.getOrderProductPrice());
+        inforgraphicsRequest.setCurrentPeriodPerDay(productRepository.getCurrentPeriodPerDay());
+        inforgraphicsRequest.setCurrentPeriodPerMonth(productRepository.getCurrentPeriodPerMonth());
+        inforgraphicsRequest.setCurrentPeriodPerYear(productRepository.getCurrentPeriodPerYear());
+        inforgraphicsRequest.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
+        inforgraphicsRequest.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
+        inforgraphicsRequest.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
+
         return inforgraphicsRequest;
     }
+
 }

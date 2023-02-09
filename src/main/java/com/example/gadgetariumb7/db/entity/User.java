@@ -21,7 +21,7 @@ import static javax.persistence.CascadeType.*;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
-    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1)
+    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1, initialValue = 2)
     private Long id;
     private String password;
     private String firstName;
@@ -34,9 +34,9 @@ public class User implements UserDetails {
     private String address;
 
     @ElementCollection
-    @CollectionTable(name="user_basket_list", joinColumns = @JoinColumn(name="user_id"))
-    @MapKeyJoinColumn(name="product_id")
-    @Column(name="count_of_product")
+    @CollectionTable(name = "user_basket_list", joinColumns = @JoinColumn(name = "user_id"))
+    @MapKeyJoinColumn(name = "product_id")
+    @Column(name = "count_of_product")
     private Map<Product, Integer> basketList;
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
@@ -65,7 +65,8 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-        return grantedAuthorities;  }
+        return grantedAuthorities;
+    }
 
     @Override
     public String getPassword() {

@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-
     @Query("select new com.example.gadgetariumb7.dto.response.OrderResponse" +
             "(o.id," +
             "concat(o.firstName,' ', o.lastName ), " +
@@ -24,14 +23,11 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "o.orderStatus) from Order o where o.orderStatus = :orderStatus")
     List<OrderResponse> findAllOrdersByStatus(OrderStatus orderStatus, Pageable pageable);
 
-
     @Query("select count (o) from Order o where o.orderStatus = :orderStatus")
     Long countByOrderStatus(OrderStatus orderStatus);
 
     @Query("select count (o) from Order o")
     Long getCountOfOrders();
-
-
 
     @Query("SELECT NEW com.example.gadgetariumb7.dto.response.OrderResponse" +
             "(o.id, " +
@@ -47,7 +43,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "OR CAST(o.orderNumber AS string) LIKE CONCAT('%', :keyWord) " +
             "OR UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))")
     List<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable);
-
 
 }
 

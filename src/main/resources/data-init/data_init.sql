@@ -349,8 +349,8 @@ VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaTI2JEyoxUD
 
 insert into orders(id, address, count_of_product, date_of_order, delivery_status, email, first_name, last_name,
                    order_number, order_status, order_type, payment, phone_number, total_discount, total_sum, user_id)
-values (1, 'Чуй 30', 0, '2011-04-17', 'WAITING', 'nurislam@gmail.com', 'Nurislam', 'Mamytov', 12345, 'WAITING',
-        'DELIVERY', 'CASH', '+996222219743', 0, 0, 1);
+values (1, 'Чуй 30', 0, '2011-04-17', 0, 'nurislam@gmail.com', 'Nurislam', 'Mamytov', 12345, 0,
+        0, 2, '+996222219743', 0, 0, 1);
 
 insert into orders_products(product_id, order_id)
 values (10, 1);
@@ -358,10 +358,7 @@ insert into orders_products(product_id, order_id)
 values (11, 1);
 
 insert into user_basket_list(user_id, count_of_product, product_id)
-values (1,5,10);
+values (1, 5, 10);
 insert into user_basket_list(user_id, count_of_product, product_id)
-values (1,5,11);
-
-
-
+values (1, 5, 11);
 

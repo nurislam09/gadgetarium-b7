@@ -53,8 +53,35 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             " from Product p where p.productStatus = 1")
     List<ProductCardResponse> getAllRecommendationProduct();
 
-    @Query(nativeQuery = true , value = "select sum(o.count_of_product) from orders o where o.order_status = 1")
-    int getSoldProducts();
+    @Query(nativeQuery = true, value = "select sum(o.count_of_product) from orders o where o.order_status = 3")
+    int getCountSoldProducts();
+
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status = 3")
+    Long getSoldProductPrice();
+
+    @Query(nativeQuery = true, value = "select sum(o.count_of_product) from orders o where o.order_status in (1, 0, 2)")
+    int getCountOrderProduct();
+
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status in (1, 0, 2)")
+    Long getOrderProductPrice();
+
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status=3 and o.date_of_order between date(now()) and date(now()) + interval '1' day")
+    Long getCurrentPeriodPerDay();
+
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status = 3 and o.date_of_order between date_trunc('month', now())and date_trunc('month',now()) + interval '1' MONTH - interval '1' second")
+    Long getCurrentPeriodPerMonth();
+
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status = 3 and o.date_of_order between date_trunc('year', now()) and date_trunc('year', now()) + interval '1' year - interval '1' second")
+    Long getCurrentPeriodPerYear();
+
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status=3 and o.date_of_order between DATE(NOW()) - interval '1' day and date(now()) - interval '1' second")
+    Long getPreviousPeriodPerDay();
+
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.date_of_order between date_trunc('month', now() - interval '1' month) and date_trunc('month', now()) - interval '1' second")
+    Long getPreviousPeriodPerMonth();
+
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.date_of_order between date_trunc('year', now() - INTERVAL '1' year) and date_trunc('year', now()) - interval '1' second")
+    Long getPreviousPeriodPerYear();
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(id," +
@@ -84,4 +111,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);
+
 }
