@@ -1,9 +1,6 @@
 package com.example.gadgetariumb7.exceptions.handler;
 
-import com.example.gadgetariumb7.exceptions.BadCredentialsException;
-import com.example.gadgetariumb7.exceptions.BadRequestException;
-import com.example.gadgetariumb7.exceptions.ExceptionResponse;
-import com.example.gadgetariumb7.exceptions.NotFoundException;
+import com.example.gadgetariumb7.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -31,6 +28,14 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionResponse handlerNotFoundException(BadRequestException e) {
         return new ExceptionResponse(HttpStatus.BAD_REQUEST,
+                e.getClass().getSimpleName(),
+                e.getMessage());
+    }
+
+    @ExceptionHandler(EmailAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ExceptionResponse handlerEmailAlreadyExistException(EmailAlreadyExistException e) {
+        return new ExceptionResponse(HttpStatus.CONFLICT,
                 e.getClass().getSimpleName(),
                 e.getMessage());
     }

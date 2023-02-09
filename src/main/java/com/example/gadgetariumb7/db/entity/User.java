@@ -34,9 +34,9 @@ public class User implements UserDetails {
     private String address;
 
     @ElementCollection
-    @CollectionTable(name="user_basket_list", joinColumns = @JoinColumn(name="user_id"))
-    @MapKeyJoinColumn(name="product_id")
-    @Column(name="count_of_product")
+    @CollectionTable(name = "user_basket_list", joinColumns = @JoinColumn(name = "user_id"))
+    @MapKeyJoinColumn(name = "product_id")
+    @Column(name = "count_of_product")
     private Map<Product, Integer> basketList;
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
@@ -71,7 +71,8 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-        return grantedAuthorities;  }
+        return grantedAuthorities;
+    }
 
     @Override
     public String getPassword() {
