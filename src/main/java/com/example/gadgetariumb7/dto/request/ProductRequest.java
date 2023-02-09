@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductRequest {
     private String productName;
 
-    private int productVendorCode;
+    private Long productVendorCode;
 
     private byte guarantee;
 

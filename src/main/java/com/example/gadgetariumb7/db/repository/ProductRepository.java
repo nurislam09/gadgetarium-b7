@@ -23,7 +23,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productStatus," +
             "p.productRating)" +
             "from Product p where p.productStatus = 0 order by p.createAt")
-    List<ProductCardResponse> getAllNewProduct();
+    List<ProductCardResponse> getAllNewProduct(Pageable pageable);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
@@ -34,7 +34,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productStatus," +
             "p.productRating)" +
             "from Product p where p.discount is not null")
-    List<ProductCardResponse> getAllDiscountProduct();
+    List<ProductCardResponse> getAllDiscountProduct(Pageable pageable);
 
     @Query("select (p.productPrice -((p.productPrice * p.discount.amountOfDiscount) /100)) from Product p  where p.id = :id ")
     int getDiscountPrice(Long id);
@@ -51,7 +51,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productStatus," +
             "p.productRating)" +
             " from Product p where p.productStatus = 1")
-    List<ProductCardResponse> getAllRecommendationProduct();
+    List<ProductCardResponse> getAllRecommendationProduct(Pageable pageable);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(id," +
@@ -67,6 +67,19 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
+            "(id," +
+            "productImage," +
+            "productVendorCode," +
+            "productName," +
+            "productCount," +
+            "subproducts.size," +
+            "createAt," +
+            "productPrice," +
+            "productStatus" +
+            ") from Product")
+    List<ProductAdminResponse> getAllProductsAdminWithoutPagination();
+
+    @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(p.id," +
             "p.productImage," +
             "p.productVendorCode," +
@@ -80,6 +93,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "cast(p.productVendorCode as string) like upper(concat(:text, '%')) or " +
             "upper(p.productName) like upper(concat('%',:text,'%'))")
     List<ProductAdminResponse> search(@Param("text") String text, Pageable pageable);
+
+    @Query("select count(p.id) from Product p where " +
+            "cast(p.productVendorCode as string) like upper(concat(:text, '%')) or " +
+            "upper(p.productName) like upper(concat('%',:text,'%'))")
+    int searchCount(@Param("text") String text);
 
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);

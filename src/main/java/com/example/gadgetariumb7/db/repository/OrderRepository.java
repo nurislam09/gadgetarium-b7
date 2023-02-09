@@ -19,6 +19,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "(o.id," +
             "concat(o.firstName,' ', o.lastName ), " +
             "o.orderNumber," +
+            "o.totalSum," +
+            "o.totalDiscount," +
+            "o.countOfProduct," +
             "o.dateOfOrder," +
             "o.orderType," +
             "o.orderStatus) from Order o where o.orderStatus = :orderStatus")
@@ -32,7 +35,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Long getCountOfOrders();
 
 
-
     @Query("SELECT NEW com.example.gadgetariumb7.dto.response.OrderResponse" +
             "(o.id, " +
             "CONCAT(o.firstName, ' ', o.lastName), " +
@@ -40,11 +42,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "o.dateOfOrder, " +
             "o.countOfProduct, " +
             "o.totalSum, " +
+            "o.totalDiscount, " +
             "o.orderType, " +
             "o.orderStatus) " +
             "FROM Order o " +
             "WHERE UPPER(CONCAT(o.firstName, ' ', o.lastName)) LIKE UPPER(CONCAT('%', :keyWord, '%')) " +
-            "OR CAST(o.orderNumber AS string) LIKE CONCAT('%', :keyWord) " +
+            "OR CAST(o.orderNumber AS string) LIKE CONCAT(:keyWord, '%') " +
             "OR UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))")
     List<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable);
 

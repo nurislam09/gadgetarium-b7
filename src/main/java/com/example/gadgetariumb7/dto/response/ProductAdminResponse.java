@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class ProductAdminResponse {
     private Long id;
     private String productImage;
-    private int productVendorCode;
+    private Long productVendorCode;
     private String productName;
     private int productCount;
     private int countSubproducts;
@@ -26,7 +26,7 @@ public class ProductAdminResponse {
     @JsonIgnore
     private ProductStatus productStatus;
 
-    public ProductAdminResponse(Long id, String productImage, int productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice, ProductStatus productStatus) {
+    public ProductAdminResponse(Long id, String productImage, Long productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice, ProductStatus productStatus) {
         this.id = id;
         this.productImage = productImage;
         this.productVendorCode = productVendorCode;

@@ -21,7 +21,7 @@ import static javax.persistence.CascadeType.*;
 public class Subproduct {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subproduct_gen")
-    @SequenceGenerator(name = "subproduct_gen", sequenceName = "subproduct_seq", allocationSize = 1)
+    @SequenceGenerator(name = "subproduct_gen", sequenceName = "subproduct_seq", allocationSize = 1, initialValue = 35)
     private Long id;
     private int price;
     private int countOfSubproduct;
@@ -39,6 +39,13 @@ public class Subproduct {
 
     @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
     private Product product;
+
+    @ManyToMany(cascade = {MERGE, REFRESH, DETACH})
+    @JoinTable(
+            name = "orders_subproducts",
+            joinColumns = @JoinColumn(name = "subproduct_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private List<Order> orders;
 
     public Subproduct(SubProductRequest subProductRequest) {
         this.characteristics = subProductRequest.getCharacteristics();

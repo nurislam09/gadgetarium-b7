@@ -1,8 +1,6 @@
 package com.example.gadgetariumb7.db.service.impl;
 
-
 import com.example.gadgetariumb7.db.entity.Order;
-import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
@@ -30,34 +28,10 @@ public class OrderServiceImpl implements OrderService {
             orderResponses = orderRepository.search(keyWord, PageRequest.of(page - 1, size)).stream().filter(x -> x.getOrderStatus() == orderStatus).toList();
         }
 
-        for (OrderResponse orderResponse : orderResponses) {
-            User user = orderRepository.findById(orderResponse.getId()).orElseThrow(() -> new NotFoundException("Order not found")).getUser();
-
-            int orderCount = user.getBasketList().values().stream().mapToInt(i -> i).sum();
-            int totalSum = user.getBasketList().entrySet().stream().filter(entry -> entry.getKey().getDiscount() == null).mapToInt(entry -> entry.getValue() * entry.getKey()
-                            .getProductPrice()).sum();
-
-            int totalSumWithDiscount = user.getBasketList().entrySet().stream().filter(entry -> entry.getKey().getDiscount() != null)
-                    .mapToInt(entry -> entry.getValue() * (entry.getKey().getProductPrice() - (entry.getKey().getProductPrice() * entry.getKey().getDiscount()
-                            .getAmountOfDiscount() / 100))).sum();
-
-            int totalSumAndTotalSumWithDiscount = totalSum + totalSumWithDiscount;
-
-            if (totalSumWithDiscount != 0 && totalSum != 0) {
-                orderResponse.setTotalSum(totalSumAndTotalSumWithDiscount);
-            } else if (totalSumWithDiscount != 0) {
-                orderResponse.setTotalSum(totalSumWithDiscount);
-            } else {
-                orderResponse.setTotalSum(totalSum);
-            }
-            orderResponse.setCountOfProduct(orderCount);
-
-        }
         if (startDate != null && endDate != null) {
             return orderResponses.stream().filter(o -> o.getDateOfOrder().toLocalDate().isAfter(startDate) && o.getDateOfOrder().toLocalDate()
                     .isBefore(endDate)).toList();
         }
-
 
         return orderResponses;
     }
@@ -69,6 +43,8 @@ public class OrderServiceImpl implements OrderService {
 
     public SimpleResponse deleteOrderById(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order not found"));
+        order.getUser().getOrders().remove(order);
+        order.getSubproducts().forEach(x -> x.getOrders().remove(order));
         orderRepository.delete(order);
         return new SimpleResponse("Order successfully deleted!", "ok");
     }

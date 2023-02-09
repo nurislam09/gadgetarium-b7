@@ -22,14 +22,14 @@ import static javax.persistence.CascadeType.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
-    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1, initialValue = 16)
+    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1, initialValue = 20)
     private Long id;
 
     private String productName;
 
     private int productPrice;
 
-    private int productVendorCode;
+    private Long productVendorCode;
 
     private int productCount;
 
@@ -71,13 +71,6 @@ public class Product {
 
     @OneToMany(cascade = {ALL}, mappedBy = "product")
     List<Subproduct> subproducts;
-
-    @ManyToMany(cascade = {MERGE, REFRESH, DETACH})
-    @JoinTable(
-            name = "orders_products",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private List<Order> orders;
 
     public Product(ProductRequest productRequest, List<Subproduct> subproducts, Brand brand, Category category, Subcategory subCategory) {
         this.brand = brand;

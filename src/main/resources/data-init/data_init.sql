@@ -100,7 +100,7 @@ values (1, 'Black', 125, 100000, 1),
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (1, '1', 'simCard'),
-       (1, '128', 'memoryOfPhone'),
+       (1, '256', 'memoryOfPhone'),
        (1, '4', 'ramOfPhone'),
        (2, '2', 'simCard'),
        (2, '256', 'memoryOfPhone'),
@@ -163,7 +163,7 @@ values (5, 'Pink gold', 254, 75455, 2),
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (5, '1', 'simCard'),
-       (5, '128', 'memoryOfPhone'),
+       (5, '512', 'memoryOfPhone'),
        (5, '4', 'ramOfPhone'),
        (6, '2', 'simCard'),
        (6, '256', 'memoryOfPhone'),
@@ -225,7 +225,7 @@ values (9,  'Black', 387, 65990, 3),
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (9, '2', 'simCard'),
-       (9, '128', 'memoryOfPhone'),
+       (9, '64', 'memoryOfPhone'),
        (9, '6', 'ramOfPhone'),
        (10, '2', 'simCard'),
        (10, '256', 'memoryOfPhone'),
@@ -401,17 +401,17 @@ values (20, 'Gray', 34, 91990, 6),
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (20, 'Apple M1', 'laptopCPU'),
-       (20, '2560x1600', 'screenResolution'),
-       (20, 'For work', 'appointment'),
+       (20, '2560x1600', 'screenResolutionOfLaptop'),
+       (20, 'For work', 'appointmentOfLaptop'),
        (20, '4', 'videoCardMemory'),
-       (20, '4', 'ram'),
-       (20, '13.3', 'screenSize'),
+       (20, '4', 'ramOfLaptop'),
+       (20, '13.3', 'screenSizeOfLaptop'),
        (21, 'Apple M1', 'laptopCPU'),
-       (21, '2560x1600', 'screenResolution'),
-       (21, 'For work', 'appointment'),
+       (21, '2560x1600', 'screenResolutionOfLaptop'),
+       (21, 'For work', 'appointmentOfLaptop'),
        (21, '6', 'videoCardMemory'),
-       (21, '6', 'ram'),
-       (21, '13.3', 'screenSize');
+       (21, '6', 'ramOfLaptop'),
+       (21, '13.3', 'screenSizeOfLaptop');
 
 insert into subproduct_images(id, image_url)
 values (20, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/7bea8548b6390af692aafe6272164804-670x540.jpg'),
@@ -450,11 +450,11 @@ values (22, 'Gray', 29, 189990, 7);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (22, 'Apple M1 Pro', 'laptopCPU'),
-       (22, '3024×1964', 'screenResolution'),
-       (22, 'For work', 'appointment'),
-       (22, '8', 'videoCardMemory'),
-       (22, '32', 'ram'),
-       (22, '14', 'screenSize');
+       (22, '3024×1964', 'screenResolutionOfLaptop'),
+       (22, 'For work', 'appointmentOfLaptop'),
+       (22, '8', 'videoCardMemoryOfLaptop'),
+       (22, '32', 'ramOfLaptop'),
+       (22, '14', 'screenSizeOfLaptop');
 
 insert into subproduct_images(id, image_url)
 values (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_0_1.jpg'),
@@ -486,11 +486,11 @@ values (23, 'Black', 54, 149990, 8);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (23, 'AMD Ryzen 5', 'laptopCPU'),
-       (23, '1920х1080', 'screenResolution'),
-       (23, 'For gaming', 'appointment'),
+       (23, '1920х1080', 'screenResolutionOfLaptop'),
+       (23, 'For gaming', 'appointmentOfLaptop'),
        (23, '8', 'videoCardMemory'),
-       (23, '16', 'ram'),
-       (23, '15.6', 'screenSize');
+       (23, '16', 'ramOfLaptop'),
+       (23, '15.6', 'screenSizeOfLaptop');
 
 insert into subproduct_images(id, image_url)
 values (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_0_1.jpg'),
@@ -521,11 +521,11 @@ values (24, 'Black', 87, 69990, 9);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (24, 'Intel Core i5', 'laptopCPU'),
-       (24, '1920х1080', 'screenResolution'),
-       (24, 'For work', 'appointment'),
+       (24, '1920х1080', 'screenResolutionOfLaptop'),
+       (24, 'For work', 'appointmentOfLaptop'),
        (24, '4', 'videoCardMemory'),
-       (24, '8', 'ram'),
-       (24, '15.6', 'screenSize');
+       (24, '8', 'ramOfLaptop'),
+       (24, '15.6', 'screenSizeOfLaptop');
 
 insert into subproduct_images(id, image_url)
 values (24, 'https://content.rozetka.com.ua/goods/images/big/269677917.jpg'),
@@ -558,11 +558,11 @@ values (25, 'Black', 39, 75990, 10);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (25, 'Intel Core i7', 'laptopCPU'),
-       (25, '1920х1080', 'screenResolution'),
-       (25, 'For work', 'appointment'),
+       (25, '1920х1080', 'screenResolutionLaptop'),
+       (25, 'For work', 'appointmentLaptop'),
        (25, '6', 'videoCardMemory'),
-       (25, '8', 'ram'),
-       (25, '15.6', 'screenSize');
+       (25, '8', 'ramLaptop'),
+       (25, '15.6', 'screenSizeLaptop');
 
 insert into subproduct_images(id, image_url)
 values (25, 'https://www.asus.com/media/global/gallery/o4znfiih78dmqfwh_setting_xxx_0_90_end_2000.png'),
@@ -768,3 +768,35 @@ values (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_0_6.png'),
 
 insert into banners(id, image)
 values (1, 'https://d16pnh712pyiwa.cloudfront.net/wp-content/uploads/2022/07/iPhone-13-pro-max-banner-image.png');
+
+
+insert into orders(id, address, count_of_product, date_of_order, delivery_status, email, first_name, last_name, order_number, order_status, order_type, payment, phone_number, total_discount, total_sum, user_id)
+values
+    (1, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 1, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 0455247, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 123, 2345, 2),
+    (2, 'г.Бишкек, Гражданская, 119', 1, '2023-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 455237, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 1223, 3468, 2),
+    (3, 'г.Бишкек, Чуй 34 кв 23', 1, '2021-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 466247, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 1233, 456, 2),
+    (4, 'г.Бишкек, Токтогулова, 123 кв 67', 1, '2020-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 455289, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 1123, 560, 2),
+    (5, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 1, '2023-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 4545277, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 11233, 789, 2);
+
+insert into orders_subproducts(subproduct_id, order_id)
+values (1, 1),
+       (2, 1),
+       (3, 1),
+       (4, 2),
+       (5, 2),
+       (6, 2),
+       (7, 3),
+       (8, 3),
+       (9, 3),
+       (10, 4),
+       (11, 4),
+       (12, 4),
+       (13, 5),
+       (14, 5),
+       (15, 5);
+
+insert into user_basket_list(user_id, count_of_product, subproduct_id)
+values
+    (1, 1, 1),
+    (1, 1, 2),
+    (1, 1, 3);

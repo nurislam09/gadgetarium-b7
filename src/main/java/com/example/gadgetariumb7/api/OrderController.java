@@ -7,6 +7,7 @@ import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,12 +27,12 @@ public class OrderController {
     @Operation(summary = "find all orders", description = "Orders with pagination and search")
     @GetMapping()
     @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<List<OrderResponse>> findAllOrders(@RequestParam(required = false) OrderStatus orderStatus,
+    public ResponseEntity<List<OrderResponse>> findAllOrders(@RequestParam OrderStatus orderStatus,
                                                              @RequestParam(required = false) String keyWord,
                                                              @RequestParam int page,
                                                              @RequestParam int size,
-                                                             @RequestParam(required = false) LocalDate startDate,
-                                                             @RequestParam(required = false) LocalDate endDate) {
+                                                             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         List<OrderResponse> orderResponses = orderService.findAllOrders(orderStatus, keyWord, page, size, startDate, endDate);
 
