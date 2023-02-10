@@ -35,9 +35,9 @@ public class User implements UserDetails {
 
     @ElementCollection
     @CollectionTable(name = "user_basket_list", joinColumns = @JoinColumn(name = "user_id"))
-    @MapKeyJoinColumn(name = "product_id")
+    @MapKeyJoinColumn(name = "subproduct_id")
     @Column(name = "count_of_product")
-    private Map<Product, Integer> basketList;
+    private Map<Subproduct, Integer> basketList;
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> favoritesList;

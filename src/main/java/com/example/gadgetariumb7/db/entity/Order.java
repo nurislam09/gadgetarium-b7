@@ -64,5 +64,5 @@ public class Order {
     private User user;
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")
-    private List<Product> products;
+    private List<Subproduct> subproducts;
 }
