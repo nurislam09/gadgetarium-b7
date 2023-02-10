@@ -41,6 +41,7 @@ public class S3Service {
                 .contentType("png")
                 .contentType("pdf")
                 .contentType("jfif")
+                .contentType("mp4")
                 .contentLength(file.getSize())
                 .key(key)
                 .build();
