@@ -101,5 +101,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);
-
 }

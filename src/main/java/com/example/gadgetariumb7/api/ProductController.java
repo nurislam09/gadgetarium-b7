@@ -95,13 +95,14 @@ public class ProductController {
                                                         @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
                                                         @RequestParam(value = "discountField", required = false) String discountField,
                                                         @RequestParam(value = "subCategoryName", required = false) String subCategoryName,
-                                                        @RequestParam(value = "minPrice", required = false) Integer minPrice,
-                                                        @RequestParam(value = "maxPrice", required = false) Integer maxPrice,
+                                                        @RequestParam(value = "min", required = false) Integer minPrice,
+                                                        @RequestParam(value = "max", required = false) Integer maxPrice,
                                                         @RequestParam(value = "colors", required = false) List<String> colors,
                                                         @RequestParam(value = "memory", required = false) Integer memory,
                                                         @RequestParam(value = "ram", required = false) Byte ram,
+                                                        @RequestParam int page,
                                                         @RequestParam int size) throws NotFoundException {
-        return productService.filterByParameters(categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
+        return productService.filterByParameters(categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, page, size);
     }
 
 }
