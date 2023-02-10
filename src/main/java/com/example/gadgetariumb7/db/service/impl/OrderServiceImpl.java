@@ -5,10 +5,13 @@ import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
+import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,20 +23,30 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
     @Override
-    public List<OrderResponse> findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate) {
+    public PaginationOrderResponse findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate) {
         List<OrderResponse> orderResponses;
+        Page<OrderResponse> orderResponsesPagination;
+        PaginationOrderResponse paginationOrderResponse = new PaginationOrderResponse();
+        Pageable pageable = PageRequest.of(page - 1, size);
+
         if (keyWord == null) {
-            orderResponses = orderRepository.findAllOrdersByStatus(orderStatus, PageRequest.of(page - 1, size));
+            orderResponsesPagination = orderRepository.findAllOrdersByStatus(orderStatus, pageable);
+            orderResponses = orderResponsesPagination.getContent();
         } else {
-            orderResponses = orderRepository.search(keyWord, PageRequest.of(page - 1, size)).stream().filter(x -> x.getOrderStatus() == orderStatus).toList();
+            orderResponsesPagination = orderRepository.search(keyWord, pageable, orderStatus);
+            orderResponses = orderResponsesPagination.getContent();
         }
 
         if (startDate != null && endDate != null) {
-            return orderResponses.stream().filter(o -> o.getDateOfOrder().toLocalDate().isAfter(startDate) && o.getDateOfOrder().toLocalDate()
+            orderResponses = orderResponses.stream().filter(o -> o.getDateOfOrder().toLocalDate().isAfter(startDate) && o.getDateOfOrder().toLocalDate()
                     .isBefore(endDate)).toList();
         }
 
-        return orderResponses;
+        paginationOrderResponse.setOrderResponses(orderResponses);
+        paginationOrderResponse.setCurrentPage(pageable.getPageNumber() + 1);
+        paginationOrderResponse.setTotalPage(orderResponsesPagination.getTotalPages());
+
+        return paginationOrderResponse;
     }
 
     @Override

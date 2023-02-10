@@ -3,6 +3,7 @@ package com.example.gadgetariumb7.api;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
+import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,16 +28,13 @@ public class OrderController {
     @Operation(summary = "find all orders", description = "Orders with pagination and search")
     @GetMapping()
     @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<List<OrderResponse>> findAllOrders(@RequestParam OrderStatus orderStatus,
-                                                             @RequestParam(required = false) String keyWord,
-                                                             @RequestParam int page,
-                                                             @RequestParam int size,
-                                                             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                                             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-
-        List<OrderResponse> orderResponses = orderService.findAllOrders(orderStatus, keyWord, page, size, startDate, endDate);
-
-        return new ResponseEntity<>(orderResponses, HttpStatus.OK);
+    public ResponseEntity<PaginationOrderResponse> findAllOrders(@RequestParam OrderStatus orderStatus,
+                                                                 @RequestParam(required = false) String keyWord,
+                                                                 @RequestParam int page,
+                                                                 @RequestParam int size,
+                                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        return new ResponseEntity<>(orderService.findAllOrders(orderStatus, keyWord, page, size, startDate, endDate), HttpStatus.OK);
     }
 
     @Operation(summary = "count orders by status")
