@@ -78,7 +78,7 @@ public class ProductController {
     @Operation(summary = "this method for get information",
             description = "get information with product status")
     @GetMapping("/inf")
-    @PreAuthorize("hasAuthority('Admin')")
+   // @PreAuthorize("hasAuthority('Admin')")
     public InforgraphicsRequest inforgraphic() {
         return productService.inforgraphics();
     }
