@@ -16,8 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
-            "p.productName, " +
             "p.productImage," +
+            "p.productName, " +
             "p.productCount," +
             "p.productPrice," +
             "p.productStatus," +
@@ -44,8 +44,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
-            "p.productName, " +
             "p.productImage," +
+            "p.productName, " +
             "p.productCount," +
             "p.productPrice," +
             "p.productStatus," +
