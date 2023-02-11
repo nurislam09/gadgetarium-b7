@@ -5,6 +5,7 @@ import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
+import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -37,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
+    private final SubproductRepository subproductRepository;
 
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -139,11 +141,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public SimpleResponse update(Long id, Long vendorCode, Integer productCount, Integer productPrice) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product for update not found!"));
-        if (vendorCode != null) product.setProductVendorCode(vendorCode);
-        if (productCount != null) product.setProductCount(productCount);
-        if (productPrice != null) product.setProductPrice(productPrice);
+    public SimpleResponse update(ProductUpdateRequest productUpdateRequest) {
+        Product product = productRepository.findById(productUpdateRequest.getId()).orElseThrow(() -> new NotFoundException("Product for update not found!"));
+        productUpdateRequest.getSubproductUpdateRequests().forEach(s -> {
+            Subproduct subproduct = subproductRepository.findById(s.getId()).orElseThrow(() -> new NotFoundException("Subproduct for update not found!"));
+            if (s.getSubproductCount() != 0) subproduct.setCountOfSubproduct(s.getSubproductCount());
+            if (s.getPrice() != 0) subproduct.setPrice(s.getPrice());
+            if (product.getSubproducts().get(0).getId() == s.getId()){
+                product.setProductPrice(product.getSubproducts().get(0).getPrice());
+                product.setProductCount(product.getSubproducts().get(0).getCountOfSubproduct());
+            }
+            subproductRepository.save(subproduct);
+        });
         productRepository.save(product);
         return new SimpleResponse("Product successfully updated", "ok");
     }

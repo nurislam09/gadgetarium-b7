@@ -16,13 +16,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
-            "p.productName, " +
             "p.productImage," +
+            "p.productName, " +
             "p.productCount," +
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            "from Product p where p.productStatus = 0 order by p.createAt")
+            "from Product p where p.productStatus = 0 order by p.id desc")
     List<ProductCardResponse> getAllNewProduct(Pageable pageable);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
@@ -33,7 +33,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            "from Product p where p.discount is not null")
+            "from Product p where p.discount is not null order by p.id desc")
     List<ProductCardResponse> getAllDiscountProduct(Pageable pageable);
 
     @Query("select (p.productPrice -((p.productPrice * p.discount.amountOfDiscount) /100)) from Product p  where p.id = :id ")
@@ -44,13 +44,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
-            "p.productName, " +
             "p.productImage," +
+            "p.productName, " +
             "p.productCount," +
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            " from Product p where p.productStatus = 1")
+            " from Product p where p.productStatus = 1 order by p.id desc")
     List<ProductCardResponse> getAllRecommendationProduct(Pageable pageable);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
