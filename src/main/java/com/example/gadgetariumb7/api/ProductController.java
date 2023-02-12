@@ -91,7 +91,8 @@ public class ProductController {
             "The field 'fieldToSort' is using if the user wants to sort the products by next fields: Новинки, По акции(if you choose this field you need to write also to discountField one of next three: Все акции, До 50%, Свыше 50%), Рекомендуемые, По увеличению цены, По уменьшению цены.'")
     @GetMapping("/catalog")
     @PreAuthorize("isAuthenticated()")
-    public List<ProductCardResponse> filterByParameters(@RequestParam(value = "categoryName") String categoryName,
+    public List<ProductCardResponse> filterByParameters(@RequestParam(value = "text", required = false) String text,
+                                                        @RequestParam(value = "categoryName", required = false) String categoryName,
                                                         @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
                                                         @RequestParam(value = "discountField", required = false) String discountField,
                                                         @RequestParam(value = "subCategoryName", required = false) String subCategoryName,
@@ -100,9 +101,8 @@ public class ProductController {
                                                         @RequestParam(value = "colors", required = false) List<String> colors,
                                                         @RequestParam(value = "memory", required = false) Integer memory,
                                                         @RequestParam(value = "ram", required = false) Byte ram,
-                                                        @RequestParam int page,
                                                         @RequestParam int size) throws NotFoundException {
-        return productService.filterByParameters(categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, page, size);
+        return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
     }
 
 }
