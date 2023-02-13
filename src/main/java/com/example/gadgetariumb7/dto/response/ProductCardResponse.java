@@ -31,4 +31,5 @@ public class ProductCardResponse {
         this.productStatus = productStatus;
         this.productRating = productRating;
     }
+
 }

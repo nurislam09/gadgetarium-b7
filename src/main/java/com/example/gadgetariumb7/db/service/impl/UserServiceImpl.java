@@ -5,7 +5,7 @@ import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.ProductRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.UserService;
-import com.example.gadgetariumb7.dto.response.ProductResponse;
+import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -49,14 +49,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ProductResponse> getAllFavorites() {
+    public List<ProductCardResponse> getAllFavorites() {
         User user = getAuthenticateUser();
-        List<ProductResponse> favorites = new ArrayList<>();
+        List<ProductCardResponse> favorites = new ArrayList<>();
         for (Long productId : userRepository.getAllFavoritesByUserId(user.getId())) {
             favorites.add(productRepository.convertToResponse(productId));
         }
         return favorites;
-
     }
-    }
+}
 

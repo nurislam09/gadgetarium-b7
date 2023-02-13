@@ -4,6 +4,7 @@ import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.repository.ProductRepository;
 import com.example.gadgetariumb7.db.service.UserService;
 import com.example.gadgetariumb7.dto.response.AllProductResponse;
+import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,7 +32,7 @@ public class UserController {
     @GetMapping()
     @Operation(summary = "Get all user's favorite products", description = "This endpoint return user's all favorite products")
     @PreAuthorize("isAuthenticated()")
-    public List<ProductResponse> getAllFavorites() {
+    public List<ProductCardResponse> getAllFavorites() {
         return userService.getAllFavorites();
     }
 

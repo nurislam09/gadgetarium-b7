@@ -84,7 +84,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);
 
-//    @Query("select new com.example.gadgetariumb7.dto.response.ProductResponse(p.id, p.productImages, p) from Product p where p.id = :productId")
-//    ProductResponse convertToResponse(Long productId);
+    @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse (p.id, p.productName, p.productCount, p.productPrice, p.productStatus, p.productRating) from Product p where p.id = :productId")
+    ProductCardResponse convertToResponse(Long productId);
 
 }
