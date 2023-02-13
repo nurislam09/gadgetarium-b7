@@ -15,12 +15,15 @@ insert into brands(id, brand_name, image)
 VALUES (1, 'Apple', 'https://www.meme-arsenal.com/memes/37c2ffed98992565b0596eca5286c7b6.jpg'),
        (2, 'Samsung',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjORvDnwy5Mm0oAz8NItWzuql0JTMkjmu-wQ&usqp=CAU'),
-       (3, 'Redmi', 'https://www.ixbt.com/short/images/2017/Oct/logo-xiaomi.jpg');
+       (3, 'Xiaomi', 'https://www.ixbt.com/short/images/2017/Oct/logo-xiaomi.jpg'),
+       (4, 'Acer', 'https://static.vecteezy.com/system/resources/previews/016/680/500/original/acer-logo-editorial-logo-free-vector.jpg'),
+       (5, 'Asus', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAgVBMVEX///8AAAChoaHY2Nizs7OXl5c2Njb7+/sZGRkeHh5ERESamprf39/t7e1WVlaLi4txcXHm5uZcXFyqqqr09PTS0tI/Pz/d3d3IyMhbW1thYWHExMTw8PARERHLy8tmZmaDg4NNTU0vLy+7u7t6eno6OjptbW0mJiaHh4cMDAxJSUnCEQLAAAAGBklEQVR4nO2ca3uiPBCGEaXWoqLiqbX1hLWH//8DX7DWkjCQgRnaa6/3uT/tLkkYbpKQk+t5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+72xPn3cVHIN84mE8eeg0ZOR5nXuDTsiKcPZi5jrlL86T/eG+aUgp3Rqq5p+u0qKfxL4kqossi6A8sBxjK9fk51LiDN9FDVlzd2k3WbEwLH1ZizdhSJ1aspbu0q6y+o2b3zfqsvbSiDL4snxGaV+ypvKwtGWJW+AFtiyWgUjJlbasO4WQOjVkMRrhlywNV8qyXjVC6vBl8XrsTJZKWKqyHlVC6rBlMb6EGamss0pYmrISlYgymLKeeKVF3konLE1ZOhFl8GStmaVFXKsuFGVJh3w5eLK4pUXM5upEUZZoJmHCkhVxSws4gzEOarJOSv3CBY4s/mAgPCqFpSeL/aIZcGSxhlgX1D7SarL2A62QOixZij0km8ayDlYu++8iOLL8Xyece15o/duWJatn5bL/Lopq5Ha1WT2z4lRmOur/xW1FXMe/r7u9nyymvxj/5VsxWD5O3oM4WXd/89aNsdvt8XHCaxBS7DWxyJ3lr5kQ/dzt4mi5OwV+b7MYttBQbVm8Dv4vWRCuFrerxgDs43U88dZxsl3pdDbNZK39XrLtTv+kl30pusrtl9ij1Rdv8/2n5WwSpXWuO503vXUzWcFPhreHx/Op50VxslmsmsfBhhr+5i7bsgZen8jQeTvs9kHtKtdMVmjlOudXSS/6ojCzNxxp26PmOZuK64PiCNrmg13ldGRVrzocP58m++DacoWdB7F0/ZS/TsjaFLNUxDo+v4fxZkGK05JFVvYS0qp3kbdJW0HNmkctIRj6CVmNV0SO44lvTCe0miF/zaQY0yzgDpOeiew9IwUlq1bVKhD8vAwdWTtPulT6zqpih2LGg5mCkiVdK431ZW1lEXHuTK3zWzNJUpZ0afKzry2LtT9cxdFVuah+0bfS0LKkS8sfz4qyvj5I4lWmafVdiS2tOzsNLcubS9dL59qy5Nthlbaodl7IMLQSDL4vvMsiG6jL8obSFdOqURiRvDjtL5XlTWXd/E5N1ux2RdhxPZTfk6gag2KqclmpLtFOQaIvy/N6orM0cdktbQsZxAJ0layUlX96WhJTcQ5tyEp7001wenpoGFJZQyROyZ2IZA5ZV/qj1Tbxo3riIiVZY72Q9rw7ZlDpeLLIKJ2vt3D+TFOWGVJ3nYU0W344QiKr1ohIuKYS1pdlRpmKi7N2QQ1j48MvyTJD6q57peLIXos4Ebojy5bJMpgGVlnL2R/IytOf2t/PA5GqR0ilOzdFWcVRtt1v1l4pFcryioeHiimo2UpCF6Yqy7U48M4qxN5gEcmyQyomIIaTVP3L+FVZhckWq5Cy0HlY87bCfJpajyrbK1GV5Zx/L9xlFLsQmSyXByJK9thVJOtkFVYcWzim/h61aSCSZYdk1yz7espraWG2rPthtynbnX1b4pscDftVDO3ePZOV9JoSFV6X9fjd4u0qXig1K9LiqHPWyx6AiLAen1jIqPhktynrTNTxBlDHD5piNWmiHlf1Q23K8nWOrxNP1Lws4+GpTdWq025tyhpSm0v1kW02mayMhyd+47KvcNWmrEGdo6wVaJ01T3kznp1a1q9y1aasWOdnJI+Kv68wRlDUS6jekG1RVla8a8mEwbrO5r0D49GJMx3nSlctyrrsfMv7mzvxvtwPxmY8VesdB0tak3X9SIuHWkM9Wea4gUhQstjQvqzrS5K2IV++43vDmOoQozfn8kZbsm5zBmrNls/eo0+3NGGYf27q8Kjz+EhLsnLzK4mtQK77hjnEIvYPShcb2pX1YLyj/qFpOVuFunnlaB6IIXZEl05XrcgqvCJqldvN9/a5xs/bQ/dTu1eP9GW92Od0LsR1zym8hLfPuFxWYA8JiMOjnP8nR/OHj2n7C0rnoatwzB6hzvx8ByN6n2+7sM7/1QMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4B/mPweYZ3/hed4iAAAAAElFTkSuQmCC');
 
 insert into categories(id, category_name)
 VALUES (1, 'Смартфоны'),
-       (2, 'Ноутбуки и планшеты'),
-       (3, 'Смарт-часы и браслеты');
+       (2, 'Ноутбуки'),
+       (3, 'Планшеты'),
+       (4, 'Смарт-часы и браслеты');
 
 insert into subcategories(id, sub_category_name, category_id)
 VALUES (1, 'Apple', 1),
@@ -43,325 +46,779 @@ VALUES (6, 'Acer', 2),
        (16, 'Xiaomi', 2);
 
 insert into subcategories(id, sub_category_name, category_id)
-VALUES (17, 'Смарт-часы Apple watch', 3),
-       (18, 'Умные часы для взрослых', 3),
-       (19, 'Умные часы для детей', 3),
-       (20, 'Фитнес браслет', 3);
+VALUES (17, 'Acer', 3),
+       (18, 'Asus', 3),
+       (19, 'Apple', 3),
+       (20, 'DELL', 3),
+       (21, 'Digma', 3),
+       (22, 'Huawei', 3),
+       (23, 'HONOR', 3),
+       (24, 'Lenovo', 3),
+       (25, 'HP', 3),
+       (26, 'MSI', 3),
+       (27, 'Xiaomi', 3);
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-VALUES ( 1, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, 0.0, null, 3200, null, null
-       , 'Red', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 pro max', 90990, 0, 0
-       , 087456, null, 6
-       , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, null, 1, '2011-04-17 18:20:03');
+insert into subcategories(id, sub_category_name, category_id)
+VALUES (28, 'Смарт-часы Apple watch', 4),
+       (29, 'Умные часы для взрослых', 4),
+       (30, 'Умные часы для детей', 4),
+       (31, 'Фитнес браслет', 4);
 
 insert into discounts(id, amount_of_discount, discount_end_date, discount_start_date)
-VALUES (1, 5, '2023-01-20', '2023-02-01');
+VALUES (1, 5, '2023-02-01', '2023-02-20'),
+       (2, 10, '2023-06-01', '2023-02-25'),
+       (3, 5, '2023-06-01', '2023-02-25'),
+       (4, 10, '2023-06-01', '2023-02-25'),
+       (5, 15, '2023-06-01', '2023-02-25'),
+       (6, 5, '2023-06-01', '2023-02-25'),
+       (7, 10, '2023-06-01', '2023-02-25'),
+       (8, 5, '2023-06-01', '2023-02-25');
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-VALUES ( 2, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, 0.0, null, 3200, null, null
-       , 'Green', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 pro ', 90990, 0, 1, 387456
-       , null, 6
-       , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, 1, 1, '2011-04-17 18:20:03');
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (1,
+        'https://9to5mac.com/wp-content/uploads/sites/6/2021/03/Screenshot-2021-03-26-at-11.06.19.png',
+        'Black',
+        '2023-09-13 18:20:03',
+        'IPhone 13 Pro — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A15 Bionic обеспечивает исключительный пользовательский опыт. Pro также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
+        12,
+        125,
+        'https://svetofor.info/images/detailed/235/smartfon-apple-iphone-13-pro-128-gb-ram-gb-graphite-1.jpg',
+        'IPhone 13 Pro',
+        100000,
+        0,
+        0,
+        341351332,
+        'https://youtu.be/6wccuJTE3nY',
+        1, 1, 1, 1);
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-VALUES ( 3, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, 0.0, null, 3200, null, null
-       , 'Black', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 14 ', 90990, 0, 1, 081056, null
-       , 6
-       , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, null, 1, '2011-04-17 18:20:03');
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (1, 'Black', 125, 100000, 1),
+       (2, 'Silver', 104, 110000, 1),
+       (3, 'Gold', 83, 105000, 1),
+       (4, 'Blue', 96, 115000, 1);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (1, '1', 'simCard'),
+       (1, '256', 'memoryOfPhone'),
+       (1, '4', 'ramOfPhone'),
+       (2, '2', 'simCard'),
+       (2, '256', 'memoryOfPhone'),
+       (2, '4', 'ramOfPhone'),
+       (3, '2', 'simCard'),
+       (3, '512', 'memoryOfPhone'),
+       (3, '4', 'ramOfPhone'),
+       (4, '2', 'simCard'),
+       (4, '1000', 'memoryOfPhone'),
+       (4, '4', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (1, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3153_0_1.jpg'),
+       (1, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3153_1_1.jpg'),
+       (1, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3153_3_1.jpg'),
+       (1, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3153_7_1.jpg'),
+       (1, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3153_4_1.jpg'),
+
+       (2, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3154_0_1.jpg'),
+       (2, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3154_1_1.jpg'),
+       (2, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3154_7_1.jpg'),
+       (2, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3154_3_1.jpg'),
+       (2, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3154_2_1.jpg'),
+
+       (3, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3155_0_1.jpg'),
+       (3, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3155_1_1.jpg'),
+       (3, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3155_3_1.jpg'),
+       (3, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3155_7_1.jpg'),
+       (3, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3155_4_1.jpg'),
+
+       (4, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3156_0_1.jpg'),
+       (4, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3156_1_1.jpg'),
+       (4, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3156_3_1.jpg'),
+       (4, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3156_7_1.jpg'),
+       (4, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3156_4_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (2,
+        'https://english.onlinekhabar.com/wp-content/uploads/2022/02/galaxy-s22_banner_ar.jpg',
+        'Pink gold',
+        '2023-09-13 18:20:03',
+        'Samsung Galaxy S22 — последнее дополнение к флагманской линейке смартфонов Samsung, предлагающее передовые технологии и стильный дизайн. Благодаря большому яркому 6,2-дюймовому дисплею, тройным задним камерам и мощному восьмиядерному процессору этот телефон обеспечивает непревзойденное удобство работы с пользователем. S22 также может похвастаться возможностью подключения 5G, обеспечивающей молниеносную скорость загрузки и выгрузки, а также аккумулятором с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии Android и имеет улучшенный помощник Bixby AI. В общем, Samsung Galaxy S22 — незаменимое устройство для тех, кто ищет высокопроизводительный и стильный смартфон.',
+        6,
+        254,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_3395_2_1.jpg',
+        'Samsung Galaxy S22',
+        75440,
+        0,
+        0,
+        1324132,
+        'https://youtu.be/9RmCoWuN8RI',
+        2, 1, 2, 2);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (5, 'Pink gold', 254, 75440, 2),
+       (6, 'Green', 98, 80440, 2),
+       (7, 'Black', 56, 73440, 2),
+       (8, 'Purple', 74, 78440, 2);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (5, '1', 'simCard'),
+       (5, '512', 'memoryOfPhone'),
+       (5, '4', 'ramOfPhone'),
+       (6, '2', 'simCard'),
+       (6, '256', 'memoryOfPhone'),
+       (6, '4', 'ramOfPhone'),
+       (7, '2', 'simCard'),
+       (7, '512', 'memoryOfPhone'),
+       (7, '4', 'ramOfPhone'),
+       (8, '2', 'simCard'),
+       (8, '1000', 'memoryOfPhone'),
+       (8, '4', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (5, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3395_2_1.jpg'),
+       (5, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3395_4_1.jpg'),
+       (5, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3395_3_1.jpg'),
+       (5, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3395_5_1.jpg'),
+       (5, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3395_1_1.jpg'),
+
+       (6, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3396_2_1.jpg'),
+       (6, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3396_3_1.jpg'),
+       (6, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3396_5_1.jpg'),
+       (6, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3396_0_1.jpg'),
+       (6, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3396_8_1.jpg'),
+
+       (7, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3397_2_1.jpg'),
+       (7, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3397_4_1.jpg'),
+       (7, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3397_3_1.jpg'),
+       (7, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3397_0_1.jpg'),
+       (7, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3397_8_1.jpg'),
+
+       (8, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3651_3_6.png'),
+       (8, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3651_0_6.png'),
+       (8, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3651_1_6.png'),
+       (8, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3651_2_6.png');
 
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-VALUES ( 4, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, 0.0, null, 3200, null, null
-       , 'Purple', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro max', 90990, 0, 1
-       , 087478, null, 6
-       , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, null, 1, '2011-04-17 18:20:03');
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (3,
+        'https://awsimages.detik.net.id/community/media/visual/2022/07/04/xiaomi-12-lite-1_169.jpeg?w=1200',
+        'Black',
+        '2023-09-13 18:20:03',
+        'Xiaomi Mi 12 Lite — это бюджетный смартфон с впечатляющими функциями и производительностью. Благодаря большому 6,57-дюймовому дисплею Full HD+ и мощному процессору Snapdragon 732G этот телефон обеспечивает плавное и быстрое взаимодействие с пользователем. Mi 12 Lite также оснащен четырьмя камерами, в том числе 48-мегапиксельной основной камерой, обеспечивающей универсальные возможности съемки и превосходное качество фотографий. Он работает на последней версии MIUI и питается от большой батареи с длительным сроком службы. Кроме того, он включает в себя подключение 5G для молниеносной скорости загрузки и выгрузки. Xiaomi Mi 12 Lite — отличный выбор для тех, кто ищет высокопроизводительный смартфон по доступной цене.',
+        8,
+        387,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_3624_0_1.jpg',
+        'Xiaomi Mi 12 Lite',
+        65990,
+        0,
+        0,
+        289476592,
+        'https://youtu.be/VMO6rN_dTxk',
+        3, 1, null, 5);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (9,  'Black', 387, 65990, 3),
+       (10, 'Light pink', 273, 63990, 3),
+       (11, 'Light green', 145, 68990, 3);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (9, '2', 'simCard'),
+       (9, '64', 'memoryOfPhone'),
+       (9, '6', 'ramOfPhone'),
+       (10, '2', 'simCard'),
+       (10, '256', 'memoryOfPhone'),
+       (10, '6', 'ramOfPhone'),
+       (11, '2', 'simCard'),
+       (11, '512', 'memoryOfPhone'),
+       (11, '6', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (9, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3624_0_1.jpg'),
+       (9, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3624_3_1.jpg'),
+       (9, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3624_2_1.jpg'),
+       (9, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3624_1_1.jpg'),
+
+       (10, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3626_0_1.jpg'),
+       (10, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3626_2_1.jpg'),
+       (10, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3626_1_1.jpg'),
+       (10, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3626_3_1.jpg'),
+
+       (11, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3625_0_1.jpg'),
+       (11, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3625_2_1.jpg'),
+       (11, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3625_1_1.jpg'),
+       (11, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3625_3_1.jpg');
 
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-VALUES ( 5, 'https://softech.kg/image/cache/63ccea961faf68e3d9e4b6f1e4d845c8.jpg', 6.1, 0, 0.0, null, 3200, null, null
-       , 'White', 'hjdkdksk', null, 12, null, 512, 0, 0, 0, 128, 'Iphone 13 pro ', 90990, 0, 0, 045456
-       , null, 6
-       , 0, null, null, 0.0, 0.0, 'dua sim card', 0, 'https://www.youtube.com/watch?v=FT3ODSg1GFE', null, null, null, 1
-       , 1, null, 1, '2011-04-17 18:20:03');
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (4,
+        'https://cdn.osxdaily.com/wp-content/uploads/2022/09/iphone-14-pro-iphone-14-pro-max.jpg',
+        'Violet',
+        '2023-09-13 18:20:03',
+        'IPhone 14 Pro Max — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A16 Bionic обеспечивает исключительный пользовательский опыт. Pro Max также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
+        16,
+        132,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_3814_4_6.png',
+        'IPhone 14 Pro Max',
+        124990,
+        0,
+        1,
+        43252435,
+        'https://youtu.be/4QmRq3EkQeo',
+        1, 1, null, 1);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (12, 'Violet', 132, 124990, 4),
+       (13, 'Golden', 108, 122590, 4),
+       (14, 'Silver', 78, 125990, 4),
+       (15, 'Black', 93, 124990, 4);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (12, 'eSIM', 'simCard'),
+       (12, '524', 'memoryOfPhone'),
+       (12, '4', 'ramOfPhone'),
+       (13, '2', 'simCard'),
+       (13, '256', 'memoryOfPhone'),
+       (13, '4', 'ramOfPhone'),
+       (14, '2', 'simCard'),
+       (14, '512', 'memoryOfPhone'),
+       (14, '4', 'ramOfPhone'),
+       (15, '1', 'simCard'),
+       (15, '1000', 'memoryOfPhone'),
+       (15, '4', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (12, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3814_4_6.png'),
+       (12, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3814_0_6.webp'),
+       (12, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3814_1_6.png'),
+       (12, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3814_0_1.jpg'),
+       (12, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3814_1_1.jpg'),
+
+       (13, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3813_0_6.png'),
+       (13, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3813_1_6.png'),
+       (13, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3813_2_6.png'),
+       (13, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3813_1_1.jpg'),
+       (13, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3813_0_1.jpg'),
+
+       (14, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3812_4_6.png'),
+       (14, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3812_0_6.png'),
+       (14, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3812_1_6.png'),
+       (14, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3812_0_1.jpg'),
+       (14, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3812_1_1.jpg'),
+
+       (15, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3811_4_6.png'),
+       (15, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3811_0_6.png'),
+       (15, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3811_1_6.png'),
+       (15, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3811_1_1.jpg'),
+       (15, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3811_0_1.jpg');
 
 
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (5,
+        'https://it-here.ru/wp-content/uploads/2021/09/iPhone-13-hero-1536x482-1.png',
+        'Blue',
+        '2023-09-13 18:20:03',
+        'IPhone 13 — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A16 Bionic обеспечивает исключительный пользовательский опыт. Pro Max также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
+        13,
+        78,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_3127_4_1.jpg',
+        'IPhone 13',
+        69990,
+        0,
+        1,
+        27634823,
+        'https://youtu.be/4QmRq3EkQeo',
+        1, 1, 3, 1);
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-values (6, 'https://softech.kg/image/cache/e5913ac2e5f9d99a5c796d3b43fc7b49.jpg', 0.0, 1.9, 44.8, null, 308, 'silicone',
-        'square', 'Red', 'dskjkdsjkljsd', 1, 12, null
-           , 0, 32, 0, 0, 1200, 'Apple Watch series 8', 42000, 0, 0, 675409, null, 0, 0, null, null, 0.0, 0.0, null,
-        0, 'dgjk', 'Aluminium, ceramic, sapphire', 'yes', 'Bluetooth',
-        1, 3, null, 17, '2011-04-17 18:20:03');
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (16, 'Blue', 78, 69990, 5),
+       (17, 'Red', 58, 68990, 5),
+       (18, 'Green', 63, 69990, 5),
+       (19, 'Black', 45, 65990, 5);
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-values (7, 'https://softech.kg/image/cache/e5913ac2e5f9d99a5c796d3b43fc7b49.jpg', 0.0, 1.9, 12.2, null, 308, 'silicone',
-        'square', 'Blue', 'dskjkdsjkljsd', 1, 12, null
-           , 0, 32, 0, 0, 1200, 'Apple Watch series 7', 32000, 0, 0, 235409, null, 0, 0, null, null, 0.0, 0.0, null,
-        0, 'fdjkh', 'Aluminium, ceramic, sapphire', 'yes', 'Bluetooth',
-        1, 3, null, 17, '2011-04-17 18:20:03');
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (16, '1', 'simCard'),
+       (16, '128', 'memoryOfPhone'),
+       (16, '3', 'ramOfPhone'),
+       (17, '2', 'simCard'),
+       (17, '256', 'memoryOfPhone'),
+       (17, '4', 'ramOfPhone'),
+       (18, '2', 'simCard'),
+       (18, '256', 'memoryOfPhone'),
+       (18, '4', 'ramOfPhone'),
+       (19, '1', 'simCard'),
+       (19, '512', 'memoryOfPhone'),
+       (19, '4', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (16, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3127_4_1.jpg'),
+       (16, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3127_3_1.jpg'),
+       (16, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3127_7_1.jpg'),
+       (16, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3127_2_1.jpg'),
+       (16, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3127_1_1.jpg'),
+
+       (17, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3126_4_1.jpg'),
+       (17, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3126_3_1.jpg'),
+       (17, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3126_7_1.jpg'),
+       (17, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3126_2_1.jpg'),
+       (17, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3126_1_1.jpg'),
+
+       (18, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3479_0_6.png'),
+       (18, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3479_7_1.jpg'),
+       (18, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3479_6_1.jpg'),
+       (18, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3479_5_1.jpg'),
+
+       (19, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3123_9_1.jpg'),
+       (19, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3123_8_1.jpg'),
+       (19, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3123_10_1.jpg'),
+       (19, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3123_6_1.jpg'),
+       (19, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3123_5_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (6,
+        'https://www.apple.com/v/macbook-pro-13/p/images/meta/macbook-pro-13_overview__bcsyunk73i2a_og.jpg',
+        'Gray',
+        '2023-09-13 18:20:03',
+        'MacBook Air — это легкий и портативный ноутбук от Apple, разработанный для тех, кому нужен мощный и стильный ноутбук для работы, учебы или игр. MacBook Air с потрясающим 13,3-дюймовым дисплеем Retina обеспечивает четкое и яркое изображение, а процессор Intel Core i5 8-го поколения обеспечивает высокую производительность и быстроту отклика. Этот ноутбук также оснащен Touch ID, упрощающим и безопасным вход в систему и совершение покупок, а также последней версией macOS, обеспечивающей удобный и интуитивно понятный пользовательский интерфейс. Кроме того, он имеет долговечную батарею, обеспечивающую до 12 часов работы без подзарядки, и поставляется с быстрым и надежным хранилищем SSD. MacBook Air (13 дюймов, 2020 г.) — идеальный ноутбук для тех, кто ищет мощное, портативное и стильное устройство.',
+        12,
+        34,
+        'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/7bea8548b6390af692aafe6272164804-670x540.jpg',
+        'Apple MacBook Air 13',
+        91990,
+        0,
+        0,
+        12367471,
+        'https://youtu.be/Hw7iB-zkYrk',
+        1, 2, 4, 8);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (20, 'Gray', 34, 91990, 6),
+       (21, 'Golden', 23,91990, 6);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (20, 'Apple M1', 'laptopCPU'),
+       (20, '2560x1600', 'screenResolutionOfLaptop'),
+       (20, 'For work', 'appointmentOfLaptop'),
+       (20, '4', 'videoCardMemory'),
+       (20, '4', 'ramOfLaptop'),
+       (20, '13.3', 'screenSizeOfLaptop'),
+       (21, 'Apple M1', 'laptopCPU'),
+       (21, '2560x1600', 'screenResolutionOfLaptop'),
+       (21, 'For work', 'appointmentOfLaptop'),
+       (21, '6', 'videoCardMemory'),
+       (21, '6', 'ramOfLaptop'),
+       (21, '13.3', 'screenSizeOfLaptop');
+
+insert into subproduct_images(id, image_url)
+values (20, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/7bea8548b6390af692aafe6272164804-670x540.jpg'),
+       (20, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/3c0d840024235dd9db096a0eb13f3db6-670x540.jpg'),
+       (20, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/203c34c0ad6a98828ac8b6453c9e0730-670x540.jpg'),
+       (20, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/ae6aa36484f09d84bde2afe69ba16a73-670x540.jpg'),
+       (20, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/e5da48d8e45181e185f6e6cc76184c05-670x540.jpg'),
+
+       (21, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/gold/eee476e95a2831ed4b655a1792969882-670x540.jpg'),
+       (21, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/gold/44b10d3f663de2959ed27e0bc1028b66-670x540.jpg'),
+       (21, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/gold/ccda904841fb20072333ad7a178d665c-670x540.jpg'),
+       (21, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/gold/9ca1ec20c27ae7debab5c4f9145bbc5c-670x540.jpg'),
+       (21, 'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/gold/115a6efdea4238cf240f55c5ac4871f8-670x540.jpg');
 
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-values (8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd3TIGbiCZ0f1ryquFCYKpcrTuM-wqmW2BCg&usqp=CAU', 13.3,
-        0.0, 0.0, 'Office', 53, null, null, 'Green', 'fddfgd',
-        1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'Apple Mack Book Air M1', 80999, 0, 0, 457665, 8, 0, 0, '2560x1600 пикс',
-        null, 21.4, 0.0, null,
-        0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (7,
+        'https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/csm_FBlmFlnX0AIbDre_b05127ba75.jpg',
+        'Gray',
+        '2023-09-13 18:20:03',
+        'MacBook Pro 14 — это мощный и универсальный ноутбук от Apple, разработанный для профессионалов и опытных пользователей. Этот ноутбук с потрясающим 14-дюймовым дисплеем Retina и быстрым процессором Apple M1 Pro обеспечивает исключительное удобство работы, независимо от того, работаете ли вы над сложными задачами или используете ресурсоемкие приложения. MacBook Pro также оснащен последней версией macOS, обеспечивающей плавный и интуитивно понятный пользовательский интерфейс, а также сенсорной панелью — сенсорной полосой стекла над клавиатурой, обеспечивающей быстрый доступ к распространенным инструментам и функциям. Кроме того, он имеет долговечную батарею, обеспечивающую до 14 часов работы без подзарядки, и поставляется с быстрым и надежным хранилищем SSD. MacBook Pro — идеальный ноутбук для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
+        8,
+        29,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_0_1.jpg',
+        'Apple MacBook Pro 14',
+        189990,
+        0,
+        1,
+        24352453,
+        'https://youtu.be/yGjb3vBnuJo',
+        1, 2, null, 8);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (22, 'Gray', 29, 189990, 7);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (22, 'Apple M1 Pro', 'laptopCPU'),
+       (22, '3024×1964', 'screenResolutionOfLaptop'),
+       (22, 'For work', 'appointmentOfLaptop'),
+       (22, '8', 'videoCardMemoryOfLaptop'),
+       (22, '32', 'ramOfLaptop'),
+       (22, '14', 'screenSizeOfLaptop');
+
+insert into subproduct_images(id, image_url)
+values (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_0_1.jpg'),
+       (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_1_1.jpg'),
+       (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_2_1.jpg'),
+       (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_3_1.jpg');
 
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-values (9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtTwyPynpyQ2ozvPKNsNUok_h2tEyM7ZPG2A&usqp=CAU', 13.3,
-        0.0, 0.0, 'Office', 53, null, null, 'Yellow', 'fddfgd',
-        1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'Apple Mack Book Air M2', 80999, 0, 0, 120665, 8, 0, 0, '2560x1600 пикс',
-        null, 21.4, 0.0, null,
-        0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (8,
+        'https://images.acer.com/is/image/acer/Nitro_5_main_2560-1?$responsive$',
+        'Black',
+        '2023-09-13 18:20:03',
+        'Acer Nitro 5 — доступный игровой ноутбук с впечатляющей производительностью и функциями. Благодаря быстрому процессору Intel Core i5 и выделенной графике NVIDIA этот ноутбук обеспечивает плавную и быструю работу даже в ресурсоемких играх и приложениях. Nitro 5 оснащен большим 15,6-дюймовым дисплеем Full HD для четкого и яркого изображения, а также клавиатурой с подсветкой для комфортной игры в условиях низкой освещенности. Кроме того, он оснащен аккумулятором с длительным сроком службы, обеспечивающим до 6 часов работы без подзарядки. , а также быстрое и надежное хранилище Acer Nitro 5 — отличный выбор для геймеров и опытных пользователей, которые ищут недорогой ноутбук с отличной производительностью и функциями.',
+        5,
+        54,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_0_1.jpg',
+        'Acer Nitro 5',
+        149990,
+        0,
+        1,
+        98245425,
+        'https://youtu.be/KlmopqEx2w0',
+        4, 2, null, 6);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (23, 'Black', 54, 149990, 8);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (23, 'AMD Ryzen 5', 'laptopCPU'),
+       (23, '1920х1080', 'screenResolutionOfLaptop'),
+       (23, 'For gaming', 'appointmentOfLaptop'),
+       (23, '8', 'videoCardMemory'),
+       (23, '16', 'ramOfLaptop'),
+       (23, '15.6', 'screenSizeOfLaptop');
+
+insert into subproduct_images(id, image_url)
+values (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_0_1.jpg'),
+       (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_1_1.jpg'),
+       (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_2_1.jpg'),
+       (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_3_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (9,
+        'http://reviewcentralme.com/wp-content/uploads/2022/09/Vivobook-15_X1502_M150.jpg',
+        'Black',
+        '2023-09-13 18:20:03',
+        'Asus VivoBook 15 — это недорогой ноутбук с отличной производительностью и функциями для повседневного использования. Благодаря быстрому процессору Intel Core i5 и дисплею Full HD этот ноутбук обеспечивает плавную и быструю работу, независимо от того, работаете ли вы, просматриваете веб-страницы или смотрите видео. VivoBook 15 также отличается элегантным и стильным дизайном, тонким и легким форм-фактором, который позволяет легко носить его с собой и использовать в дороге. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 6 часов работы без подзарядки, а также быстрые и надежные варианты хранения. Asus VivoBook 15 — отличный выбор для тех, кто ищет недорогой ноутбук, обеспечивающий производительность и функции, необходимые для повседневного использования.',
+        5,
+        34,
+        'https://content.rozetka.com.ua/goods/images/big/269677917.jpg',
+        'Asus VivoBook 15',
+        69990,
+        0,
+        0,
+        123987985,
+        'https://youtu.be/bjZ0kymy-Zs',
+        5, 2, 5, 7);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (24, 'Black', 87, 69990, 9);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (24, 'Intel Core i5', 'laptopCPU'),
+       (24, '1920х1080', 'screenResolutionOfLaptop'),
+       (24, 'For work', 'appointmentOfLaptop'),
+       (24, '4', 'videoCardMemory'),
+       (24, '8', 'ramOfLaptop'),
+       (24, '15.6', 'screenSizeOfLaptop');
+
+insert into subproduct_images(id, image_url)
+values (24, 'https://content.rozetka.com.ua/goods/images/big/269677917.jpg'),
+       (24, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2521_1_1.jpg'),
+       (24, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2521_2_1.jpg'),
+       (24, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2521_3_1.jpg'),
+       (24, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2521_1_6.png'),
+       (24, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2521_0_6.png');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (10,
+        'https://cdnb.artstation.com/p/assets/images/images/014/956/421/large/marcus-ryden-asuszenbook.jpg?1546467187',
+        'Black',
+        '2023-09-13 18:20:03',
+        'Asus ZenBook Pro 15 — это недорогой ноутбук с отличной производительностью и функциями для повседневного использования. Благодаря быстрому процессору Intel Core i5 и дисплею Full HD этот ноутбук обеспечивает плавную и быструю работу, независимо от того, работаете ли вы, просматриваете веб-страницы или смотрите видео. VivoBook 15 также отличается элегантным и стильным дизайном, тонким и легким форм-фактором, который позволяет легко носить его с собой и использовать в дороге. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 6 часов работы без подзарядки, а также быстрые и надежные варианты хранения. Asus VivoBook 15 — отличный выбор для тех, кто ищет недорогой ноутбук, обеспечивающий производительность и функции, необходимые для повседневного использования.',
+        8,
+        39,
+        'https://www.asus.com/media/global/gallery/o4znfiih78dmqfwh_setting_xxx_0_90_end_2000.png',
+        'Asus ZenBook Pro 15',
+        75990,
+        0,
+        1,
+        3489534,
+        'https://youtu.be/cUAwfZtoGYM',
+        5, 2, null, 7);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (25, 'Black', 39, 75990, 10);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (25, 'Intel Core i7', 'laptopCPU'),
+       (25, '1920х1080', 'screenResolutionLaptop'),
+       (25, 'For work', 'appointmentLaptop'),
+       (25, '6', 'videoCardMemory'),
+       (25, '8', 'ramLaptop'),
+       (25, '15.6', 'screenSizeLaptop');
+
+insert into subproduct_images(id, image_url)
+values (25, 'https://www.asus.com/media/global/gallery/o4znfiih78dmqfwh_setting_xxx_0_90_end_2000.png'),
+       (25, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2145_1_6.png'),
+       (25, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2145_3_6.png'),
+       (25, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2145_2_6.png');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (11,
+        'https://appleinsider.ru/wp-content/uploads/2022/03/iPad_air_5_2022_000989-740x462.jpg',
+        'Blue',
+        '2023-09-13 18:20:03',
+        'iPad Air (10,9 дюйма, 2020 г.) — это мощный и универсальный планшет от Apple, разработанный для работы, учебы и развлечений. Благодаря большому и яркому 10,9-дюймовому дисплею Liquid Retina и быстрому процессору A14 Bionic этот планшет обеспечивает плавную и быструю работу, независимо от того, просматриваете ли вы веб-страницы, играете в игры или используете ресурсоемкие приложения. iPad Air также включает поддержку Apple Pencil и Smart Keyboard, что делает его отличным выбором для творческих задач и продуктивной работы. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 10 часов работы без подзарядки, и работает на последней версии iPadOS, обеспечивая плавный и интуитивно понятный пользовательский интерфейс. iPad Air (10,9 дюйма, 2020 г.) — идеальный планшет для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
+        12,
+        23,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_64_646_0_1.jpg',
+        'Apple iPad Air 10.9',
+        69990,
+        0,
+        0,
+        62435243,
+        'https://youtu.be/Kb_kIq5tMGQ',
+        1, 3, null, 19);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (26, 'Blue', 23, 69990, 11),
+       (27, 'Green', 30, 71990, 11),
+       (28, 'Pink gold', 35, 68990, 11),
+       (29, 'Silver', 29, 69990, 11);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (26, '2388x1668', 'screenResolutionOfTablet'),
+       (26, '11', 'screenSizeOfTablet'),
+       (26, '64', 'memoryOfTablet'),
+       (26, '6', 'ramOfTablet'),
+       (26, '9 - 11', 'screenDiagonalOfTablet'),
+       (27, '2388x1668', 'screenResolutionOfTablet'),
+       (27, '11', 'screenSizeOfTablet'),
+       (27, '128', 'memoryOfTablet'),
+       (27, '4', 'ramOfTablet'),
+       (27, '9 - 11', 'screenDiagonalOfTablet'),
+       (28, '2388x1668', 'screenResolutionOfTablet'),
+       (28, '11', 'screenSizeOfTablet'),
+       (28, '64', 'memoryOfTablet'),
+       (28, '4', 'ramOfTablet'),
+       (28, '9 - 11', 'screenDiagonalOfTablet'),
+       (29, '2388x1668', 'screenResolutionOfTablet'),
+       (29, '11', 'screenSizeOfTablet'),
+       (29, '256', 'memoryOfTablet'),
+       (29, '6', 'ramOfTablet'),
+       (29, '9 - 11', 'screenDiagonalOfTablet');
+
+insert into subproduct_images(id, image_url)
+values (26, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_646_0_1.jpg'),
+       (26, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_646_1_1.jpg'),
+
+       (27, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_647_0_1.jpg'),
+       (27, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_647_1_1.jpg'),
+
+       (28, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_645_0_1.jpg'),
+       (28, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_645_1_1.jpg'),
+
+       (29, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_644_0_1.jpg'),
+       (29, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_644_1_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (12,
+        'https://appleinsider.ru/wp-content/uploads/2022/03/iPad_air_5_2022_000989-740x462.jpg',
+        'Blue',
+        '2023-09-13 18:20:03',
+        'iPad Mini (6 дюйма, 2020 г.) — это мощный и универсальный планшет от Apple, разработанный для работы, учебы и развлечений. Благодаря большому и яркому 10,9-дюймовому дисплею Liquid Retina и быстрому процессору A14 Bionic этот планшет обеспечивает плавную и быструю работу, независимо от того, просматриваете ли вы веб-страницы, играете в игры или используете ресурсоемкие приложения. iPad Air также включает поддержку Apple Pencil и Smart Keyboard, что делает его отличным выбором для творческих задач и продуктивной работы. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 10 часов работы без подзарядки, и работает на последней версии iPadOS, обеспечивая плавный и интуитивно понятный пользовательский интерфейс. iPad Air (10,9 дюйма, 2020 г.) — идеальный планшет для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
+        9,
+        56,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_64_765_8_1.jpg',
+        'Apple iPad Mini 6',
+        59990,
+        0,
+        1,
+        423524,
+        'https://youtu.be/LBEGCC5oMCw',
+        1, 3, null, 19);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (30, 'Gray', 56, 59990, 12);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (30, '2388x1668', 'screenResolutionOfTablet'),
+       (30, '11', 'screenSizeOfTablet'),
+       (30, '64', 'memoryOfTablet'),
+       (30, '6', 'ramOfTablet'),
+       (30, '9 - 11', 'screenDiagonalOfTablet');
+
+insert into subproduct_images(id, image_url)
+values (30, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_765_8_1.jpg'),
+       (30, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_765_7_1.jpg'),
+       (30, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_765_6_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (13,
+        'https://www.apple.com/newsroom/images/product/ipad/standard/apple_ipad-pro-spring21_lp_04202021.jpg.og.jpg?202301192200',
+        'Black',
+        '2023-09-13 18:20:03',
+        'iPad Pro — это мощный и универсальный планшет от Apple, разработанный для работы, учебы и развлечений. Благодаря большому и яркому 10,9-дюймовому дисплею Liquid Retina и быстрому процессору A14 Bionic этот планшет обеспечивает плавную и быструю работу, независимо от того, просматриваете ли вы веб-страницы, играете в игры или используете ресурсоемкие приложения. iPad Air также включает поддержку Apple Pencil и Smart Keyboard, что делает его отличным выбором для творческих задач и продуктивной работы. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 10 часов работы без подзарядки, и работает на последней версии iPadOS, обеспечивая плавный и интуитивно понятный пользовательский интерфейс. iPad Air (10,9 дюйма, 2020 г.) — идеальный планшет для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
+        9,
+        56,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_64_697_0_1.jpg',
+        'Apple iPad Pro',
+        139990,
+        0,
+        0,
+        82452443,
+        'https://youtu.be/xhb68TUGyIo',
+        1, 3, 6, 19);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (31, 'Black', 56, 139990, 13);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (31, '2388x1668', 'screenResolutionOfTablet'),
+       (31, '11', 'screenSizeOfTablet'),
+       (31, '512', 'memoryOfTablet'),
+       (31, '8', 'ramOfTablet'),
+       (31, '9 - 11', 'screenDiagonalOfTablet');
+
+insert into subproduct_images(id, image_url)
+values (31, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_697_0_1.jpg'),
+       (31, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_697_1_1.jpg'),
+       (31, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_697_2_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (14,
+        'https://www.m1.com.sg/-/media/Images/Personal/Promotions/applewatch7/1440x671_watchs7.jpg',
+        'Blue',
+        '2023-09-13 18:20:03',
+        'Apple Watch Series 7 — это мощные и стильные смарт-часы от Apple, предназначенные для фитнеса, здоровья и подключения. Благодаря быстрому процессору S6 SiP и яркому постоянно включенному дисплею Retina эти часы обеспечивают плавную и быструю работу, независимо от того, отслеживаете ли вы свои тренировки, отслеживаете частоту сердечных сокращений или проверяете свои уведомления. Series 6 также имеет широкий спектр датчиков здоровья и фитнеса, включая датчик кислорода в крови, приложение для ЭКГ и обнаружение падения. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 18 часов работы без подзарядки, и включает в себя возможности подключения к сотовой сети для совершения звонков и отправки текстовых сообщений без телефона. Apple Watch Series 6 — это идеальные смарт-часы для тех, кто ищет мощное и стильное устройство для фитнеса, здоровья и связи.',
+        4,
+        37,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_911_598_0_1.jpg',
+        'Apple Watch Series 7',
+        49990,
+        0,
+        1,
+        52452435,
+        'https://youtu.be/JRsEa7YTOiE',
+        1, 4, 7, 28);
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (32, 'Black', 37, 49990, 14);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (32, 'Wi-Fi', 'wirelessInterface'),
+       (32, '16', 'memoryOfSmartWatch'),
+       (32, 'square', 'caseShape'),
+       (32, 'Silicon', 'braceletMaterial'),
+       (32, 'Unisex', 'gender'),
+       (32, 'Yes', 'waterProof'),
+       (32, '13', 'screenDiagonalOfSmartWatch');
+
+insert into subproduct_images(id, image_url)
+values (32, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_598_0_1.jpg'),
+       (32, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_598_1_1.jpg'),
+       (32, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_598_2_1.jpg');
 
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-values (10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd7zYmmYlxRTw0_r4op0XPsxmN98DFaS0Hmw&usqp=CAU', 13.3,
-        0.0, 0.0, 'Office', 53, null, null, 'Dark', 'fddfgd',
-        1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'Asus ROG G5', 80999, 0, 0, 452345, 8, 0, 0, '2560x1600 пикс',
-        null, 21.4, 0.0, null,
-        0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
+VALUES (15,
+        'https://my-apple-store.ru/wa-data/public/site/watch-7/nike-banner.jpg',
+        'Gray',
+        '2023-09-13 18:20:03',
+        'Apple Watch Nike — это специальная версия Apple Watch, разработанная специально для спортсменов и любителей фитнеса. Они обладают всеми мощными функциями для здоровья и фитнеса стандартных Apple Watch, включая быстрый S6 SiP, яркий и всегда включенный дисплей Retina, а также ряд датчиков здоровья и фитнеса. Кроме того, он включает в себя эксклюзивные циферблаты Nike и спортивные ремешки Nike, а также интеграцию с приложением Nike Run Club для отслеживания ваших пробежек и постановки целей в фитнесе. Apple Watch Nike — идеальные смарт-часы для тех, кто ищет мощное и стильное устройство для фитнеса и занятий спортом. Бегаете ли вы, катаетесь на велосипеде или тренируетесь в тренажерном зале, Apple Watch Nike помогут вам сохранять мотивацию, не отставать от цели и поддерживать связь со своими целями в области здоровья и фитнеса.',
+        4,
+        73,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_0_6.png',
+        'Apple Watch Nike',
+        49990,
+        0,
+        1,
+        2346646643,
+        'https://youtu.be/60RaXZ01P1Q',
+        1, 4, 8, 28);
 
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (33, 'Gray', 73, 49990, 15);
 
-insert into products(id, pdf, screen_diagonal, screen_display, size_of_watch, appointment_of_laptop, battery_capacity,
-                     bracelet_material, case_shape, color, description, gender, guarantee, laptopcpu, memory_of_phone,
-                     memory_of_smart_watch, memory_of_tablet, order_count, product_count, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, ram_of_laptop, ram_of_phone, ram_of_tablet,
-                     screen_resolution_laptop, screen_resolution_tablet, screen_size_laptop, screen_size_tablet,
-                     sim_card, video_card_memory, video_review, watch_material, water_proof, wireless_interface,
-                     brand_id, category_id, discount_id, sub_category_id, create_at)
-values (11, 'https://mobile-review.com/news/wp-content/uploads/HONOR-MagicBook-Pro.jpg', 13.3, 0.0, 0.0, 'Office', 53,
-        null,
-        null, 'Blue', 'fddfgd',
-        1, 12, 'Apple M1', 0, 0, 0, 0, 125, 'HONOR Magic Book 15', 80999, 0, 0, 452365, 8, 0, 0, '2560x1600 пикс',
-        null, 21.4, 0.0, null,
-        0, 'sdfsfd', null, null, null, 1, 2, null, 8, '2011-04-17 18:20:03');
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (33, 'Wi-Fi', 'wirelessInterface'),
+       (33, '16', 'memoryOfSmartWatch'),
+       (33, 'square', 'caseShape'),
+       (33, 'Silicon', 'braceletMaterial'),
+       (33, 'Unisex', 'gender'),
+       (33, 'Yes', 'waterProof'),
+       (33, '13', 'screenDiagonalOfSmartWatch');
 
+insert into subproduct_images(id, image_url)
+values (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_0_6.png'),
+       (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_1_1.jpg'),
+       (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_2_1.jpg');
 
 insert into banners(id, image)
-values (1, 'https://www.budetsdelano.ru/upload/iblock/be0/sale_web.jpg');
-
-insert into product_images(id, image_url)
-VALUES (1,
-        'https://asiastore.kg/image/cache/catalog/iphone/iphone14/iphone14promax/deeppurple/wwen_iphone14promax_q422_deep-purple_pdp-images_position-1a-1920x1080.jpg');
-insert into product_images(id, image_url)
-VALUES (1, 'https://www.apple.com/v/iphone-14-pro/c/images/meta/iphone-14-pro_overview__e414c54gtu6a_og.png');
-insert into product_images(id, image_url)
-VALUES (1, 'https://www.apple.com/my/iphone-14-pro/images/overview/design/design_startframe__f5z6xj9zkgmu_large.jpg');
-insert into product_images(id, image_url)
-VALUES (1,
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR6qtAmQ_lkxOYMlhIQTfW8ptx4a80WpMQe5kmmTZzsab5tsP0cpkFzfmn8GMV0pekMB4&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (1,
-        'https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone-14-Pro-iPhone-14-Pro-Max-hero-220907.jpg.news_app_ed.jpg');
+values (1, 'https://d16pnh712pyiwa.cloudfront.net/wp-content/uploads/2022/07/iPhone-13-pro-max-banner-image.png');
 
 
-insert into product_images(id, image_url)
-VALUES (2, 'https://softech.kg/image/cache/41298c8e9b905465003380f38105bb38.jpg');
-insert into product_images(id, image_url)
-VALUES (2,
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPmRQPFRPpRRQ5jjI6FlzO6aD3H5TAz2jcKsdzC39D2aT40Hkx6vBdHTH7i0mMCVGZ6Hc&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (2,
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDEA9QiSRYXr4me3Xcs-O0h8Kuj1LK302R8nMEO-8fwUgnQr6iAEub8VuAUESmh3QVdkY&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (2, 'https://www.tabletowo.pl/wp-content/uploads/2022/09/iPhone-14-Pro-zrodlo-Apple.jpg');
-insert into product_images(id, image_url)
-VALUES (2,
-        'https://cdn.shopify.com/s/files/1/0079/5602/products/iPhone_14_Pro_Space_Black_PDP_Image_Position-1a_CAEN_1024x1024.jpg?v=1662610399');
+insert into orders(id, address, count_of_product, date_of_order, delivery_status, email, first_name, last_name, order_number, order_status, order_type, payment, phone_number, total_discount, total_sum, user_id)
+values
+    (1, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 0455247, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 15750, 315000, 2),
+    (2, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 455237, 'CANCEL', 'DELIVERY', 'CASH', '+996222219743', 249570, 270910, 2),
+    (3, 'г.Бишкек, Чуй 34 кв 23', 3, '2021-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 466247, 'WAITING', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 2),
+    (4, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 455289, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 2),
+    (5, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Syimyk', 'Ravshanbekov', 4545277, 'DELIVERED', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 2);
 
 
-insert into product_images(id, image_url)
-VALUES (3, 'https://media.wired.com/photos/6332360740fe1e8870aa3bc0/master/pass/iPhone-14-Review-Gear.jpg');
-insert into product_images(id, image_url)
-VALUES (3,
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmhnRNlS3Sf46Dft1h0z0jxOm2qcxT_VpuYykREg5trichD2S95ATRlpOQ1RcAYO-TEic&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (3,
-        'https://www.apple.com/newsroom/images/product/iphone/geo/Apple-iPhone-14-iPhone-14-Plus-2up-blue-220907-geo_inline.jpg.large.jpg');
-insert into product_images(id, image_url)
-VALUES (3, 'https://cdn.eraspace.com/media/catalog/product/i/p/iphone_14_purple_1_3.jpg');
-insert into product_images(id, image_url)
-VALUES (3, 'https://m.media-amazon.com/images/I/61BGE6iu4AL._SX466_.jpg');
+insert into orders_subproducts(subproduct_id, order_id)
+values (1, 1),
+       (2, 1),
+       (3, 1),
+       (4, 2),
+       (5, 2),
+       (6, 2),
+       (7, 3),
+       (8, 3),
+       (9, 3),
+       (10, 4),
+       (11, 4),
+       (12, 4),
+       (13, 5),
+       (14, 5),
+       (15, 5);
 
-insert into product_images(id, image_url)
-VALUES (4, 'https://login.kg/image/cache/catalog/new/Phones/Apple/IPhone%2013/Pro/1-500x500.jpg');
-insert into product_images(id, image_url)
-VALUES (4, 'https://appleinsider.ru/wp-content/uploads/2021/09/iPhone_13_pro_max_00004.jpg');
-insert into product_images(id, image_url)
-VALUES (4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSzKo-3DrlP7IwnV9tHOJqW_c7w9wHK0PFrw&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (4, 'https://myphone.kg/files/media/13/13453.jpg');
-insert into product_images(id, image_url)
-VALUES (4, 'https://static.toiimg.com/thumb/resizemode-4,msid-92431103,imgsize-14570,width-720/92431103.jpg');
+insert into user_basket_list(user_id, count_of_product, subproduct_id)
+values
+    (1, 1, 1),
+    (1, 1, 2),
+    (1, 1, 3);
 
-insert into product_images(id, image_url)
-VALUES (5,
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaFe1qsBKsdOGu8ifPTUOuhIhvr0p_o-v0QfPJNqmnJUYk2k-cfhHLOL0HetTdHK-KfDI&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (5,
-        'https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-13-Pro_iPhone-13-Pro-Max_09142021_inline.jpg.large.jpg');
-insert into product_images(id, image_url)
-VALUES (5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWGYeM9nHLsIjYyQmZe6ahCt_VsyJAxgUO9w&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV1bl0kdltTApSYPldlNlHfuC6FC0ljDUEeQ&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfYykZCRCNOciq2t6fqvLfgxYV-8ClqZ_Xqw&usqp=CAU');
+insert into users_compare_products_list(user_id, compare_products_list_id)
+values
+    (2, 1),
+    (2, 2),
+    (2, 3),
+    (2, 4);
 
-insert into product_images(id, image_url)
-VALUES (6, 'https://softech.kg/image/catalog/Products/Acsessuary/Apple/Smart-Watch/8%20Series/1a.jpg');
-insert into product_images(id, image_url)
-VALUES (6,
-        'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MPH43ref_VW_34FR+watch-45-alum-midnight-nc-8s_VW_34FR_WF_CO+watch-face-45-nike7s-desertberry-spruceaura_VW_34FR_WF_CO?wid=1400&hei=1400&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1660757976267%2C1661968921009%2C1662143432353');
-insert into product_images(id, image_url)
-VALUES (6, 'https://softech.kg/image/cache/d48ec199cd27d8038c31ee71f2909f36.jpg');
-insert into product_images(id, image_url)
-VALUES (6, 'https://appleinsider.ru/wp-content/uploads/2022/09/new_watch-1.jpg');
-insert into product_images(id, image_url)
-VALUES (6,
-        'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MP7F3ref_VW_34FR+watch-45-alum-midnight-nc-8s_VW_34FR_WF_CO?wid=1400&hei=1400&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1660778102078%2C1661968921009');
+insert into users_favorites_list(user_id, favorites_list_id)
+values
+    (2, 1),
+    (2, 2),
+    (2, 3),
+    (2, 4);
 
-insert into product_images(id, image_url)
-VALUES (7, 'https://login.kg/image/catalog/new/Aksessuary/Apple/Chasy/Watch%207/86956.jpg');
-insert into product_images(id, image_url)
-VALUES (7, 'https://softech.kg/image/cache/d0355fba0ca0fbfadb8bf55b74b3c8fa.jpg');
-insert into product_images(id, image_url)
-VALUES (7, 'https://svetofor.info/images/detailed/235/umnye-chasy-apple-watch-series-7-41mm-chernye-1.jpg');
-insert into product_images(id, image_url)
-VALUES (7, 'https://cdn.shopify.com/s/files/1/0568/5942/7015/products/MKJP3HN_A_1.png?v=1633758334');
-insert into product_images(id, image_url)
-VALUES (7,
-        'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/FKN63?wid=2000&hei=2000&fmt=jpeg&qlt=90&.v=1647901207355');
-
-insert into product_images(id, image_url)
-VALUES (8, 'https://login.kg/image/cache/catalog/new/Notebook/Apple/MacBook%20Air%202020%20M1/1-500x500.jpeg');
-insert into product_images(id, image_url)
-VALUES (8, 'https://max.kg/nal/img/22565/b_tov_11442656_7caea5c6.jpg');
-insert into product_images(id, image_url)
-VALUES (8, 'https://www.apple.com/v/macbook-air/m/images/overview/hero_startframe__m19qweu56hea_large_2x.jpg');
-insert into product_images(id, image_url)
-VALUES (8,
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5zQQ4NV4PanZRVX12IY3fS_zOdxkrRjWPcy9sQmlbWbsOXTR34YRPT_3kOcPV8rl1nS0&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (8,
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXrz1s5_SNh2nSW5QHLCNhoNrwhsr9Bw14xHJJcK1Qe5PeZFyzCck02WfwoThJCVDdZss&usqp=CAU');
-
-insert into product_images(id, image_url)
-VALUES (9, 'https://softech.kg/image/cache/8a7c19189ebe9e7677b52c471760dae5.jpg');
-insert into product_images(id, image_url)
-VALUES (9,
-        'https://www.apple.com/v/macbook-air-m2/d/images/overview/design/design_top_midnight__codbsd86bjxy_large.jpg');
-insert into product_images(id, image_url)
-VALUES (9, 'https://softech.kg/image/cache/892e41e2d275f2ecaa911e3e81630ea9.jpg');
-insert into product_images(id, image_url)
-VALUES (9, 'https://softech.kg/image/cache/8049bd076698c20ebbb6e6d2c0732073.jpg');
-insert into product_images(id, image_url)
-VALUES (9,
-        'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/HQ8W2?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1666990110712');
-
-insert into product_images(id, image_url)
-VALUES (10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtuvzKi94e3_8XzztzjnZt4jJ3i8ZQj9gvOQ&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShTTNaVuYtwnkTUIpWq64BZui2a6GjNURM1Q&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUSnQ1psLB-GurpVKraoLFWS8GDYjczV2Diw&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PtsgvMju7yhcsgb7sJftMQvIJr6EmQb2lQ&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4lDkVtW8QYjmsVpqSjosg7Nrw_LsWu1XVKw&usqp=CAU');
-
-insert into product_images(id, image_url)
-VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfwYRMZXK_YMesmgQ1QEyAvc_DIgFCotHeEw&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9IWIdmyqbhRdE7vMymlHuNq9589CgRd2C_g&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSysO-r6qeen8sCC_HJyAnXchWE0oiCITAdQw&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9tR3imJ1fH7O6MzARMXsJyJuIYfeqtPzVqQ&usqp=CAU');
-insert into product_images(id, image_url)
-VALUES (11, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaTI2JEyoxUDdvj94c-FmKBIaaKdkxe-_vQ&usqp=CAU');
-
-insert into orders(id, address, count_of_product, date_of_order, delivery_status, email, first_name, last_name,
-                   order_number, order_status, order_type, payment, phone_number, total_discount, total_sum, user_id)
-values (1, 'Чуй 30', 0, '2011-04-17', 'WAITING', 'nurislam@gmail.com', 'Nurislam', 'Mamytov', 12345, 'WAITING',
-        'DELIVERY', 'CASH', '+996222219743', 0, 0, 1);
-
-insert into orders_products(product_id, order_id)
-values (10, 1);
-insert into orders_products(product_id, order_id)
-values (11, 1);
-
-insert into user_basket_list(user_id, count_of_product, product_id)
-values (1,5,10);
-insert into user_basket_list(user_id, count_of_product, product_id)
-values (1,5,11);
-
-
-
-
+insert into users_viewed_products_list(user_id, viewed_products_list_id)
+values
+    (2, 1),
+    (2, 2),
+    (2, 3),
+    (2, 4);
