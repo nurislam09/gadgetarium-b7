@@ -4,6 +4,7 @@ import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
+import com.example.gadgetariumb7.dto.request.InforgraphicsRequest;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
@@ -309,9 +310,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public InforgraphicsRequest inforgraphics() {
+    public InforgraphicsRequest inforgraphics() throws NullPointerException{
         InforgraphicsRequest inforgraphicsRequest = new InforgraphicsRequest();
-
+        try {
         inforgraphicsRequest.setSoldCount(productRepository.getCountSoldProducts());
         inforgraphicsRequest.setSoldPrice(productRepository.getSoldProductPrice());
         inforgraphicsRequest.setOrderCount(productRepository.getCountOrderProduct());
@@ -322,7 +323,11 @@ public class ProductServiceImpl implements ProductService {
         inforgraphicsRequest.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
         inforgraphicsRequest.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
         inforgraphicsRequest.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
-
+    }catch (NullPointerException e){
+          throw new NotFoundException(
+                  "Null"
+          );
+        }
         return inforgraphicsRequest;
     }
 

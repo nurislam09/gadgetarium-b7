@@ -3,6 +3,7 @@ package com.example.gadgetariumb7.db.repository;
 import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

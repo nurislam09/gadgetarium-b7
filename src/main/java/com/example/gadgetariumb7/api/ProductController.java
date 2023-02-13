@@ -2,8 +2,6 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.InforgraphicsRequest;
-import com.example.gadgetariumb7.dto.response.AllProductResponse;
-import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -108,12 +106,11 @@ public class ProductController {
         return productService.filterByParameters(categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, page, size);
     }
 
-
     @Operation(summary = "this method for get information",
             description = "get information with product status")
     @GetMapping("/inf")
    // @PreAuthorize("hasAuthority('Admin')")
-    public InforgraphicsRequest inforgraphic() {
+    public InforgraphicsRequest inforgraphic() throws NotFoundException{
         return productService.inforgraphics();
     }
 
