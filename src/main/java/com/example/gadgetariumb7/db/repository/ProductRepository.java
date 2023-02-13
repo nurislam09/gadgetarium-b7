@@ -131,4 +131,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "cast(p.productVendorCode as string) like upper(concat(:text, '%')) OR " +
             "upper(p.color) like upper(concat('%',:text,'%')) ")
     List<ProductSearchResponse> searchCatalog(@Param("text") String text, Pageable pageable);
+
+    @Query("")
+    List<String> getProductImage();
 }

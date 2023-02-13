@@ -10,6 +10,7 @@ import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -251,7 +252,6 @@ public class ProductServiceImpl implements ProductService {
                         p.getProductRating()))
                 .collect(Collectors.toList());
 
-
         int toIndex = Math.min(size, productCardResponses.size());
         productCardResponses = productCardResponses.subList(0, toIndex);
 
@@ -262,7 +262,7 @@ public class ProductServiceImpl implements ProductService {
         }
         return productCardResponses;
         } else {
-            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
+            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(-1, size)).stream()
                     .map(p -> new ProductCardResponse(p.getId(),
                             p.getProductImage(),
                             p.getProductName(),
@@ -271,7 +271,7 @@ public class ProductServiceImpl implements ProductService {
                             p.getProductStatus(),
                             p.getProductRating())).toList();
             forEach(list);
-            list.forEach(x->x.setProductImage(x.getProductImage()));
+//            list.forEach(x->x.setProductImage(x.getProductImage()));
             return list;
         }
     }
