@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
          getOrdersByStatus.put(OrderStatus.CANCEL,orderRepository.countByOrderStatus(OrderStatus.CANCEL));
 
          paginationOrderResponse.setOrderStatusAndSize(getOrdersByStatus);
-         paginationOrderResponse.setCountOfOrders(orderRepository.getCountOfOrders());
+        paginationOrderResponse.setCountOfOrders((long) orderRepository.findAll().size());
 
         return paginationOrderResponse;
     }
