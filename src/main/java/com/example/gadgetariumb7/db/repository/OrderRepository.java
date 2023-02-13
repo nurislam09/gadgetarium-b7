@@ -47,6 +47,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "OR UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))")
     Page<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable, OrderStatus orderStatus);
 
-
 }
 
