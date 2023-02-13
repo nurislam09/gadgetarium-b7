@@ -10,7 +10,6 @@ import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -150,9 +149,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
-        products.forEach(r -> {
-            setDiscountToResponse(null, r);
-        });
+        products.forEach(r -> setDiscountToResponse(null, r));
 
         if (fieldToSort != null) {
             switch (fieldToSort) {
@@ -228,7 +225,6 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size) throws NotFoundException {
         if(text == null){
         List<Product> productList = productRepository.findAll();
-        //add the subproducts filtration also
         List<ProductCardResponse> productCardResponses = productList.stream()
                 .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
                 .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
@@ -262,7 +258,7 @@ public class ProductServiceImpl implements ProductService {
         }
         return productCardResponses;
         } else {
-            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(-1, size)).stream()
+            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
                     .map(p -> new ProductCardResponse(p.getId(),
                             p.getProductImage(),
                             p.getProductName(),
@@ -271,7 +267,6 @@ public class ProductServiceImpl implements ProductService {
                             p.getProductStatus(),
                             p.getProductRating())).toList();
             forEach(list);
-//            list.forEach(x->x.setProductImage(x.getProductImage()));
             return list;
         }
     }
@@ -319,6 +314,7 @@ public class ProductServiceImpl implements ProductService {
                     int countFeedback = product.getUsersReviews().size();
                     productCardResponse.setCountOfReview(countFeedback);
                     setDiscountToResponse(productCardResponse, null);
+                    productCardResponse.setProductImage(productRepository.getFirstImage(productCardResponse.getProductId()));
             } else {
                 throw new NotFoundException();
             }
