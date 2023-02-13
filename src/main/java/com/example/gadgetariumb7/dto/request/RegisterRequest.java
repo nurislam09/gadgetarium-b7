@@ -30,10 +30,10 @@ public class RegisterRequest {
   @NotBlank(message = "Email should not be empty")
   private String email;
 
-  @PhoneValid
+  @PhoneValid(message = "Phone should be valid")
   private String phoneNumber;
 
-  @PasswordValid
+  @PasswordValid(message = "Password should be valid")
   private String password;
 
 }

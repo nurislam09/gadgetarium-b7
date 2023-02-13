@@ -25,6 +25,10 @@ public class Review {
 
     private byte productGrade;
 
+    @Column(length = 10000)
+    private String userReview;
+
+    @Column(length = 10000)
     private String responseOfReview;
 
     private boolean statusOfResponse;
