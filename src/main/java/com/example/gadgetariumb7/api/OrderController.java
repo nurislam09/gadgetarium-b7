@@ -2,6 +2,7 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
+import com.example.gadgetariumb7.dto.response.OrderPaymentResponse;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
 import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -57,6 +58,21 @@ public class OrderController {
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse deleteOrder(@PathVariable Long id) {
         return orderService.deleteOrderById(id);
+    }
+
+    @Operation(summary = "update order by orderStatus")
+    @PutMapping
+    @PreAuthorize("hasAuthority('Admin')")
+    public SimpleResponse update(@RequestParam Long id,
+                                 @RequestParam (value = "orderStatus",required = false) OrderStatus orderStatus) {
+        return orderService.update(id,orderStatus);
+    }
+
+    @Operation(summary = "get info orders payment")
+    @GetMapping("/id")
+    @PreAuthorize("hasAuthority('Admin')")
+    public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId",required = false) Long id) {
+        return orderService.getOrdersPaymentInfo(id);
     }
 
 }
