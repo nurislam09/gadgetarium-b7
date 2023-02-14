@@ -1,6 +1,5 @@
 package com.example.gadgetariumb7.db.service.impl;
 
-import com.example.gadgetariumb7.converter.ColorMapper;
 import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
@@ -9,28 +8,20 @@ import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
 import com.example.gadgetariumb7.dto.request.SubproductUpdateRequest;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
+import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
-import org.springframework.data.domain.PageRequest;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
-
-import com.example.gadgetariumb7.db.repository.ProductRepository;
-
-
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,7 +33,6 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final SubproductRepository subproductRepository;
-    private final ColorMapper colorMapper;
 
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -253,10 +243,8 @@ public class ProductServiceImpl implements ProductService {
         Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
         Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
         Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
-
         List<Subproduct> subproducts = new ArrayList<>();
         productRequest.getSubProductRequests().forEach(x -> {
-            x.setColor(colorMapper.getColorName(x.getColor()));
             subproducts.add(new Subproduct(x));
         });
 
