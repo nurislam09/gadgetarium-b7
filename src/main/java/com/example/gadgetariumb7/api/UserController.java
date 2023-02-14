@@ -1,11 +1,7 @@
 package com.example.gadgetariumb7.api;
 
-import com.example.gadgetariumb7.db.entity.Product;
-import com.example.gadgetariumb7.db.repository.ProductRepository;
 import com.example.gadgetariumb7.db.service.UserService;
-import com.example.gadgetariumb7.dto.response.AllProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
-import com.example.gadgetariumb7.dto.response.ProductResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,6 +25,7 @@ public class UserController {
     public SimpleResponse addAndRemoveToFavoriteList(@RequestParam Long productId) {
         return userService.addAndRemoveToFavorites(productId);
     }
+
     @GetMapping()
     @Operation(summary = "Get all user's favorite products", description = "This endpoint return user's all favorite products")
     @PreAuthorize("isAuthenticated()")

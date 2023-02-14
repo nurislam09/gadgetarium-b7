@@ -41,9 +41,9 @@ public class User implements UserDetails {
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> favoritesList;
-    public void addToFavorite(Product product){
-        if (product == null) {
 
+    public void addToFavorite(Product product) {
+        if (product == null) {
         }
         favoritesList.add(product);
     }

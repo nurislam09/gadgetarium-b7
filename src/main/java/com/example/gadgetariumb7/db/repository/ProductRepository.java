@@ -3,7 +3,6 @@ package com.example.gadgetariumb7.db.repository;
 import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
-import com.example.gadgetariumb7.dto.response.ProductResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -103,7 +102,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);
 
-    @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse (p.id, p.productName, p.productCount, p.productPrice, p.productStatus, p.productRating) from Product p where p.id = :productId")
+    @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse (p.id, p.productImage, p.productName, " +
+            "p.productCount, p.productPrice, p.productStatus, p.productRating) from Product p where p.id = :productId")
     ProductCardResponse convertToResponse(Long productId);
 
 }

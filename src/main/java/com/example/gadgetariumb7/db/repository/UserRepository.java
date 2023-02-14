@@ -1,7 +1,6 @@
 package com.example.gadgetariumb7.db.repository;
 
 import com.example.gadgetariumb7.db.entity.User;
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
