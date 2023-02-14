@@ -23,4 +23,17 @@ public class SubproductCardResponse {
     private Long vendorCode;
     private int orderCount;
     private int price;
+
+    public SubproductCardResponse(Long id, String image, Map<String, String> characteristics, String color, byte rating, int countOfReviews, int countOfSubproduct, Long vendorCode, int orderCount, int price) {
+        this.id = id;
+        this.image = image;
+        this.characteristics = characteristics;
+        this.color = color;
+        this.rating = rating;
+        this.countOfReviews = countOfReviews;
+        this.countOfSubproduct = countOfSubproduct;
+        this.vendorCode = vendorCode;
+        this.orderCount = orderCount;
+        this.price = price;
+    }
 }

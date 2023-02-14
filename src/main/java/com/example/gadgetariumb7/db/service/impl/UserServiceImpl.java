@@ -101,7 +101,11 @@ public class UserServiceImpl implements UserService {
         if (subproductsId.size() != 0){
             subproductsId.forEach(id -> {
                 Subproduct s = subproductRepository.findById(id).get();
-                responses.add(new SubproductCardResponse(s.getId(), s.getImages().get(0), s.getCharacteristics(), s.getColor(), s.getProduct().getProductRating(), s.getProduct().getDiscount().getAmountOfDiscount(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice()));
+                SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getImages().get(0), s.getCharacteristics(), s.getColor(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
+                if (s.getProduct().getDiscount() != null){
+                    subproductCardResponse.setAmountOfDiscount(s.getProduct().getDiscount().getAmountOfDiscount());
+                }
+                responses.add(subproductCardResponse);
             });
         } else{
             throw new NotFoundException("Users basketList is empty");
