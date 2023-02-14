@@ -1,5 +1,6 @@
 package com.example.gadgetariumb7.db.service.impl;
 
+import com.example.gadgetariumb7.converter.ColorMapper;
 import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
@@ -41,6 +42,7 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final SubproductRepository subproductRepository;
+    private final ColorMapper colorMapper;
 
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -253,7 +255,10 @@ public class ProductServiceImpl implements ProductService {
         Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
 
         List<Subproduct> subproducts = new ArrayList<>();
-        productRequest.getSubProductRequests().forEach(x -> subproducts.add(new Subproduct(x)));
+        productRequest.getSubProductRequests().forEach(x -> {
+            x.setColor(colorMapper.getColorName(x.getColor()));
+            subproducts.add(new Subproduct(x));
+        });
 
         Product product = new Product(productRequest, subproducts, brand, category, subcategory);
         product.setCreateAt(LocalDateTime.now());
