@@ -14,7 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -45,12 +47,17 @@ public class OrderServiceImpl implements OrderService {
         paginationOrderResponse.setCurrentPage(pageable.getPageNumber() + 1);
         paginationOrderResponse.setTotalPage(orderResponsesPagination.getTotalPages());
 
-        return paginationOrderResponse;
-    }
+        Map<OrderStatus,Long> getOrdersByStatus= new HashMap<>();
+         getOrdersByStatus.put(OrderStatus.WAITING, orderRepository.countByOrderStatus(OrderStatus.WAITING));
+         getOrdersByStatus.put(OrderStatus.IN_PROCESSING,orderRepository.countByOrderStatus(OrderStatus.IN_PROCESSING));
+         getOrdersByStatus.put(OrderStatus.ON_THE_WAY,orderRepository.countByOrderStatus(OrderStatus.ON_THE_WAY));
+         getOrdersByStatus.put(OrderStatus.DELIVERED,orderRepository.countByOrderStatus(OrderStatus.DELIVERED));
+         getOrdersByStatus.put(OrderStatus.CANCEL,orderRepository.countByOrderStatus(OrderStatus.CANCEL));
 
-    @Override
-    public Long countByOrderStatus(OrderStatus orderStatus) {
-        return orderRepository.countByOrderStatus(orderStatus);
+         paginationOrderResponse.setOrderStatusAndSize(getOrdersByStatus);
+        paginationOrderResponse.setCountOfOrders((long) orderRepository.findAll().size());
+
+        return paginationOrderResponse;
     }
 
     public SimpleResponse deleteOrderById(Long id) {

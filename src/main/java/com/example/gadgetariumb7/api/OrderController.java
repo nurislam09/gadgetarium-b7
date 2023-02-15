@@ -2,7 +2,8 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
-import com.example.gadgetariumb7.dto.response.*;
+import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
+import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -32,21 +33,6 @@ public class OrderController {
                                                                  @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                                  @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return new ResponseEntity<>(orderService.findAllOrders(orderStatus, keyWord, page, size, startDate, endDate), HttpStatus.OK);
-    }
-
-    @Operation(summary = "count orders by status")
-    @GetMapping("/count")
-    @PreAuthorize("hasAuthority('Admin')")
-    public Long countOfOrdersByStatus(@RequestParam OrderStatus orderStatus) {
-        return orderService.countByOrderStatus(orderStatus);
-    }
-
-    @Operation(summary = "count all orders")
-    @GetMapping("/count/all")
-    @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<Long> countAllOrders() {
-        Long count = orderService.getCountOfOrders();
-        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
     @Operation(summary = "delete order by id")
