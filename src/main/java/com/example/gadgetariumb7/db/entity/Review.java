@@ -3,9 +3,11 @@ package com.example.gadgetariumb7.db.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.catalina.LifecycleState;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static javax.persistence.CascadeType.*;
 
@@ -21,24 +23,22 @@ public class Review {
     private Long id;
 
     private LocalDateTime reviewTime;
-    private byte productGrade;
+    private double productGrade;
 
     private String userReview;
     private String responseOfReview;
     private boolean statusOfResponse;
-    private String image;
+
+    @ElementCollection
+    @CollectionTable(name = "review_images", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "image_url", length = 10000)
+    private List<String> images;
 
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private User user;
 
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private Product product;
-    public Review(Long id, byte productGrade, String responseOfReview, boolean statusOfResponse, String image) {
-        this.id = id;
-        this.productGrade = productGrade;
-        this.responseOfReview = responseOfReview;
-        this.statusOfResponse = statusOfResponse;
-        this.image = image;
-    }
+
 
 }
