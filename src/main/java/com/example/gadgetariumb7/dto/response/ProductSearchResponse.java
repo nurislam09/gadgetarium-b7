@@ -32,10 +32,11 @@ public class ProductSearchResponse {
     private String description;
     private Long productVendorCode;
     private String color;
-    public ProductSearchResponse(Long id, String productName, int productCount, int productPrice, ProductStatus productStatus, Byte productRating,
+    public ProductSearchResponse(Long id,String productImage, String productName, int productCount, int productPrice, ProductStatus productStatus, Byte productRating,
                                  String brandName, String categoryName, String subCategoryName, Byte amountOfDiscount,
                                  String description, Long productVendorCode, String color) {
         this.id = id;
+        this.productImage = productImage;
         this.productName = productName;
         this.productCount = productCount;
         this.productPrice = productPrice;

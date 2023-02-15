@@ -89,7 +89,7 @@ public class ProductController {
 
     @Operation(summary = "get products from catalog", description = "the user can filter by 7 parameters and categoryName is always required in filtering, but others no because user shouldn't give them all." +
             "The field 'fieldToSort' is using if the user wants to sort the products by next fields: Новинки, По акции(if you choose this field you need to write also to discountField one of next three: Все акции, До 50%, Свыше 50%), Рекомендуемые, По увеличению цены, По уменьшению цены.'" +
-            "Also if the 'text' is null will work only the filter and sort, but if you write something int text then will work only searching. Required only the")
+            "Also if the 'text' is null will work only the filter and sort, but if you write something int text then will work only searching. Required only the size")
     @GetMapping("/catalog")
     @PreAuthorize("isAuthenticated()")
     public List<ProductCardResponse> filterByParameters(@RequestParam(value = "text", required = false) String text,
