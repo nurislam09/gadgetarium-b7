@@ -4,13 +4,15 @@ import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
-import com.example.gadgetariumb7.dto.request.InforgraphicsRequest;
+import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -330,25 +332,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public InforgraphicsRequest inforgraphics() throws NullPointerException{
-        InforgraphicsRequest inforgraphicsRequest = new InforgraphicsRequest();
+    public InforgraphicsResponse inforgraphics() throws NullPointerException {
         try {
-        inforgraphicsRequest.setSoldCount(productRepository.getCountSoldProducts());
-        inforgraphicsRequest.setSoldPrice(productRepository.getSoldProductPrice());
-        inforgraphicsRequest.setOrderCount(productRepository.getCountOrderProduct());
-        inforgraphicsRequest.setOrderPrice(productRepository.getOrderProductPrice());
-        inforgraphicsRequest.setCurrentPeriodPerDay(productRepository.getCurrentPeriodPerDay());
-        inforgraphicsRequest.setCurrentPeriodPerMonth(productRepository.getCurrentPeriodPerMonth());
-        inforgraphicsRequest.setCurrentPeriodPerYear(productRepository.getCurrentPeriodPerYear());
-        inforgraphicsRequest.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
-        inforgraphicsRequest.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
-        inforgraphicsRequest.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
-    }catch (NullPointerException e){
-          throw new NotFoundException(
-                  "Null"
-          );
+            InforgraphicsResponse inforgraphicsRequest = new InforgraphicsResponse();
+            inforgraphicsRequest.setSoldCount(productRepository.getCountSoldProducts());
+            inforgraphicsRequest.setSoldPrice(productRepository.getSoldProductPrice());
+            inforgraphicsRequest.setOrderCount(productRepository.getCountOrderProduct());
+            inforgraphicsRequest.setOrderPrice(productRepository.getOrderProductPrice());
+            inforgraphicsRequest.setCurrentPeriodPerDay(productRepository.getCurrentPeriodPerDay());
+            inforgraphicsRequest.setCurrentPeriodPerMonth(productRepository.getCurrentPeriodPerMonth());
+            inforgraphicsRequest.setCurrentPeriodPerYear(productRepository.getCurrentPeriodPerYear());
+            inforgraphicsRequest.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
+            inforgraphicsRequest.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
+            inforgraphicsRequest.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
+            return inforgraphicsRequest;
+
+        } catch (AopInvocationException e) {
+            throw new BadRequestException("Inforgraphic is null");
         }
-        return inforgraphicsRequest;
     }
 
 }

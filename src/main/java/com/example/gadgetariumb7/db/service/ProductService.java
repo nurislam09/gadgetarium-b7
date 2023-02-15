@@ -1,6 +1,6 @@
 package com.example.gadgetariumb7.db.service;
 
-import com.example.gadgetariumb7.dto.request.InforgraphicsRequest;
+import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
@@ -21,7 +21,7 @@ public interface ProductService {
 
     SimpleResponse addProduct(ProductRequest productRequest);
 
-    InforgraphicsRequest inforgraphics() throws NullPointerException;
+    InforgraphicsResponse inforgraphics() throws NullPointerException;
 
     SimpleResponse delete(Long id);
 
