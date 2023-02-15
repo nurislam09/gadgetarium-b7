@@ -31,10 +31,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select count (o) from Order o where o.orderStatus = :orderStatus")
     Long countByOrderStatus(OrderStatus orderStatus);
 
-    @Query("select count (o) from Order o")
-    Long getCountOfOrders();
-
-
     @Query("SELECT NEW com.example.gadgetariumb7.dto.response.OrderResponse" +
             "(o.id, " +
             "CONCAT(o.firstName, ' ', o.lastName), " +
@@ -50,7 +46,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "OR CAST(o.orderNumber AS string) LIKE CONCAT(:keyWord, '%') " +
             "OR UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))")
     Page<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable, OrderStatus orderStatus);
-
 
 }
 

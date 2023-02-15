@@ -3,6 +3,7 @@ package com.example.gadgetariumb7.db.repository;
 import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
+import com.example.gadgetariumb7.dto.response.ProductSearchResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,7 +23,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            "from Product p where p.productStatus = 0 order by p.createAt")
+            "from Product p where p.productStatus = 0 order by p.id desc")
     List<ProductCardResponse> getAllNewProduct(Pageable pageable);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
@@ -33,7 +34,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            "from Product p where p.discount is not null")
+            "from Product p where p.discount is not null order by p.id desc")
     List<ProductCardResponse> getAllDiscountProduct(Pageable pageable);
 
     @Query("select (p.productPrice -((p.productPrice * p.discount.amountOfDiscount) /100)) from Product p  where p.id = :id ")
@@ -50,7 +51,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productPrice," +
             "p.productStatus," +
             "p.productRating)" +
-            " from Product p where p.productStatus = 1")
+            " from Product p where p.productStatus = 1 order by p.id desc")
     List<ProductCardResponse> getAllRecommendationProduct(Pageable pageable);
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
@@ -101,4 +102,34 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p.discount.amountOfDiscount from Product p where p.id = :id")
     int getAmountOfDiscount(Long id);
+
+    @Query("select new com.example.gadgetariumb7.dto.response.ProductSearchResponse" +
+            "(p.id," +
+            "p.productImage," +
+            "p.productName," +
+            "p.productCount," +
+            "p.productPrice," +
+            "p.productStatus," +
+            "p.productRating," +
+            "p.brand.brandName," +
+            "p.category.categoryName," +
+            "p.subCategory.subCategoryName," +
+            "p.discount.amountOfDiscount," +
+            "p.description," +
+            "p.productVendorCode," +
+            "p.color" +
+            ") from Product p where " +
+            "upper(p.productName) like upper(concat('%',:text,'%')) OR " +
+            "cast(p.productPrice as string) like concat(:text,'%') OR " +
+            "cast(p.productRating as string) like :text OR " +
+            "upper(p.category.categoryName) like upper(concat ('%',:text,'%')) OR " +
+            "upper(p.brand.brandName) like upper(concat('%',:text, '%')) OR " +
+            "upper(p.subCategory.subCategoryName) like upper(concat('%', :text, '%')) OR " +
+            "cast(concat(p.discount.amountOfDiscount,'%') as string) like :text OR " +
+            "cast(p.productVendorCode as string) like upper(concat(:text, '%')) OR " +
+            "upper(p.color) like upper(concat('%',:text,'%')) ")
+    List<ProductSearchResponse> searchCatalog(@Param("text") String text, Pageable pageable);
+
+    @Query(nativeQuery = true, value = "select image_url from product_images where id = :id limit 1")
+    String getFirstImage(Long id);
 }

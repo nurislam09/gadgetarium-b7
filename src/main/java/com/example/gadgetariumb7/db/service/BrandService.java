@@ -1,14 +1,15 @@
 package com.example.gadgetariumb7.db.service;
 
-import com.example.gadgetariumb7.dto.BrandDTO;
+import com.example.gadgetariumb7.dto.request.BrandRequest;
+import com.example.gadgetariumb7.dto.response.BrandResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 
 import java.util.List;
 
 public interface BrandService {
 
-    SimpleResponse addBrand(BrandDTO brandRequest);
+    SimpleResponse addBrand(BrandRequest brandRequest);
 
-    List<BrandDTO> getAllBrand();
+    List<BrandResponse> getAllBrand();
 
 }

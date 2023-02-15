@@ -1,11 +1,11 @@
 package com.example.gadgetariumb7.db.entity;
 
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.catalina.LifecycleState;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,10 +23,15 @@ public class Review {
     private Long id;
 
     private LocalDateTime reviewTime;
-    private double productGrade;
 
+    private byte productGrade;
+
+    @Column(length = 10000)
     private String userReview;
+
+    @Column(length = 10000)
     private String responseOfReview;
+
     private boolean statusOfResponse;
 
     @ElementCollection
@@ -39,6 +44,4 @@ public class Review {
 
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private Product product;
-
-
 }

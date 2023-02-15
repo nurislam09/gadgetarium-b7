@@ -1,16 +1,17 @@
 package com.example.gadgetariumb7.dto.response;
 
-import com.example.gadgetariumb7.db.entity.Product;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-//@Builder
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
 public class BrandResponse {
-    private String brandName;
+    private Long id;
 
-    public BrandResponse(Product product) {
-        this.brandName = product.getBrand().getBrandName();
-    }
+    private String image;
+
+    private String brandName;
 }
+
