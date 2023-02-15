@@ -21,19 +21,16 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public ReviewResponses getAll(String statusOfReview) {
         ReviewResponses reviewResponses = new ReviewResponses();
-        List<ReviewResponse> allReview = reviewRepository.getAllByAdmin();
-        List<ReviewResponse> answered = reviewRepository.getAllReviewByStatusTrue();
-        List<ReviewResponse> unanswered = reviewRepository.getAllReviewByStatusOfResponseFalse();
-        duplicateCode(allReview);
-        duplicateCode(answered);
-        duplicateCode(unanswered);
+        List<ReviewResponse> responses = null;
         if (statusOfReview.equals("Отвеченные")) {
-            reviewResponses.setReviewResponses(answered);
+            responses = reviewRepository.getAllReviewByStatusTrue();
         } else if (statusOfReview.equals("Неотвеченные")) {
-            reviewResponses.setReviewResponses(unanswered);
+            responses = reviewRepository.getAllReviewByStatusOfResponseFalse();
         } else if (statusOfReview.equals("Все отзывы")) {
-            reviewResponses.setReviewResponses(allReview);
+            responses = reviewRepository.getAllByAdmin();
         }
+        duplicateCode(responses);
+        reviewResponses.setReviewResponses(responses);
         reviewResponses.setCountGrade(countReviewsGrade());
         reviewResponses.setCountReviewUnAnswered(reviewRepository.countReviewUnAnswered());
         return reviewResponses;
@@ -49,9 +46,11 @@ public class ReviewServiceImpl implements ReviewService {
                     user.getImage()
             );
             Product product = reviewRepository.getProductReview(r.getId());
+            Review review = reviewRepository.findById(r.getId()).orElseThrow(() -> new NotFoundException("Review not found"));
             ProductReviewResponse productReviewResponse = new ProductReviewResponse(product);
             r.setProductReviewResponse(productReviewResponse);
             r.setUserResponse(userResponse);
+            r.setReviewImages(review.getImages());
         }
     }
 

@@ -17,7 +17,6 @@ public class ReviewResponse {
     private String responseOfReview;
 
     private List<String> reviewImages;
-
     private LocalDateTime reviewTime;
     private byte productGrade;
 
@@ -25,12 +24,11 @@ public class ReviewResponse {
 
     private UserResponse userResponse;
 
-    public ReviewResponse(Long id,List<String> reviewImages, String userReview, String responseOfReview,LocalDateTime reviewTime, byte productGrade) {
+    public ReviewResponse(Long id, String userReview, String responseOfReview,LocalDateTime reviewTime, byte productGrade) {
         this.id = id;
-        this.reviewImages=reviewImages;
         this.userReview = userReview;
         this.responseOfReview = responseOfReview;
-        this.reviewTime=reviewTime;
+        this.reviewTime = reviewTime;
         this.productGrade = productGrade;
     }
 }

@@ -3,8 +3,6 @@ package com.example.gadgetariumb7.db.repository;
 import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.entity.Review;
 import com.example.gadgetariumb7.db.entity.User;
-import com.example.gadgetariumb7.dto.response.BrandResponse;
-import com.example.gadgetariumb7.dto.response.ProductReviewResponse;
 import com.example.gadgetariumb7.dto.response.ReviewResponse;
 import com.example.gadgetariumb7.dto.response.UserResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,11 +19,13 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select count(r) from Review r where r.statusOfResponse = false ")
     int countReviewUnAnswered();
+
     @Query("select r.user from Review r where r.id = :id")
     User getUserReview(Long id);
 
     @Query("select r.product from Review r where r.id=:id")
     Product getProductReview(Long id);
+
 
     @Query("select new com.example.gadgetariumb7.dto.response.UserResponse(" +
             "r.user.id," +
@@ -37,7 +37,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
             "r.id," +
-            "r.images," +
             "r.userReview," +
             "r.responseOfReview," +
             "r.reviewTime," +
@@ -46,21 +45,17 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
             "r.id," +
-            "r.images," +
             "r.userReview," +
             "r.responseOfReview," +
             "r.reviewTime," +
-            "r.productGrade) from Review r where r.statusOfResponse =false")
+            "r.productGrade) from Review r where r.statusOfResponse = false")
     List<ReviewResponse> getAllReviewByStatusOfResponseFalse();
 
     @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
             "r.id," +
-            "r.images," +
             "r.userReview," +
             "r.responseOfReview," +
             "r.reviewTime," +
-            "r.productGrade) from Review r where r.statusOfResponse =true")
+            "r.productGrade) from Review r where r.statusOfResponse = true")
     List<ReviewResponse> getAllReviewByStatusTrue();
-
-
 }
