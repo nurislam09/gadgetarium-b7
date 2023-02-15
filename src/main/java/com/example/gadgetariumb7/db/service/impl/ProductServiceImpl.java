@@ -299,7 +299,7 @@ public class ProductServiceImpl implements ProductService {
         return productCardResponses;
     }
 
-    public void forEach(List<ProductCardResponse> productCardResponses){
+    public void forEach(List<ProductCardResponse> productCardResponses) {
         for (ProductCardResponse productCardResponse : productCardResponses) {
             User user = getAuthenticateUser();
             Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
@@ -311,12 +311,16 @@ public class ProductServiceImpl implements ProductService {
                     productCardResponse.setCompared(true);
                 }
                 Product product = productOptional.get();
+                if (product.getUsersReviews() != null) {
                     int countFeedback = product.getUsersReviews().size();
                     productCardResponse.setCountOfReview(countFeedback);
-                    setDiscountToResponse(productCardResponse, null);
-                    if(product.getProductImage() == null){
+                } else {
+                    productCardResponse.setCountOfReview(0);
+                }
+                setDiscountToResponse(productCardResponse, null);
+                if (product.getProductImage() == null) {
                     productCardResponse.setProductImage(productRepository.getFirstImage(product.getId()));
-                    }
+                }
             } else {
                 throw new NotFoundException();
             }
