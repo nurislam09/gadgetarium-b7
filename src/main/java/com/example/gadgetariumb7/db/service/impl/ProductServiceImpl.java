@@ -334,18 +334,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public InforgraphicsResponse inforgraphics() throws NullPointerException {
         try {
-            InforgraphicsResponse inforgraphicsRequest = new InforgraphicsResponse();
-            inforgraphicsRequest.setSoldCount(productRepository.getCountSoldProducts());
-            inforgraphicsRequest.setSoldPrice(productRepository.getSoldProductPrice());
-            inforgraphicsRequest.setOrderCount(productRepository.getCountOrderProduct());
-            inforgraphicsRequest.setOrderPrice(productRepository.getOrderProductPrice());
-            inforgraphicsRequest.setCurrentPeriodPerDay(productRepository.getCurrentPeriodPerDay());
-            inforgraphicsRequest.setCurrentPeriodPerMonth(productRepository.getCurrentPeriodPerMonth());
-            inforgraphicsRequest.setCurrentPeriodPerYear(productRepository.getCurrentPeriodPerYear());
-            inforgraphicsRequest.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
-            inforgraphicsRequest.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
-            inforgraphicsRequest.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
-            return inforgraphicsRequest;
+            InforgraphicsResponse inforgraphics = new InforgraphicsResponse();
+            inforgraphics.setSoldCount(productRepository.getCountSoldProducts());
+            inforgraphics.setSoldPrice(productRepository.getSoldProductPrice());
+            inforgraphics.setOrderCount(productRepository.getCountOrderProduct());
+            inforgraphics.setOrderPrice(productRepository.getOrderProductPrice());
+            inforgraphics.setCurrentPeriodPerDay(productRepository.getCurrentPeriodPerDay());
+            inforgraphics.setCurrentPeriodPerMonth(productRepository.getCurrentPeriodPerMonth());
+            inforgraphics.setCurrentPeriodPerYear(productRepository.getCurrentPeriodPerYear());
+            inforgraphics.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
+            inforgraphics.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
+            inforgraphics.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
+            return inforgraphics;
 
         } catch (AopInvocationException e) {
             throw new BadRequestException("Inforgraphic is null");

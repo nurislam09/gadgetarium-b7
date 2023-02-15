@@ -69,14 +69,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED' and o.date_of_order between date(now()) and date(now()) + interval '1' day")
     Long getCurrentPeriodPerDay();
 
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED' and o.date_of_order between date(now()) - interval '1' day and date(now()) - interval '1' second")
+    Long getPreviousPeriodPerDay();
+
     @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED' and o.date_of_order between date_trunc('month', now()) and date_trunc('month', now()) + interval '1' MONTH - interval '1' second")
     Long getCurrentPeriodPerMonth();
 
     @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED' and o.date_of_order between date_trunc('year', now()) and date_trunc('year', now()) + interval '1' year - interval '1' second")
     Long getCurrentPeriodPerYear();
-
-    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED' and o.date_of_order between date(NOW()) - interval '1' day and date(now()) - interval '1' second")
-    Long getPreviousPeriodPerDay();
 
     @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED' and o.date_of_order between date_trunc('month', now() - interval '1' month) and date_trunc('month', now()) - interval '1' second")
     Long getPreviousPeriodPerMonth();
