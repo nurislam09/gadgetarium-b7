@@ -223,40 +223,40 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size) throws NotFoundException {
-        if(text == null){
-        List<Product> productList = productRepository.findAll();
-        List<ProductCardResponse> productCardResponses = productList.stream()
-                .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
-                .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
-                .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
-                .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
-                .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
-                .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
-                        Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("videoCardMemory")) == memory.byteValue()) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
-                        Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("memoryOfTablet")) == memory) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone")) == memory) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch")) == memory))
-                .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone")) == ram) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && Objects.equals(Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop")), ram)) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet")) == ram))
-                .map(p -> new ProductCardResponse(p.getId(),
-                        p.getProductImage(),
-                        p.getProductName(),
-                        p.getProductCount(),
-                        p.getProductPrice(),
-                        p.getProductStatus(),
-                        p.getProductRating()))
-                .collect(Collectors.toList());
+        if (text == null) {
+            List<Product> productList = productRepository.findAll();
+            List<ProductCardResponse> productCardResponses = productList.stream()
+                    .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
+                    .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
+                    .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
+                    .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
+                    .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
+                    .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                            Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("videoCardMemory")) == memory.byteValue()) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
+                            Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("memoryOfTablet")) == memory) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone")) == memory) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch")) == memory))
+                    .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone")) == ram) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && Objects.equals(Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop")), ram)) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet")) == ram))
+                    .map(p -> new ProductCardResponse(p.getId(),
+                            p.getProductImage(),
+                            p.getProductName(),
+                            p.getProductCount(),
+                            p.getProductPrice(),
+                            p.getProductStatus(),
+                            p.getProductRating()))
+                    .collect(Collectors.toList());
 
-        int toIndex = Math.min(size, productCardResponses.size());
-        productCardResponses = productCardResponses.subList(0, toIndex);
+            int toIndex = Math.min(size, productCardResponses.size());
+            productCardResponses = productCardResponses.subList(0, toIndex);
 
-        forEach(productCardResponses);
+            forEach(productCardResponses);
 
-        if (fieldToSort != null) {
-            productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
-        }
-        return productCardResponses;
+            if (fieldToSort != null) {
+                productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
+            }
+            return productCardResponses;
         } else {
             List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
                     .map(p -> new ProductCardResponse(p.getId(),
@@ -280,11 +280,11 @@ public class ProductServiceImpl implements ProductService {
                     if (discountField != null) {
                         switch (discountField) {
                             case "Все акции" ->
-                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() > 0).toList();
+                                    productCardResponses = productCardResponses.stream().filter(x -> 100 - ((x.getDiscountPrice() * 100) / x.getProductPrice()) > 0).toList();
                             case "До 50%" ->
-                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() < 50 && (x.getDiscountPrice() * 100) / x.getProductPrice() > 0).toList();
+                                    productCardResponses = productCardResponses.stream().filter(x -> 100 - ((x.getDiscountPrice() * 100) / x.getProductPrice()) < 50 && 100 - ((x.getDiscountPrice() * 100) / x.getProductPrice()) > 0).toList();
                             case "Свыше 50%" ->
-                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() > 50).toList();
+                                    productCardResponses = productCardResponses.stream().filter(x -> 100 - ((x.getDiscountPrice() * 100) / x.getProductPrice()) > 50).toList();
                         }
                     }
                 }
@@ -299,7 +299,7 @@ public class ProductServiceImpl implements ProductService {
         return productCardResponses;
     }
 
-    public void forEach(List<ProductCardResponse> productCardResponses){
+    public void forEach(List<ProductCardResponse> productCardResponses) {
         for (ProductCardResponse productCardResponse : productCardResponses) {
             User user = getAuthenticateUser();
             Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
@@ -311,10 +311,10 @@ public class ProductServiceImpl implements ProductService {
                     productCardResponse.setCompared(true);
                 }
                 Product product = productOptional.get();
-                    int countFeedback = product.getUsersReviews().size();
-                    productCardResponse.setCountOfReview(countFeedback);
-                    setDiscountToResponse(productCardResponse, null);
-                    productCardResponse.setProductImage(productRepository.getFirstImage(productCardResponse.getProductId()));
+                int countFeedback = product.getUsersReviews().size();
+                productCardResponse.setCountOfReview(countFeedback);
+                setDiscountToResponse(productCardResponse, null);
+                productCardResponse.setProductImage(productRepository.getFirstImage(productCardResponse.getProductId()));
             } else {
                 throw new NotFoundException();
             }
