@@ -280,11 +280,11 @@ public class ProductServiceImpl implements ProductService {
                     if (discountField != null) {
                         switch (discountField) {
                             case "Все акции" ->
-                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() > 0).toList();
+                                    productCardResponses = productCardResponses.stream().filter(x -> 100 - ((x.getDiscountPrice() * 100) / (x.getProductPrice())) > 0).toList();
                             case "До 50%" ->
-                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() < 50 && (x.getDiscountPrice() * 100) / x.getProductPrice() > 0).toList();
+                                    productCardResponses = productCardResponses.stream().filter(x -> (100 - (((x.getDiscountPrice()) * 100) / (x.getProductPrice()))) < 50 && (100 - ((x.getDiscountPrice() * 100) / (x.getProductPrice()))) > 0).toList();
                             case "Свыше 50%" ->
-                                    productCardResponses = productCardResponses.stream().filter(x -> (x.getDiscountPrice() * 100) / x.getProductPrice() > 50).toList();
+                                    productCardResponses = productCardResponses.stream().filter(x -> (100 - ((x.getDiscountPrice() * 100) / (x.getProductPrice()))) > 50 && x.getDiscountPrice() != 0).toList();
                         }
                     }
                 }
