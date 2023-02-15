@@ -17,9 +17,9 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select count(productGrade) from Review where productGrade = :productGrade ")
-    int countReviewByProductGrade(double productGrade);
+    int countReviewByProductGrade(byte productGrade);
 
-    @Query("select count(r) from Review r where r.statusOfResponse=false ")
+    @Query("select count(r) from Review r where r.statusOfResponse = false ")
     int countReviewUnAnswered();
     @Query("select r.user from Review r where r.id = :id")
     User getUserReview(Long id);
@@ -37,6 +37,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
             "r.id," +
+            "r.images," +
             "r.userReview," +
             "r.responseOfReview," +
             "r.reviewTime," +
@@ -45,6 +46,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
             "r.id," +
+            "r.images," +
             "r.userReview," +
             "r.responseOfReview," +
             "r.reviewTime," +
@@ -53,6 +55,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select new com.example.gadgetariumb7.dto.response.ReviewResponse(" +
             "r.id," +
+            "r.images," +
             "r.userReview," +
             "r.responseOfReview," +
             "r.reviewTime," +

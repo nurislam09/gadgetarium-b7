@@ -50,7 +50,6 @@ public class ReviewServiceImpl implements ReviewService {
             );
             Product product = reviewRepository.getProductReview(r.getId());
             ProductReviewResponse productReviewResponse = new ProductReviewResponse(product);
-            productReviewResponse.setBrandResponse(new BrandResponse(product));
             r.setProductReviewResponse(productReviewResponse);
             r.setUserResponse(userResponse);
         }
@@ -59,8 +58,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Map<Integer, Integer> countReviewsGrade() {
         Map<Integer, Integer> counts = new HashMap<Integer, Integer>();
-        for (double i = 1; i < 6; i++) {
-            counts.put((int)i, reviewRepository.countReviewByProductGrade(i));
+        for (int i = 1; i < 6; i++) {
+            counts.put(i, reviewRepository.countReviewByProductGrade((byte) i));
         }
         return counts;
     }

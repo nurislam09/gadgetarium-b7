@@ -19,14 +19,15 @@ public class ReviewResponse {
     private List<String> reviewImages;
 
     private LocalDateTime reviewTime;
-    private double productGrade;
+    private byte productGrade;
 
     private ProductReviewResponse productReviewResponse;
 
     private UserResponse userResponse;
 
-    public ReviewResponse(Long id, String userReview, String responseOfReview,LocalDateTime reviewTime, double productGrade) {
+    public ReviewResponse(Long id,List<String> reviewImages, String userReview, String responseOfReview,LocalDateTime reviewTime, byte productGrade) {
         this.id = id;
+        this.reviewImages=reviewImages;
         this.userReview = userReview;
         this.responseOfReview = responseOfReview;
         this.reviewTime=reviewTime;
