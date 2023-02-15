@@ -107,7 +107,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productCount, p.productPrice, p.productStatus, p.productRating) from Product p where p.id = :productId")
     ProductCardResponse convertToResponse(Long productId);
 
-
     @Query("select new com.example.gadgetariumb7.dto.response.ProductSearchResponse" +
             "(p.id," +
             "p.productName," +
