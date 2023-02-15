@@ -88,11 +88,13 @@ public class ProductController {
         return productService.addProduct(productRequest);
     }
 
-    @Operation(summary = "get products from catalog", description = "the user can filter by 7 parameters and categoryName is always required, but others no because user shouldn't give them all." +
-            "The field 'fieldToSort' is using if the user wants to sort the products by next fields: Новинки, По акции(if you choose this field you need to write also to discountField one of next three: Все акции, До 50%, Свыше 50%), Рекомендуемые, По увеличению цены, По уменьшению цены.'")
+    @Operation(summary = "get products from catalog", description = "the user can filter by 7 parameters and categoryName is always required in filtering, but others no because user shouldn't give them all." +
+            "The field 'fieldToSort' is using if the user wants to sort the products by next fields: Новинки, По акции(if you choose this field you need to write also to discountField one of next three: Все акции, До 50%, Свыше 50%), Рекомендуемые, По увеличению цены, По уменьшению цены.'" +
+            "Also if the 'text' is null will work only the filter and sort, but if you write something int text then will work only searching. Required only the size")
     @GetMapping("/catalog")
     @PreAuthorize("isAuthenticated()")
-    public List<ProductCardResponse> filterByParameters(@RequestParam(value = "categoryName") String categoryName,
+    public List<ProductCardResponse> filterByParameters(@RequestParam(value = "text", required = false) String text,
+                                                        @RequestParam(value = "categoryName", required = false) String categoryName,
                                                         @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
                                                         @RequestParam(value = "discountField", required = false) String discountField,
                                                         @RequestParam(value = "subCategoryName", required = false) String subCategoryName,
@@ -101,9 +103,8 @@ public class ProductController {
                                                         @RequestParam(value = "colors", required = false) List<String> colors,
                                                         @RequestParam(value = "memory", required = false) Integer memory,
                                                         @RequestParam(value = "ram", required = false) Byte ram,
-                                                        @RequestParam int page,
                                                         @RequestParam int size) throws NotFoundException {
-        return productService.filterByParameters(categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, page, size);
+        return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
     }
 
     @Operation(summary = "this method for get information",
