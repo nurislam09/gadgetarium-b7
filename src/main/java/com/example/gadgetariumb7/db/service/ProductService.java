@@ -24,6 +24,6 @@ public interface ProductService {
 
     SimpleResponse update(Long id, Long vendorCode, Integer productCount, Integer productPrice);
 
-    List<ProductCardResponse> filterByParameters(String categoryName, String fieldSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int page, int size);
+    List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size);
 
 }
