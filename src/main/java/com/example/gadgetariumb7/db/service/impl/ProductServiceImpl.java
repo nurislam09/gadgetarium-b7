@@ -149,9 +149,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
-        products.forEach(r -> {
-            setDiscountToResponse(null, r);
-        });
+        products.forEach(r -> setDiscountToResponse(null, r));
 
         if (fieldToSort != null) {
             switch (fieldToSort) {
@@ -223,10 +221,12 @@ public class ProductServiceImpl implements ProductService {
         return new SimpleResponse("Product successfully saved", "ok");
     }
 
-    public List<ProductCardResponse> filterByParameters(String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int page, int size) throws NotFoundException {
+    @Override
+    public List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size) throws NotFoundException {
+        if(text == null){
         List<Product> productList = productRepository.findAll();
         List<ProductCardResponse> productCardResponses = productList.stream()
-                .filter(p -> p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
+                .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
                 .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
                 .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
                 .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
@@ -248,35 +248,27 @@ public class ProductServiceImpl implements ProductService {
                         p.getProductRating()))
                 .collect(Collectors.toList());
 
-        int fromIndex = (page - 1) * size;
-        int toIndex = Math.min(fromIndex + size, productCardResponses.size());
-        productCardResponses = productCardResponses.subList(fromIndex, toIndex);
+        int toIndex = Math.min(size, productCardResponses.size());
+        productCardResponses = productCardResponses.subList(0, toIndex);
 
-        for (ProductCardResponse productCardResponse : productCardResponses) {
-            User user = getAuthenticateUser();
-            Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
-            if (productOptional.isPresent()) {
-                if (user.getFavoritesList().contains(productOptional.get())) {
-                    productCardResponse.setFavorite(true);
-                }
-                if (user.getCompareProductsList().contains(productOptional.get())) {
-                    productCardResponse.setCompared(true);
-                }
-                Product product = productOptional.get();
-                if (product.getCategory().getCategoryName().equalsIgnoreCase(categoryName)) {
-                    int countFeedback = product.getUsersReviews().size();
-                    productCardResponse.setCountOfReview(countFeedback);
-                    setDiscountToResponse(productCardResponse, null);
-                }
-            } else {
-                throw new NotFoundException();
-            }
-        }
+        forEach(productCardResponses);
 
         if (fieldToSort != null) {
             productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
         }
         return productCardResponses;
+        } else {
+            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
+                    .map(p -> new ProductCardResponse(p.getId(),
+                            p.getProductImage(),
+                            p.getProductName(),
+                            p.getProductCount(),
+                            p.getProductPrice(),
+                            p.getProductStatus(),
+                            p.getProductRating())).toList();
+            forEach(list);
+            return list;
+        }
     }
 
     private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
@@ -305,5 +297,27 @@ public class ProductServiceImpl implements ProductService {
             }
         }
         return productCardResponses;
+    }
+
+    public void forEach(List<ProductCardResponse> productCardResponses){
+        for (ProductCardResponse productCardResponse : productCardResponses) {
+            User user = getAuthenticateUser();
+            Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
+            if (productOptional.isPresent()) {
+                if (user.getFavoritesList().contains(productOptional.get())) {
+                    productCardResponse.setFavorite(true);
+                }
+                if (user.getCompareProductsList().contains(productOptional.get())) {
+                    productCardResponse.setCompared(true);
+                }
+                Product product = productOptional.get();
+                    int countFeedback = product.getUsersReviews().size();
+                    productCardResponse.setCountOfReview(countFeedback);
+                    setDiscountToResponse(productCardResponse, null);
+                    productCardResponse.setProductImage(productRepository.getFirstImage(productCardResponse.getProductId()));
+            } else {
+                throw new NotFoundException();
+            }
+        }
     }
 }
