@@ -258,7 +258,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size) throws NotFoundException {
-        if(text == null){
+        if (text != null) {
+            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
+                    .map(p -> new ProductCardResponse(p.getId(),
+                            p.getProductImage(),
+                            p.getProductName(),
+                            p.getProductCount(),
+                            p.getProductPrice(),
+                            p.getProductStatus(),
+                            p.getProductRating()))
+                    .collect(Collectors.toList());
+            forEach(list);
+            return list;
+        }
         List<Product> productList = productRepository.findAll();
         List<ProductCardResponse> productCardResponses = productList.stream()
                 .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
@@ -292,18 +304,6 @@ public class ProductServiceImpl implements ProductService {
             productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
         }
         return productCardResponses;
-        } else {
-            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
-                    .map(p -> new ProductCardResponse(p.getId(),
-                            p.getProductImage(),
-                            p.getProductName(),
-                            p.getProductCount(),
-                            p.getProductPrice(),
-                            p.getProductStatus(),
-                            p.getProductRating())).toList();
-            forEach(list);
-            return list;
-        }
     }
 
     private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
@@ -334,7 +334,7 @@ public class ProductServiceImpl implements ProductService {
         return productCardResponses;
     }
 
-    public void forEach(List<ProductCardResponse> productCardResponses){
+    public void forEach(List<ProductCardResponse> productCardResponses) {
         for (ProductCardResponse productCardResponse : productCardResponses) {
             User user = getAuthenticateUser();
             Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
@@ -346,10 +346,16 @@ public class ProductServiceImpl implements ProductService {
                     productCardResponse.setCompared(true);
                 }
                 Product product = productOptional.get();
+                if (product.getUsersReviews() != null) {
                     int countFeedback = product.getUsersReviews().size();
                     productCardResponse.setCountOfReview(countFeedback);
-                    setDiscountToResponse(productCardResponse, null);
-                    productCardResponse.setProductImage(productRepository.getFirstImage(productCardResponse.getProductId()));
+                } else {
+                    productCardResponse.setCountOfReview(0);
+                }
+                setDiscountToResponse(productCardResponse, null);
+                if (product.getProductImage() == null) {
+                    productCardResponse.setProductImage(productRepository.getFirstImage(product.getId()));
+                }
             } else {
                 throw new NotFoundException();
             }

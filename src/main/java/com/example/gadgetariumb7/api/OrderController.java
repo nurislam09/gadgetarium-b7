@@ -35,21 +35,6 @@ public class OrderController {
         return new ResponseEntity<>(orderService.findAllOrders(orderStatus, keyWord, page, size, startDate, endDate), HttpStatus.OK);
     }
 
-    @Operation(summary = "count orders by status")
-    @GetMapping("/count")
-    @PreAuthorize("hasAuthority('Admin')")
-    public Long countOfOrdersByStatus(@RequestParam OrderStatus orderStatus) {
-        return orderService.countByOrderStatus(orderStatus);
-    }
-
-    @Operation(summary = "count all orders")
-    @GetMapping("/count/all")
-    @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<Long> countAllOrders() {
-        Long count = orderService.getCountOfOrders();
-        return new ResponseEntity<>(count, HttpStatus.OK);
-    }
-
     @Operation(summary = "delete order by id")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('Admin')")
