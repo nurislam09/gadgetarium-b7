@@ -9,6 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class OrderPaymentResponse {
 
+    private Long id;
+
     private String fullName;
 
     private int orderNumber;
@@ -21,20 +23,15 @@ public class OrderPaymentResponse {
 
     private int totalDiscount;
 
-    private  String productName;
+    private String productName;
 
-//    private String phoneNumber;
-//
-//    private String address;
-
-    public OrderPaymentResponse(String fullName, int orderNumber) {
+    public OrderPaymentResponse(Long id, String fullName, int orderNumber, int totalSum, int countOfProduct, int totalDiscount) {
+        this.id = id;
         this.fullName = fullName;
         this.orderNumber = orderNumber;
-    }
+        this.totalSum = totalSum;
+        this.countOfProduct = countOfProduct;
+        this.totalDiscount = totalDiscount;
 
-//    public OrderPaymentResponse(int orderNumber, String phoneNumber, String address) {
-//        this.orderNumber = orderNumber;
-//        this.phoneNumber = phoneNumber;
-//        this.address = address;
-//    }
+    }
 }

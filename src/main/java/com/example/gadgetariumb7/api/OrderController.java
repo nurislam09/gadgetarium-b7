@@ -2,10 +2,7 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
-import com.example.gadgetariumb7.dto.response.OrderPaymentResponse;
-import com.example.gadgetariumb7.dto.response.OrderResponse;
-import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.response.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +13,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,15 +60,22 @@ public class OrderController {
     @PutMapping
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse update(@RequestParam Long id,
-                                 @RequestParam (value = "orderStatus",required = false) OrderStatus orderStatus) {
-        return orderService.update(id,orderStatus);
+                                 @RequestParam(value = "orderStatus", required = false) OrderStatus orderStatus) {
+        return orderService.update(id, orderStatus);
     }
 
-    @Operation(summary = "get info orders payment")
-    @GetMapping("/id")
+    @Operation(summary = "get by id order payment info")
+    @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('Admin')")
-    public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId",required = false) Long id) {
+    public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId", required = false) Long id) {
         return orderService.getOrdersPaymentInfo(id);
+    }
+
+    @Operation(summary = "get by id order info")
+    @GetMapping("/{id}/info")
+    @PreAuthorize("hasAuthority('Admin')")
+    public OrderInfoResponse getOrderInfoById(@RequestParam(value = "orderId", required = false) Long id) {
+        return orderService.getOrderInfoById(id);
     }
 
 }

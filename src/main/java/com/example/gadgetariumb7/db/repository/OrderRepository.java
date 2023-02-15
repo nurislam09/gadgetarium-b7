@@ -2,7 +2,6 @@ package com.example.gadgetariumb7.db.repository;
 
 import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
-import com.example.gadgetariumb7.dto.response.OrderPaymentResponse;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,13 +48,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "OR CAST(o.orderNumber AS string) LIKE CONCAT(:keyWord, '%') " +
             "OR UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))")
     Page<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable, OrderStatus orderStatus);
-
-
-    @Query("SELECT NEW com.example.gadgetariumb7.dto.response.OrderPaymentResponse" +
-            "(CONCAT(o.firstName, ' ', o.lastName)," +
-            "o.orderNumber)" +
-            "from Order o  where o.id = :id")
-    OrderPaymentResponse getOrderPaymentInfo(Long id);
 
 }
 

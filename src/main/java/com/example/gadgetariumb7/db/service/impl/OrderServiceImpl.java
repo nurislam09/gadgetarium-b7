@@ -1,17 +1,11 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Order;
-import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
-import com.example.gadgetariumb7.db.repository.ProductRepository;
-import com.example.gadgetariumb7.db.repository.SubProductRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
-import com.example.gadgetariumb7.dto.response.OrderPaymentResponse;
-import com.example.gadgetariumb7.dto.response.OrderResponse;
-import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,8 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final SubProductRepository subProductRepository;
-    private final ProductRepository productRepository;
 
     @Override
     public PaginationOrderResponse findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate) {
@@ -84,23 +76,37 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderPaymentResponse getOrdersPaymentInfo(Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order  not found!"));
         OrderPaymentResponse orderPaymentResponse = new OrderPaymentResponse();
-        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order  not found! "));
+        orderPaymentResponse.setId(order.getId());
+        orderPaymentResponse.setFullName(order.getFirstName()+" "+ order.getLastName());
+        orderPaymentResponse.setOrderNumber(order.getOrderNumber());
+        orderPaymentResponse.setCountOfProduct(order.getCountOfProduct());
+        orderPaymentResponse.setTotalSum(order.getTotalSum());
+        orderPaymentResponse.setTotalDiscount(order.getTotalDiscount());
         for (Subproduct subproduct:order.getSubproducts()) {
-            orderPaymentResponse.setTotalSum(subproduct.getPrice());
             orderPaymentResponse.setProductName(subproduct.getProduct().getProductName());
+            int discount = 0;
             if (subproduct.getProduct().getDiscount().getAmountOfDiscount() != null) {
-                int discount = subproduct.getProduct().getDiscount().getAmountOfDiscount();
-                int totalDiscount = (subproduct.getPrice() * discount) / 100;
+                discount = (order.getTotalDiscount() * 100) / order.getTotalSum();
                 orderPaymentResponse.setDiscount(discount);
-                orderPaymentResponse.setTotalDiscount(totalDiscount);
             }
         }
-        orderPaymentResponse = orderRepository.getOrderPaymentInfo(id);
-
         return orderPaymentResponse;
     }
 
+    @Override
+    public OrderInfoResponse getOrderInfoById(Long id) {
+        return orderRepository.findById(id)
+                .map(order -> {
+                    OrderInfoResponse orderInfoResponse = new OrderInfoResponse();
+                    orderInfoResponse.setOrderNumber(order.getOrderNumber());
+                    orderInfoResponse.setPhoneNumber(order.getPhoneNumber());
+                    orderInfoResponse.setAddress(order.getAddress());
+                    return orderInfoResponse;
+                })
+                .orElseThrow(() -> new NotFoundException("Order not found!"));
+    }
 
 }
 
