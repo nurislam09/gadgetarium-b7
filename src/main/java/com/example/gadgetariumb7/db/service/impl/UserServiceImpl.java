@@ -53,7 +53,9 @@ public class UserServiceImpl implements UserService {
         User user = getAuthenticateUser();
         List<ProductCardResponse> favorites = new ArrayList<>();
         for (Long productId : userRepository.getAllFavoritesByUserId(user.getId())) {
-            favorites.add(productRepository.convertToResponse(productId));
+            ProductCardResponse productCardResponse = productRepository.convertToResponse(productId);
+            productCardResponse.setFavorite(true);
+            favorites.add(productCardResponse);
         }
         return favorites;
     }
