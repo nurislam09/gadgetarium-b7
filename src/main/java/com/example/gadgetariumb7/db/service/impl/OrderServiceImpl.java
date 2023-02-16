@@ -1,28 +1,38 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Order;
+import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
+import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
-import com.example.gadgetariumb7.dto.response.OrderResponse;
-import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.request.OrderRequest;
+import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+    private Random random = new Random();
+
+    private Optional<User> getAuthenticateUserForAutofill() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+        return userRepository.findByEmail(login);
+    }
 
     @Override
     public PaginationOrderResponse findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate) {
@@ -67,6 +77,30 @@ public class OrderServiceImpl implements OrderService {
         order.getSubproducts().forEach(x -> x.getOrders().remove(order));
         orderRepository.delete(order);
         return new SimpleResponse("Order successfully deleted!", "ok");
+    }
+
+    @Override
+    public UserAutofillResponse autofillUserInformation() {
+        if (getAuthenticateUserForAutofill().isPresent()){
+            User user = getAuthenticateUserForAutofill().get();
+            return new UserAutofillResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getAddress());
+        } else {
+            throw new NotFoundException("User is not authenticate");
+        }
+    }
+
+    @Override
+    public OrderCompleteResponse saveOrder(OrderRequest orderRequest) {
+//        Order order = new Order(orderRequest.getFirstName(), orderRequest.getLastName(), orderRequest.getEmail(), orderRequest.getPhoneNumber(), orderRequest.getAddress(), orderRequest.getCountOfProduct(), orderRequest.getTotalSum(), orderRequest.getTotalDiscount(), orderRequest.getPayment());
+//        order.setDateOfOrder(LocalDateTime.now());
+//        order.setOrderStatus(OrderStatus.IN_PROCESSING);
+//
+//        int number = random.nextInt(10000, 200000);
+//
+//        Order order1 = orderRepository.find
+//
+//        order.setOrderNumber();
+        return null;
     }
 }
 

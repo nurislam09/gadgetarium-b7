@@ -4,6 +4,7 @@ import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.response.UserAutofillResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -42,5 +43,12 @@ public class OrderController {
     public SimpleResponse deleteOrder(@PathVariable Long id) {
         return orderService.deleteOrderById(id);
     }
+
+    @Operation(summary = "Autofill", description = "This method return user's information if user is authenticated")
+    @GetMapping("/autofill")
+    public UserAutofillResponse autofill(){
+        return orderService.autofillUserInformation();
+    }
+
 
 }

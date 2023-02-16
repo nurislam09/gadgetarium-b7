@@ -65,4 +65,16 @@ public class Order {
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")
     private List<Subproduct> subproducts;
+
+    public Order(String firstName, String lastName, String email, String phoneNumber, String address, int countOfProduct, int totalSum, int totalDiscount, Payment payment) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.countOfProduct = countOfProduct;
+        this.totalSum = totalSum;
+        this.totalDiscount = totalDiscount;
+        this.payment = payment;
+    }
 }
