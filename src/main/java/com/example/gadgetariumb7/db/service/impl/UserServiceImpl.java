@@ -1,23 +1,18 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Product;
-import com.example.gadgetariumb7.db.entity.User;
-import com.example.gadgetariumb7.db.repository.ProductRepository;
-import com.example.gadgetariumb7.db.repository.UserRepository;
-import com.example.gadgetariumb7.db.service.UserService;
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
-import com.example.gadgetariumb7.db.entity.Subproduct;
-import com.example.gadgetariumb7.db.repository.SubproductRepository;
-import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.db.entity.Review;
+import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.ProductRepository;
 import com.example.gadgetariumb7.db.repository.ReviewRepository;
+import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.UserService;
 import com.example.gadgetariumb7.dto.request.ReviewRequest;
+import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +20,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +34,8 @@ public class UserServiceImpl implements UserService {
     private final SubproductRepository subproductRepository;
 
     private final ProductRepository productRepository;
+
+    private final ReviewRepository reviewRepository;
 
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
