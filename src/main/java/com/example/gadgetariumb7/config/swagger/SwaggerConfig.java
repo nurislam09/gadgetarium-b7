@@ -20,7 +20,8 @@ public class SwaggerConfig {
                 .components(new Components()
                         .addSecuritySchemes(API_KEY, apiKeySecuritySchema()))
                 .info(new Info().title("Gadgetarium"))
-                .security(Collections.singletonList(new SecurityRequirement().addList(API_KEY))); // then apply it. If you don't apply it will not be added to the header in cURL
+                .security(Collections.singletonList(new SecurityRequirement().addList(API_KEY)));
+        // then apply it. If you don't apply it will not be added to the header in cURL
     }
 
     public SecurityScheme apiKeySecuritySchema() {
