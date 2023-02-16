@@ -1,13 +1,14 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Product;
-import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.ProductRepository;
-import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.UserService;
+import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.db.entity.Subproduct;
+import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
@@ -23,8 +24,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
+
     private final SubproductRepository subproductRepository;
+    
     private final ProductRepository productRepository;
 
     private User getAuthenticateUser() {
@@ -34,6 +38,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public SimpleResponse addAndRemoveToFavorites(Long productId) {
+        User user = getAuthenticateUser();
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product not found"));
+
+        if (user.getFavoritesList() == null) {
+            user.setFavoritesList(Arrays.asList(product));
+        } else {
+            if (user.getFavoritesList().contains(product)) {
+                user.getFavoritesList().remove(product);
+                userRepository.save(user);
+                return new SimpleResponse("Product successfully deleted from User's favorites", "ok");
+            } else user.getFavoritesList().add(product);
+        }
+        userRepository.save(user);
+        return new SimpleResponse("Product successfully added to User's favorites", "ok");
+    }
+
+    @Override
+    public List<ProductCardResponse> getAllFavorites() {
+        User user = getAuthenticateUser();
+        List<ProductCardResponse> favorites = new ArrayList<>();
+        for (Long productId : userRepository.getAllFavoritesByUserId(user.getId())) {
+            ProductCardResponse productCardResponse = productRepository.convertToResponse(productId);
+            productCardResponse.setFavorite(true);
+            favorites.add(productCardResponse);
+        }
+        return favorites;
+    }
+
     public SimpleResponse addToBasketList(int orderCount, Long subProductId) {
         User user = getAuthenticateUser();
         Subproduct subproduct = subproductRepository.findById(subProductId).orElseThrow(() -> new NotFoundException("Subproduct not found"));
