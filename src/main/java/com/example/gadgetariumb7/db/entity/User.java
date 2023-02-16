@@ -48,7 +48,7 @@ public class User implements UserDetails {
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> compareProductsList;
 
-    @OneToMany(cascade = {MERGE, DETACH, REFRESH})
+    @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> orderHistoryList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
