@@ -8,6 +8,7 @@ import com.example.gadgetariumb7.db.service.SubscriptionService;
 import com.example.gadgetariumb7.dto.request.MailingRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class MailingServiceImpl implements MailingService {
     private final SubscriptionService subscriptionService;
     private final JavaMailSender emailSender;
     private final MailingRepository mailingRepository;
+    @Value("${spring.mail.username}")
+    private String sender;
 
     @Override
     public void saveMailing(Mailing mailing) {
@@ -41,7 +44,7 @@ public class MailingServiceImpl implements MailingService {
     @Override
     public void sendEmail(String email, Mailing mailing) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("zhumataev.03@gmail.com");
+        message.setFrom(sender);
         message.setTo(email);
         message.setSubject(mailing.getMailingName());
         message.setText(mailing.getDescription() + "\n" + mailing.getImage()
