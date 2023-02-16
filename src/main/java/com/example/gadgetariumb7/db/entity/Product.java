@@ -64,6 +64,7 @@ public class Product {
     @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
     private Subcategory subCategory;
 
+    @Column(length = 1000000)
     private String productImage;
 
     @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")

@@ -18,4 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select favorites_list_id from users_favorites_list where user_id = :userId", nativeQuery = true)
     List<Long> getAllFavoritesByUserId(Long userId);
+
 }
