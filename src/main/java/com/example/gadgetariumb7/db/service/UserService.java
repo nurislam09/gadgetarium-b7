@@ -1,5 +1,5 @@
 package com.example.gadgetariumb7.db.service;
-import com.example.gadgetariumb7.dto.request.ReviewRequest;
+import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -21,6 +21,6 @@ public interface UserService {
 
     List<SubproductCardResponse> getAllFromBasketList();
 
-    SimpleResponse addReview(ReviewRequest request);
+    SimpleResponse addReview(ReviewSaveRequest request);
 
 }

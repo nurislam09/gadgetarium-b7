@@ -9,7 +9,7 @@ import com.example.gadgetariumb7.db.repository.ReviewRepository;
 import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.UserService;
-import com.example.gadgetariumb7.dto.request.ReviewRequest;
+import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
         return responses;
     }
 
-    public SimpleResponse addReview(ReviewRequest request) {
+    public SimpleResponse addReview(ReviewSaveRequest request) {
         Product product = productRepository.findById(request.getProductId()).orElseThrow(() -> new NotFoundException("Product not found"));
         User user = getAuthenticateUser();
 

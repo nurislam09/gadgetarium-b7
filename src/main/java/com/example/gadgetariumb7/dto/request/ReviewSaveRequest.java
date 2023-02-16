@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Valid
-public class ReviewRequest {
+public class ReviewSaveRequest {
     @NotNull(message = "Product id should be not null")
     private Long productId;
 

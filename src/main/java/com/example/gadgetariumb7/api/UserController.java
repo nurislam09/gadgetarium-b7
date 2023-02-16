@@ -1,7 +1,7 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.UserService;
-import com.example.gadgetariumb7.dto.request.ReviewRequest;
+import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
@@ -67,7 +67,7 @@ public class UserController {
     @Operation(summary = "This method for save review", description = "This endpoint save review with array of images")
     @PostMapping()
     @PreAuthorize("hasAuthority('Customer')")
-    public SimpleResponse save(@RequestBody ReviewRequest reviewRequest) {
-        return userService.addReview(reviewRequest);
+    public SimpleResponse save(@RequestBody ReviewSaveRequest reviewSaveRequest) {
+        return userService.addReview(reviewSaveRequest);
     }
 }
