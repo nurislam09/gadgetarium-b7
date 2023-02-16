@@ -19,11 +19,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select favorites_list_id from users_favorites_list where user_id = :userId", nativeQuery = true)
     List<Long> getAllFavoritesByUserId(Long userId);
 
-    @Query("select new com.example.gadgetariumb7.dto.response.UserResponse(" +
-            "r.user.id," +
-            "r.user.firstName," +
-            "r.user.lastName," +
-            "r.user.email," +
-            "r.user.image) from Review  r join User u on r.user.id=u.id")
-    UserResponse getUser();
 }
