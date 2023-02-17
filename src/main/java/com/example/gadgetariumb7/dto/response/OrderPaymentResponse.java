@@ -25,13 +25,4 @@ public class OrderPaymentResponse {
 
     private String productName;
 
-    public OrderPaymentResponse(Long id, String fullName, int orderNumber, int totalSum, int countOfProduct, int totalDiscount) {
-        this.id = id;
-        this.fullName = fullName;
-        this.orderNumber = orderNumber;
-        this.totalSum = totalSum;
-        this.countOfProduct = countOfProduct;
-        this.totalDiscount = totalDiscount;
-
-    }
 }

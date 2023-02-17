@@ -14,9 +14,4 @@ public class OrderInfoResponse {
 
     private String address;
 
-    public OrderInfoResponse(int orderNumber, String phoneNumber, String address) {
-        this.orderNumber = orderNumber;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-    }
 }
