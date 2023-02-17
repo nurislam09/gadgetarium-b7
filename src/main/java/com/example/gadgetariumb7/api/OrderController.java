@@ -20,6 +20,7 @@ import java.time.LocalDate;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/orders")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Tag(name = "Orders API")
 public class OrderController {
 

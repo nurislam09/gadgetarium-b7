@@ -34,7 +34,7 @@ public class Subproduct {
 
     @ElementCollection
     @CollectionTable(name = "subproduct_images", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "image_url", length = 10000)
+    @Column(name = "image_url", length = 1000000)
     List<String> images;
 
     @ManyToOne(cascade = {DETACH, MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)

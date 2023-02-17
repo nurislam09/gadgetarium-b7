@@ -16,7 +16,7 @@ public class SubproductCardResponse {
     private String image;
     private Map<String, String> characteristics;
     private String color;
-    private byte rating;
+    private Double rating;
     private byte amountOfDiscount;
     private int countOfReviews;
     private int countOfSubproduct;
@@ -24,7 +24,7 @@ public class SubproductCardResponse {
     private int orderCount;
     private int price;
 
-    public SubproductCardResponse(Long id, String image, Map<String, String> characteristics, String color, byte rating, int countOfReviews, int countOfSubproduct, Long vendorCode, int orderCount, int price) {
+    public SubproductCardResponse(Long id, String image, Map<String, String> characteristics, String color, Double rating, int countOfReviews, int countOfSubproduct, Long vendorCode, int orderCount, int price) {
         this.id = id;
         this.image = image;
         this.characteristics = characteristics;

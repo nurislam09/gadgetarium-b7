@@ -1,6 +1,8 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.UserService;
+import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
+import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,6 +20,20 @@ import java.util.List;
 @Tag(name = "User api")
 public class UserController {
     private final UserService userService;
+
+    @Operation(summary = "Add or remove product from favoriteList", description = "This method for add or remove product from User's favoriteList")
+    @PostMapping()
+    @PreAuthorize("isAuthenticated()")
+    public SimpleResponse addAndRemoveToFavoriteList(@RequestParam Long productId) {
+        return userService.addAndRemoveToFavorites(productId);
+    }
+
+    @GetMapping()
+    @Operation(summary = "Get all user's favorite products", description = "This endpoint return user's all favorite products")
+    @PreAuthorize("isAuthenticated()")
+    public List<ProductCardResponse> getAllFavorites() {
+        return userService.getAllFavorites();
+    }
 
     @Operation(summary = "Add product to basket list", description = "This endpoint adds a product to a user's basket list")
     @PostMapping("/addToBasketList")
@@ -46,5 +62,12 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     public List<SubproductCardResponse> getAllFromBasketList() {
         return userService.getAllFromBasketList();
+    }
+
+    @Operation(summary = "This method for save review", description = "This endpoint save review with array of images")
+    @PostMapping()
+    @PreAuthorize("hasAuthority('Customer')")
+    public SimpleResponse save(@RequestBody ReviewSaveRequest reviewSaveRequest) {
+        return userService.addReview(reviewSaveRequest);
     }
 }

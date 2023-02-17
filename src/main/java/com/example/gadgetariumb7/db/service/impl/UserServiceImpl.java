@@ -1,12 +1,16 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Product;
+import com.example.gadgetariumb7.db.entity.Review;
 import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.ProductRepository;
+import com.example.gadgetariumb7.db.repository.ReviewRepository;
 import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.UserService;
+import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
+import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
@@ -16,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,9 +28,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
+
     private final SubproductRepository subproductRepository;
+
     private final ProductRepository productRepository;
+
+    private final ReviewRepository reviewRepository;
 
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -34,6 +44,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public SimpleResponse addAndRemoveToFavorites(Long productId) {
+        User user = getAuthenticateUser();
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product not found"));
+
+        if (user.getFavoritesList() == null) {
+            user.setFavoritesList(Arrays.asList(product));
+        } else {
+            if (user.getFavoritesList().contains(product)) {
+                user.getFavoritesList().remove(product);
+                userRepository.save(user);
+                return new SimpleResponse("Product successfully deleted from User's favorites", "ok");
+            } else user.getFavoritesList().add(product);
+        }
+        userRepository.save(user);
+        return new SimpleResponse("Product successfully added to User's favorites", "ok");
+    }
+
+    @Override
+    public List<ProductCardResponse> getAllFavorites() {
+        User user = getAuthenticateUser();
+        List<ProductCardResponse> favorites = new ArrayList<>();
+        for (Long productId : userRepository.getAllFavoritesByUserId(user.getId())) {
+            ProductCardResponse productCardResponse = productRepository.convertToResponse(productId);
+            productCardResponse.setFavorite(true);
+            favorites.add(productCardResponse);
+        }
+        return favorites;
+    }
+
     public SimpleResponse addToBasketList(int orderCount, Long subProductId) {
         User user = getAuthenticateUser();
         Subproduct subproduct = subproductRepository.findById(subProductId).orElseThrow(() -> new NotFoundException("Subproduct not found"));
@@ -98,18 +137,62 @@ public class UserServiceImpl implements UserService {
         User user = getAuthenticateUser();
         List<Long> subproductsId = subproductRepository.getAllFromUserBasketList(user.getId());
         List<SubproductCardResponse> responses = new ArrayList<>();
-        if (subproductsId.size() != 0){
+        if (subproductsId.size() != 0) {
             subproductsId.forEach(id -> {
                 Subproduct s = subproductRepository.findById(id).get();
                 SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getImages().get(0), s.getCharacteristics(), s.getColor(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
-                if (s.getProduct().getDiscount() != null){
+                if (s.getProduct().getDiscount() != null) {
                     subproductCardResponse.setAmountOfDiscount(s.getProduct().getDiscount().getAmountOfDiscount());
                 }
                 responses.add(subproductCardResponse);
             });
-        } else{
+        } else {
             throw new NotFoundException("Users basketList is empty");
         }
         return responses;
+    }
+
+    public SimpleResponse addReview(ReviewSaveRequest request) {
+        Product product = productRepository.findById(request.getProductId()).orElseThrow(() -> new NotFoundException("Product not found"));
+        User user = getAuthenticateUser();
+
+        if (!user.getOrderHistoryList().contains(product)){
+            throw new BadRequestException("This customer did not purchase this product");
+        }
+
+        if (product.getUsersReviews() != null) {
+            for (Review r : product.getUsersReviews()) {
+                if (r.getUser().getId().equals(user.getId())) {
+                    throw new BadRequestException("User has already added a review for this product");
+                }
+            }
+        }
+
+        Review review = new Review(request.getProductGrade(), request.getReviewComment(), user, product);
+        review.setReviewTime(LocalDateTime.now());
+        review.setStatusOfResponse(false);
+
+        if (request.getImages() != null) {
+            review.setImages(request.getImages());
+        }
+
+        if (product.getUsersReviews() != null) {
+            product.getUsersReviews().add(review);
+            double rating = product.getUsersReviews().stream().mapToDouble(Review::getProductGrade).average().getAsDouble();
+            product.setProductRating(Math.round(rating * 100.0) / 100.0);
+        } else {
+            product.setProductRating(request.getProductGrade());
+            product.setUsersReviews(Arrays.asList(review));
+        }
+
+        if (user.getUserReviews() != null)
+            user.getUserReviews().add(review);
+        else
+            user.setUserReviews(Arrays.asList(review));
+
+        reviewRepository.save(review);
+        productRepository.save(product);
+        userRepository.save(user);
+        return new SimpleResponse("Review successfully saved", "ok");
     }
 }
