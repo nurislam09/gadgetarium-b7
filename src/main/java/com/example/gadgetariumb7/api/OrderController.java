@@ -2,6 +2,8 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
+import com.example.gadgetariumb7.dto.response.OrderInfoResponse;
+import com.example.gadgetariumb7.dto.response.OrderPaymentResponse;
 import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
