@@ -103,4 +103,7 @@ public class ProductController {
         return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
     }
 
+//    public List<?> getProductById(Long productId, Authentication authentication){
+//        productService.
+//    }
 }
