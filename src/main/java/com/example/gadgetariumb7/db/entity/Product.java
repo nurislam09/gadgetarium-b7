@@ -46,7 +46,7 @@ public class Product {
 
     private ProductStatus productStatus;
 
-    private Byte productRating;
+    private Double productRating;
 
     private LocalDateTime createAt;
 
