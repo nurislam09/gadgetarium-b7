@@ -353,9 +353,6 @@ public class ProductServiceImpl implements ProductService {
                     productCardResponse.setCountOfReview(0);
                 }
                 setDiscountToResponse(productCardResponse, null);
-                if (product.getProductImage() == null) {
-                    productCardResponse.setProductImage(productRepository.getFirstImage(product.getId()));
-                }
             } else {
                 throw new NotFoundException();
             }
