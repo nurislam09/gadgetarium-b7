@@ -69,13 +69,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Long getCountOfOrders() {
-        return orderRepository.getCountOfOrders();
-    }
-
-    @Override
     public SimpleResponse update(Long id, OrderStatus orderStatus) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order for update not found! "));
+        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order for update not found!"));
         if(orderStatus != null) order.setOrderStatus(orderStatus);
         orderRepository.save(order);
         return new SimpleResponse("Order successfully updated", "ok");

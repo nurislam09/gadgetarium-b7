@@ -12,9 +12,7 @@ public interface OrderService {
     PaginationOrderResponse findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate);
     SimpleResponse deleteOrderById(Long id);
 
-    Long getCountOfOrders();
-
-    SimpleResponse update(Long id,OrderStatus orderStatus);
+    SimpleResponse update(Long id, OrderStatus orderStatus);
 
     OrderPaymentResponse getOrdersPaymentInfo(Long id);
 
