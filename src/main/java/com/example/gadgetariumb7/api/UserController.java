@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @Operation(summary = "This method for save review", description = "This endpoint save review with array of images")
-    @PostMapping()
+    @PostMapping("/review")
     @PreAuthorize("hasAuthority('Customer')")
     public SimpleResponse save(@RequestBody ReviewSaveRequest reviewSaveRequest) {
         return userService.addReview(reviewSaveRequest);
