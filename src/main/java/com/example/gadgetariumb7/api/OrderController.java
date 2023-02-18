@@ -2,6 +2,8 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
+import com.example.gadgetariumb7.dto.request.OrderRequest;
+import com.example.gadgetariumb7.dto.response.OrderCompleteResponse;
 import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.UserAutofillResponse;
@@ -50,5 +52,10 @@ public class OrderController {
         return orderService.autofillUserInformation();
     }
 
-
+    @Operation(summary = "Save order", description = "This method for save order")
+    @PostMapping()
+    @PreAuthorize("hasAuthority('Customer')")
+    public OrderCompleteResponse save(OrderRequest orderRequest){
+        return orderService.saveOrder(orderRequest);
+    }
 }

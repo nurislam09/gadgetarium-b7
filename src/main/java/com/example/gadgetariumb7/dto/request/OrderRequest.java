@@ -1,5 +1,6 @@
 package com.example.gadgetariumb7.dto.request;
 
+import com.example.gadgetariumb7.db.enums.OrderType;
 import com.example.gadgetariumb7.db.enums.Payment;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +19,6 @@ public class OrderRequest {
     private int totalSum;
     private int totalDiscount;
     private Payment payment;
+    private OrderType orderType;
     private List<Long> subproductsId;
 }
