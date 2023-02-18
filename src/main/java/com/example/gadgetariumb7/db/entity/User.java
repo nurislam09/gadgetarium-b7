@@ -21,7 +21,7 @@ import static javax.persistence.CascadeType.*;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
-    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1,initialValue = 3)
+    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1, initialValue = 3)
     private Long id;
     private String password;
     private String firstName;
@@ -42,13 +42,19 @@ public class User implements UserDetails {
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> favoritesList;
 
+    public void addToFavorite(Product product) {
+        if (product == null) {
+        }
+        favoritesList.add(product);
+    }
+
     @OneToMany(cascade = {MERGE, DETACH, REFRESH, REMOVE}, mappedBy = "user")
     private List<Review> userReviews;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> compareProductsList;
 
-    @OneToMany(cascade = {MERGE, DETACH, REFRESH})
+    @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> orderHistoryList;
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH})

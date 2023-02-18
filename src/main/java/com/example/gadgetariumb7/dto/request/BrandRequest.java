@@ -1,4 +1,4 @@
-package com.example.gadgetariumb7.dto;
+package com.example.gadgetariumb7.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @AllArgsConstructor
-public class BrandDTO {
+public class BrandRequest {
     @NotNull
     private String image;
 

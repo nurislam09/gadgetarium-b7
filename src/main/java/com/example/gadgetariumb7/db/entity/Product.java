@@ -46,7 +46,7 @@ public class Product {
 
     private ProductStatus productStatus;
 
-    private Byte productRating;
+    private Double productRating;
 
     private LocalDateTime createAt;
 
@@ -64,6 +64,7 @@ public class Product {
     @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
     private Subcategory subCategory;
 
+    @Column(length = 1000000)
     private String productImage;
 
     @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")

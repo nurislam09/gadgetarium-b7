@@ -2,6 +2,8 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
+import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
+
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -72,12 +74,8 @@ public class ProductController {
     @Operation(summary = "update product", description = "This endpoint update product by id")
     @PutMapping()
     @PreAuthorize("hasAuthority('Admin')")
-    public SimpleResponse update(
-            @RequestParam(value = "ID") Long id,
-            @RequestParam(value = "Артикул", required = false) Long vendorCode,
-            @RequestParam(value = "Наименования товара", required = false) Integer productCount,
-            @RequestParam(value = "Цена товара", required = false) Integer productPrice) {
-        return productService.update(id, vendorCode, productCount, productPrice);
+    public SimpleResponse update(@RequestBody ProductUpdateRequest productUpdateRequest) {
+        return productService.update(productUpdateRequest);
     }
 
     @Operation(summary = "This method for save product",
