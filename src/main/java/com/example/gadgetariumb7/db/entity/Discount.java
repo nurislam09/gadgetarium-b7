@@ -18,7 +18,7 @@ import static javax.persistence.CascadeType.*;
 public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discount_gen")
-    @SequenceGenerator(name = "discount_gen", sequenceName = "discount_seq", allocationSize = 10, initialValue = 8)
+    @SequenceGenerator(name = "discount_gen", sequenceName = "discount_seq", allocationSize = 1 ,initialValue = 10)
     private Long id;
 
     private Byte amountOfDiscount;
