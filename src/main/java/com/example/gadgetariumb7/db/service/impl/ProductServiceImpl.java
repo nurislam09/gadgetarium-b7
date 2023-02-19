@@ -7,10 +7,7 @@ import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
 import com.example.gadgetariumb7.dto.request.SubproductUpdateRequest;
-import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
-import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -357,6 +354,43 @@ public class ProductServiceImpl implements ProductService {
                 throw new NotFoundException();
             }
         }
+    }
+
+    @Override
+    public ProductSingleResponse getProductById(Long productId, String attribute, int size) {
+        User user = getAuthenticateUser();
+        ProductSingleResponse productSingleResponse = new ProductSingleResponse();
+        Optional<Product> product = productRepository.findById(productId);
+        if (productRepository.getDiscountPrice(productSingleResponse.getId()) == 0) {
+            productSingleResponse.setDiscountPrice(productSingleResponse.getProductPrice());
+        } else {
+            productSingleResponse.setDiscountPrice(Math.round(productRepository.getDiscountPrice(productSingleResponse.getId())));
+        }
+        if (product.isPresent()) {
+            productSingleResponse = productRepository.getProductById(product.get().getId());
+            productSingleResponse.setDiscountPrice(productRepository.getDiscountPrice(product.get().getId()));
+            if (user.getFavoritesList().contains(product.get())) {
+                productSingleResponse.setFavorite(true);
+            }
+            switch (attribute) {
+                case "Описание" -> {
+                    String description = product.get().getDescription();
+                    productSingleResponse.setAttribute("Описание", description);
+                    productSingleResponse.setVideoReview(product.get().getVideoReview());
+                }
+                case "Характеристики" -> {
+                    Map<String, String> characteristics = product.get().getSubproducts().get(0).getCharacteristics();
+                    productSingleResponse.setAttribute("Характеристики", characteristics);
+                }
+                case "Отзывы" -> {
+                    List<Review> reviews = product.get().getUsersReviews();
+                    int toIndex = Math.min(size, reviews.size());
+                    reviews = reviews.subList(0, toIndex);
+                    productSingleResponse.setAttribute("Отзывы", reviews);
+                }
+            }
+        }
+        return productSingleResponse;
     }
 
 

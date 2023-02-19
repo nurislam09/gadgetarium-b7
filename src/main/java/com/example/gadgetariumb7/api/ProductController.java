@@ -4,6 +4,7 @@ import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
+import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -102,8 +103,11 @@ public class ProductController {
                                                         @RequestParam int size) throws NotFoundException {
         return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
     }
-
-//    public List<?> getProductById(Long productId, Authentication authentication){
-//        productService.
-//    }
+    @Operation(summary = "Get product by id", description = "to get the inner page of product you always need to give the id of product and by default the attribute 'Описание'" +
+            "size is required if you need attribute 'Отзывы'")
+    @GetMapping("/product")
+    @PreAuthorize("isAuthenticated()")
+    public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) int size){
+        return productService.getProductById(productId, attribute, size);
+    }
 }

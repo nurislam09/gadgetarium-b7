@@ -4,6 +4,7 @@ import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.ProductSearchResponse;
+import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -134,6 +135,19 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "upper(p.color) like upper(concat('%',:text,'%')) ")
     List<ProductSearchResponse> searchCatalog(@Param("text") String text, Pageable pageable);
 
-//    @Query(nativeQuery = true, value = "select image_url from product_images where id = :id limit 1")
-//    String getFirstImage(Long id);
+    @Query("select new com.example.gadgetariumb7.dto.response.ProductSingleResponse" +
+            "(p.id," +
+            "p.productName," +
+            "p.productImage," +
+            "p.productCount," +
+            "p.productVendorCode," +
+            "p.category.categoryName," +
+            "p.subCategory.subCategoryName," +
+            "p.usersReviews.size," +
+            "p.productPrice," +
+            "p.productRating," +
+            "p.color," +
+            "p.subproducts" +
+            ") from Product p where p.id = :productId")
+    ProductSingleResponse getProductById(@Param(value = "productId") Long productId);
 }
