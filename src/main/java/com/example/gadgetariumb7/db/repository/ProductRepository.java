@@ -136,4 +136,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(nativeQuery = true, value = "select image_url from product_images where id = :id limit 1")
     String getFirstImage(Long id);
+
+    @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse (p.id, p.productName, p.productImage, " +
+            " p.productRating, p.productPrice) from Product p where p.id = :productId")
+    ProductCardResponse latestViewed(Long productId);
 }
