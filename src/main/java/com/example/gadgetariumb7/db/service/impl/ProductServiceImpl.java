@@ -306,8 +306,6 @@ public class ProductServiceImpl implements ProductService {
         return productCardResponses;
     }
 
-    public List<Long> getLast7ViewedProducts() {
-        return Collections.unmodifiableList(viewedProducts);
 
     private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
         if (fieldToSort != null) {
