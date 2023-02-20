@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -30,12 +28,6 @@ public class OrderResponse {
     private OrderType orderType;
 
     private OrderStatus orderStatus;
-
-//    private Map<OrderStatus, String> orderStatusTranslations;
-
-//    public String getOrderStatusTranslation() {
-//        return orderStatusTranslations.getOrDefault(orderStatus, null);
-//    }
 
 
     public OrderResponse(Long id, String fullName, int orderNumber, int totalSum, int countOfProduct,
