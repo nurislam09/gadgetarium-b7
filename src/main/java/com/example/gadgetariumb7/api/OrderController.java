@@ -45,7 +45,7 @@ public class OrderController {
         return orderService.deleteOrderById(id);
     }
 
-    @Operation(summary = "update order by orderStatus")
+    @Operation(summary = "update order by orderStatus", description = "In this method we can update orders by order status")
     @PutMapping
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse update(@RequestParam Long id,
@@ -53,14 +53,14 @@ public class OrderController {
         return orderService.update(id, orderStatus);
     }
 
-    @Operation(summary = "get by id order payment info")
+    @Operation(summary = "get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount")
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('Admin')")
     public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId", required = false) Long id) {
         return orderService.getOrdersPaymentInfo(id);
     }
 
-    @Operation(summary = "get by id order info")
+    @Operation(summary = "get by id order info", description = "Get 1 orders info (address, phone number")
     @GetMapping("/{id}/info")
     @PreAuthorize("hasAuthority('Admin')")
     public OrderInfoResponse getOrderInfoById(@RequestParam(value = "orderId", required = false) Long id) {
