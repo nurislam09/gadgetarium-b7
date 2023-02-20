@@ -361,14 +361,13 @@ public class ProductServiceImpl implements ProductService {
         User user = getAuthenticateUser();
         ProductSingleResponse productSingleResponse = new ProductSingleResponse();
         Optional<Product> product = productRepository.findById(productId);
-        if (productRepository.getDiscountPrice(productSingleResponse.getId()) == 0) {
-            productSingleResponse.setDiscountPrice(productSingleResponse.getProductPrice());
-        } else {
-            productSingleResponse.setDiscountPrice(Math.round(productRepository.getDiscountPrice(productSingleResponse.getId())));
-        }
         if (product.isPresent()) {
             productSingleResponse = productRepository.getProductById(product.get().getId());
-            productSingleResponse.setDiscountPrice(productRepository.getDiscountPrice(product.get().getId()));
+            if (productRepository.getDiscountPrice(productSingleResponse.getId()) == 0) {
+                productSingleResponse.setDiscountPrice(productSingleResponse.getProductPrice());
+            } else {
+                productSingleResponse.setDiscountPrice(Math.round(productRepository.getDiscountPrice(productSingleResponse.getId())));
+            }
             if (user.getFavoritesList().contains(product.get())) {
                 productSingleResponse.setFavorite(true);
             }
@@ -384,9 +383,16 @@ public class ProductServiceImpl implements ProductService {
                 }
                 case "Отзывы" -> {
                     List<Review> reviews = product.get().getUsersReviews();
-                    int toIndex = Math.min(size, reviews.size());
-                    reviews = reviews.subList(0, toIndex);
-                    productSingleResponse.setAttribute("Отзывы", reviews);
+
+                    List<ReviewMainResponse> reviewMainResponses = reviews.stream().map(r -> new ReviewMainResponse(
+                            r.getId(), r.getUserReview(), r.getResponseOfReview(),
+                            r.getReviewTime(), r.getProductGrade(), new UserMainResponse(
+                            r.getUser().getId(), r.getUser().getFirstName() + " " + r.getUser().getLastName(),
+                            r.getUser().getImage())
+                    )).toList();
+                    int toIndex = Math.min(size, reviewMainResponses.size());
+                    reviewMainResponses = reviewMainResponses.subList(0, toIndex);
+                    productSingleResponse.setAttribute("Отзывы", reviewMainResponses);
                 }
             }
         }

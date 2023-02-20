@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 public class DiscountRequest {
-    private byte amountOfDiscount;
+    private Byte amountOfDiscount;
     @Future
     private LocalDate startDate;
     @Past

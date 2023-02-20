@@ -143,7 +143,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.productVendorCode," +
             "p.category.categoryName," +
             "p.subCategory.subCategoryName," +
-            "p.usersReviews.size," +
+            "size(p.usersReviews)," +
             "p.productPrice," +
             "p.productRating," +
             "p.color," +

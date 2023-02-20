@@ -25,8 +25,9 @@ public class ProductSingleResponse {
     private int productPrice;
     private Double productRating;
     private String color;
-    private String videoReview;
     private List<Subproduct> subproducts;
+
+    private String videoReview;
     private int discountPrice;
     private boolean isFavorite;
 
@@ -48,6 +49,27 @@ public class ProductSingleResponse {
         this.subproducts = subproducts;
     }
 
+    public ProductSingleResponse(Long id, String productName, String productImage, int productCount, Long productVendorCode, String categoryName, String subCategoryName,
+                                 int countOfReviews, int productPrice, Double productRating, String color, List<Subproduct> subproducts, int discountPrice, Map<String, Object> attribute, String videoReview, boolean isFavorite){
+        this.id = id;
+        this.productName = productName;
+        this.productImage = productImage;
+        this.productCount = productCount;
+        this.productVendorCode = productVendorCode;
+        this.categoryName = categoryName;
+        this.subCategoryName = subCategoryName;
+        this.countOfReviews = countOfReviews;
+        this.productPrice = productPrice;
+        this.productRating = productRating;
+        this.color = color;
+        this.subproducts = subproducts;
+        this.discountPrice = discountPrice;
+        this.attribute = attribute;
+        this.videoReview = videoReview;
+        this.isFavorite = isFavorite;
+
+    }
+
     public void setAttribute(String name, Object value){
         if(attribute == null){
             attribute = new HashMap<>();
@@ -55,8 +77,8 @@ public class ProductSingleResponse {
         attribute.put(name, value);
     }
 
-    public Map<String, Object> getAttribute(){
-        return attribute;
-    }
+//    public Map<String, Object> getAttribute(){
+//        return attribute;
+//    }
 
 }
