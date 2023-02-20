@@ -103,4 +103,12 @@ public class ProductController {
         return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
     }
 
+    @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
+    @GetMapping()
+    @PreAuthorize("isAuthenticated()")
+    public List<ProductCardResponse> getViewedProducts(){
+        List<ProductCardResponse> viewedProducts = productService.getViewedProducts();
+        return viewedProducts;
+    }
+
 }
