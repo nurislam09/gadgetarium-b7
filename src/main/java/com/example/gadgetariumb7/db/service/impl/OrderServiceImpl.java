@@ -28,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
     public PaginationOrderResponse findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate) {
         List<OrderResponse> orderResponses;
         Page<OrderResponse> orderResponsesPagination;
+        OrderResponse orderResponse = new OrderResponse();
         PaginationOrderResponse paginationOrderResponse = new PaginationOrderResponse();
         Pageable pageable = PageRequest.of(page - 1, size);
 
@@ -43,6 +44,15 @@ public class OrderServiceImpl implements OrderService {
             orderResponses = orderResponses.stream().filter(o -> o.getDateOfOrder().toLocalDate().isAfter(startDate) && o.getDateOfOrder().toLocalDate()
                     .isBefore(endDate)).toList();
         }
+
+        Map<OrderStatus, String> orderStatusTranslations = new HashMap<>();
+        orderStatusTranslations.put(OrderStatus.WAITING,"В ожидании");
+        orderStatusTranslations.put(OrderStatus.IN_PROCESSING,"В обработке");
+        orderStatusTranslations.put(OrderStatus.ON_THE_WAY,"Курьер в пути");
+        orderStatusTranslations.put(OrderStatus.DELIVERED,"Доставлены");
+        orderStatusTranslations.put(OrderStatus.CANCEL,"Отменены");
+
+        paginationOrderResponse.setOrderStatusTranslations(orderStatusTranslations);
 
         paginationOrderResponse.setOrderResponses(orderResponses);
         paginationOrderResponse.setCurrentPage(pageable.getPageNumber() + 1);

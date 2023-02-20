@@ -15,4 +15,5 @@ public class PaginationOrderResponse {
     private List<OrderResponse> orderResponses;
     private Map<OrderStatus, Long> orderStatusAndSize;
     private Long countOfOrders;
+    private Map<OrderStatus, String> orderStatusTranslations;
 }

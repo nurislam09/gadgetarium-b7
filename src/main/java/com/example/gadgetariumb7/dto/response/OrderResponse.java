@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -25,20 +27,23 @@ public class OrderResponse {
 
     private int totalSum;
 
-    private int totalDiscount;
-
     private OrderType orderType;
 
     private OrderStatus orderStatus;
 
+//    private Map<OrderStatus, String> orderStatusTranslations;
 
-    public OrderResponse(Long id, String fullName, int orderNumber, int totalSum, int totalDiscount, int countOfProduct,
+//    public String getOrderStatusTranslation() {
+//        return orderStatusTranslations.getOrDefault(orderStatus, null);
+//    }
+
+
+    public OrderResponse(Long id, String fullName, int orderNumber, int totalSum, int countOfProduct,
                          LocalDateTime dateOfOrder, OrderType orderType, OrderStatus orderStatus) {
         this.id = id;
         this.fullName = fullName;
         this.orderNumber = orderNumber;
         this.totalSum = totalSum;
-        this.totalDiscount = totalDiscount;
         this.countOfProduct = countOfProduct;
         this.dateOfOrder = dateOfOrder;
         this.orderType = orderType;
@@ -46,14 +51,13 @@ public class OrderResponse {
     }
 
     public OrderResponse(Long id, String fullName, int orderNumber, LocalDateTime dateOfOrder,
-                         int countOfProduct, int totalSum, int totalDiscount, OrderType orderType,OrderStatus orderStatus) {
+                         int countOfProduct, int totalSum, OrderType orderType,OrderStatus orderStatus) {
         this.id = id;
         this.fullName = fullName;
         this.orderNumber = orderNumber;
         this.dateOfOrder = dateOfOrder;
         this.countOfProduct = countOfProduct;
         this.totalSum = totalSum;
-        this.totalDiscount = totalDiscount;
         this.orderType = orderType;
         this.orderStatus=orderStatus;
     }
