@@ -20,7 +20,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "concat(o.firstName,' ', o.lastName ), " +
             "o.orderNumber," +
             "o.totalSum," +
-            "o.totalDiscount," +
             "o.countOfProduct," +
             "o.dateOfOrder," +
             "o.orderType," +
@@ -38,7 +37,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "o.dateOfOrder, " +
             "o.countOfProduct, " +
             "o.totalSum, " +
-            "o.totalDiscount, " +
             "o.orderType, " +
             "o.orderStatus) " +
             "FROM Order o " +
