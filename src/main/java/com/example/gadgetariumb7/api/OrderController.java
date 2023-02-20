@@ -2,6 +2,8 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
+import com.example.gadgetariumb7.dto.response.OrderInfoResponse;
+import com.example.gadgetariumb7.dto.response.OrderPaymentResponse;
 import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,6 +43,28 @@ public class OrderController {
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse deleteOrder(@PathVariable Long id) {
         return orderService.deleteOrderById(id);
+    }
+
+    @Operation(summary = "update order by orderStatus", description = "In this method we can update orders by order status")
+    @PutMapping
+    @PreAuthorize("hasAuthority('Admin')")
+    public SimpleResponse update(@RequestParam Long id,
+                                 @RequestParam(value = "orderStatus", required = false) OrderStatus orderStatus) {
+        return orderService.update(id, orderStatus);
+    }
+
+    @Operation(summary = "get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount")
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
+    public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId", required = false) Long id) {
+        return orderService.getOrdersPaymentInfo(id);
+    }
+
+    @Operation(summary = "get by id order info", description = "Get 1 orders info (address, phone number")
+    @GetMapping("/{id}/info")
+    @PreAuthorize("hasAuthority('Admin')")
+    public OrderInfoResponse getOrderInfoById(@RequestParam(value = "orderId", required = false) Long id) {
+        return orderService.getOrderInfoById(id);
     }
 
 }
