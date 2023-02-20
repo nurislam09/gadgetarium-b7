@@ -60,10 +60,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED'")
     Long getSoldProductPrice();
 
-    @Query(nativeQuery = true, value = "select sum(o.count_of_product) from orders o where o.order_status in ('WAITING', 'ORDER_READY', 'ON_THE_WAY')")
+    @Query(nativeQuery = true, value = "select sum(o.count_of_product) from orders o where o.order_status in ('WAITING', 'ORDER_READY', 'ON_THE_WAY', 'IN_PROCESSING')")
     int getCountOrderProduct();
 
-    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status in ('WAITING', 'ORDER_READY', 'ON_THE_WAY')")
+    @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status in ('WAITING', 'ORDER_READY', 'ON_THE_WAY', 'IN_PROCESSING')")
     Long getOrderProductPrice();
 
     @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED' and o.date_of_order between date(now()) and date(now()) + interval '1' day")
