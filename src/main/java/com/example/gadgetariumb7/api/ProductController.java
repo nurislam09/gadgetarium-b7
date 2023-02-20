@@ -107,7 +107,7 @@ public class ProductController {
             "size is required if you need attribute 'Отзывы'")
     @GetMapping("/product")
     @PreAuthorize("isAuthenticated()")
-    public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) int size){
+    public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException{
         return productService.getProductById(productId, attribute, size);
     }
 }

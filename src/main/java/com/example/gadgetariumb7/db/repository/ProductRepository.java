@@ -134,20 +134,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "cast(p.productVendorCode as string) like upper(concat(:text, '%')) OR " +
             "upper(p.color) like upper(concat('%',:text,'%')) ")
     List<ProductSearchResponse> searchCatalog(@Param("text") String text, Pageable pageable);
-
-    @Query("select new com.example.gadgetariumb7.dto.response.ProductSingleResponse" +
-            "(p.id," +
-            "p.productName," +
-            "p.productImage," +
-            "p.productCount," +
-            "p.productVendorCode," +
-            "p.category.categoryName," +
-            "p.subCategory.subCategoryName," +
-            "size(p.usersReviews)," +
-            "p.productPrice," +
-            "p.productRating," +
-            "p.color," +
-            "p.subproducts" +
-            ") from Product p where p.id = :productId")
-    ProductSingleResponse getProductById(@Param(value = "productId") Long productId);
 }

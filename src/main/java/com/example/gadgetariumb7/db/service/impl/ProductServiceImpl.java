@@ -357,17 +357,25 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductSingleResponse getProductById(Long productId, String attribute, int size) {
+    public ProductSingleResponse getProductById(Long productId, String attribute, Integer size) {
         User user = getAuthenticateUser();
         ProductSingleResponse productSingleResponse = new ProductSingleResponse();
         Optional<Product> product = productRepository.findById(productId);
         if (product.isPresent()) {
-            productSingleResponse = productRepository.getProductById(product.get().getId());
+            List<SubproductResponse> subproducts = product.get().getSubproducts().stream().map(p -> new SubproductResponse(p.getId(), p.getCountOfSubproduct(),
+                    p.getImages(), p.getPrice(), p.getColor(), p.getCharacteristics())).toList();
+            productSingleResponse = product.map(p -> new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductImage(), p.getProductCount(),
+                    p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
+                    p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), p.getColor(), subproducts)).orElseThrow(() -> new NotFoundException("Product not found"));
+            try{
             if (productRepository.getDiscountPrice(productSingleResponse.getId()) == 0) {
                 productSingleResponse.setDiscountPrice(productSingleResponse.getProductPrice());
             } else {
                 productSingleResponse.setDiscountPrice(Math.round(productRepository.getDiscountPrice(productSingleResponse.getId())));
+            }}catch (RuntimeException e){
+                System.out.println("null discount");
             }
+
             if (user.getFavoritesList().contains(product.get())) {
                 productSingleResponse.setFavorite(true);
             }
@@ -376,28 +384,31 @@ public class ProductServiceImpl implements ProductService {
                     String description = product.get().getDescription();
                     productSingleResponse.setAttribute("Описание", description);
                     productSingleResponse.setVideoReview(product.get().getVideoReview());
+                    return productSingleResponse;
                 }
                 case "Характеристики" -> {
                     Map<String, String> characteristics = product.get().getSubproducts().get(0).getCharacteristics();
                     productSingleResponse.setAttribute("Характеристики", characteristics);
+                    return productSingleResponse;
                 }
                 case "Отзывы" -> {
                     List<Review> reviews = product.get().getUsersReviews();
-
                     List<ReviewMainResponse> reviewMainResponses = reviews.stream().map(r -> new ReviewMainResponse(
                             r.getId(), r.getUserReview(), r.getResponseOfReview(),
                             r.getReviewTime(), r.getProductGrade(), new UserMainResponse(
                             r.getUser().getId(), r.getUser().getFirstName() + " " + r.getUser().getLastName(),
                             r.getUser().getImage())
                     )).toList();
+                    if(size == null){
+                        size = 3;
+                    }
                     int toIndex = Math.min(size, reviewMainResponses.size());
                     reviewMainResponses = reviewMainResponses.subList(0, toIndex);
                     productSingleResponse.setAttribute("Отзывы", reviewMainResponses);
+                    return productSingleResponse;
                 }
             }
         }
         return productSingleResponse;
     }
-
-
 }

@@ -28,5 +28,5 @@ public interface ProductService {
 
     List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size);
 
-    ProductSingleResponse getProductById(Long productId, String attribute, int size);
+    ProductSingleResponse getProductById(Long productId, String attribute, Integer size);
 }

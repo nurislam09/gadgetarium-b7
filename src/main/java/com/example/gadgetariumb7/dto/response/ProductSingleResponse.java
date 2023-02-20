@@ -4,16 +4,13 @@ import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductSingleResponse {
-    @JsonIgnore
     private Long id;
     private String productName;
     private String productImage;
@@ -25,7 +22,7 @@ public class ProductSingleResponse {
     private int productPrice;
     private Double productRating;
     private String color;
-    private List<Subproduct> subproducts;
+    private List<SubproductResponse> subproducts;
 
     private String videoReview;
     private int discountPrice;
@@ -33,8 +30,8 @@ public class ProductSingleResponse {
 
     private Map<String, Object> attribute;
 
-    public ProductSingleResponse(Long id, String productName, String productImage, int productCount, Long productVendorCode, String categoryName, String subCategoryName,
-                                 int countOfReviews, int productPrice, Double productRating, String color, List<Subproduct> subproducts){
+    public ProductSingleResponse(long id, String productName, String productImage, int productCount, long productVendorCode, String categoryName, String subCategoryName,
+                                 int countOfReviews, int productPrice, double productRating, String color, List<SubproductResponse> subproducts) {
         this.id = id;
         this.productName = productName;
         this.productImage = productImage;
@@ -47,27 +44,6 @@ public class ProductSingleResponse {
         this.productRating = productRating;
         this.color = color;
         this.subproducts = subproducts;
-    }
-
-    public ProductSingleResponse(Long id, String productName, String productImage, int productCount, Long productVendorCode, String categoryName, String subCategoryName,
-                                 int countOfReviews, int productPrice, Double productRating, String color, List<Subproduct> subproducts, int discountPrice, Map<String, Object> attribute, String videoReview, boolean isFavorite){
-        this.id = id;
-        this.productName = productName;
-        this.productImage = productImage;
-        this.productCount = productCount;
-        this.productVendorCode = productVendorCode;
-        this.categoryName = categoryName;
-        this.subCategoryName = subCategoryName;
-        this.countOfReviews = countOfReviews;
-        this.productPrice = productPrice;
-        this.productRating = productRating;
-        this.color = color;
-        this.subproducts = subproducts;
-        this.discountPrice = discountPrice;
-        this.attribute = attribute;
-        this.videoReview = videoReview;
-        this.isFavorite = isFavorite;
-
     }
 
     public void setAttribute(String name, Object value){
@@ -76,9 +52,4 @@ public class ProductSingleResponse {
         }
         attribute.put(name, value);
     }
-
-//    public Map<String, Object> getAttribute(){
-//        return attribute;
-//    }
-
 }
