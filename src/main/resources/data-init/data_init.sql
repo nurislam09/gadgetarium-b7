@@ -777,12 +777,6 @@ values
     (4, 'г.Бишкек, Токтогулова, 123 кв 67', 23, '2020-09-13 18:20:03', 'IN_PROCESS', 'syimyk@gmail.com', 'Nurtilek', 'Nurtilekov', 100004, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 2),
     (5, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 12, '2023-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Malik', 'Malikov', 100005, 'DELIVERED', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 2),
 
-    (6, 'г.Бишкек, Chuiskaya, 145/7 кв 24, дом 5', 17, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Kairat', 'Kairatov', 100006, 'IN_PROCESSING', 'DELIVERY', 'CASH', '+996222219743', 15750, 315000, 2),
-    (7, 'г.Бишкек, Gogola, 119', 16, '2023-09-13 18:20:03', 'IN_PROCESS', 'syimyk@gmail.com', 'Azim', 'Azimov', 100007, 'CANCEL', 'DELIVERY', 'CASH', '+996222219743', 249570, 270910, 2),
-    (8, 'г.Бишкек, Чуй 34 кв 23', 54, '2021-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Aibek', 'Aibekov', 100008, 'WAITING', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 2),
-    (9, 'г.Бишкек, Toktogula, 123 кв 67', 22, '2020-09-13 18:20:03', 'IN_PROCESS', 'syimyk@gmail.com', 'Nursultan', 'Nursultanov', 100009, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 2),
-    (10, 'г.Бишкек, Magistral, 47 кв 12, дом 8', 87, '2023-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Argen', 'Jetim', 100010, 'DELIVERED', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 2);
-
 
 insert into orders_subproducts(subproduct_id, order_id)
 values (1, 1),
