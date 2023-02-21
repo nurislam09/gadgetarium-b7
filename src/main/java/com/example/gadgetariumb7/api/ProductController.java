@@ -115,8 +115,7 @@ public class ProductController {
     @GetMapping()
     @PreAuthorize("isAuthenticated()")
     public List<ProductCardResponse> getViewedProducts() {
-        List<ProductCardResponse> viewedProducts = productService.getViewedProducts();
-        return viewedProducts;
+        return productService.getViewedProducts();
     }
 
 }
