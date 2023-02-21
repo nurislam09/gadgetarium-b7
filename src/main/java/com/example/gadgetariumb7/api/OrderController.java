@@ -53,14 +53,14 @@ public class OrderController {
         return orderService.update(id, orderStatus);
     }
 
-    @Operation(summary = "get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount")
+    @Operation(summary = "get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount)")
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('Admin')")
     public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId", required = false) Long id) {
         return orderService.getOrdersPaymentInfo(id);
     }
 
-    @Operation(summary = "get by id order info", description = "Get 1 orders info (address, phone number")
+    @Operation(summary = "get by id order info", description = "Get 1 orders info (address, phone number)")
     @GetMapping("/{id}/info")
     @PreAuthorize("hasAuthority('Admin')")
     public OrderInfoResponse getOrderInfoById(@RequestParam(value = "orderId", required = false) Long id) {

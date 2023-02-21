@@ -103,6 +103,13 @@ public class ProductController {
         return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
     }
 
+    @Operation(summary = "This method for get information", description = "Get information with product status")
+    @GetMapping("/inf")
+    @PreAuthorize("hasAuthority('Admin')")
+    public InforgraphicsResponse inforgraphic() throws NotFoundException{
+        return productService.inforgraphics();
+    }
+
     @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
     @GetMapping()
     @PreAuthorize("isAuthenticated()")
