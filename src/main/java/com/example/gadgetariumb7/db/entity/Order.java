@@ -66,12 +66,8 @@ public class Order {
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")
     private List<Subproduct> subproducts;
 
-    @PostPersist
-    private void generateOrderNumber() {
-        this.orderNumber = 100000 + id.intValue();
-    }
 
-    public Order(String firstName, String lastName, String email, String phoneNumber, String address, int countOfProduct, int totalSum, int totalDiscount, Payment payment, OrderType orderType, List<Subproduct> subproducts, User user) {
+    public Order(String firstName, String lastName, String email, String phoneNumber, String address, int countOfProduct, int totalSum, int totalDiscount, Payment payment, OrderType orderType, List<Subproduct> subproducts, User user, int orderNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -83,8 +79,10 @@ public class Order {
         this.payment = payment;
         this.subproducts = subproducts;
         this.orderStatus = OrderStatus.IN_PROCESSING;
+        this.orderType = orderType;
         this.deliveryStatus = DeliveryStatus.IN_PROCESS;
         this.dateOfOrder = LocalDateTime.now();
         this.user = user;
+        this.orderNumber = orderNumber;
     }
 }

@@ -3,7 +3,6 @@ package com.example.gadgetariumb7.db.service.impl;
 import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.entity.User;
-import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
 import com.example.gadgetariumb7.db.repository.SubproductRepository;
@@ -11,7 +10,6 @@ import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.dto.request.OrderRequest;
-import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,9 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final SubproductRepository subproductRepository;
+    private int orderGenerateNumber = 100006;
 
     private Optional<User> getAuthenticateUserForAutofill() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -141,15 +138,16 @@ public class OrderServiceImpl implements OrderService {
     public OrderCompleteResponse saveOrder(OrderRequest req) {
         User user = getAuthenticateUserForAutofill().orElseThrow(() -> new NotFoundException("User not found"));
         List<Subproduct> subproducts = req.getSubproductsId().stream().map(s -> subproductRepository.findById(s).orElseThrow(() -> new NotFoundException(String.format("Subproduct with id %d not found", s)))).toList();
-        Order order = new Order(req.getFirstName(), req.getLastName(), req.getEmail(), req.getPhoneNumber(), req.getAddress(), req.getCountOfProduct(), req.getTotalSum(), req.getTotalDiscount(), req.getPayment(), req.getOrderType(), subproducts, user);
+        Order order = new Order(req.getFirstName(), req.getLastName(), req.getEmail(), req.getPhoneNumber(), req.getAddress(), req.getCountOfProduct(), req.getTotalSum(), req.getTotalDiscount(), req.getPayment(), req.getOrderType(), subproducts, user, orderGenerateNumber);
         subproducts.forEach(x -> {
             if (user.getBasketList().containsKey(x)){
                 user.getBasketList().remove(x);
             } else {
-                throw new NotFoundException(String.format("Subproduct not exist in user's ba", x.getId(), user.getId()));
+                throw new NotFoundException(String.format("Subproduct not exist in user's basket list", x.getId(), user.getId()));
             }
         });
         orderRepository.save(order);
+        orderGenerateNumber++;
         return new OrderCompleteResponse(order.getOrderNumber(), order.getDateOfOrder());
     }
 }
