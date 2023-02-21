@@ -4,6 +4,7 @@ import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
+import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
 import com.example.gadgetariumb7.dto.request.SubproductUpdateRequest;
@@ -11,6 +12,7 @@ import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +31,8 @@ public class ProductServiceImpl implements ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
+
+    private final OrderRepository orderRepository;
     private final SubproductRepository subproductRepository;
 
     private User getAuthenticateUser() {
@@ -66,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
             setDiscountToResponse(r, null);
             r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
-        if (getAuthenticateUserForFavorite().isPresent()) {
+        if (getAuthenticateUserForFavorite().isPresent()){
             User user = getAuthenticateUserForFavorite().get();
             productCardResponses.forEach(x -> {
                 Optional<Product> productOptional = productRepository.findById(x.getProductId());
@@ -211,6 +215,7 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
+
     private void setDiscountToResponse(ProductCardResponse productCardResponse, ProductAdminResponse productAdminResponse) {
         try {
             if (productCardResponse != null) {
@@ -302,6 +307,18 @@ public class ProductServiceImpl implements ProductService {
         return productCardResponses;
     }
 
+    @Override
+    public List<ProductCardResponse> getViewedProducts() {
+        List<Long> productsId = productRepository.getViewedProducts(getAuthenticateUser().getId());
+        List<ProductCardResponse> responses = new ArrayList<>();
+        productsId.forEach(r -> {
+            Product p = productRepository.findById(r).orElseThrow(() -> new NotFoundException("Product not found"));
+            responses.add(new ProductCardResponse(p.getId(), p.getProductName(), p.getProductImage(), p.getProductRating(),
+                    productRepository.getAmountOfFeedback(p.getId()), p.getProductPrice()));
+        });
+        return responses;
+    }
+
     private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
         if (fieldToSort != null) {
             switch (fieldToSort) {
@@ -354,6 +371,28 @@ public class ProductServiceImpl implements ProductService {
             }
         }
     }
+
+    @Override
+    public InforgraphicsResponse inforgraphics() throws NullPointerException {
+        try {
+            InforgraphicsResponse inforgraphics = new InforgraphicsResponse();
+            inforgraphics.setSoldCount(productRepository.getCountSoldProducts());
+            inforgraphics.setSoldPrice(productRepository.getSoldProductPrice());
+            inforgraphics.setOrderCount(productRepository.getCountOrderProduct());
+            inforgraphics.setOrderPrice(productRepository.getOrderProductPrice());
+            inforgraphics.setCurrentPeriodPerDay(productRepository.getCurrentPeriodPerDay());
+            inforgraphics.setCurrentPeriodPerMonth(productRepository.getCurrentPeriodPerMonth());
+            inforgraphics.setCurrentPeriodPerYear(productRepository.getCurrentPeriodPerYear());
+            inforgraphics.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
+            inforgraphics.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
+            inforgraphics.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
+            return inforgraphics;
+
+        } catch (AopInvocationException e) {
+            throw new BadRequestException("Inforgraphic is null");
+        }
+    }
+
 
     @Override
     public ProductSingleResponse getProductById(Long productId, String attribute, Integer size) {

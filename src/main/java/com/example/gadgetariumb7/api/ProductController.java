@@ -2,6 +2,7 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
+import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
@@ -103,6 +104,21 @@ public class ProductController {
                                                         @RequestParam int size) throws NotFoundException {
         return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
     }
+
+    @Operation(summary = "This method for get information", description = "Get information with product status")
+    @GetMapping("/inf")
+    @PreAuthorize("hasAuthority('Admin')")
+    public InforgraphicsResponse inforgraphic() throws NotFoundException {
+        return productService.inforgraphics();
+    }
+
+    @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
+    @GetMapping()
+    @PreAuthorize("isAuthenticated()")
+    public List<ProductCardResponse> getViewedProducts() {
+        return productService.getViewedProducts();
+    }
+
     @Operation(summary = "Get product by id", description = "to get the inner page of product you always need to give the id of product and by default the attribute 'Описание'" +
             "size is required if you need attribute 'Отзывы'")
     @GetMapping("/product")

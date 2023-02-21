@@ -1,5 +1,6 @@
 package com.example.gadgetariumb7.db.service;
 
+import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
@@ -22,6 +23,8 @@ public interface ProductService {
 
     SimpleResponse addProduct(ProductRequest productRequest);
 
+    InforgraphicsResponse inforgraphics() throws NullPointerException;
+
     SimpleResponse delete(Long id);
 
     SimpleResponse update(ProductUpdateRequest productUpdateRequest);
@@ -29,4 +32,5 @@ public interface ProductService {
     List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size);
 
     ProductSingleResponse getProductById(Long productId, String attribute, Integer size);
+    List<ProductCardResponse> getViewedProducts();
 }
