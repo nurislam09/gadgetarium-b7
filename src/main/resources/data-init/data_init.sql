@@ -775,7 +775,7 @@ values
     (2, 'г.Бишкек, Гражданская, 119', 24, '2023-09-13 18:20:03', 'IN_PROCESS', 'syimyk@gmail.com', 'Алишер', 'Алишеров', 100002, 'CANCEL', 'DELIVERY', 'CASH', '+996222219743', 249570, 270910, 2),
     (3, 'г.Бишкек, Chui 34 кв 23', 4, '2021-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Альбина', 'Альбинова', 100003, 'WAITING', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 2),
     (4, 'г.Бишкек, Токтогулова, 123 кв 67', 23, '2020-09-13 18:20:03', 'IN_PROCESS', 'syimyk@gmail.com', 'Nurtilek', 'Nurtilekov', 100004, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 2),
-    (5, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 12, '2023-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Malik', 'Malikov', 100005, 'DELIVERED', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 2),
+    (5, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 12, '2023-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com', 'Malik', 'Malikov', 100005, 'DELIVERED', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 2);
 
 
 insert into orders_subproducts(subproduct_id, order_id)
