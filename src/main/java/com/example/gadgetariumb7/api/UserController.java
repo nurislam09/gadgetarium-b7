@@ -1,8 +1,8 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.UserService;
+import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,5 +62,12 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     public List<SubproductCardResponse> getAllFromBasketList() {
         return userService.getAllFromBasketList();
+    }
+
+    @Operation(summary = "This method for save review", description = "This endpoint save review with array of images")
+    @PostMapping("/review")
+    @PreAuthorize("hasAuthority('Customer')")
+    public SimpleResponse save(@RequestBody ReviewSaveRequest reviewSaveRequest) {
+        return userService.addReview(reviewSaveRequest);
     }
 }

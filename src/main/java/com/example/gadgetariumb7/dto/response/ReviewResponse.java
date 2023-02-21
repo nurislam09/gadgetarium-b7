@@ -10,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class ReviewResponse {
     private Long id;
     private String userReview;
@@ -18,13 +17,13 @@ public class ReviewResponse {
 
     private List<String> reviewImages;
     private LocalDateTime reviewTime;
-    private byte productGrade;
+    private Double productGrade;
 
     private ProductReviewResponse productReviewResponse;
 
     private UserResponse userResponse;
 
-    public ReviewResponse(Long id, String userReview, String responseOfReview,LocalDateTime reviewTime, byte productGrade) {
+    public ReviewResponse(Long id, String userReview, String responseOfReview,LocalDateTime reviewTime, Double productGrade) {
         this.id = id;
         this.userReview = userReview;
         this.responseOfReview = responseOfReview;
