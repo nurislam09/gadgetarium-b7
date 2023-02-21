@@ -40,10 +40,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "o.orderType, " +
             "o.orderStatus) " +
             "FROM Order o " +
-            "WHERE o.orderStatus = :orderStatus and UPPER(CONCAT(o.firstName, ' ', o.lastName)) LIKE UPPER(CONCAT('%', :keyWord, '%')) " +
-            "OR CAST(o.orderNumber AS string) LIKE CONCAT(:keyWord, '%') " +
-            "OR UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))")
+            "WHERE (o.orderStatus = :orderStatus) and  ((UPPER(CONCAT(o.firstName, ' ', o.lastName)) LIKE UPPER(CONCAT('%', :keyWord, '%'))) " +
+            "OR (CAST(o.orderNumber AS string) LIKE CONCAT(:keyWord, '%')) " +
+            "OR (UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))))")
     Page<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable, OrderStatus orderStatus);
+
+
 
 }
 
