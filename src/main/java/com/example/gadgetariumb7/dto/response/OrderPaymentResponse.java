@@ -25,4 +25,10 @@ public class OrderPaymentResponse {
 
     private String productName;
 
+    private int total;
+
+    private String phoneNumber;
+
+    private String address;
+
 }
