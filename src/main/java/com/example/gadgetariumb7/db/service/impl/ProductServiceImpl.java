@@ -310,6 +310,18 @@ public class ProductServiceImpl implements ProductService {
         return productCardResponses;
     }
 
+    @Override
+    public List<ProductCardResponse> getViewedProducts() {
+        List<Long> productsId = productRepository.getViewedProducts(getAuthenticateUser().getId());
+        List<ProductCardResponse> responses = new ArrayList<>();
+        productsId.forEach(r -> {
+            Product p = productRepository.findById(r).orElseThrow(() -> new NotFoundException("Product not found"));
+            responses.add(new ProductCardResponse(p.getId(), p.getProductName(), p.getProductImage(), p.getProductRating(),
+                    productRepository.getAmountOfFeedback(p.getId()), p.getProductPrice()));
+        });
+        return responses;
+    }
+
     private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
         if (fieldToSort != null) {
             switch (fieldToSort) {
