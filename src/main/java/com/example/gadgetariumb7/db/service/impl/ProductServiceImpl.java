@@ -211,7 +211,6 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
-
     private void setDiscountToResponse(ProductCardResponse productCardResponse, ProductAdminResponse productAdminResponse) {
         try {
             if (productCardResponse != null) {
@@ -359,54 +358,48 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductSingleResponse getProductById(Long productId, String attribute, Integer size) {
         User user = getAuthenticateUser();
-        ProductSingleResponse productSingleResponse = new ProductSingleResponse();
-        Optional<Product> product = productRepository.findById(productId);
-        if (product.isPresent()) {
-            List<SubproductResponse> subproducts = product.get().getSubproducts().stream().map(p -> new SubproductResponse(p.getId(), p.getCountOfSubproduct(),
-                    p.getImages(), p.getPrice(), p.getColor(), p.getCharacteristics())).toList();
-            productSingleResponse = product.map(p -> new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductImage(), p.getProductCount(),
+        ProductSingleResponse productSingleResponse;
+        Product p = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("we don't have the product with such id"));
+            List<SubproductResponse> subproducts = p.getSubproducts().stream().map(s -> new SubproductResponse(s.getId(), s.getCountOfSubproduct(),
+                    s.getImages(), s.getPrice(), s.getColor(), s.getCharacteristics())).toList();
+            productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
                     p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
-                    p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), p.getColor(), subproducts)).orElseThrow(() -> new NotFoundException("Product not found"));
+                    p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), p.getColor(), subproducts);
             try{
-            if (productRepository.getDiscountPrice(productSingleResponse.getId()) == 0) {
-                productSingleResponse.setDiscountPrice(productSingleResponse.getProductPrice());
-            } else {
-                productSingleResponse.setDiscountPrice(Math.round(productRepository.getDiscountPrice(productSingleResponse.getId())));
-            }}catch (RuntimeException e){
+            productSingleResponse.setAmountOfDiscount(p.getDiscount().getAmountOfDiscount());}
+            catch (RuntimeException e){
                 System.out.println("null discount");
             }
-
-            if (user.getFavoritesList().contains(product.get())) {
-                productSingleResponse.setFavorite(true);
+        if (user.getFavoritesList().contains(p)) {
+            productSingleResponse.setFavorite(true);
+        }
+        switch (attribute) {
+            case "Описание" -> {
+                String description = p.getDescription();
+                productSingleResponse.setAttribute("Описание", description);
+                productSingleResponse.setVideoReview(p.getVideoReview());
+                return productSingleResponse;
             }
-            switch (attribute) {
-                case "Описание" -> {
-                    String description = product.get().getDescription();
-                    productSingleResponse.setAttribute("Описание", description);
-                    productSingleResponse.setVideoReview(product.get().getVideoReview());
-                    return productSingleResponse;
+            case "Характеристики" -> {
+                Map<String, String> characteristics = p.getSubproducts().get(0).getCharacteristics();
+                productSingleResponse.setAttribute("Характеристики", characteristics);
+                return productSingleResponse;
+            }
+            case "Отзывы" -> {
+                List<Review> reviews = p.getUsersReviews();
+                List<ReviewMainResponse> reviewMainResponses = reviews.stream().map(r -> new ReviewMainResponse(
+                        r.getId(), r.getUserReview(), r.getResponseOfReview(),
+                        r.getReviewTime(), r.getProductGrade(), new UserMainResponse(
+                        r.getUser().getId(), r.getUser().getFirstName() + " " + r.getUser().getLastName(),
+                        r.getUser().getImage())
+                )).toList();
+                if (size == null) {
+                    size = 3;
                 }
-                case "Характеристики" -> {
-                    Map<String, String> characteristics = product.get().getSubproducts().get(0).getCharacteristics();
-                    productSingleResponse.setAttribute("Характеристики", characteristics);
-                    return productSingleResponse;
-                }
-                case "Отзывы" -> {
-                    List<Review> reviews = product.get().getUsersReviews();
-                    List<ReviewMainResponse> reviewMainResponses = reviews.stream().map(r -> new ReviewMainResponse(
-                            r.getId(), r.getUserReview(), r.getResponseOfReview(),
-                            r.getReviewTime(), r.getProductGrade(), new UserMainResponse(
-                            r.getUser().getId(), r.getUser().getFirstName() + " " + r.getUser().getLastName(),
-                            r.getUser().getImage())
-                    )).toList();
-                    if(size == null){
-                        size = 3;
-                    }
-                    int toIndex = Math.min(size, reviewMainResponses.size());
-                    reviewMainResponses = reviewMainResponses.subList(0, toIndex);
-                    productSingleResponse.setAttribute("Отзывы", reviewMainResponses);
-                    return productSingleResponse;
-                }
+                int toIndex = Math.min(size, reviewMainResponses.size());
+                reviewMainResponses = reviewMainResponses.subList(0, toIndex);
+                productSingleResponse.setAttribute("Отзывы", reviewMainResponses);
+                return productSingleResponse;
             }
         }
         return productSingleResponse;
