@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/mailings")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "mailing api")
+@Tag(name = "Mailing api")
 public class MailingController {
     private final MailingService emailService;
     private final SubscriptionService subscriptionService;

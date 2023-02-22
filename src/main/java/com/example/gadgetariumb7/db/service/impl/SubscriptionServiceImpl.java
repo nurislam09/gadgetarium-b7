@@ -1,6 +1,5 @@
 package com.example.gadgetariumb7.db.service.impl;
 
-import com.example.gadgetariumb7.converter.SubscriptionRequestConverter;
 import com.example.gadgetariumb7.db.entity.Subscription;
 import com.example.gadgetariumb7.db.repository.SubscriptionRepository;
 import com.example.gadgetariumb7.db.service.SubscriptionService;
@@ -18,11 +17,11 @@ import java.util.List;
 public class SubscriptionServiceImpl implements SubscriptionService {
 
     private final SubscriptionRepository subscriptionRepository;
-    private final SubscriptionRequestConverter subscriptionRequestConverter;
 
     @Override
     public ResponseEntity<String> save(SubscriptionRequest subscriptionRequest) {
-        Subscription subscription = subscriptionRequestConverter.createSubscription(subscriptionRequest);
+        Subscription subscription = new Subscription();
+        subscription.setEmail(subscriptionRequest.getEmail());
         if (subscriptionRepository.existsByEmail(subscription.getEmail())) {
             throw new EmailAlreadyExistException("Email already registered");
         }
