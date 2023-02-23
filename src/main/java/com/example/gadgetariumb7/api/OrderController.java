@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 @RestController
@@ -53,11 +52,10 @@ public class OrderController {
         return orderService.update(id, orderStatus);
     }
 
-    @Operation(summary = "get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount,total)" +
-                                                                       " and users phone number,address")
-    @GetMapping("/{id}")
+    @Operation(summary = "get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount,total) and users phone number,address")
+    @GetMapping("/paymentInfo")
     @PreAuthorize("hasAuthority('Admin')")
-    public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId", required = false) Long id) {
+    public OrderPaymentResponse getOrderPaymentInfo(@RequestParam Long id) {
         return orderService.getOrdersPaymentInfo(id);
     }
 
