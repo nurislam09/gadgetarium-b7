@@ -61,14 +61,6 @@ public class OrderController {
     public OrderPaymentResponse getOrderPaymentInfo(@RequestParam Long id) {
         return orderService.getOrdersPaymentInfo(id);
     }
-
-    @Operation(summary = "get by id order info", description = "Get 1 orders info (address, phone number)")
-    @GetMapping("/{id}/info")
-    @PreAuthorize("hasAuthority('Admin')")
-    public OrderInfoResponse getOrderInfoById(@RequestParam(value = "orderId", required = false) Long id) {
-        return orderService.getOrderInfoById(id);
-    }
-
     @Operation(summary = "Autofill", description = "This method return user's information if user is authenticated")
     @GetMapping("/autofill")
     public UserAutofillResponse autofill(){

@@ -128,19 +128,6 @@ public class OrderServiceImpl implements OrderService {
         return orderPaymentResponse;
     }
 
-    @Override
-    public OrderInfoResponse getOrderInfoById(Long id) {
-        return orderRepository.findById(id)
-                .map(order -> {
-                    OrderInfoResponse orderInfoResponse = new OrderInfoResponse();
-                    orderInfoResponse.setOrderNumber(order.getOrderNumber());
-                    orderInfoResponse.setPhoneNumber(order.getPhoneNumber());
-                    orderInfoResponse.setAddress(order.getAddress());
-                    return orderInfoResponse;
-                })
-                .orElseThrow(() -> new NotFoundException("Order not found!"));
-    }
-
 
     @Override
     public UserAutofillResponse autofillUserInformation() {
