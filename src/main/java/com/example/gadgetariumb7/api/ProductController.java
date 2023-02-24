@@ -1,11 +1,11 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
-import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
-
+import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
+import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -108,8 +108,22 @@ public class ProductController {
     @Operation(summary = "This method for get information", description = "Get information with product status")
     @GetMapping("/inf")
     @PreAuthorize("hasAuthority('Admin')")
-    public InforgraphicsResponse inforgraphic() throws NotFoundException{
+    public InforgraphicsResponse inforgraphic() throws NotFoundException {
         return productService.inforgraphics();
     }
 
+    @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
+    @GetMapping()
+    @PreAuthorize("isAuthenticated()")
+    public List<ProductCardResponse> getViewedProducts() {
+        return productService.getViewedProducts();
+    }
+
+    @Operation(summary = "Get product by id", description = "to get the inner page of product you always need to give the id of product and by default the attribute 'Описание'" +
+            "size is required if you need attribute 'Отзывы'")
+    @GetMapping("/product")
+    @PreAuthorize("isAuthenticated()")
+    public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException{
+        return productService.getProductById(productId, attribute, size);
+    }
 }

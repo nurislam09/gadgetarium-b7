@@ -3,8 +3,11 @@ package com.example.gadgetariumb7.api;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.OrderPaymentResponse;
+import com.example.gadgetariumb7.dto.request.OrderRequest;
+import com.example.gadgetariumb7.dto.response.OrderCompleteResponse;
 import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.response.UserAutofillResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -59,4 +62,23 @@ public class OrderController {
         return orderService.getOrdersPaymentInfo(id);
     }
 
+    @Operation(summary = "get by id order info", description = "Get 1 orders info (address, phone number)")
+    @GetMapping("/{id}/info")
+    @PreAuthorize("hasAuthority('Admin')")
+    public OrderInfoResponse getOrderInfoById(@RequestParam(value = "orderId", required = false) Long id) {
+        return orderService.getOrderInfoById(id);
+    }
+
+    @Operation(summary = "Autofill", description = "This method return user's information if user is authenticated")
+    @GetMapping("/autofill")
+    public UserAutofillResponse autofill(){
+        return orderService.autofillUserInformation();
+    }
+
+    @Operation(summary = "Save order", description = "This method for save order")
+    @PostMapping()
+    @PreAuthorize("hasAuthority('Customer')")
+    public OrderCompleteResponse save(OrderRequest orderRequest){
+        return orderService.saveOrder(orderRequest);
+    }
 }
