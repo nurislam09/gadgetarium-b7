@@ -8,10 +8,7 @@ import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
 import com.example.gadgetariumb7.dto.request.SubproductUpdateRequest;
-import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
-import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -396,4 +393,54 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+
+    @Override
+    public ProductSingleResponse getProductById(Long productId, String attribute, Integer size) {
+        User user = getAuthenticateUser();
+        ProductSingleResponse productSingleResponse;
+        Product p = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("we don't have the product with such id"));
+            List<SubproductResponse> subproducts = p.getSubproducts().stream().map(s -> new SubproductResponse(s.getId(), s.getCountOfSubproduct(),
+                    s.getImages(), s.getPrice(), s.getColor(), s.getCharacteristics())).toList();
+            productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
+                    p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
+                    p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), p.getColor(), subproducts);
+            try{
+            productSingleResponse.setAmountOfDiscount(p.getDiscount().getAmountOfDiscount());}
+            catch (RuntimeException e){
+                System.out.println("null discount");
+            }
+        if (user.getFavoritesList().contains(p)) {
+            productSingleResponse.setFavorite(true);
+        }
+        switch (attribute) {
+            case "Описание" -> {
+                String description = p.getDescription();
+                productSingleResponse.setAttribute("Описание", description);
+                productSingleResponse.setVideoReview(p.getVideoReview());
+                return productSingleResponse;
+            }
+            case "Характеристики" -> {
+                Map<String, String> characteristics = p.getSubproducts().get(0).getCharacteristics();
+                productSingleResponse.setAttribute("Характеристики", characteristics);
+                return productSingleResponse;
+            }
+            case "Отзывы" -> {
+                List<Review> reviews = p.getUsersReviews();
+                List<ReviewMainResponse> reviewMainResponses = reviews.stream().map(r -> new ReviewMainResponse(
+                        r.getId(), r.getUserReview(), r.getResponseOfReview(),
+                        r.getReviewTime(), r.getProductGrade(), new UserMainResponse(
+                        r.getUser().getId(), r.getUser().getFirstName() + " " + r.getUser().getLastName(),
+                        r.getUser().getImage())
+                )).toList();
+                if (size == null) {
+                    size = 3;
+                }
+                int toIndex = Math.min(size, reviewMainResponses.size());
+                reviewMainResponses = reviewMainResponses.subList(0, toIndex);
+                productSingleResponse.setAttribute("Отзывы", reviewMainResponses);
+                return productSingleResponse;
+            }
+        }
+        return productSingleResponse;
+    }
 }
