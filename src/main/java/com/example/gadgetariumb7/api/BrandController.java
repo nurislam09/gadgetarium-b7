@@ -16,21 +16,20 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/brands")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "Brand api")
+@Tag(name = "Brand API")
+@PreAuthorize("hasAuthority('Admin')")
 public class BrandController {
 
     private final BrandService brandService;
 
-    @GetMapping()
     @Operation(summary = "Get all brands", description = "This endpoint returns a list of all brands")
-    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping
     public List<BrandResponse> getAllBrand() {
         return brandService.getAllBrand();
     }
 
     @Operation(summary = "Add a brand", description = "This endpoint adds a new brand")
-    @PostMapping()
-    @PreAuthorize("hasAuthority('Admin')")
+    @PostMapping
     public SimpleResponse addBrand(@RequestBody BrandRequest brandRequest) {
         return brandService.addBrand(brandRequest);
     }

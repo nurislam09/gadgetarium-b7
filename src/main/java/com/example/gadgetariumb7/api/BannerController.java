@@ -10,15 +10,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/banners")
+@RequiredArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "Banner api")
+@Tag(name = "Banner API")
 public class BannerController {
     private final BannerService bannerService;
 
     @Operation(summary = "This method for save banners", description = "BannerRequest have array of images url and every image url is Banner")
-    @PostMapping()
+    @PostMapping
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse save(@RequestBody BannerRequest bannerRequest) {
         return bannerService.addBanner(bannerRequest);
