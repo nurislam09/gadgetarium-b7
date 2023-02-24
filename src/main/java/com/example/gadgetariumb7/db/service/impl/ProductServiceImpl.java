@@ -403,7 +403,7 @@ public class ProductServiceImpl implements ProductService {
                     s.getImages(), s.getPrice(), s.getColor(), s.getCharacteristics())).toList();
             productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
                     p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
-                    p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), p.getColor(), subproducts);
+                    p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), subproducts);
             try{
             productSingleResponse.setAmountOfDiscount(p.getDiscount().getAmountOfDiscount());}
             catch (RuntimeException e){

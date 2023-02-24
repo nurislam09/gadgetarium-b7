@@ -17,7 +17,7 @@ public class SubproductResponse {
     private int countOfSubproduct;
     private String color;
     private Map<String, String> characteristics = new HashMap<>();
-    List<String> images;
+    private List<String> images;
 
     public SubproductResponse(Long id, int countOfSubproduct, List<String> images, int price, String color, Map<String, String> characteristics) {
         this.id = id;
