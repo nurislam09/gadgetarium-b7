@@ -1,8 +1,11 @@
 package com.example.gadgetariumb7.dto.response;
 
+import com.example.gadgetariumb7.db.enums.OrderStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,10 +22,18 @@ public class OrderPaymentResponse {
 
     private int countOfProduct;
 
-    private int discount;
+    private double discount;
 
     private int totalDiscount;
 
-    private String productName;
+    private List<String> productsName;
+
+    private OrderStatus orderStatus;
+
+    private int total;
+
+    private String phoneNumber;
+
+    private String address;
 
 }
