@@ -10,32 +10,30 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/reviews")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Tag(name = "Review API")
+@PreAuthorize("hasAuthority('Admin')")
 public class ReviewController {
     private final ReviewServiceImpl reviewService;
 
-    @GetMapping()
     @Operation(summary = "Reviews", description = "Get all reviews")
-    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping
     public ReviewResponses getAll(@RequestParam String statusOfReviews) {
         return reviewService.getAll(statusOfReviews);
     }
 
-    @DeleteMapping("/{id}")
-    @Operation(summary = "Delete review", description = "Delete review by id")
-    @PreAuthorize("hasAuthority('Admin')")
-    public SimpleResponse deleteById(@PathVariable Long id) {
+    @Operation(summary = "Delete", description = "Delete review by id")
+    @DeleteMapping
+    public SimpleResponse deleteById(@RequestParam Long id) {
         return reviewService.deleteReviewById(id);
     }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Answer and update ", description = "Answer saved")
-    @PreAuthorize("hasAuthority('Admin')")
-    public SimpleResponse updateReview(@PathVariable Long id, ReviewRequest reviewRequest) {
+    @Operation(summary = "Answer and update", description = "Answer saved")
+    @PutMapping
+    public SimpleResponse updateReview(@RequestParam Long id, ReviewRequest reviewRequest) {
         return reviewService.update(id, reviewRequest);
     }
 }

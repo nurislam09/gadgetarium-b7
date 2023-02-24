@@ -25,12 +25,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/products")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "Product api")
-public class ProductController {
+@Tag(name = "Product API")
+public class ProductUserController {
 
     private final ProductService productService;
 
-    @GetMapping("/discountsProducts")
+    @GetMapping("/discounts")
     @Operation(summary = "Get all products with discount to main page", description = "This endpoint return ProductResponse with discounts")
     public List<ProductCardResponse> getAllDiscountProductMainPage(@RequestParam int page, @RequestParam int size) {
         return productService.getAllDiscountProductToMP(page, size);
@@ -42,47 +42,10 @@ public class ProductController {
         return productService.getAllNewProductToMP(page, size);
     }
 
-    @GetMapping("/recommendationsProducts")
+    @GetMapping("/recommendations")
     @Operation(summary = "Get all products with recommendation status to main page", description = "This endpoint return ProductResponse with recommendation status")
     public List<ProductCardResponse> getAllRecommendationProductMainPage(@RequestParam int page, @RequestParam int size) {
         return productService.getAllRecommendationProductToMP(page, size);
-    }
-
-    @Operation(summary = "Get all products to admin page", description = "This endpoint return all products by product type for ADMIN")
-    @GetMapping("/getAllProducts")
-    @PreAuthorize("hasAuthority('Admin')")
-    public ProductAdminPaginationResponse getAllProduct(
-            @RequestParam(value = "productType") String productType,
-            @RequestParam(value = "searchText", required = false) String searchText,
-            @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
-            @RequestParam(value = "discountField", required = false) String discountField,
-            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-            @RequestParam int page,
-            @RequestParam int size) {
-        return productService.getProductAdminResponses(searchText, productType, fieldToSort, discountField, startDate, endDate, page, size);
-    }
-
-    @Operation(summary = "delete product", description = "This endpoint delete product by id")
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('Admin')")
-    public SimpleResponse delete(@PathVariable Long id) {
-        return productService.delete(id);
-    }
-
-    @Operation(summary = "update product", description = "This endpoint update product by id")
-    @PutMapping()
-    @PreAuthorize("hasAuthority('Admin')")
-    public SimpleResponse update(@RequestBody ProductUpdateRequest productUpdateRequest) {
-        return productService.update(productUpdateRequest);
-    }
-
-    @Operation(summary = "This method for save product",
-            description = "The save product with different types and options")
-    @PostMapping()
-    @PreAuthorize("hasAuthority('Admin')")
-    public SimpleResponse save(@RequestBody ProductRequest productRequest) {
-        return productService.addProduct(productRequest);
     }
 
     @Operation(summary = "get products from catalog", description = "the user can filter by 7 parameters and categoryName is always required in filtering, but others no because user shouldn't give them all." +
@@ -104,15 +67,8 @@ public class ProductController {
         return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
     }
 
-    @Operation(summary = "This method for get information", description = "Get information with product status")
-    @GetMapping("/inf")
-    @PreAuthorize("hasAuthority('Admin')")
-    public InforgraphicsResponse inforgraphic() throws NotFoundException {
-        return productService.inforgraphics();
-    }
-
     @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
-    @GetMapping()
+    @GetMapping("/viewed")
     @PreAuthorize("isAuthenticated()")
     public List<ProductCardResponse> getViewedProducts() {
         return productService.getViewedProducts();

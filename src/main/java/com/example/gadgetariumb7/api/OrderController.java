@@ -22,13 +22,13 @@ import java.time.LocalDate;
 @RequestMapping("/api/orders")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Tag(name = "Orders API")
+@PreAuthorize("hasAuthority('Admin')")
 public class OrderController {
 
     private final OrderService orderService;
 
-    @Operation(summary = "find all orders", description = "Orders with pagination and search")
+    @Operation(summary = "Find all", description = "Orders with pagination and search")
     @GetMapping()
-    @PreAuthorize("hasAuthority('Admin')")
     public ResponseEntity<PaginationOrderResponse> findAllOrders(@RequestParam OrderStatus orderStatus,
                                                                  @RequestParam(required = false) String keyWord,
                                                                  @RequestParam int page,
@@ -38,31 +38,27 @@ public class OrderController {
         return new ResponseEntity<>(orderService.findAllOrders(orderStatus, keyWord, page, size, startDate, endDate), HttpStatus.OK);
     }
 
-    @Operation(summary = "delete order by id")
+    @Operation(summary = "Delete order by id")
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse deleteOrder(@PathVariable Long id) {
         return orderService.deleteOrderById(id);
     }
 
-    @Operation(summary = "update order by orderStatus", description = "In this method we can update orders by order status")
+    @Operation(summary = "Update order by orderStatus", description = "In this method we can update orders by order status")
     @PutMapping
-    @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse update(@RequestParam Long id,
                                  @RequestParam(value = "orderStatus", required = false) OrderStatus orderStatus) {
         return orderService.update(id, orderStatus);
     }
 
-    @Operation(summary = "get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount)")
+    @Operation(summary = "Get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount)")
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('Admin')")
     public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId", required = false) Long id) {
         return orderService.getOrdersPaymentInfo(id);
     }
 
-    @Operation(summary = "get by id order info", description = "Get 1 orders info (address, phone number)")
+    @Operation(summary = "Get by id order info", description = "Get 1 orders info (address, phone number)")
     @GetMapping("/{id}/info")
-    @PreAuthorize("hasAuthority('Admin')")
     public OrderInfoResponse getOrderInfoById(@RequestParam(value = "orderId", required = false) Long id) {
         return orderService.getOrderInfoById(id);
     }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/discounts")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "Discount api")
+@Tag(name = "Discount API")
 public class DiscountController {
     private final DiscountService discountService;
 
