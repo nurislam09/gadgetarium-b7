@@ -373,7 +373,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public InforgraphicsResponse inforgraphics() throws NullPointerException {
+    public InforgraphicsResponse infographics() throws NullPointerException {
         try {
             InforgraphicsResponse inforgraphics = new InforgraphicsResponse();
             inforgraphics.setSoldCount(productRepository.getCountSoldProducts());

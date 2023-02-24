@@ -23,7 +23,7 @@ public interface ProductService {
 
     SimpleResponse addProduct(ProductRequest productRequest);
 
-    InforgraphicsResponse inforgraphics() throws NullPointerException;
+    InforgraphicsResponse infographics() throws NullPointerException;
 
     SimpleResponse delete(Long id);
 
