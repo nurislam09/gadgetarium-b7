@@ -31,20 +31,20 @@ public class ProductUserController {
 
     private final ProductService productService;
 
-    @GetMapping("/discounts")
     @Operation(summary = "Get all products with discount to main page", description = "This endpoint return ProductResponse with discounts")
+    @GetMapping("/discounts")
     public List<ProductCardResponse> getAllDiscountProductMainPage(@RequestParam int page, @RequestParam int size) {
         return productService.getAllDiscountProductToMP(page, size);
     }
 
-    @GetMapping("/newProducts")
     @Operation(summary = "Get all products with new status to main page", description = "This endpoint return ProductResponse with new status")
+    @GetMapping("/newProducts")
     public List<ProductCardResponse> getAllNewProductMainPage(@RequestParam int page, @RequestParam int size) {
         return productService.getAllNewProductToMP(page, size);
     }
 
-    @GetMapping("/recommendations")
     @Operation(summary = "Get all products with recommendation status to main page", description = "This endpoint return ProductResponse with recommendation status")
+    @GetMapping("/recommendations")
     public List<ProductCardResponse> getAllRecommendationProductMainPage(@RequestParam int page, @RequestParam int size) {
         return productService.getAllRecommendationProductToMP(page, size);
     }

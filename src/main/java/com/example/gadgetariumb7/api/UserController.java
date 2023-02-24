@@ -2,16 +2,12 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.UserService;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
-import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/reviews")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "Review API")
+@Tag(name = "Review admin API")
 @PreAuthorize("hasAuthority('Admin')")
 public class ReviewController {
     private final ReviewServiceImpl reviewService;

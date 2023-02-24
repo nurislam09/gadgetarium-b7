@@ -18,7 +18,7 @@ public class BannerController {
     private final BannerService bannerService;
 
     @Operation(summary = "This method for save banners", description = "BannerRequest have array of images url and every image url is Banner")
-    @PostMapping()
+    @PostMapping
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse save(@RequestBody BannerRequest bannerRequest) {
         return bannerService.addBanner(bannerRequest);

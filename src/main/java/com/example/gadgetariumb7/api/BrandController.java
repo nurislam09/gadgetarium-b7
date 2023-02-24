@@ -22,14 +22,14 @@ public class BrandController {
 
     private final BrandService brandService;
 
-    @GetMapping()
     @Operation(summary = "Get all brands", description = "This endpoint returns a list of all brands")
+    @GetMapping
     public List<BrandResponse> getAllBrand() {
         return brandService.getAllBrand();
     }
 
     @Operation(summary = "Add a brand", description = "This endpoint adds a new brand")
-    @PostMapping()
+    @PostMapping
     public SimpleResponse addBrand(@RequestBody BrandRequest brandRequest) {
         return brandService.addBrand(brandRequest);
     }
