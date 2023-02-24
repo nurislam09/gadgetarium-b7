@@ -11,6 +11,10 @@ import com.example.gadgetariumb7.dto.request.SubproductUpdateRequest;
 import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aop.AopInvocationException;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +22,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -31,7 +37,6 @@ public class ProductServiceImpl implements ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
-
     private final OrderRepository orderRepository;
     private final SubproductRepository subproductRepository;
 
@@ -401,6 +406,27 @@ public class ProductServiceImpl implements ProductService {
         Product p = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("we don't have the product with such id"));
             List<SubproductResponse> subproducts = p.getSubproducts().stream().map(s -> new SubproductResponse(s.getId(), s.getCountOfSubproduct(),
                     s.getImages(), s.getPrice(), s.getColor(), s.getCharacteristics())).toList();
+
+            subproducts.forEach(s -> {
+                try {
+                    Document document = new Document();
+                    PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("products.pdf"));
+
+
+                    document.add(new Paragraph());
+
+                    document.open();
+
+
+                    document.close();
+                } catch (DocumentException e) {
+                    throw new RuntimeException(e);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+            });
+
             productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
                     p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
                     p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), p.getColor(), subproducts);
