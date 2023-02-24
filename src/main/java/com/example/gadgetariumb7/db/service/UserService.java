@@ -11,6 +11,8 @@ public interface UserService {
 
     SimpleResponse addAndRemoveToFavorites(Long productId);
 
+    SimpleResponse addAndRemoveToCompares(Long productId);
+
     List<ProductCardResponse> getAllFavorites();
 
     SimpleResponse addToBasketList(int orderCount, Long subProductId);

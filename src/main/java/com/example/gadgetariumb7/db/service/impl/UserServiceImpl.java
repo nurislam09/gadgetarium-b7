@@ -62,6 +62,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public SimpleResponse addAndRemoveToCompares(Long productId) {
+        User user = getAuthenticateUser();
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product not found"));
+
+        if (user.getCompareProductsList() == null) {
+            user.setCompareProductsList(Arrays.asList(product));
+        } else {
+            if (user.getCompareProductsList().contains(product)) {
+                user.getCompareProductsList().remove(product);
+                userRepository.save(user);
+                return new SimpleResponse("Product successfully deleted from User's compares", "ok");
+            } else user.getCompareProductsList().add(product);
+        }
+        userRepository.save(user);
+        return new SimpleResponse("Product successfully added to User's compares", "ok");
+    }
+
+
+    @Override
     public List<ProductCardResponse> getAllFavorites() {
         User user = getAuthenticateUser();
         List<ProductCardResponse> favorites = new ArrayList<>();
