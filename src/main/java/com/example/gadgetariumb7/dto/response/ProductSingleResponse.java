@@ -1,5 +1,4 @@
 package com.example.gadgetariumb7.dto.response;
-import com.itextpdf.text.Document;
 import lombok.*;
 
 import java.util.*;
@@ -23,7 +22,6 @@ public class ProductSingleResponse {
     private List<SubproductResponse> subproducts;
     private boolean isFavorite;
     private Map<String, Object> attribute;
-    private Document document;
     private String videoReview;
 
 
