@@ -15,7 +15,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("api/file")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "AWS S3 Api", description = "Upload and delete files")
+@Tag(name = "AWS S3 API", description = "Upload and delete files")
 public class S3FileApi {
     private final S3Service s3Service;
 

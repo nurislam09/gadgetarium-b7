@@ -39,6 +39,4 @@ public class GlobalExceptionHandler {
                 e.getClass().getSimpleName(),
                 e.getMessage());
     }
-
-
 }

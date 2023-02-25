@@ -2,26 +2,45 @@ package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.entity.Subproduct;
+import com.example.gadgetariumb7.db.entity.User;
+import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
+import com.example.gadgetariumb7.db.repository.SubproductRepository;
+import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.*;
+import com.example.gadgetariumb7.dto.request.OrderRequest;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+    private final SubproductRepository subproductRepository;
+    private int orderGenerateNumber = 100006;
+
+    private Optional<User> getAuthenticateUserForAutofill() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+        return userRepository.findByEmail(login);
+    }
 
     @Override
     public PaginationOrderResponse findAllOrders(OrderStatus orderStatus, String keyWord, int page, int size, LocalDate startDate, LocalDate endDate) {
@@ -37,12 +56,14 @@ public class OrderServiceImpl implements OrderService {
             orderResponsesPagination = orderRepository.search(keyWord, pageable, orderStatus);
             orderResponses = orderResponsesPagination.getContent();
         }
-
-        if (startDate != null && endDate != null) {
-            orderResponses = orderResponses.stream().filter(o -> o.getDateOfOrder().toLocalDate().isAfter(startDate) && o.getDateOfOrder().toLocalDate()
-                    .isBefore(endDate)).toList();
+        try {
+            if (startDate != null && endDate != null) {
+                orderResponses = orderResponses.stream().filter(o -> o.getDateOfOrder().toLocalDate().isAfter(startDate.minusDays(1)) && o.getDateOfOrder().toLocalDate()
+                        .isBefore(endDate.plusDays(1))).toList();
+            }
+        } catch (DateTimeParseException ex) {
+            throw new IllegalArgumentException("Invalid date format", ex);
         }
-
         paginationOrderResponse.setOrderResponses(orderResponses);
         paginationOrderResponse.setCurrentPage(pageable.getPageNumber() + 1);
         paginationOrderResponse.setTotalPage(orderResponsesPagination.getTotalPages());
@@ -62,7 +83,9 @@ public class OrderServiceImpl implements OrderService {
 
     public SimpleResponse deleteOrderById(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order not found"));
-        order.getUser().getOrders().remove(order);
+        if(order.getUser() != null) {
+            order.getUser().getOrders().remove(order);
+        }
         order.getSubproducts().forEach(x -> x.getOrders().remove(order));
         orderRepository.delete(order);
         return new SimpleResponse("Order successfully deleted!", "ok");
@@ -86,29 +109,51 @@ public class OrderServiceImpl implements OrderService {
         orderPaymentResponse.setCountOfProduct(order.getCountOfProduct());
         orderPaymentResponse.setTotalSum(order.getTotalSum());
         orderPaymentResponse.setTotalDiscount(order.getTotalDiscount());
-        for (Subproduct subproduct:order.getSubproducts()) {
-            orderPaymentResponse.setProductName(subproduct.getProduct().getProductName());
-            int discount = 0;
-            if (subproduct.getProduct().getDiscount().getAmountOfDiscount() != null) {
-                discount = (order.getTotalDiscount() * 100) / order.getTotalSum();
-                orderPaymentResponse.setDiscount(discount);
+        double discount1 = Math.round(((double)order.getTotalDiscount() * 100) /(double)order.getTotalSum());
+        orderPaymentResponse.setDiscount(discount1);
+        orderPaymentResponse.setTotal(order.getTotalSum()-order.getTotalDiscount());
+        orderPaymentResponse.setAddress(order.getUser().getAddress());
+        orderPaymentResponse.setPhoneNumber(order.getUser().getPhoneNumber());
+        List<String> productsName = new ArrayList<>();
+        List<Long> products = new ArrayList<>();
+        order.getSubproducts().forEach(s -> {
+            Product p = s.getProduct();
+            if (!products.contains(p.getId())) {
+                products.add(p.getId());
+                productsName.add(p.getProductName());
             }
-        }
+        });
+        orderPaymentResponse.setProductsName(productsName);
+        orderPaymentResponse.setOrderStatus(order.getOrderStatus());
         return orderPaymentResponse;
     }
 
+
     @Override
-    public OrderInfoResponse getOrderInfoById(Long id) {
-        return orderRepository.findById(id)
-                .map(order -> {
-                    OrderInfoResponse orderInfoResponse = new OrderInfoResponse();
-                    orderInfoResponse.setOrderNumber(order.getOrderNumber());
-                    orderInfoResponse.setPhoneNumber(order.getPhoneNumber());
-                    orderInfoResponse.setAddress(order.getAddress());
-                    return orderInfoResponse;
-                })
-                .orElseThrow(() -> new NotFoundException("Order not found!"));
+    public UserAutofillResponse autofillUserInformation() {
+        if (getAuthenticateUserForAutofill().isPresent()){
+            User user = getAuthenticateUserForAutofill().get();
+            return new UserAutofillResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getAddress());
+        } else {
+            throw new NotFoundException("User is not authenticate");
+        }
     }
 
+    @Override
+    public OrderCompleteResponse saveOrder(OrderRequest req) {
+        User user = getAuthenticateUserForAutofill().orElseThrow(() -> new NotFoundException("User not found"));
+        List<Subproduct> subproducts = req.getSubproductsId().stream().map(s -> subproductRepository.findById(s).orElseThrow(() -> new NotFoundException(String.format("Subproduct with id %d not found", s)))).toList();
+        Order order = new Order(req.getFirstName(), req.getLastName(), req.getEmail(), req.getPhoneNumber(), req.getAddress(), req.getCountOfProduct(), req.getTotalSum(), req.getTotalDiscount(), req.getPayment(), req.getOrderType(), subproducts, user, orderGenerateNumber);
+        subproducts.forEach(x -> {
+            if (user.getBasketList().containsKey(x)){
+                user.getBasketList().remove(x);
+            } else {
+                throw new NotFoundException(String.format("Subproduct not exist in user's basket list", x.getId(), user.getId()));
+            }
+        });
+        orderRepository.save(order);
+        orderGenerateNumber++;
+        return new OrderCompleteResponse(order.getOrderNumber(), order.getDateOfOrder());
+    }
 }
 

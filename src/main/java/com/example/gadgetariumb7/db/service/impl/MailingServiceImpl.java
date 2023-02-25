@@ -6,6 +6,7 @@ import com.example.gadgetariumb7.db.repository.MailingRepository;
 import com.example.gadgetariumb7.db.service.MailingService;
 import com.example.gadgetariumb7.db.service.SubscriptionService;
 import com.example.gadgetariumb7.dto.request.MailingRequest;
+import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +32,7 @@ public class MailingServiceImpl implements MailingService {
     }
 
     @Override
-    public void sendMailing(MailingRequest mailingRequest) {
+    public SimpleResponse sendMailing(MailingRequest mailingRequest) {
         Mailing mailing = new Mailing();
         BeanUtils.copyProperties(mailingRequest, mailing);
         List<Subscription> subscribers = subscriptionService.findAll();
@@ -39,6 +40,7 @@ public class MailingServiceImpl implements MailingService {
             sendEmail(subscriber.getEmail(), mailing);
         }
         saveMailing(mailing);
+        return new SimpleResponse("Successfully sent", "ok");
     }
 
     @Override

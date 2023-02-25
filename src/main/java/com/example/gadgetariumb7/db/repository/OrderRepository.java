@@ -16,7 +16,6 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-
     @Query("select new com.example.gadgetariumb7.dto.response.OrderResponse" +
             "(o.id," +
             "concat(o.firstName,' ', o.lastName ), " +

@@ -5,6 +5,7 @@ import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
 import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
+import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 
 import java.time.LocalDate;
@@ -22,13 +23,15 @@ public interface ProductService {
 
     SimpleResponse addProduct(ProductRequest productRequest);
 
-    InforgraphicsResponse inforgraphics() throws NullPointerException;
+    InforgraphicsResponse infographics() throws NullPointerException;
 
     SimpleResponse delete(Long id);
 
     SimpleResponse update(ProductUpdateRequest productUpdateRequest);
 
     List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size);
+
+    ProductSingleResponse getProductById(Long productId, String attribute, Integer size);
 
     List<ProductCardResponse> getViewedProducts();
 }

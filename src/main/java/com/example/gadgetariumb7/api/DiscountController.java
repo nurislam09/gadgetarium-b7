@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/discounts")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "Discount api")
+@Tag(name = "Discount API")
 public class DiscountController {
     private final DiscountService discountService;
 
     @Operation(summary = "Add discount", description = "This endpoint adds a new discount")
-    @PostMapping()
+    @PostMapping
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse addDiscount(@RequestBody DiscountRequest discountRequest) {
         return discountService.addDiscount(discountRequest);
