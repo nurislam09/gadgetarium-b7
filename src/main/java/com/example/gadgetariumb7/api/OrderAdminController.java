@@ -2,7 +2,6 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.service.OrderService;
-import com.example.gadgetariumb7.dto.response.OrderInfoResponse;
 import com.example.gadgetariumb7.dto.response.OrderPaymentResponse;
 import com.example.gadgetariumb7.dto.response.PaginationOrderResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -49,16 +48,10 @@ public class OrderAdminController {
         return orderService.update(id, orderStatus);
     }
 
-    @Operation(summary = "Get by id order payment info", description = "In this method we can get 1 orders payment info(total sum,total discount, discount)")
+    @Operation(summary = "Get by id order payment info", description = "In this method we can get  order payment info(total sum,total discount, discount) and user address,phone number")
     @GetMapping("/paymentInfo")
-    public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId", required = false) Long id) {
+    public OrderPaymentResponse getOrderPaymentInfo(@RequestParam(value = "orderId") Long id) {
         return orderService.getOrdersPaymentInfo(id);
-    }
-
-    @Operation(summary = "Get by id order info", description = "Get 1 orders info (address, phone number)")
-    @GetMapping("/info")
-    public OrderInfoResponse getOrderInfoById(@RequestParam(value = "orderId", required = false) Long id) {
-        return orderService.getOrderInfoById(id);
     }
 
 }
