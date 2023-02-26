@@ -12,6 +12,7 @@ import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.AopInvocationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
@@ -38,30 +40,35 @@ public class ProductServiceImpl implements ProductService {
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
+        log.info("the token has taken successfully");
         return userRepository.findByEmail(login).orElseThrow(() -> new NotFoundException("User not found!"));
     }
 
     private Optional<User> getAuthenticateUserForFavorite() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
+        log.info("The user token for favorite has taken");
         return userRepository.findByEmail(login);
     }
 
     @Override
     public List<ProductCardResponse> getAllDiscountProductToMP(int page, int size) {
         List<ProductCardResponse> discountProducts = productRepository.getAllDiscountProduct(PageRequest.of(page - 1, size));
+        log.info("all discount product taken to main page successfully");
         return checkFavorite(discountProducts);
     }
 
     @Override
     public List<ProductCardResponse> getAllNewProductToMP(int page, int size) {
         List<ProductCardResponse> newProducts = productRepository.getAllNewProduct(PageRequest.of(page - 1, size));
+        log.info("all new product taken to main page successfully");
         return checkFavorite(newProducts);
     }
 
     @Override
     public List<ProductCardResponse> getAllRecommendationProductToMP(int page, int size) {
         List<ProductCardResponse> recommendations = productRepository.getAllRecommendationProduct(PageRequest.of(page - 1, size));
+        log.info("all recommendation product taken to main page successfully");
         return checkFavorite(recommendations);
     }
 
@@ -86,7 +93,7 @@ public class ProductServiceImpl implements ProductService {
                 }
             });
         }
-
+        log.info("favorite has checked successfully");
         return productCardResponses;
     }
 
@@ -141,6 +148,7 @@ public class ProductServiceImpl implements ProductService {
                 default -> throw new BadRequestException("Product type is not correct");
             }
         }
+        log.info("admin product is delivered");
         return productAdminPaginationResponse;
     }
 
@@ -154,6 +162,7 @@ public class ProductServiceImpl implements ProductService {
             x.getViewedProductsList().remove(product);
         });
         productRepository.delete(product);
+        log.info("successfully works the delete method");
         return new SimpleResponse("Product successfully deleted!", "ok");
     }
 
@@ -178,12 +187,12 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setSubproducts(subproducts);
         productRepository.save(product);
+        log.info("successfully works the update method");
         return new SimpleResponse("Product successfully updated", "ok");
     }
 
     private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
         products.forEach(r -> setDiscountToResponse(null, r));
-
         if (fieldToSort != null) {
             switch (fieldToSort) {
                 case "Новинки" ->
@@ -211,7 +220,7 @@ public class ProductServiceImpl implements ProductService {
         }
         if (startDate != null && endDate != null)
             return products.stream().filter(p -> p.getCreateAt().toLocalDate().isAfter(startDate) && p.getCreateAt().toLocalDate().isBefore(endDate)).toList();
-
+        log.info("successfully works the sorting product method");
         return products;
     }
 
@@ -235,6 +244,7 @@ public class ProductServiceImpl implements ProductService {
         } catch (RuntimeException e) {
             System.out.println("null discount");
         }
+        log.info("successfully works the setDiscountResponse");
     }
 
     @Override
@@ -253,7 +263,7 @@ public class ProductServiceImpl implements ProductService {
         product.setSubproducts(subproducts);
         subproducts.forEach(s -> s.setProduct(product));
         productRepository.save(product);
-
+        log.info("successfully works the add product method");
         return new SimpleResponse("Product successfully saved", "ok");
     }
 
@@ -304,6 +314,7 @@ public class ProductServiceImpl implements ProductService {
         if (fieldToSort != null) {
             productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
         }
+        log.info("successfully works the filter by parameters method");
         return productCardResponses;
     }
 
@@ -316,6 +327,7 @@ public class ProductServiceImpl implements ProductService {
             responses.add(new ProductCardResponse(p.getId(), p.getProductName(), p.getProductImage(), p.getProductRating(),
                     productRepository.getAmountOfFeedback(p.getId()), p.getProductPrice()));
         });
+        log.info("successfully works the getViewedProducts");
         return responses;
     }
 
@@ -344,6 +356,7 @@ public class ProductServiceImpl implements ProductService {
                         productCardResponses.sort(Comparator.comparing(ProductCardResponse::getProductPrice).reversed());
             }
         }
+        log.info("successfully works the sortingProduct2 method");
         return productCardResponses;
     }
 
@@ -370,6 +383,7 @@ public class ProductServiceImpl implements ProductService {
                 throw new NotFoundException();
             }
         }
+        log.info("successfully works the for each method");
     }
 
     @Override
@@ -386,6 +400,7 @@ public class ProductServiceImpl implements ProductService {
             inforgraphics.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
             inforgraphics.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
             inforgraphics.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
+            log.info("successfully works the infographics method");
             return inforgraphics;
 
         } catch (AopInvocationException e) {
@@ -441,6 +456,7 @@ public class ProductServiceImpl implements ProductService {
                 return productSingleResponse;
             }
         }
+        log.info("successfully works the productSingleResponse method");
         return productSingleResponse;
     }
 }

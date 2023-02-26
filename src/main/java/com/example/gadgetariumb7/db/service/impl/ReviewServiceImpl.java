@@ -9,12 +9,14 @@ import com.example.gadgetariumb7.dto.request.ReviewRequest;
 import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
 
@@ -33,6 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
         reviewResponses.setReviewResponses(responses);
         reviewResponses.setCountGrade(countReviewsGrade());
         reviewResponses.setCountReviewUnAnswered(reviewRepository.countReviewUnAnswered());
+        log.info("successfully works the get all reviews method");
         return reviewResponses;
     }
 
@@ -52,6 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
             r.setUserResponse(userResponse);
             r.setReviewImages(review.getImages());
         }
+        log.info("successfully works the duplicate code method");
     }
 
     @Override
@@ -60,6 +64,7 @@ public class ReviewServiceImpl implements ReviewService {
         for (int i = 1; i < 6; i++) {
             counts.put(i, reviewRepository.countReviewByProductGrade((byte) i));
         }
+        log.info("successfully works the count reviews grade method");
         return counts;
     }
 
@@ -69,6 +74,7 @@ public class ReviewServiceImpl implements ReviewService {
         review.setResponseOfReview(reviewRequest.getResponseOfReview());
         review.setStatusOfResponse(review.getResponseOfReview().length() != 0);
         reviewRepository.save(review);
+        log.info("successfully works the update method");
         return new SimpleResponse("Answer successfully saved", "ok");
     }
 
@@ -76,6 +82,7 @@ public class ReviewServiceImpl implements ReviewService {
     public SimpleResponse deleteReviewById(Long id) {
         Review review = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("not found!")));
         reviewRepository.delete(review);
+        log.info("successfully works the delete review by id method");
         return new SimpleResponse("deleted", "ok");
     }
 }

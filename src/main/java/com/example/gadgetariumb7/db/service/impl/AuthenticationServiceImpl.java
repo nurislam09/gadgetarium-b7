@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,6 +28,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -41,8 +43,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         FirebaseOptions firebaseOptions = FirebaseOptions.builder()
                 .setCredentials(googleCredentials)
                 .build();
-
+        log.info("successfully works the init method");
         FirebaseApp firebaseApp = FirebaseApp.initializeApp(firebaseOptions);
+
     }
 
     @Override
@@ -57,6 +60,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
+        log.info("successfully works the register method");
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .roleName(user.getRole().getRoleName())
@@ -76,6 +80,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         String jwtToken = jwtService.generateToken(user);
+        log.info("successfully works the authenticate method");
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .roleName(user.getRole().getRoleName())
@@ -101,6 +106,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new NotFoundException(String.format("Пользователь с таким электронным адресом %s не найден!", firebaseToken.getEmail()));
         });
         String token = jwtService.generateToken(user);
+        log.info("successfully works the authorization with google method");
         return new AuthenticationResponse(token, user.getRole().getRoleName(), user.getEmail());
     }
 

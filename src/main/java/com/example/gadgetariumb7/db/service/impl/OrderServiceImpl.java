@@ -13,6 +13,7 @@ import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.dto.request.OrderRequest;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +31,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
@@ -39,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
     private Optional<User> getAuthenticateUserForAutofill() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
+        log.info("successfully works the get authenticate user for autofill method");
         return userRepository.findByEmail(login);
     }
 
@@ -77,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
 
          paginationOrderResponse.setOrderStatusAndSize(getOrdersByStatus);
         paginationOrderResponse.setCountOfOrders((long) orderRepository.findAll().size());
-
+        log.info("successfully works the find all orders method");
         return paginationOrderResponse;
     }
 
@@ -88,6 +91,7 @@ public class OrderServiceImpl implements OrderService {
         }
         order.getSubproducts().forEach(x -> x.getOrders().remove(order));
         orderRepository.delete(order);
+        log.info("successfully works the delete order by id method");
         return new SimpleResponse("Order successfully deleted!", "ok");
     }
 
@@ -96,6 +100,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order for update not found!"));
         if(orderStatus != null) order.setOrderStatus(orderStatus);
         orderRepository.save(order);
+        log.info("successfully works the order update method");
         return new SimpleResponse("Order successfully updated", "ok");
     }
 
@@ -125,6 +130,7 @@ public class OrderServiceImpl implements OrderService {
         });
         orderPaymentResponse.setProductsName(productsName);
         orderPaymentResponse.setOrderStatus(order.getOrderStatus());
+        log.info("successfully works the get orders payment info method");
         return orderPaymentResponse;
     }
 
@@ -133,6 +139,7 @@ public class OrderServiceImpl implements OrderService {
     public UserAutofillResponse autofillUserInformation() {
         if (getAuthenticateUserForAutofill().isPresent()){
             User user = getAuthenticateUserForAutofill().get();
+            log.info("successfully works the autofill user information method");
             return new UserAutofillResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getAddress());
         } else {
             throw new NotFoundException("User is not authenticate");
@@ -153,6 +160,7 @@ public class OrderServiceImpl implements OrderService {
         });
         orderRepository.save(order);
         orderGenerateNumber++;
+        log.info("successfully works the save order method");
         return new OrderCompleteResponse(order.getOrderNumber(), order.getDateOfOrder());
     }
 }

@@ -16,6 +16,7 @@ import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
+        log.info("successfully works the get authenticate user method");
         return userRepository.findByEmail(login).orElseThrow(() -> new NotFoundException("User not found!"));
     }
 
@@ -54,10 +57,12 @@ public class UserServiceImpl implements UserService {
             if (user.getFavoritesList().contains(product)) {
                 user.getFavoritesList().remove(product);
                 userRepository.save(user);
+                log.info("Product successfully deleted from User's favorites");
                 return new SimpleResponse("Product successfully deleted from User's favorites", "ok");
             } else user.getFavoritesList().add(product);
         }
         userRepository.save(user);
+        log.info("Product successfully added from User's favorites");
         return new SimpleResponse("Product successfully added to User's favorites", "ok");
     }
 
@@ -70,6 +75,7 @@ public class UserServiceImpl implements UserService {
             productCardResponse.setFavorite(true);
             favorites.add(productCardResponse);
         }
+        log.info("successfully works the get all favorites method");
         return favorites;
     }
 
@@ -89,7 +95,7 @@ public class UserServiceImpl implements UserService {
 
         subproductRepository.save(subproduct);
         userRepository.save(user);
-
+        log.info("successfully works the add to basketList method");
         return new SimpleResponse("Subproduct successfully add to basket list", "ok");
     }
 
@@ -107,7 +113,7 @@ public class UserServiceImpl implements UserService {
         }
 
         userRepository.save(user);
-
+        log.info("successfully works the delete from basket list method");
         return new SimpleResponse("Subproduct successfully deleted from basketList", "ok");
     }
 
@@ -129,6 +135,7 @@ public class UserServiceImpl implements UserService {
             }
         });
         userRepository.save(user);
+        log.info("successfully works move to favorite List");
         return new SimpleResponse("Subproduct successfully moved to favorite list", "ok");
     }
 
@@ -149,6 +156,7 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new NotFoundException("Users basketList is empty");
         }
+        log.info("successfully works the get all from basket list");
         return responses;
     }
 
@@ -193,6 +201,7 @@ public class UserServiceImpl implements UserService {
         reviewRepository.save(review);
         productRepository.save(product);
         userRepository.save(user);
+        log.info("successfully works the add review method");
         return new SimpleResponse("Review successfully saved", "ok");
     }
 }
