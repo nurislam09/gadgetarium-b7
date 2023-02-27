@@ -21,7 +21,6 @@ public class ProductSingleResponse {
     private List<SubproductResponse> subproducts;
     private boolean isFavorite;
     private Map<String, Object> attribute;
-
     private String videoReview;
 
 

@@ -31,7 +31,6 @@ public class ProductServiceImpl implements ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
-
     private final OrderRepository orderRepository;
     private final SubproductRepository subproductRepository;
 
