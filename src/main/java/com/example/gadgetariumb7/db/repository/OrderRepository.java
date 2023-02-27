@@ -3,6 +3,7 @@ package com.example.gadgetariumb7.db.repository;
 import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.dto.response.OrderResponse;
+import com.example.gadgetariumb7.dto.response.PersonalOrderResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
@@ -44,7 +46,11 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "OR (UPPER(o.orderType) LIKE UPPER(CONCAT('%', :keyWord, '%'))))")
     Page<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable, OrderStatus orderStatus);
 
-
-
+    @Query("select new com.example.gadgetariumb7.dto.response.PersonalOrderResponse(" +
+            "o.dateOfOrder," +
+            "o.orderNumber," +
+            "o.orderStatus," +
+            "o.totalSum) from Order o where o.user.id = ?1")
+    List<PersonalOrderResponse> getAllPersonalOrders(Long userId);
 }
 
