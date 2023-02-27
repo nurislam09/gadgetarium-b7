@@ -17,7 +17,6 @@ public class ProductSingleResponse {
     private int countOfReviews;
     private int productPrice;
     private Double productRating;
-    private String color;
     private byte amountOfDiscount;
     private List<SubproductResponse> subproducts;
     private boolean isFavorite;
@@ -29,7 +28,7 @@ public class ProductSingleResponse {
 
 
     public ProductSingleResponse(long id, String productName, int productCount, long productVendorCode, String categoryName, String subCategoryName,
-                                 int countOfReviews, int productPrice, double productRating, String color, List<SubproductResponse> subproducts) {
+                                 int countOfReviews, int productPrice, double productRating, List<SubproductResponse> subproducts) {
         this.id = id;
         this.productName = productName;
         this.productCount = productCount;
@@ -39,7 +38,6 @@ public class ProductSingleResponse {
         this.countOfReviews = countOfReviews;
         this.productPrice = productPrice;
         this.productRating = productRating;
-        this.color = color;
         this.subproducts = subproducts;
     }
 
