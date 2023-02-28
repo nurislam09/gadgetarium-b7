@@ -11,11 +11,14 @@ import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.UserService;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
+import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -156,7 +160,7 @@ public class UserServiceImpl implements UserService {
         Product product = productRepository.findById(request.getProductId()).orElseThrow(() -> new NotFoundException("Product not found"));
         User user = getAuthenticateUser();
 
-        if (!user.getOrderHistoryList().contains(product)){
+        if (!user.getOrderHistoryList().contains(product)) {
             throw new BadRequestException("This customer did not purchase this product");
         }
 
@@ -194,5 +198,19 @@ public class UserServiceImpl implements UserService {
         productRepository.save(product);
         userRepository.save(user);
         return new SimpleResponse("Review successfully saved", "ok");
+    }
+
+    @Override
+    public List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size) {
+        User user = getAuthenticateUser();
+        List<Product> products = productRepository.getAllFromUserCompareProductList(user.getId(), PageRequest.ofSize(size));
+        List<ProductCompareResponse> productCompareResponses = new ArrayList<>();
+        for (Product product : products) {
+            ProductCompareResponse productCompareResponse
+                    = new ProductCompareResponse(product.getId(), product.getProductName(), product.getProductImage(), product.getSubproducts().get(0).getCharacteristics(),
+                product.getBrand().getBrandName(), product.getColor(), product.getProductPrice());
+            productCompareResponses.add(productCompareResponse);
+        }
+        return productCompareResponses;
     }
 }

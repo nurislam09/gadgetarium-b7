@@ -1,5 +1,6 @@
 package com.example.gadgetariumb7.dto.response;
 
+import com.example.gadgetariumb7.db.entity.Subproduct;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
