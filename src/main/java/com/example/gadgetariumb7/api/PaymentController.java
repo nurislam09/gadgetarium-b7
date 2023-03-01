@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/payments")
 @CrossOrigin(origins = "*", maxAge = 3600)
-@Tag(name = "Payment")
+@Tag(name = "Payment API")
 public class PaymentController {
     private final PaymentService paymentService;
 
@@ -21,5 +21,10 @@ public class PaymentController {
     @PreAuthorize("isAuthenticated()")
     public SimpleResponse chargeCreditCard(@RequestBody PaymentRequest paymentRequest) throws StripeException {
      return paymentService.chargeCreditCard(paymentRequest);
+    }
+
+    @PostMapping("/webhook")
+    public SimpleResponse handleWebhookEvent(@RequestParam String payload, @RequestParam String signatureHeader) {
+        return paymentService.handleWebhookEvent(payload, signatureHeader);
     }
 }

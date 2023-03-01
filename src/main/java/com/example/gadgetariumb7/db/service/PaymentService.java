@@ -8,4 +8,5 @@ import java.math.BigDecimal;
 
 public interface PaymentService {
      SimpleResponse chargeCreditCard(PaymentRequest paymentRequest) throws StripeException;
+     SimpleResponse handleWebhookEvent(String payload, String signatureHeader);
 }
