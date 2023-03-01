@@ -40,7 +40,10 @@ public class ProductServiceImpl implements ProductService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
         log.info("the token has taken successfully");
-        return userRepository.findByEmail(login).orElseThrow(() -> new NotFoundException("User not found!"));
+        return userRepository.findByEmail(login).orElseThrow(() -> {
+            log.error("User not found");
+            throw new NotFoundException("User not found!");
+        });
     }
 
     private Optional<User> getAuthenticateUserForFavorite() {
@@ -76,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
             setDiscountToResponse(r, null);
             r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
-        if (getAuthenticateUserForFavorite().isPresent()){
+        if (getAuthenticateUserForFavorite().isPresent()) {
             User user = getAuthenticateUserForFavorite().get();
             productCardResponses.forEach(x -> {
                 Optional<Product> productOptional = productRepository.findById(x.getProductId());
@@ -88,6 +91,7 @@ public class ProductServiceImpl implements ProductService {
                         x.setCompared(true);
                     }
                 } else {
+                    log.error("Product not found");
                     throw new NotFoundException("Product not found!");
                 }
             });
@@ -144,7 +148,10 @@ public class ProductServiceImpl implements ProductService {
                     productAdminPaginationResponse.setResponseList(productAdminResponses);
                     return productAdminPaginationResponse;
                 }
-                default -> throw new BadRequestException("Product type is not correct");
+                default -> {
+                    log.error("Product type is not correct");
+                    throw new BadRequestException("Product type is not correct");
+                }
             }
         }
         log.info("admin product is delivered");
@@ -153,7 +160,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public SimpleResponse delete(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product for delete not found!"));
+        Product product = productRepository.findById(id).orElseThrow(() -> {
+            log.error("Product for delete not found");
+            throw new NotFoundException("Product for delete not found!");
+        });
         userRepository.findAll().forEach(x -> {
             x.getFavoritesList().remove(product);
             product.getSubproducts().forEach(i -> x.getBasketList().remove(i));
@@ -167,11 +177,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public SimpleResponse update(ProductUpdateRequest productUpdateRequest) {
-        Product product = productRepository.findById(productUpdateRequest.getId()).orElseThrow(() -> new NotFoundException("Product for update not found!"));
+        Product product = productRepository.findById(productUpdateRequest.getId()).orElseThrow(() -> {
+            log.error("Product for update not found");
+            throw new NotFoundException("Product for update not found!");
+        });
         List<Subproduct> subproducts = product.getSubproducts();
         List<SubproductUpdateRequest> subproductUpdateRequests = new ArrayList<>(productUpdateRequest.getSubproductUpdateRequests());
         for (SubproductUpdateRequest s : subproductUpdateRequests) {
-            Subproduct subproduct = subproductRepository.findById(s.getId()).orElseThrow(() -> new NotFoundException("Subproduct for update not found!"));
+            Subproduct subproduct = subproductRepository.findById(s.getId()).orElseThrow(() -> {
+                log.error("Subproduct for update not found!");
+                throw new NotFoundException("Subproduct for update not found!");
+            });
             int index = subproducts.indexOf(subproduct);
             if (index != -1) {
                 if (s.getSubproductCount() != 0) subproduct.setCountOfSubproduct(s.getSubproductCount());
@@ -214,7 +230,10 @@ public class ProductServiceImpl implements ProductService {
                 case "По увеличению цены" -> products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice));
                 case "По уменьшению цены" ->
                         products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice).reversed());
-                default -> throw new BadRequestException("Sort field is not correct");
+                default -> {
+                    log.error("Sort field is not correct");
+                    throw new BadRequestException("Sort field is not correct");
+                }
             }
         }
         if (startDate != null && endDate != null)
@@ -241,16 +260,25 @@ public class ProductServiceImpl implements ProductService {
                 }
             }
         } catch (RuntimeException e) {
-            System.out.println("null discount");
+            log.error("null discount");
         }
         log.info("successfully works the setDiscountResponse");
     }
 
     @Override
     public SimpleResponse addProduct(ProductRequest productRequest) {
-        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
-        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
-        Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
+        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> {
+            log.error("Brand not found");
+            throw new NotFoundException("Brand not found");
+        });
+        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> {
+            log.error("Category not found");
+            throw new NotFoundException("Category not found");
+        });
+        Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> {
+            log.error("Subcategory not found");
+            throw new NotFoundException("Subcategory not found");
+        });
         List<Subproduct> subproducts = new ArrayList<>();
         productRequest.getSubProductRequests().forEach(x -> {
             subproducts.add(new Subproduct(x));
@@ -268,8 +296,35 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size) throws NotFoundException {
-        if (text != null) {
-            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
+        try {
+            if (text != null) {
+                List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
+                        .map(p -> new ProductCardResponse(p.getId(),
+                                p.getProductImage(),
+                                p.getProductName(),
+                                p.getProductCount(),
+                                p.getProductPrice(),
+                                p.getProductStatus(),
+                                p.getProductRating()))
+                        .collect(Collectors.toList());
+                forEach(list);
+                return list;
+            }
+            List<Product> productList = productRepository.findAll();
+            List<ProductCardResponse> productCardResponses = productList.stream()
+                    .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
+                    .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
+                    .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
+                    .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
+                    .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
+                    .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                            Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("videoCardMemory")) == memory.byteValue()) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
+                            Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("memoryOfTablet")) == memory) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone")) == memory) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch")) == memory))
+                    .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone")) == ram) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && Objects.equals(Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop")), ram)) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet")) == ram))
                     .map(p -> new ProductCardResponse(p.getId(),
                             p.getProductImage(),
                             p.getProductName(),
@@ -278,43 +333,21 @@ public class ProductServiceImpl implements ProductService {
                             p.getProductStatus(),
                             p.getProductRating()))
                     .collect(Collectors.toList());
-            forEach(list);
-            return list;
+
+            int toIndex = Math.min(size, productCardResponses.size());
+            productCardResponses = productCardResponses.subList(0, toIndex);
+
+            forEach(productCardResponses);
+
+            if (fieldToSort != null) {
+                productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
+            }
+            log.info("successfully works the filter by parameters method");
+            return productCardResponses;
+        } catch (NotFoundException e) {
+            log.error("Product not found");
+            throw new NotFoundException("Product not found");
         }
-        List<Product> productList = productRepository.findAll();
-        List<ProductCardResponse> productCardResponses = productList.stream()
-                .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
-                .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
-                .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
-                .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
-                .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
-                .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
-                        Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("videoCardMemory")) == memory.byteValue()) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
-                        Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("memoryOfTablet")) == memory) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone")) == memory) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch")) == memory))
-                .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone")) == ram) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && Objects.equals(Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop")), ram)) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet")) == ram))
-                .map(p -> new ProductCardResponse(p.getId(),
-                        p.getProductImage(),
-                        p.getProductName(),
-                        p.getProductCount(),
-                        p.getProductPrice(),
-                        p.getProductStatus(),
-                        p.getProductRating()))
-                .collect(Collectors.toList());
-
-        int toIndex = Math.min(size, productCardResponses.size());
-        productCardResponses = productCardResponses.subList(0, toIndex);
-
-        forEach(productCardResponses);
-
-        if (fieldToSort != null) {
-            productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
-        }
-        log.info("successfully works the filter by parameters method");
-        return productCardResponses;
     }
 
     @Override
@@ -322,12 +355,16 @@ public class ProductServiceImpl implements ProductService {
         List<Long> productsId = productRepository.getViewedProducts(getAuthenticateUser().getId());
         List<ProductCardResponse> responses = new ArrayList<>();
         productsId.forEach(r -> {
-            Product p = productRepository.findById(r).orElseThrow(() -> new NotFoundException("Product not found"));
+            Product p = productRepository.findById(r).orElseThrow(() -> {
+                log.error("Product not found");
+                throw new NotFoundException("Product not found");
+            });
             responses.add(new ProductCardResponse(p.getId(), p.getProductName(), p.getProductImage(), p.getProductRating(),
                     productRepository.getAmountOfFeedback(p.getId()), p.getProductPrice()));
         });
         log.info("successfully works the getViewedProducts");
         return responses;
+
     }
 
     private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
@@ -379,6 +416,7 @@ public class ProductServiceImpl implements ProductService {
                 }
                 setDiscountToResponse(productCardResponse, null);
             } else {
+                log.error("Not found product card response");
                 throw new NotFoundException();
             }
         }
@@ -403,6 +441,7 @@ public class ProductServiceImpl implements ProductService {
             return inforgraphics;
 
         } catch (AopInvocationException e) {
+            log.error("Infographic is null");
             throw new BadRequestException("Inforgraphic is null");
         }
     }
@@ -412,17 +451,19 @@ public class ProductServiceImpl implements ProductService {
     public ProductSingleResponse getProductById(Long productId, String attribute, Integer size) {
         User user = getAuthenticateUser();
         ProductSingleResponse productSingleResponse;
-        Product p = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("we don't have the product with such id"));
-            List<SubproductResponse> subproducts = p.getSubproducts().stream().map(s -> new SubproductResponse(s.getId(), s.getCountOfSubproduct(),
-                    s.getImages(), s.getPrice(), s.getColor(), s.getCharacteristics())).toList();
-            productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
-                    p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
-                    p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), subproducts);
-            try{
-            productSingleResponse.setAmountOfDiscount(p.getDiscount().getAmountOfDiscount());}
-            catch (RuntimeException e){
-                System.out.println("null discount");
-            }
+        Product p = productRepository.findById(productId).orElseThrow(() ->{
+            log.error("We don't have the product with such id");
+            throw new NotFoundException("we don't have the product with such id");});
+        List<SubproductResponse> subproducts = p.getSubproducts().stream().map(s -> new SubproductResponse(s.getId(), s.getCountOfSubproduct(),
+                s.getImages(), s.getPrice(), s.getColor(), s.getCharacteristics())).toList();
+        productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
+                p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
+                p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), subproducts);
+        try {
+            productSingleResponse.setAmountOfDiscount(p.getDiscount().getAmountOfDiscount());
+        } catch (RuntimeException e) {
+            log.error("null discount");
+        }
         if (user.getFavoritesList().contains(p)) {
             productSingleResponse.setFavorite(true);
         }

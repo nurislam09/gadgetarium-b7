@@ -23,6 +23,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Subscription subscription = new Subscription();
         subscription.setEmail(subscriptionRequest.getEmail());
         if (subscriptionRepository.existsByEmail(subscription.getEmail())) {
+            log.error("Email already registered");
             throw new EmailAlreadyExistException("Email already registered");
         }
         subscriptionRepository.save(subscription);

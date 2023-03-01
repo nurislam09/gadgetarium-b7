@@ -21,8 +21,11 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public SimpleResponse addDiscount(DiscountRequest discountRequest) {
-        Product product = productRepository.findById(discountRequest.getProductId()).orElseThrow(() -> new NotFoundException("Product not found"));
 
+        Product product = productRepository.findById(discountRequest.getProductId()).orElseThrow(() -> {
+            log.error("Not found product");
+            throw new NotFoundException("Product not found");
+        });
         Discount discount = new Discount();
         discount.setAmountOfDiscount(discountRequest.getAmountOfDiscount());
         discount.setDiscountStartDate(discountRequest.getStartDate());
@@ -36,5 +39,6 @@ public class DiscountServiceImpl implements DiscountService {
 
         log.info("successfully works the add discount method");
         return new SimpleResponse("Discount successfully saved!", "ok");
+
     }
 }

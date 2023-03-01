@@ -30,29 +30,34 @@ public class S3Service {
     }
 
     public Map<String, String> upload(MultipartFile file) throws IOException {
+        try {
 
-        log.info("Uploading file...");
-        String key = System.currentTimeMillis() + file.getOriginalFilename();
+            log.info("Uploading file...");
+            String key = System.currentTimeMillis() + file.getOriginalFilename();
 
-        PutObjectRequest putObjectRequest = PutObjectRequest
-                .builder()
-                .bucket(bucketName)
-                .contentType("jpeg")
-                .contentType("png")
-                .contentType("pdf")
-                .contentType("jfif")
-                .contentType("mp4")
-                .contentLength(file.getSize())
-                .key(key)
-                .build();
+            PutObjectRequest putObjectRequest = PutObjectRequest
+                    .builder()
+                    .bucket(bucketName)
+                    .contentType("jpeg")
+                    .contentType("png")
+                    .contentType("pdf")
+                    .contentType("jfif")
+                    .contentType("mp4")
+                    .contentLength(file.getSize())
+                    .key(key)
+                    .build();
 
-        s3.putObject(putObjectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+            s3.putObject(putObjectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
 
-        log.info("Upload complete");
+            log.info("Upload complete");
 
-        return Map.of(
-                "link", bucketPath + key
-        );
+            return Map.of(
+                    "link", bucketPath + key
+            );
+        } catch (IOException e) {
+            log.error("IOException");
+            throw new IOException();
+        }
     }
 
     public Map<String, String> delete(String fileLink) {
@@ -68,11 +73,13 @@ public class S3Service {
             s3.deleteObject(dor -> dor.bucket(bucketName).key(key).build());
 
         } catch (S3Exception e) {
+            log.error(e.awsErrorDetails().errorMessage());
             throw new IllegalStateException(e.awsErrorDetails().errorMessage());
         } catch (Exception e) {
+            log.error(e.getMessage());
             throw new IllegalStateException(e.getMessage());
         }
-
+        log.info("the file was deleted");
         return Map.of(
                 "message", fileLink + " has been deleted"
         );

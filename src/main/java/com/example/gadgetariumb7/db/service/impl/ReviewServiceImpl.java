@@ -49,7 +49,9 @@ public class ReviewServiceImpl implements ReviewService {
                     user.getImage()
             );
             Product product = reviewRepository.getProductReview(r.getId());
-            Review review = reviewRepository.findById(r.getId()).orElseThrow(() -> new NotFoundException("Review not found"));
+            Review review = reviewRepository.findById(r.getId()).orElseThrow(() ->{
+                log.error("Review not found");
+                throw new NotFoundException("Review not found");});
             ProductReviewResponse productReviewResponse = new ProductReviewResponse(product);
             r.setProductReviewResponse(productReviewResponse);
             r.setUserResponse(userResponse);
@@ -60,7 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Map<Integer, Integer> countReviewsGrade() {
-        Map<Integer, Integer> counts = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> counts = new HashMap<>();
         for (int i = 1; i < 6; i++) {
             counts.put(i, reviewRepository.countReviewByProductGrade((byte) i));
         }
@@ -70,7 +72,10 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public SimpleResponse update(Long id, ReviewRequest reviewRequest) {
-        Review review = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("Not found")));
+        Review review = reviewRepository.findById(id).orElseThrow(() -> {
+            log.error("Not found");
+            throw new NotFoundException(String.format("Not found"));
+        });
         review.setResponseOfReview(reviewRequest.getResponseOfReview());
         review.setStatusOfResponse(review.getResponseOfReview().length() != 0);
         reviewRepository.save(review);
@@ -80,7 +85,9 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public SimpleResponse deleteReviewById(Long id) {
-        Review review = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("not found!")));
+        Review review = reviewRepository.findById(id).orElseThrow(() -> {
+            log.error("not found!");
+            throw new NotFoundException(String.format("not found!"));});
         reviewRepository.delete(review);
         log.info("successfully works the delete review by id method");
         return new SimpleResponse("deleted", "ok");

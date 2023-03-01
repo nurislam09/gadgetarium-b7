@@ -65,28 +65,32 @@ public class OrderServiceImpl implements OrderService {
                         .isBefore(endDate.plusDays(1))).toList();
             }
         } catch (DateTimeParseException ex) {
+            log.error(String.format("Invalid date format %s", ex));
             throw new IllegalArgumentException("Invalid date format", ex);
         }
         paginationOrderResponse.setOrderResponses(orderResponses);
         paginationOrderResponse.setCurrentPage(pageable.getPageNumber() + 1);
         paginationOrderResponse.setTotalPage(orderResponsesPagination.getTotalPages());
 
-        Map<OrderStatus,Long> getOrdersByStatus= new HashMap<>();
-         getOrdersByStatus.put(OrderStatus.WAITING, orderRepository.countByOrderStatus(OrderStatus.WAITING));
-         getOrdersByStatus.put(OrderStatus.IN_PROCESSING,orderRepository.countByOrderStatus(OrderStatus.IN_PROCESSING));
-         getOrdersByStatus.put(OrderStatus.ON_THE_WAY,orderRepository.countByOrderStatus(OrderStatus.ON_THE_WAY));
-         getOrdersByStatus.put(OrderStatus.DELIVERED,orderRepository.countByOrderStatus(OrderStatus.DELIVERED));
-         getOrdersByStatus.put(OrderStatus.CANCEL,orderRepository.countByOrderStatus(OrderStatus.CANCEL));
+        Map<OrderStatus, Long> getOrdersByStatus = new HashMap<>();
+        getOrdersByStatus.put(OrderStatus.WAITING, orderRepository.countByOrderStatus(OrderStatus.WAITING));
+        getOrdersByStatus.put(OrderStatus.IN_PROCESSING, orderRepository.countByOrderStatus(OrderStatus.IN_PROCESSING));
+        getOrdersByStatus.put(OrderStatus.ON_THE_WAY, orderRepository.countByOrderStatus(OrderStatus.ON_THE_WAY));
+        getOrdersByStatus.put(OrderStatus.DELIVERED, orderRepository.countByOrderStatus(OrderStatus.DELIVERED));
+        getOrdersByStatus.put(OrderStatus.CANCEL, orderRepository.countByOrderStatus(OrderStatus.CANCEL));
 
-         paginationOrderResponse.setOrderStatusAndSize(getOrdersByStatus);
+        paginationOrderResponse.setOrderStatusAndSize(getOrdersByStatus);
         paginationOrderResponse.setCountOfOrders((long) orderRepository.findAll().size());
         log.info("successfully works the find all orders method");
         return paginationOrderResponse;
     }
 
     public SimpleResponse deleteOrderById(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order not found"));
-        if(order.getUser() != null) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> {
+            log.error("Order not found");
+            throw new NotFoundException("Order not found");
+        });
+        if (order.getUser() != null) {
             order.getUser().getOrders().remove(order);
         }
         order.getSubproducts().forEach(x -> x.getOrders().remove(order));
@@ -97,8 +101,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public SimpleResponse update(Long id, OrderStatus orderStatus) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order for update not found!"));
-        if(orderStatus != null) order.setOrderStatus(orderStatus);
+        Order order = orderRepository.findById(id).orElseThrow(() -> {
+            log.error("Order for update not found");
+            throw new NotFoundException("Order for update not found!");
+        });
+        if (orderStatus != null) order.setOrderStatus(orderStatus);
         orderRepository.save(order);
         log.info("successfully works the order update method");
         return new SimpleResponse("Order successfully updated", "ok");
@@ -106,17 +113,20 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderPaymentResponse getOrdersPaymentInfo(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order  not found!"));
+        Order order = orderRepository.findById(id).orElseThrow(() -> {
+            log.error("Order not found");
+            throw new NotFoundException("Order  not found!");
+        });
         OrderPaymentResponse orderPaymentResponse = new OrderPaymentResponse();
         orderPaymentResponse.setId(order.getId());
-        orderPaymentResponse.setFullName(order.getFirstName()+" "+ order.getLastName());
+        orderPaymentResponse.setFullName(order.getFirstName() + " " + order.getLastName());
         orderPaymentResponse.setOrderNumber(order.getOrderNumber());
         orderPaymentResponse.setCountOfProduct(order.getCountOfProduct());
         orderPaymentResponse.setTotalSum(order.getTotalSum());
         orderPaymentResponse.setTotalDiscount(order.getTotalDiscount());
-        double discount1 = Math.round(((double)order.getTotalDiscount() * 100) /(double)order.getTotalSum());
+        double discount1 = Math.round(((double) order.getTotalDiscount() * 100) / (double) order.getTotalSum());
         orderPaymentResponse.setDiscount(discount1);
-        orderPaymentResponse.setTotal(order.getTotalSum()-order.getTotalDiscount());
+        orderPaymentResponse.setTotal(order.getTotalSum() - order.getTotalDiscount());
         orderPaymentResponse.setAddress(order.getUser().getAddress());
         orderPaymentResponse.setPhoneNumber(order.getUser().getPhoneNumber());
         List<String> productsName = new ArrayList<>();
@@ -137,19 +147,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public UserAutofillResponse autofillUserInformation() {
-        if (getAuthenticateUserForAutofill().isPresent()){
+        if (getAuthenticateUserForAutofill().isPresent()) {
             User user = getAuthenticateUserForAutofill().get();
             log.info("successfully works the autofill user information method");
             return new UserAutofillResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getAddress());
         } else {
+            log.error("User is not authenticate");
             throw new NotFoundException("User is not authenticate");
         }
     }
 
     @Override
     public OrderCompleteResponse saveOrder(OrderRequest req) {
-        User user = getAuthenticateUserForAutofill().orElseThrow(() -> new NotFoundException("User not found"));
-        List<Subproduct> subproducts = req.getSubproductsId().stream().map(s -> subproductRepository.findById(s).orElseThrow(() -> new NotFoundException(String.format("Subproduct with id %d not found", s)))).toList();
+        User user = getAuthenticateUserForAutofill().orElseThrow(() -> {
+            log.error("User not found");
+            throw new NotFoundException("User not found");
+        });
+        List<Subproduct> subproducts = req.getSubproductsId().stream().map(s -> subproductRepository.findById(s).orElseThrow(() -> {
+            log.error(String.format("Subproduct with id %d not found", s));
+            throw new NotFoundException(String.format("Subproduct with id %d not found", s));
+        })).toList();
         Order order = new Order(req.getFirstName(), req.getLastName(), req.getEmail(), req.getPhoneNumber(), req.getAddress(), req.getCountOfProduct(), req.getTotalSum(), req.getTotalDiscount(), req.getPayment(), req.getOrderType(), subproducts, user, orderGenerateNumber);
 
         user.getBasketList().forEach((key, value) -> key.setCountOfSubproduct(key.getCountOfSubproduct() - value));
@@ -157,8 +174,10 @@ public class OrderServiceImpl implements OrderService {
         subproducts.forEach(x -> {
             if (user.getBasketList().containsKey(x))
                 user.getBasketList().remove(x);
-            else
+            else {
+                log.error(String.format("Subproduct with id %d not exist in user's basket list with id %d", x.getId(), user.getId()));
                 throw new NotFoundException(String.format("Subproduct with id %d not exist in user's basket list with id %d", x.getId(), user.getId()));
+            }
         });
         orderRepository.save(order);
         orderGenerateNumber++;
