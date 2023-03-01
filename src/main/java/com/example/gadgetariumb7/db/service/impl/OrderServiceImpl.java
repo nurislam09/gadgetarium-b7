@@ -151,12 +151,14 @@ public class OrderServiceImpl implements OrderService {
         User user = getAuthenticateUserForAutofill().orElseThrow(() -> new NotFoundException("User not found"));
         List<Subproduct> subproducts = req.getSubproductsId().stream().map(s -> subproductRepository.findById(s).orElseThrow(() -> new NotFoundException(String.format("Subproduct with id %d not found", s)))).toList();
         Order order = new Order(req.getFirstName(), req.getLastName(), req.getEmail(), req.getPhoneNumber(), req.getAddress(), req.getCountOfProduct(), req.getTotalSum(), req.getTotalDiscount(), req.getPayment(), req.getOrderType(), subproducts, user, orderGenerateNumber);
+
+        user.getBasketList().forEach((key, value) -> key.setCountOfSubproduct(key.getCountOfSubproduct() - value));
+
         subproducts.forEach(x -> {
-            if (user.getBasketList().containsKey(x)){
+            if (user.getBasketList().containsKey(x))
                 user.getBasketList().remove(x);
-            } else {
-                throw new NotFoundException(String.format("Subproduct not exist in user's basket list", x.getId(), user.getId()));
-            }
+            else
+                throw new NotFoundException(String.format("Subproduct with id %d not exist in user's basket list with id %d", x.getId(), user.getId()));
         });
         orderRepository.save(order);
         orderGenerateNumber++;

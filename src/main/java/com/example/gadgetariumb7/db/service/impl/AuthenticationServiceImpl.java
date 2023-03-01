@@ -8,6 +8,7 @@ import com.example.gadgetariumb7.db.service.AuthenticationService;
 import com.example.gadgetariumb7.dto.request.AuthenticationRequest;
 import com.example.gadgetariumb7.dto.request.RegisterRequest;
 import com.example.gadgetariumb7.dto.response.AuthenticationResponse;
+import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -50,6 +51,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
+        if(repository.existsByEmail(request.getEmail()))
+            throw new BadRequestException(String.format("User with email %s already exist", request.getEmail()));
+
         var user = User.builder()
                 .firstName(request.getFirstname())
                 .lastName(request.getLastname())
@@ -108,6 +112,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String token = jwtService.generateToken(user);
         log.info("successfully works the authorization with google method");
         return new AuthenticationResponse(token, user.getRole().getRoleName(), user.getEmail());
+    }
+
+    @Override
+    public AuthenticationResponse getToken(User user) {
+        String jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .roleName(user.getRole().getRoleName())
+                .email(user.getEmail())
+                .build();
     }
 
 }
