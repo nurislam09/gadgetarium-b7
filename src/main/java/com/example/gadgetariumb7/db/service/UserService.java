@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserService {
 
     SimpleResponse addAndRemoveToFavorites(Long productId);
+    SimpleResponse addAndRemoveToCompares(Long productId);
 
     List<ProductCardResponse> getAllFavorites();
 
