@@ -45,7 +45,7 @@ public class User implements UserDetails {
     @OneToMany(cascade = {MERGE, DETACH, REFRESH, REMOVE}, mappedBy = "user")
     private List<Review> userReviews;
 
-    @OneToMany(cascade = {MERGE, DETACH, REFRESH})
+    @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> compareProductsList;
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})

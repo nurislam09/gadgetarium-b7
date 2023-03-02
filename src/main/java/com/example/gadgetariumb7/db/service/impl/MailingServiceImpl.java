@@ -8,6 +8,7 @@ import com.example.gadgetariumb7.db.service.SubscriptionService;
 import com.example.gadgetariumb7.dto.request.MailingRequest;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MailingServiceImpl implements MailingService {
 
     private final SubscriptionService subscriptionService;
@@ -28,6 +30,7 @@ public class MailingServiceImpl implements MailingService {
 
     @Override
     public void saveMailing(Mailing mailing) {
+        log.info("successfully works the save mailing method");
         mailingRepository.save(mailing);
     }
 
@@ -40,6 +43,7 @@ public class MailingServiceImpl implements MailingService {
             sendEmail(subscriber.getEmail(), mailing);
         }
         saveMailing(mailing);
+        log.info("successfully works the send mailing method");
         return new SimpleResponse("Successfully sent", "ok");
     }
 
@@ -53,5 +57,6 @@ public class MailingServiceImpl implements MailingService {
                 + "\n" + "Дата начала акции: " + mailing.getMailingDateOfStart() + "\n" + "Дата окончании акции: " + mailing.getMailingDateOfEnd());
         message.setBcc();
         emailSender.send(message);
+        log.info("successfully works the send email method");
     }
 }
