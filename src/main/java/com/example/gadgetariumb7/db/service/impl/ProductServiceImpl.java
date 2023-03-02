@@ -298,6 +298,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductCardResponse> filterByParameters(String text, String fieldToSort, String discountField, String categoryName, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors,
                                                         Integer memory, Byte ram, String laptopCPU, String appointmentOfLaptop, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
                                                         String wirelessInterface, String caseShape, String braceletMaterial, String housingMaterial, String gender, String waterProof, int size) throws NotFoundException {
+        try{
         if (text != null) {
             List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
                     .map(p -> new ProductCardResponse(p.getId(),
