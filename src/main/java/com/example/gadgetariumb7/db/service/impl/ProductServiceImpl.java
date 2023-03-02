@@ -296,7 +296,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductCardResponse> filterByParameters(String text, String fieldToSort, String discountField, String categoryName, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors,
-                                                        Integer memory, Byte ram, String laptopCPU, String appointmentOfLaptop, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
+                                                        Integer memory, Byte ram, String laptopCPU, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
                                                         String wirelessInterface, String caseShape, String braceletMaterial, String housingMaterial, String gender, String waterProof, int size) throws NotFoundException {
         try{
         if (text != null) {
@@ -330,8 +330,6 @@ public class ProductServiceImpl implements ProductService {
                         (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet")) == ram))
                 .filter(p -> laptopCPU == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
                         p.getSubproducts().get(0).getCharacteristics().get("laptopCPU").equalsIgnoreCase(laptopCPU)))
-                .filter(p -> appointmentOfLaptop == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
-                        p.getSubproducts().get(0).getCharacteristics().get("appointmentOfLaptop").equalsIgnoreCase(appointmentOfLaptop)))
                 .filter(p -> screenResolution == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
                         p.getSubproducts().get(0).getCharacteristics().get("screenResolutionLaptop").equalsIgnoreCase(screenResolution)) ||
                         (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && p.getSubproducts().get(0).getCharacteristics().get("screenResolutionOfTablet").equalsIgnoreCase(screenResolution)))
@@ -375,7 +373,7 @@ public class ProductServiceImpl implements ProductService {
             }
             log.info("successfully works the filter by parameters method");
             return productCardResponses;
-        } catch (NotFoundException e) {
+        } catch (NotFoundException | NullPointerException e) {
             log.error("Product not found");
             throw new NotFoundException("Product not found");
         }

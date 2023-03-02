@@ -417,13 +417,11 @@ values (20, 'Gray', 34, 91990, 6),
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (20, 'Apple M1', 'laptopCPU'),
        (20, '2560x1600', 'screenResolutionOfLaptop'),
-       (20, 'For work', 'appointmentOfLaptop'),
        (20, '4', 'videoCardMemory'),
        (20, '4', 'ramOfLaptop'),
        (20, '13.3', 'screenSizeOfLaptop'),
        (21, 'Apple M1', 'laptopCPU'),
        (21, '2560x1600', 'screenResolutionOfLaptop'),
-       (21, 'For work', 'appointmentOfLaptop'),
        (21, '6', 'videoCardMemory'),
        (21, '6', 'ramOfLaptop'),
        (21, '13.3', 'screenSizeOfLaptop');
@@ -478,7 +476,6 @@ values (22, 'Gray', 29, 189990, 7);
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (22, 'Apple M1 Pro', 'laptopCPU'),
        (22, '3024×1964', 'screenResolutionOfLaptop'),
-       (22, 'For work', 'appointmentOfLaptop'),
        (22, '8', 'videoCardMemoryOfLaptop'),
        (22, '32', 'ramOfLaptop'),
        (22, '14', 'screenSizeOfLaptop');
@@ -516,7 +513,6 @@ values (23, 'Black', 54, 149990, 8);
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (23, 'AMD Ryzen 5', 'laptopCPU'),
        (23, '1920х1080', 'screenResolutionOfLaptop'),
-       (23, 'For gaming', 'appointmentOfLaptop'),
        (23, '8', 'videoCardMemory'),
        (23, '16', 'ramOfLaptop'),
        (23, '15.6', 'screenSizeOfLaptop');
@@ -553,7 +549,6 @@ values (24, 'Black', 87, 69990, 9);
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (24, 'Intel Core i5', 'laptopCPU'),
        (24, '1920х1080', 'screenResolutionOfLaptop'),
-       (24, 'For work', 'appointmentOfLaptop'),
        (24, '4', 'videoCardMemory'),
        (24, '8', 'ramOfLaptop'),
        (24, '15.6', 'screenSizeOfLaptop');
@@ -592,7 +587,6 @@ values (25, 'Black', 39, 75990, 10);
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (25, 'Intel Core i7', 'laptopCPU'),
        (25, '1920х1080', 'screenResolutionLaptop'),
-       (25, 'For work', 'appointmentLaptop'),
        (25, '6', 'videoCardMemory'),
        (25, '8', 'ramLaptop'),
        (25, '15.6', 'screenSizeLaptop');

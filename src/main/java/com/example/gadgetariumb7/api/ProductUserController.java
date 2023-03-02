@@ -46,10 +46,10 @@ public class ProductUserController {
     @GetMapping("/catalog")
     @PreAuthorize("isAuthenticated()")
     public List<ProductCardResponse> filterByParameters(@RequestParam(required = false) String text, @RequestParam(required = false) String fieldToSort, @RequestParam(required = false) String discountField, @RequestParam(required = false) String categoryName, @RequestParam(required = false) String subCategoryName, @RequestParam(required = false) Integer minPrice, @RequestParam(required = false) Integer maxPrice, @RequestParam(required = false) List<String> colors,
-                                                        @RequestParam(required = false) Integer memory, @RequestParam(required = false) Byte ram, @RequestParam(required = false) String laptopCPU, @RequestParam(required = false) String appointmentOfLaptop, @RequestParam(required = false) String screenResolution, @RequestParam(required = false) String screenSize, @RequestParam(required = false) String screenDiagonal, @RequestParam(required = false) String batteryCapacity,
+                                                        @RequestParam(required = false) Integer memory, @RequestParam(required = false) Byte ram, @RequestParam(required = false) String laptopCPU, @RequestParam(required = false) String screenResolution, @RequestParam(required = false) String screenSize, @RequestParam(required = false) String screenDiagonal, @RequestParam(required = false) String batteryCapacity,
                                                         @RequestParam(required = false) String wirelessInterface, @RequestParam(required = false) String caseShape, @RequestParam(required = false) String braceletMaterial, @RequestParam(required = false) String housingMaterial, @RequestParam(required = false) String gender, @RequestParam(required = false) String waterProof, @RequestParam() int size) throws NotFoundException {
         return productService.filterByParameters(text, fieldToSort, discountField, categoryName, subCategoryName, minPrice, maxPrice, colors,
-                memory, ram, laptopCPU, appointmentOfLaptop, screenResolution, screenSize, screenDiagonal, batteryCapacity,
+                memory, ram, laptopCPU, screenResolution, screenSize, screenDiagonal, batteryCapacity,
                 wirelessInterface, caseShape, braceletMaterial, housingMaterial, gender, waterProof, size);
     }
 

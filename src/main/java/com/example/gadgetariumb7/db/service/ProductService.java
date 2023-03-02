@@ -32,7 +32,7 @@ public interface ProductService {
     SimpleResponse update(ProductUpdateRequest productUpdateRequest);
 
     List<ProductCardResponse> filterByParameters(String text, String fieldToSort, String discountField, String categoryName, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors,
-                                                 Integer memory, Byte ram, String laptopCPU, String appointmentOfLaptop, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
+                                                 Integer memory, Byte ram, String laptopCPU, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
                                                  String wirelessInterface, String caseShape, String braceletMaterial, String housingMaterial, String gender, String waterProof, int size) throws NotFoundException;
 
     ProductSingleResponse getProductById(Long productId, String attribute, Integer size);
