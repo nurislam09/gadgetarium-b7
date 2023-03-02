@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
         if (subproductsId.size() != 0) {
             subproductsId.forEach(id -> {
                 Subproduct s = subproductRepository.findById(id).get();
-                SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getImages().get(0), s.getCharacteristics(), s.getColor(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
+                SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getProduct().getProductName(), s.getImages().get(0), s.getCharacteristics(), s.getColor(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
                 if (s.getProduct().getDiscount() != null) {
                     subproductCardResponse.setAmountOfDiscount(s.getProduct().getDiscount().getAmountOfDiscount());
                 }
