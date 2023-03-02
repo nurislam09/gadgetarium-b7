@@ -24,7 +24,7 @@ public class PaymentController {
     }
 
     @PostMapping("/webhook")
-    public SimpleResponse handleWebhookEvent(@RequestParam String payload, @RequestParam String signatureHeader) {
+    public SimpleResponse handleWebhookEvent(@RequestBody String payload, @RequestParam String signatureHeader) {
         return paymentService.handleWebhookEvent(payload, signatureHeader);
     }
 }

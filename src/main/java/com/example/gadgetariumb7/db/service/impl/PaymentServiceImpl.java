@@ -49,7 +49,7 @@ public class PaymentServiceImpl implements PaymentService {
         try {
             Event event = Webhook.constructEvent(payload, signatureHeader, webhookSecret);
             return switch (event.getType()) {
-                case "charge.succeeded" -> new SimpleResponse("Payment succed", "ok");
+                case "charge.succeeded" -> new SimpleResponse("Payment succeed", "ok");
                 case "charge.failed" -> new SimpleResponse("Payment failed", "катострофа");
                 case "charge.refunded" -> new SimpleResponse("Payment refunded", "ok");
                 default -> new SimpleResponse("Something went wrong", "катострофа");
