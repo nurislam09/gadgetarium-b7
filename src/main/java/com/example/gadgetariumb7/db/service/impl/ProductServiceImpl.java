@@ -12,6 +12,7 @@ import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.AopInvocationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
@@ -37,30 +39,38 @@ public class ProductServiceImpl implements ProductService {
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
-        return userRepository.findByEmail(login).orElseThrow(() -> new NotFoundException("User not found!"));
+        log.info("the token has taken successfully");
+        return userRepository.findByEmail(login).orElseThrow(() -> {
+            log.error("User not found");
+            throw new NotFoundException("User not found!");
+        });
     }
 
     private Optional<User> getAuthenticateUserForFavorite() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
+        log.info("The user token for favorite has taken");
         return userRepository.findByEmail(login);
     }
 
     @Override
     public List<ProductCardResponse> getAllDiscountProductToMP(int page, int size) {
         List<ProductCardResponse> discountProducts = productRepository.getAllDiscountProduct(PageRequest.of(page - 1, size));
+        log.info("all discount product taken to main page successfully");
         return checkFavorite(discountProducts);
     }
 
     @Override
     public List<ProductCardResponse> getAllNewProductToMP(int page, int size) {
         List<ProductCardResponse> newProducts = productRepository.getAllNewProduct(PageRequest.of(page - 1, size));
+        log.info("all new product taken to main page successfully");
         return checkFavorite(newProducts);
     }
 
     @Override
     public List<ProductCardResponse> getAllRecommendationProductToMP(int page, int size) {
         List<ProductCardResponse> recommendations = productRepository.getAllRecommendationProduct(PageRequest.of(page - 1, size));
+        log.info("all recommendation product taken to main page successfully");
         return checkFavorite(recommendations);
     }
 
@@ -81,11 +91,12 @@ public class ProductServiceImpl implements ProductService {
                         x.setCompared(true);
                     }
                 } else {
+                    log.error("Product not found");
                     throw new NotFoundException("Product not found!");
                 }
             });
         }
-
+        log.info("favorite has checked successfully");
         return productCardResponses;
     }
 
@@ -137,15 +148,22 @@ public class ProductServiceImpl implements ProductService {
                     productAdminPaginationResponse.setResponseList(productAdminResponses);
                     return productAdminPaginationResponse;
                 }
-                default -> throw new BadRequestException("Product type is not correct");
+                default -> {
+                    log.error("Product type is not correct");
+                    throw new BadRequestException("Product type is not correct");
+                }
             }
         }
+        log.info("admin product is delivered");
         return productAdminPaginationResponse;
     }
 
     @Override
     public SimpleResponse delete(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product for delete not found!"));
+        Product product = productRepository.findById(id).orElseThrow(() -> {
+            log.error("Product for delete not found");
+            throw new NotFoundException("Product for delete not found!");
+        });
         userRepository.findAll().forEach(x -> {
             x.getFavoritesList().remove(product);
             product.getSubproducts().forEach(i -> x.getBasketList().remove(i));
@@ -153,16 +171,23 @@ public class ProductServiceImpl implements ProductService {
             x.getViewedProductsList().remove(product);
         });
         productRepository.delete(product);
+        log.info("successfully works the delete method");
         return new SimpleResponse("Product successfully deleted!", "ok");
     }
 
     @Override
     public SimpleResponse update(ProductUpdateRequest productUpdateRequest) {
-        Product product = productRepository.findById(productUpdateRequest.getId()).orElseThrow(() -> new NotFoundException("Product for update not found!"));
+        Product product = productRepository.findById(productUpdateRequest.getId()).orElseThrow(() -> {
+            log.error("Product for update not found");
+            throw new NotFoundException("Product for update not found!");
+        });
         List<Subproduct> subproducts = product.getSubproducts();
         List<SubproductUpdateRequest> subproductUpdateRequests = new ArrayList<>(productUpdateRequest.getSubproductUpdateRequests());
         for (SubproductUpdateRequest s : subproductUpdateRequests) {
-            Subproduct subproduct = subproductRepository.findById(s.getId()).orElseThrow(() -> new NotFoundException("Subproduct for update not found!"));
+            Subproduct subproduct = subproductRepository.findById(s.getId()).orElseThrow(() -> {
+                log.error("Subproduct for update not found!");
+                throw new NotFoundException("Subproduct for update not found!");
+            });
             int index = subproducts.indexOf(subproduct);
             if (index != -1) {
                 if (s.getSubproductCount() != 0) subproduct.setCountOfSubproduct(s.getSubproductCount());
@@ -177,12 +202,12 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setSubproducts(subproducts);
         productRepository.save(product);
+        log.info("successfully works the update method");
         return new SimpleResponse("Product successfully updated", "ok");
     }
 
     private List<ProductAdminResponse> sortingProduct(String fieldToSort, String discountField, List<ProductAdminResponse> products, LocalDate startDate, LocalDate endDate) {
         products.forEach(r -> setDiscountToResponse(null, r));
-
         if (fieldToSort != null) {
             switch (fieldToSort) {
                 case "Новинки" ->
@@ -205,12 +230,15 @@ public class ProductServiceImpl implements ProductService {
                 case "По увеличению цены" -> products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice));
                 case "По уменьшению цены" ->
                         products.sort(Comparator.comparing(ProductAdminResponse::getProductPrice).reversed());
-                default -> throw new BadRequestException("Sort field is not correct");
+                default -> {
+                    log.error("Sort field is not correct");
+                    throw new BadRequestException("Sort field is not correct");
+                }
             }
         }
         if (startDate != null && endDate != null)
             return products.stream().filter(p -> p.getCreateAt().toLocalDate().isAfter(startDate) && p.getCreateAt().toLocalDate().isBefore(endDate)).toList();
-
+        log.info("successfully works the sorting product method");
         return products;
     }
 
@@ -232,15 +260,25 @@ public class ProductServiceImpl implements ProductService {
                 }
             }
         } catch (RuntimeException e) {
-            System.out.println("null discount");
+            log.error("null discount");
         }
+        log.info("successfully works the setDiscountResponse");
     }
 
     @Override
     public SimpleResponse addProduct(ProductRequest productRequest) {
-        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found"));
-        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> new NotFoundException("Category not found"));
-        Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> new NotFoundException("Subcategory not found"));
+        Brand brand = brandRepository.findById(productRequest.getBrandId()).orElseThrow(() -> {
+            log.error("Brand not found");
+            throw new NotFoundException("Brand not found");
+        });
+        Category category = categoryRepository.findById(productRequest.getCategoryId()).orElseThrow(() -> {
+            log.error("Category not found");
+            throw new NotFoundException("Category not found");
+        });
+        Subcategory subcategory = subcategoryRepository.findById(productRequest.getSubCategoryId()).orElseThrow(() -> {
+            log.error("Subcategory not found");
+            throw new NotFoundException("Subcategory not found");
+        });
         List<Subproduct> subproducts = new ArrayList<>();
         productRequest.getSubProductRequests().forEach(x -> {
             subproducts.add(new Subproduct(x));
@@ -252,7 +290,7 @@ public class ProductServiceImpl implements ProductService {
         product.setSubproducts(subproducts);
         subproducts.forEach(s -> s.setProduct(product));
         productRepository.save(product);
-
+        log.info("successfully works the add product method");
         return new SimpleResponse("Product successfully saved", "ok");
     }
 
@@ -326,15 +364,20 @@ public class ProductServiceImpl implements ProductService {
                         p.getProductRating()))
                 .collect(Collectors.toList());
 
-        int toIndex = Math.min(size, productCardResponses.size());
-        productCardResponses = productCardResponses.subList(0, toIndex);
+            int toIndex = Math.min(size, productCardResponses.size());
+            productCardResponses = productCardResponses.subList(0, toIndex);
 
-        forEach(productCardResponses);
+            forEach(productCardResponses);
 
-        if (fieldToSort != null) {
-            productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
+            if (fieldToSort != null) {
+                productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
+            }
+            log.info("successfully works the filter by parameters method");
+            return productCardResponses;
+        } catch (NotFoundException e) {
+            log.error("Product not found");
+            throw new NotFoundException("Product not found");
         }
-        return productCardResponses;
     }
 
     @Override
@@ -342,11 +385,16 @@ public class ProductServiceImpl implements ProductService {
         List<Long> productsId = productRepository.getViewedProducts(getAuthenticateUser().getId());
         List<ProductCardResponse> responses = new ArrayList<>();
         productsId.forEach(r -> {
-            Product p = productRepository.findById(r).orElseThrow(() -> new NotFoundException("Product not found"));
+            Product p = productRepository.findById(r).orElseThrow(() -> {
+                log.error("Product not found");
+                throw new NotFoundException("Product not found");
+            });
             responses.add(new ProductCardResponse(p.getId(), p.getProductName(), p.getProductImage(), p.getProductRating(),
                     productRepository.getAmountOfFeedback(p.getId()), p.getProductPrice()));
         });
+        log.info("successfully works the getViewedProducts");
         return responses;
+
     }
 
     private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
@@ -374,6 +422,7 @@ public class ProductServiceImpl implements ProductService {
                         productCardResponses.sort(Comparator.comparing(ProductCardResponse::getProductPrice).reversed());
             }
         }
+        log.info("successfully works the sortingProduct2 method");
         return productCardResponses;
     }
 
@@ -397,9 +446,11 @@ public class ProductServiceImpl implements ProductService {
                 }
                 setDiscountToResponse(productCardResponse, null);
             } else {
+                log.error("Not found product card response");
                 throw new NotFoundException();
             }
         }
+        log.info("successfully works the for each method");
     }
 
     @Override
@@ -416,8 +467,10 @@ public class ProductServiceImpl implements ProductService {
             inforgraphics.setPreviousPeriodPerDay(productRepository.getPreviousPeriodPerDay());
             inforgraphics.setPreviousPeriodPerMonth(productRepository.getPreviousPeriodPerMonth());
             inforgraphics.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
+            log.info("successfully works the infographics method");
             return inforgraphics;
         } catch (AopInvocationException e) {
+            log.error("Infographic is null");
             throw new BadRequestException("Inforgraphic is null");
         }
     }
@@ -427,7 +480,9 @@ public class ProductServiceImpl implements ProductService {
     public ProductSingleResponse getProductById(Long productId, String attribute, Integer size) {
         User user = getAuthenticateUser();
         ProductSingleResponse productSingleResponse;
-        Product p = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("we don't have the product with such id"));
+        Product p = productRepository.findById(productId).orElseThrow(() ->{
+            log.error("We don't have the product with such id");
+            throw new NotFoundException("we don't have the product with such id");});
         List<SubproductResponse> subproducts = p.getSubproducts().stream().map(s -> new SubproductResponse(s.getId(), s.getCountOfSubproduct(),
                 s.getImages(), s.getPrice(), s.getColor(), s.getCharacteristics())).toList();
         productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
@@ -436,7 +491,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             productSingleResponse.setAmountOfDiscount(p.getDiscount().getAmountOfDiscount());
         } catch (RuntimeException e) {
-            System.out.println("null discount");
+            log.error("null discount");
         }
         if (user.getFavoritesList().contains(p)) {
             productSingleResponse.setFavorite(true);
@@ -470,6 +525,7 @@ public class ProductServiceImpl implements ProductService {
                 return productSingleResponse;
             }
         }
+        log.info("successfully works the productSingleResponse method");
         return productSingleResponse;
     }
 }
