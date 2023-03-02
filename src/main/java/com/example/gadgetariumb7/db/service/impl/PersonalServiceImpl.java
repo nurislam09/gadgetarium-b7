@@ -13,6 +13,7 @@ import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +25,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PersonalServiceImpl implements PersonalService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
@@ -34,40 +36,57 @@ public class PersonalServiceImpl implements PersonalService {
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
-        return userRepository.findByEmail(login).orElseThrow(() -> new NotFoundException("User not found!"));
+        log.info("successfully works the get authenticate user");
+        return userRepository.findByEmail(login).orElseThrow(() -> {
+            log.error("User not found");
+            throw new NotFoundException("User not found!");
+        });
     }
 
     @Override
     public List<PersonalOrderResponse> getAllPersonalOrders() {
         User user = getAuthenticateUser();
         List<PersonalOrderResponse> orders = orderRepository.getAllPersonalOrders(user.getId());
-        if (CollectionUtils.isEmpty(orders))
+        if (CollectionUtils.isEmpty(orders)) {
+            log.error("User's order history is empty");
             throw new NotFoundException("User's order history is empty");
+        }
+        log.info("Successfully works the get all personal orders");
         return orders;
     }
 
     @Override
     public PersonalOrderByIdResponse getByIdPersonalOrder(Long orderId) {
         User user = getAuthenticateUser();
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundException(String.format("Order with id %d not found", orderId)));
-
-        if (!user.getOrders().contains(order))
-            throw new NotFoundException(String.format("Order with id %d not found in order history", orderId));
-
-        List<ProductCardResponse> subproductsResponses = new ArrayList<>();
-        order.getSubproducts().forEach(s -> {
-            Product p = productRepository.findById(s.getProduct().getId()).orElseThrow(() -> new NotFoundException(String.format("Product with id %d not found", s.getProduct().getId())));
-            subproductsResponses.add(new ProductCardResponse(s.getId(), p.getProductName(), s.getImages().get(0), p.getProductRating(), p.getUsersReviews().size(), s.getPrice()));
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> {
+            log.error(String.format("Order with id %d not found", orderId));
+            throw new NotFoundException(String.format("Order with id %d not found", orderId));
         });
 
+        if (!user.getOrders().contains(order)) {
+            log.error(String.format("Order with id %d not found in order history", orderId));
+            throw new NotFoundException(String.format("Order with id %d not found in order history", orderId));
+        }
+        List<ProductCardResponse> subproductsResponses = new ArrayList<>();
+        order.getSubproducts().forEach(s -> {
+            Product p = productRepository.findById(s.getProduct().getId()).orElseThrow(() -> {
+                log.error(String.format("Product with id %d not found", s.getProduct().getId()));
+                throw new NotFoundException(String.format("Product with id %d not found", s.getProduct().getId()));
+            });
+            subproductsResponses.add(new ProductCardResponse(s.getId(), p.getProductName(), s.getImages().get(0), p.getProductRating(), p.getUsersReviews().size(), s.getPrice()));
+        });
+        log.info("Successfully works the get by id personal order");
         return new PersonalOrderByIdResponse(order.getOrderNumber(), subproductsResponses, order.getDeliveryStatus(), user.getFirstName() + " " + user.getLastName(), user.getFirstName(), user.getLastName(), order.getAddress(), user.getPhoneNumber(), user.getEmail(), order.getDateOfOrder().toLocalDate(), order.getPayment(), order.getTotalSum() - order.getTotalDiscount(), order.getTotalSum());
     }
 
     @Override
     public List<ProductCardResponse> getAllPersonalFavorite() {
         User user = getAuthenticateUser();
-        if (CollectionUtils.isEmpty(user.getFavoritesList()))
+        if (CollectionUtils.isEmpty(user.getFavoritesList())){
+            log.error("User's favorites products is empty");
             throw new NotFoundException("User's favorites products is empty");
+        }
+        log.info("Successfully works the get all personal favorite");
         return user.getFavoritesList().stream().map(x -> new ProductCardResponse(x.getId(), x.getProductName(), x.getProductImage(), x.getProductRating(), x.getUsersReviews().size(), x.getProductPrice())).toList();
     }
 
@@ -93,25 +112,28 @@ public class PersonalServiceImpl implements PersonalService {
         }
 
         if (!user.getEmail().equals(request.getEmail().replace(" ", ""))) {
-            if (userRepository.existsByEmail(request.getEmail()))
+            if (userRepository.existsByEmail(request.getEmail())){
+                log.error(String.format("User with email %s already exist", request.getEmail()));
                 throw new BadRequestException(String.format("User with email %s already exist", request.getEmail()));
-
+        }
             user.setEmail(request.getEmail());
 
             AuthenticationResponse authenticationResponse = authenticationService.getToken(user);
 
             userRepository.save(user);
+            log.info("Successfully works the update user");
             return authenticationResponse;
         }
 
         userRepository.save(user);
-
+        log.info("User successfully updated");
         return new SimpleResponse("User successfully updated", "ok");
     }
 
     @Override
     public PersonalUserResponse getPersonalUser() {
         User u = getAuthenticateUser();
+        log.info("Successfully works the get personal user");
         return new PersonalUserResponse(u.getFirstName(), u.getLastName(), u.getEmail(), u.getPhoneNumber(), u.getAddress());
     }
 
@@ -121,6 +143,7 @@ public class PersonalServiceImpl implements PersonalService {
         user.getOrders().forEach(x -> x.setUser(null));
         user.getOrders().clear();
         userRepository.save(user);
+        log.info("User's order history successfully cleared");
         return new SimpleResponse("User's order history successfully cleared", "ok");
     }
 
@@ -131,16 +154,19 @@ public class PersonalServiceImpl implements PersonalService {
         boolean matches = passwordEncoder.matches(request.getCurrentPassword(), user.getPassword());
 
         if (!matches) {
+            log.error("Invalid current password");
             throw new BadRequestException("invalid current password");
         }
 
-        if (request.getNewPassword().length() < 6){
+        if (request.getNewPassword().length() < 6) {
+            log.error("Password should be more than 5");
             throw new BadRequestException("Password should be more than 5");
         }
 
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
 
         userRepository.save(user);
+        log.info("Password successfully updated");
         return new SimpleResponse("Password successfully updated", "ok");
     }
 }
