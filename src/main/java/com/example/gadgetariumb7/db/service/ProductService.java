@@ -7,6 +7,7 @@ import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.exceptions.NotFoundException;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -30,7 +31,9 @@ public interface ProductService {
 
     SimpleResponse update(ProductUpdateRequest productUpdateRequest);
 
-    List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size);
+    List<ProductCardResponse> filterByParameters(String text, String fieldToSort, String discountField, String categoryName, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors,
+                                                 Integer memory, Byte ram, String laptopCPU, String appointmentOfLaptop, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
+                                                 String wirelessInterface, String caseShape, String braceletMaterial, String housingMaterial, String gender, String waterProof, int size) throws NotFoundException;
 
     ProductSingleResponse getProductById(Long productId, String attribute, Integer size);
 
