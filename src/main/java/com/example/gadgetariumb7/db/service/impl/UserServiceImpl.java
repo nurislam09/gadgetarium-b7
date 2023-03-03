@@ -190,9 +190,8 @@ public class UserServiceImpl implements UserService {
         User user = getAuthenticateUser();
         List<Long> subproductsId = subproductRepository.getAllFromUserBasketList(user.getId());
         List<SubproductCardResponse> responses = new ArrayList<>();
-        if (subproductsId.size() != 0) {
-            Translate translate = TranslateOptions.newBuilder().setApiKey(googleAPI).build().getService();
-            subproductsId.forEach(id -> {
+        Translate translate = TranslateOptions.newBuilder().setApiKey(googleAPI).build().getService();
+        subproductsId.forEach(id -> {
                 Subproduct s = subproductRepository.findById(id).get();
                 Translation translation = translate.translate(colorNameMapper.getColorName(s.getColor()), Translate.TranslateOption.targetLanguage("ru"));
                 SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getImages().get(0), s.getCharacteristics(), translation.getTranslatedText(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
@@ -201,10 +200,6 @@ public class UserServiceImpl implements UserService {
                 }
                 responses.add(subproductCardResponse);
             });
-        } else {
-            log.error("Users basketList is empty");
-            throw new NotFoundException("Users basketList is empty");
-        }
         log.info("successfully works the get all from basket list");
         return responses;
     }
