@@ -796,9 +796,21 @@ values (1, 1),
 
 insert into user_basket_list(user_id, count_of_product, subproduct_id)
 values
-    (2, 1, 1),
-    (2, 1, 2),
-    (2, 1, 3);
+    (2, 10, 1),
+    (2, 10, 2),
+    (2, 10, 3),
+    (2, 10, 5),
+    (2, 10, 6),
+    (2, 10, 7),
+    (2, 10, 8),
+    (2, 10, 9),
+    (2, 10, 10),
+    (2, 10, 11),
+    (2, 10, 12),
+    (2, 10, 13),
+    (2, 10, 14),
+    (2, 10, 15),
+    (2, 10, 4);
 
 insert into users_compare_products_list(user_id, compare_products_list_id)
 values
