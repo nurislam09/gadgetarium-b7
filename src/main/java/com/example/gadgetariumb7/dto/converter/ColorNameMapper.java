@@ -1,8 +1,11 @@
 package com.example.gadgetariumb7.dto.converter;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class ColorNameMapper {
 
     private static final Map<String, String> colorMap = new HashMap<>();

@@ -34,9 +34,8 @@ public class ProductServiceImpl implements ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
-    private final OrderRepository orderRepository;
     private final SubproductRepository subproductRepository;
-    private ColorNameMapper colorNameMapper;
+    private final ColorNameMapper colorNameMapper;
 
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -474,12 +473,10 @@ public class ProductServiceImpl implements ProductService {
                 String description = p.getDescription();
                 productSingleResponse.setAttribute("Описание", description);
                 productSingleResponse.setVideoReview(p.getVideoReview());
-                return productSingleResponse;
             }
             case "Характеристики" -> {
                 Map<String, String> characteristics = p.getSubproducts().get(0).getCharacteristics();
                 productSingleResponse.setAttribute("Характеристики", characteristics);
-                return productSingleResponse;
             }
             case "Отзывы" -> {
                 List<Review> reviews = p.getUsersReviews();
@@ -495,9 +492,10 @@ public class ProductServiceImpl implements ProductService {
                 int toIndex = Math.min(size, reviewMainResponses.size());
                 reviewMainResponses = reviewMainResponses.subList(0, toIndex);
                 productSingleResponse.setAttribute("Отзывы", reviewMainResponses);
-                return productSingleResponse;
             }
         }
+        user.addViewedProduct(p);
+        userRepository.save(user);
         log.info("successfully works the productSingleResponse method");
         return productSingleResponse;
     }

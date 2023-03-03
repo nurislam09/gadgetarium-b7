@@ -77,7 +77,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (1,
         'https://9to5mac.com/wp-content/uploads/sites/6/2021/03/Screenshot-2021-03-26-at-11.06.19.png',
-        'Black',
+        '#000000',
         '2023-09-13 18:20:03',
         'IPhone 13 Pro — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A15 Bionic обеспечивает исключительный пользовательский опыт. Pro также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
         12,
@@ -92,10 +92,10 @@ VALUES (1,
         1, 1, 1, 1);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (1, 'Black', 125, 100000, 1),
-       (2, 'Silver', 104, 110000, 1),
-       (3, 'Gold', 83, 105000, 1),
-       (4, 'Blue', 96, 115000, 1);
+values (1, '#000000', 125, 100000, 1),
+       (2, '#B2B2B2', 104, 110000, 1),
+       (3, '#FFFFBE', 83, 105000, 1),
+       (4, '#0071FF', 96, 115000, 1);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (1, '1', 'simCard'),
@@ -140,7 +140,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (2,
         'https://english.onlinekhabar.com/wp-content/uploads/2022/02/galaxy-s22_banner_ar.jpg',
-        'Pink gold',
+        '#FFEBBE',
         '2023-09-13 18:20:03',
         'Samsung Galaxy S22 — последнее дополнение к флагманской линейке смартфонов Samsung, предлагающее передовые технологии и стильный дизайн. Благодаря большому яркому 6,2-дюймовому дисплею, тройным задним камерам и мощному восьмиядерному процессору этот телефон обеспечивает непревзойденное удобство работы с пользователем. S22 также может похвастаться возможностью подключения 5G, обеспечивающей молниеносную скорость загрузки и выгрузки, а также аккумулятором с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии Android и имеет улучшенный помощник Bixby AI. В общем, Samsung Galaxy S22 — незаменимое устройство для тех, кто ищет высокопроизводительный и стильный смартфон.',
         6,
@@ -155,10 +155,10 @@ VALUES (2,
         2, 1, 2, 2);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (5, 'Pink gold', 254, 75440, 2),
-       (6, 'Green', 98, 80440, 2),
-       (7, 'Black', 56, 73440, 2),
-       (8, 'Purple', 74, 78440, 2);
+values (5, '#FFEBBE', 254, 75440, 2),
+       (6, '#38A800', 98, 80440, 2),
+       (7, '#000000', 56, 73440, 2),
+       (8, '#CD6699', 74, 78440, 2);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (5, '1', 'simCard'),
@@ -203,7 +203,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (3,
         'https://awsimages.detik.net.id/community/media/visual/2022/07/04/xiaomi-12-lite-1_169.jpeg?w=1200',
-        'Black',
+        '#000000',
         '2023-09-13 18:20:03',
         'Xiaomi Mi 12 Lite — это бюджетный смартфон с впечатляющими функциями и производительностью. Благодаря большому 6,57-дюймовому дисплею Full HD+ и мощному процессору Snapdragon 732G этот телефон обеспечивает плавное и быстрое взаимодействие с пользователем. Mi 12 Lite также оснащен четырьмя камерами, в том числе 48-мегапиксельной основной камерой, обеспечивающей универсальные возможности съемки и превосходное качество фотографий. Он работает на последней версии MIUI и питается от большой батареи с длительным сроком службы. Кроме того, он включает в себя подключение 5G для молниеносной скорости загрузки и выгрузки. Xiaomi Mi 12 Lite — отличный выбор для тех, кто ищет высокопроизводительный смартфон по доступной цене.',
         8,
@@ -218,9 +218,9 @@ VALUES (3,
         3, 1, null, 5);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (9,  'Black', 387, 65990, 3),
-       (10, 'Light pink', 273, 63990, 3),
-       (11, 'Light green', 145, 68990, 3);
+values (9,  '#000000', 387, 65990, 3),
+       (10, '#FFEBBE', 273, 63990, 3),
+       (11, '#5C8944', 145, 68990, 3);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (9, '2', 'simCard'),
@@ -254,7 +254,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (4,
         'https://cdn.osxdaily.com/wp-content/uploads/2022/09/iphone-14-pro-iphone-14-pro-max.jpg',
-        'Violet',
+        '#73004C',
         '2023-09-13 18:20:03',
         'IPhone 14 Pro Max — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A16 Bionic обеспечивает исключительный пользовательский опыт. Pro Max также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
         16,
@@ -269,10 +269,10 @@ VALUES (4,
         1, 1, null, 1);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (12, 'Violet', 132, 124990, 4),
-       (13, 'Golden', 108, 122590, 4),
-       (14, 'Silver', 78, 125990, 4),
-       (15, 'Black', 93, 124990, 4);
+values (12, '#73004C', 132, 124990, 4),
+       (13, '#E69800', 108, 122590, 4),
+       (14, '#343434', 78, 125990, 4),
+       (15, '#000000', 93, 124990, 4);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (12, 'eSIM', 'simCard'),
@@ -318,7 +318,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (5,
         'https://it-here.ru/wp-content/uploads/2021/09/iPhone-13-hero-1536x482-1.png',
-        'Blue',
+        '#0370CB',
         '2023-09-13 18:20:03',
         'IPhone 13 — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A16 Bionic обеспечивает исключительный пользовательский опыт. Pro Max также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
         13,
@@ -333,10 +333,10 @@ VALUES (5,
         1, 1, 3, 1);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (16, 'Blue', 78, 69990, 5),
-       (17, 'Red', 58, 68990, 5),
-       (18, 'Green', 63, 69990, 5),
-       (19, 'Black', 45, 65990, 5);
+values (16, '#0370CB', 78, 69990, 5),
+       (17, '#FF0000', 58, 68990, 5),
+       (18, '#38A800', 63, 69990, 5),
+       (19, '#000000', 45, 65990, 5);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (16, '1', 'simCard'),
@@ -380,7 +380,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (6,
         'https://www.apple.com/v/macbook-pro-13/p/images/meta/macbook-pro-13_overview__bcsyunk73i2a_og.jpg',
-        'Gray',
+        '#686868',
         '2023-09-13 18:20:03',
         'MacBook Air — это легкий и портативный ноутбук от Apple, разработанный для тех, кому нужен мощный и стильный ноутбук для работы, учебы или игр. MacBook Air с потрясающим 13,3-дюймовым дисплеем Retina обеспечивает четкое и яркое изображение, а процессор Intel Core i5 8-го поколения обеспечивает высокую производительность и быстроту отклика. Этот ноутбук также оснащен Touch ID, упрощающим и безопасным вход в систему и совершение покупок, а также последней версией macOS, обеспечивающей удобный и интуитивно понятный пользовательский интерфейс. Кроме того, он имеет долговечную батарею, обеспечивающую до 12 часов работы без подзарядки, и поставляется с быстрым и надежным хранилищем SSD. MacBook Air (13 дюймов, 2020 г.) — идеальный ноутбук для тех, кто ищет мощное, портативное и стильное устройство.',
         12,
@@ -395,8 +395,8 @@ VALUES (6,
         1, 2, 4, 8);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (20, 'Gray', 34, 91990, 6),
-       (21, 'Golden', 23,91990, 6);
+values (20, '#686868', 34, 91990, 6),
+       (21, '#E69800', 23,91990, 6);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (20, 'Apple M1', 'laptopCPU'),
@@ -430,7 +430,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (7,
         'https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/csm_FBlmFlnX0AIbDre_b05127ba75.jpg',
-        'Gray',
+        '#CCCCCC',
         '2023-09-13 18:20:03',
         'MacBook Pro 14 — это мощный и универсальный ноутбук от Apple, разработанный для профессионалов и опытных пользователей. Этот ноутбук с потрясающим 14-дюймовым дисплеем Retina и быстрым процессором Apple M1 Pro обеспечивает исключительное удобство работы, независимо от того, работаете ли вы над сложными задачами или используете ресурсоемкие приложения. MacBook Pro также оснащен последней версией macOS, обеспечивающей плавный и интуитивно понятный пользовательский интерфейс, а также сенсорной панелью — сенсорной полосой стекла над клавиатурой, обеспечивающей быстрый доступ к распространенным инструментам и функциям. Кроме того, он имеет долговечную батарею, обеспечивающую до 14 часов работы без подзарядки, и поставляется с быстрым и надежным хранилищем SSD. MacBook Pro — идеальный ноутбук для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
         8,
@@ -445,7 +445,7 @@ VALUES (7,
         1, 2, null, 8);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (22, 'Gray', 29, 189990, 7);
+values (22, '#CCCCCC', 29, 189990, 7);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (22, 'Apple M1 Pro', 'laptopCPU'),
@@ -466,7 +466,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (8,
         'https://images.acer.com/is/image/acer/Nitro_5_main_2560-1?$responsive$',
-        'Black',
+        '#000000',
         '2023-09-13 18:20:03',
         'Acer Nitro 5 — доступный игровой ноутбук с впечатляющей производительностью и функциями. Благодаря быстрому процессору Intel Core i5 и выделенной графике NVIDIA этот ноутбук обеспечивает плавную и быструю работу даже в ресурсоемких играх и приложениях. Nitro 5 оснащен большим 15,6-дюймовым дисплеем Full HD для четкого и яркого изображения, а также клавиатурой с подсветкой для комфортной игры в условиях низкой освещенности. Кроме того, он оснащен аккумулятором с длительным сроком службы, обеспечивающим до 6 часов работы без подзарядки. , а также быстрое и надежное хранилище Acer Nitro 5 — отличный выбор для геймеров и опытных пользователей, которые ищут недорогой ноутбук с отличной производительностью и функциями.',
         5,
@@ -481,7 +481,7 @@ VALUES (8,
         4, 2, null, 6);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (23, 'Black', 54, 149990, 8);
+values (23, '#000000', 54, 149990, 8);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (23, 'AMD Ryzen 5', 'laptopCPU'),
@@ -501,7 +501,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (9,
         'http://reviewcentralme.com/wp-content/uploads/2022/09/Vivobook-15_X1502_M150.jpg',
-        'Black',
+        '#000000',
         '2023-09-13 18:20:03',
         'Asus VivoBook 15 — это недорогой ноутбук с отличной производительностью и функциями для повседневного использования. Благодаря быстрому процессору Intel Core i5 и дисплею Full HD этот ноутбук обеспечивает плавную и быструю работу, независимо от того, работаете ли вы, просматриваете веб-страницы или смотрите видео. VivoBook 15 также отличается элегантным и стильным дизайном, тонким и легким форм-фактором, который позволяет легко носить его с собой и использовать в дороге. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 6 часов работы без подзарядки, а также быстрые и надежные варианты хранения. Asus VivoBook 15 — отличный выбор для тех, кто ищет недорогой ноутбук, обеспечивающий производительность и функции, необходимые для повседневного использования.',
         5,
@@ -516,7 +516,7 @@ VALUES (9,
         5, 2, 5, 7);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (24, 'Black', 87, 69990, 9);
+values (24, '#000000', 87, 69990, 9);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (24, 'Intel Core i5', 'laptopCPU'),
@@ -538,7 +538,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (10,
         'https://cdnb.artstation.com/p/assets/images/images/014/956/421/large/marcus-ryden-asuszenbook.jpg?1546467187',
-        'Black',
+        '#000000',
         '2023-09-13 18:20:03',
         'Asus ZenBook Pro 15 — это недорогой ноутбук с отличной производительностью и функциями для повседневного использования. Благодаря быстрому процессору Intel Core i5 и дисплею Full HD этот ноутбук обеспечивает плавную и быструю работу, независимо от того, работаете ли вы, просматриваете веб-страницы или смотрите видео. VivoBook 15 также отличается элегантным и стильным дизайном, тонким и легким форм-фактором, который позволяет легко носить его с собой и использовать в дороге. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 6 часов работы без подзарядки, а также быстрые и надежные варианты хранения. Asus VivoBook 15 — отличный выбор для тех, кто ищет недорогой ноутбук, обеспечивающий производительность и функции, необходимые для повседневного использования.',
         8,
@@ -553,7 +553,7 @@ VALUES (10,
         5, 2, null, 7);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (25, 'Black', 39, 75990, 10);
+values (25, '#000000', 39, 75990, 10);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (25, 'Intel Core i7', 'laptopCPU'),
@@ -573,7 +573,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (11,
         'https://appleinsider.ru/wp-content/uploads/2022/03/iPad_air_5_2022_000989-740x462.jpg',
-        'Blue',
+        '#3B3AC4',
         '2023-09-13 18:20:03',
         'iPad Air (10,9 дюйма, 2020 г.) — это мощный и универсальный планшет от Apple, разработанный для работы, учебы и развлечений. Благодаря большому и яркому 10,9-дюймовому дисплею Liquid Retina и быстрому процессору A14 Bionic этот планшет обеспечивает плавную и быструю работу, независимо от того, просматриваете ли вы веб-страницы, играете в игры или используете ресурсоемкие приложения. iPad Air также включает поддержку Apple Pencil и Smart Keyboard, что делает его отличным выбором для творческих задач и продуктивной работы. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 10 часов работы без подзарядки, и работает на последней версии iPadOS, обеспечивая плавный и интуитивно понятный пользовательский интерфейс. iPad Air (10,9 дюйма, 2020 г.) — идеальный планшет для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
         12,
@@ -588,10 +588,10 @@ VALUES (11,
         1, 3, null, 19);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (26, 'Blue', 23, 69990, 11),
-       (27, 'Green', 30, 71990, 11),
-       (28, 'Pink gold', 35, 68990, 11),
-       (29, 'Silver', 29, 69990, 11);
+values (26, '#3B3AC4', 23, 69990, 11),
+       (27, '#002673', 30, 71990, 11),
+       (28, '#FFEBBE', 35, 68990, 11),
+       (29, '#B2B2B2', 29, 69990, 11);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (26, '2388x1668', 'screenResolutionOfTablet'),
@@ -632,7 +632,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (12,
         'https://appleinsider.ru/wp-content/uploads/2022/03/iPad_air_5_2022_000989-740x462.jpg',
-        'Blue',
+        '#0071FF',
         '2023-09-13 18:20:03',
         'iPad Mini (6 дюйма, 2020 г.) — это мощный и универсальный планшет от Apple, разработанный для работы, учебы и развлечений. Благодаря большому и яркому 10,9-дюймовому дисплею Liquid Retina и быстрому процессору A14 Bionic этот планшет обеспечивает плавную и быструю работу, независимо от того, просматриваете ли вы веб-страницы, играете в игры или используете ресурсоемкие приложения. iPad Air также включает поддержку Apple Pencil и Smart Keyboard, что делает его отличным выбором для творческих задач и продуктивной работы. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 10 часов работы без подзарядки, и работает на последней версии iPadOS, обеспечивая плавный и интуитивно понятный пользовательский интерфейс. iPad Air (10,9 дюйма, 2020 г.) — идеальный планшет для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
         9,
@@ -647,7 +647,7 @@ VALUES (12,
         1, 3, null, 19);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (30, 'Gray', 56, 59990, 12);
+values (30, '#0071FF', 56, 59990, 12);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (30, '2388x1668', 'screenResolutionOfTablet'),
@@ -665,7 +665,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (13,
         'https://www.apple.com/newsroom/images/product/ipad/standard/apple_ipad-pro-spring21_lp_04202021.jpg.og.jpg?202301192200',
-        'Black',
+        '#000000',
         '2023-09-13 18:20:03',
         'iPad Pro — это мощный и универсальный планшет от Apple, разработанный для работы, учебы и развлечений. Благодаря большому и яркому 10,9-дюймовому дисплею Liquid Retina и быстрому процессору A14 Bionic этот планшет обеспечивает плавную и быструю работу, независимо от того, просматриваете ли вы веб-страницы, играете в игры или используете ресурсоемкие приложения. iPad Air также включает поддержку Apple Pencil и Smart Keyboard, что делает его отличным выбором для творческих задач и продуктивной работы. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 10 часов работы без подзарядки, и работает на последней версии iPadOS, обеспечивая плавный и интуитивно понятный пользовательский интерфейс. iPad Air (10,9 дюйма, 2020 г.) — идеальный планшет для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
         9,
@@ -680,7 +680,7 @@ VALUES (13,
         1, 3, 6, 19);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (31, 'Black', 56, 139990, 13);
+values (31, '#000000', 56, 139990, 13);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (31, '2388x1668', 'screenResolutionOfTablet'),
@@ -698,7 +698,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (14,
         'https://www.m1.com.sg/-/media/Images/Personal/Promotions/applewatch7/1440x671_watchs7.jpg',
-        'Blue',
+        '#0071FF',
         '2023-09-13 18:20:03',
         'Apple Watch Series 7 — это мощные и стильные смарт-часы от Apple, предназначенные для фитнеса, здоровья и подключения. Благодаря быстрому процессору S6 SiP и яркому постоянно включенному дисплею Retina эти часы обеспечивают плавную и быструю работу, независимо от того, отслеживаете ли вы свои тренировки, отслеживаете частоту сердечных сокращений или проверяете свои уведомления. Series 6 также имеет широкий спектр датчиков здоровья и фитнеса, включая датчик кислорода в крови, приложение для ЭКГ и обнаружение падения. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 18 часов работы без подзарядки, и включает в себя возможности подключения к сотовой сети для совершения звонков и отправки текстовых сообщений без телефона. Apple Watch Series 6 — это идеальные смарт-часы для тех, кто ищет мощное и стильное устройство для фитнеса, здоровья и связи.',
         4,
@@ -713,7 +713,7 @@ VALUES (14,
         1, 4, 7, 28);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (32, 'Black', 37, 49990, 14);
+values (32, '#0071FF', 37, 49990, 14);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (32, 'Wi-Fi', 'wirelessInterface'),
@@ -734,7 +734,7 @@ insert into products(id, pdf, color, create_at, description, guarantee, product_
                      product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id)
 VALUES (15,
         'https://my-apple-store.ru/wa-data/public/site/watch-7/nike-banner.jpg',
-        'Gray',
+        '#B2B2B2',
         '2023-09-13 18:20:03',
         'Apple Watch Nike — это специальная версия Apple Watch, разработанная специально для спортсменов и любителей фитнеса. Они обладают всеми мощными функциями для здоровья и фитнеса стандартных Apple Watch, включая быстрый S6 SiP, яркий и всегда включенный дисплей Retina, а также ряд датчиков здоровья и фитнеса. Кроме того, он включает в себя эксклюзивные циферблаты Nike и спортивные ремешки Nike, а также интеграцию с приложением Nike Run Club для отслеживания ваших пробежек и постановки целей в фитнесе. Apple Watch Nike — идеальные смарт-часы для тех, кто ищет мощное и стильное устройство для фитнеса и занятий спортом. Бегаете ли вы, катаетесь на велосипеде или тренируетесь в тренажерном зале, Apple Watch Nike помогут вам сохранять мотивацию, не отставать от цели и поддерживать связь со своими целями в области здоровья и фитнеса.',
         4,
@@ -749,7 +749,7 @@ VALUES (15,
         1, 4, 8, 28);
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (33, 'Gray', 73, 49990, 15);
+values (33, '#B2B2B2', 73, 49990, 15);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (33, 'Wi-Fi', 'wirelessInterface'),
