@@ -19,7 +19,6 @@ import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -110,9 +108,10 @@ public class UserServiceImpl implements UserService {
 
     public SimpleResponse addToBasketList(int orderCount, Long subProductId) {
         User user = getAuthenticateUser();
-        Subproduct subproduct = subproductRepository.findById(subProductId).orElseThrow(() ->{
+        Subproduct subproduct = subproductRepository.findById(subProductId).orElseThrow(() -> {
             log.error("Subproduct not found");
-            throw new NotFoundException("Subproduct not found");});
+            throw new NotFoundException("Subproduct not found");
+        });
 
         if (!user.getBasketList().containsKey(subproduct)) {
             if (orderCount <= subproduct.getCountOfSubproduct()) {
@@ -137,9 +136,10 @@ public class UserServiceImpl implements UserService {
         User user = getAuthenticateUser();
 
         for (Long id : productsId) {
-            Subproduct subproduct = subproductRepository.findById(id).orElseThrow(() ->{
+            Subproduct subproduct = subproductRepository.findById(id).orElseThrow(() -> {
                 log.error("Subproduct not found");
-                throw new NotFoundException("Subproduct not found");});
+                throw new NotFoundException("Subproduct not found");
+            });
             if (user.getBasketList().containsKey(subproduct)) {
                 user.getBasketList().remove(subproduct);
             } else {
@@ -183,14 +183,14 @@ public class UserServiceImpl implements UserService {
         User user = getAuthenticateUser();
         List<Long> subproductsId = subproductRepository.getAllFromUserBasketList(user.getId());
         List<SubproductCardResponse> responses = new ArrayList<>();
-            subproductsId.forEach(id -> {
-                Subproduct s = subproductRepository.findById(id).get();
-                SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getProduct().getProductName(), s.getImages().get(0), s.getCharacteristics(), s.getColor(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
-                if (s.getProduct().getDiscount() != null) {
-                    subproductCardResponse.setAmountOfDiscount(s.getProduct().getDiscount().getAmountOfDiscount());
-                }
-                responses.add(subproductCardResponse);
-            });
+        subproductsId.forEach(id -> {
+            Subproduct s = subproductRepository.findById(id).get();
+            SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getProduct().getProductName(), s.getImages().get(0), s.getCharacteristics(), s.getColor(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
+            if (s.getProduct().getDiscount() != null) {
+                subproductCardResponse.setAmountOfDiscount(s.getProduct().getDiscount().getAmountOfDiscount());
+            }
+            responses.add(subproductCardResponse);
+        });
         log.info("successfully works the get all from basket list");
         return responses;
     }
@@ -198,10 +198,11 @@ public class UserServiceImpl implements UserService {
     public SimpleResponse addReview(ReviewSaveRequest request) {
         Product product = productRepository.findById(request.getProductId()).orElseThrow(() -> {
             log.error("Product not found");
-            throw new NotFoundException("Product not found");});
+            throw new NotFoundException("Product not found");
+        });
         User user = getAuthenticateUser();
 
-        if (!user.getOrderHistoryList().contains(product)){
+        if (!user.getOrderHistoryList().contains(product)) {
             log.error("This customer did not purchase this product");
             throw new BadRequestException("This customer did not purchase this product");
         }
@@ -252,7 +253,7 @@ public class UserServiceImpl implements UserService {
         for (Product product : products) {
             ProductCompareResponse productCompareResponse
                     = new ProductCompareResponse(product.getId(), product.getProductName(), product.getProductImage(), product.getSubproducts().get(0).getCharacteristics(),
-                product.getBrand().getBrandName(), product.getColor(), product.getProductPrice());
+                    product.getBrand().getBrandName(), product.getColor(), product.getProductPrice());
             productCompareResponses.add(productCompareResponse);
         }
         return productCompareResponses;

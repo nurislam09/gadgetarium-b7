@@ -3,7 +3,6 @@ package com.example.gadgetariumb7.db.repository;
 import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
-import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
 import com.example.gadgetariumb7.dto.response.ProductSearchResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -55,7 +54,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             " from Product p where p.productStatus = 1 order by p.id desc")
     List<ProductCardResponse> getAllRecommendationProduct(Pageable pageable);
 
-    @Query(nativeQuery = true,value = "select sum(o.count_of_product) from orders o where o.order_status like 'DELIVERED'")
+    @Query(nativeQuery = true, value = "select sum(o.count_of_product) from orders o where o.order_status like 'DELIVERED'")
     int getCountSoldProducts();
 
     @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED'")
@@ -171,5 +170,3 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select u.compareProductsList from User u where u.id = :userId")
     List<Product> getAllFromUserCompareProductList(Long userId, Pageable pageable);
 }
-
-

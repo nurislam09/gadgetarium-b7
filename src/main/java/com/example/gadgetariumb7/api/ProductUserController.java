@@ -1,24 +1,16 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
-import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
-import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
-import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.gadgetariumb7.dto.request.ProductRequest;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -79,7 +71,7 @@ public class ProductUserController {
             "size is required if you need attribute 'Отзывы'")
     @GetMapping("/product")
     @PreAuthorize("isAuthenticated()")
-    public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException{
+    public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException {
         return productService.getProductById(productId, attribute, size);
     }
 }
