@@ -8,6 +8,7 @@ import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface ProductService {
 
     ProductAdminPaginationResponse getProductAdminResponses(String searchText, String productType, String fieldToSort, String discountField, LocalDate startDate, LocalDate endDate, int page, int size);
 
-    SimpleResponse addProduct(ProductRequest productRequest);
+    SimpleResponse addProduct(ProductRequest productRequest) throws IOException;
 
     InforgraphicsResponse infographics() throws NullPointerException;
 

@@ -42,12 +42,6 @@ public class User implements UserDetails {
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> favoritesList;
 
-    public void addToFavorite(Product product) {
-        if (product == null) {
-        }
-        favoritesList.add(product);
-    }
-
     @OneToMany(cascade = {MERGE, DETACH, REFRESH, REMOVE}, mappedBy = "user")
     private List<Review> userReviews;
 

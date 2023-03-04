@@ -1,5 +1,6 @@
 package com.example.gadgetariumb7.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,11 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderInfoResponse {
-    private int orderNumber;
-
+@AllArgsConstructor
+public class PersonalUserResponse {
+    private String firstName;
+    private String lastName;
+    private String email;
     private String phoneNumber;
-
     private String address;
-
 }

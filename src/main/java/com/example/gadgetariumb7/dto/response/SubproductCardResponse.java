@@ -14,6 +14,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class SubproductCardResponse {
     private Long id;
+    private String productName;
     private String image;
     private Map<String, String> characteristics;
     private String color;
@@ -25,8 +26,9 @@ public class SubproductCardResponse {
     private int orderCount;
     private int price;
 
-    public SubproductCardResponse(Long id, String image, Map<String, String> characteristics, String color, Double rating, int countOfReviews, int countOfSubproduct, Long vendorCode, int orderCount, int price) {
+    public SubproductCardResponse(Long id, String productName, String image, Map<String, String> characteristics, String color, Double rating, int countOfReviews, int countOfSubproduct, Long vendorCode, int orderCount, int price) {
         this.id = id;
+        this.productName = productName;
         this.image = image;
         this.characteristics = characteristics;
         this.color = color;

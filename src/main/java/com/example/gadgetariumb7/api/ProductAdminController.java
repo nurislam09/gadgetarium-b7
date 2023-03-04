@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @RestController
@@ -55,7 +56,7 @@ public class ProductAdminController {
     @Operation(summary = "This method for save product",
             description = "The save product with different types and options")
     @PostMapping()
-    public SimpleResponse save(@RequestBody ProductRequest productRequest) {
+    public SimpleResponse save(@RequestBody ProductRequest productRequest) throws IOException {
         return productService.addProduct(productRequest);
     }
 
