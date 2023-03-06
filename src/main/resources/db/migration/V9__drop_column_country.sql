@@ -1,0 +1,1 @@
+ALTER TABLE brands drop column country;
