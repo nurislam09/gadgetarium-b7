@@ -15,15 +15,17 @@ public class SubproductResponse {
     private Long id;
     private int price;
     private int countOfSubproduct;
-    private String color;
+    private String colorName;
+    private String colorCode;
     private Map<String, String> characteristics = new HashMap<>();
     private List<String> images;
 
-    public SubproductResponse(Long id, int countOfSubproduct, List<String> images, int price, String color, Map<String, String> characteristics) {
+    public SubproductResponse(Long id, int countOfSubproduct, List<String> images, int price, String colorName, String colorCode, Map<String, String> characteristics) {
         this.id = id;
         this.price = price;
         this.countOfSubproduct = countOfSubproduct;
-        this.color = color;
+        this.colorName = colorName;
+        this.colorCode = colorCode;
         this.characteristics = characteristics;
         this.images = images;
     }

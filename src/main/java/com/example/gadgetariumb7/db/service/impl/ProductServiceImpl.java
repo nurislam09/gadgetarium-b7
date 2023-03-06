@@ -485,7 +485,7 @@ public class ProductServiceImpl implements ProductService {
             log.error("We don't have the product with such id");
             throw new NotFoundException("we don't have the product with such id");});
         List<SubproductResponse> subproducts = p.getSubproducts().stream().map(s -> new SubproductResponse(s.getId(), s.getCountOfSubproduct(),
-                s.getImages(), s.getPrice(), colorNameMapper.getColorName(s.getColor()), s.getCharacteristics())).toList();
+                s.getImages(), s.getPrice(), colorNameMapper.getColorName(s.getColor()), s.getColor(), s.getCharacteristics())).toList();
         productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
                 p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
                 p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), subproducts);
