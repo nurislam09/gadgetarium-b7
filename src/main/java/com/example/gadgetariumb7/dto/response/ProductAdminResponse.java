@@ -23,8 +23,22 @@ public class ProductAdminResponse {
     private int productPrice;
     private int currentPrice;
     private int amountOfDiscount;
+    private String dateOfIssue;
     @JsonIgnore
     private ProductStatus productStatus;
+
+    public ProductAdminResponse(Long id, String productImage, Long productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice, ProductStatus productStatus,String dateOfIssue) {
+        this.id = id;
+        this.productImage = productImage;
+        this.productVendorCode = productVendorCode;
+        this.productName = productName;
+        this.productCount = productCount;
+        this.countSubproducts = countSubproducts;
+        this.createAt = createAt;
+        this.productPrice = productPrice;
+        this.productStatus = productStatus;
+        this.dateOfIssue = dateOfIssue;
+    }
 
     public ProductAdminResponse(Long id, String productImage, Long productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice, ProductStatus productStatus) {
         this.id = id;
@@ -37,4 +51,5 @@ public class ProductAdminResponse {
         this.productPrice = productPrice;
         this.productStatus = productStatus;
     }
+
 }
