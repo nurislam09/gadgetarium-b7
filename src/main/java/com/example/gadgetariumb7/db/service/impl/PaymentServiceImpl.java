@@ -5,7 +5,6 @@ import com.example.gadgetariumb7.dto.request.PaymentRequest;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.stripe.Stripe;
-import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.Event;
@@ -47,17 +46,30 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public SimpleResponse handleWebhookEvent(String payload, String signatureHeader) {
         try {
+            Webhook.Signature.verifyHeader(payload, signatureHeader, webhookSecret, 300);
             Event event = Webhook.constructEvent(payload, signatureHeader, webhookSecret);
-            return switch (event.getType()) {
-                case "charge.succeeded" -> new SimpleResponse("Payment succeed", "ok");
-                case "charge.failed" -> new SimpleResponse("Payment failed", "катострофа");
-                case "charge.refunded" -> new SimpleResponse("Payment refunded", "ok");
-                default -> new SimpleResponse("Something went wrong", "катострофа");
-            };
+            log.info("Event created");
+            switch (event.getType()) {
+                case "charge.succeeded" -> {
+                    log.info("Charge succeeded");
+                    return new SimpleResponse("Payment succeed", "ok");
+                }
+                case "charge.failed" -> {
+                    log.info("Charge failed");
+                    return new SimpleResponse("Payment failed", "катострофа");
+                }
+                case "charge.refunded" -> {
+                    log.info("Charge refunded");
+                    return new SimpleResponse("Payment refunded", "ok");
+                }
+                default -> {
+                    log.info("Event error");
+                    return new SimpleResponse("Something went wrong", "катострофа");
+                }
+            }
         } catch (StripeException e) {
+            log.info("Event error");
             throw new BadRequestException(e.getMessage());
         }
     }
-
 }
-
