@@ -297,36 +297,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductCardResponse> filterByParameters(String text, String categoryName, String fieldToSort, String discountField, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors, Integer memory, Byte ram, int size) throws NotFoundException {
-        try {
-            if (text != null) {
-                List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
-                        .map(p -> new ProductCardResponse(p.getId(),
-                                p.getProductImage(),
-                                p.getProductName(),
-                                p.getProductCount(),
-                                p.getProductPrice(),
-                                p.getProductStatus(),
-                                p.getProductRating()))
-                        .collect(Collectors.toList());
-                forEach(list);
-                return list;
-            }
-            List<Product> productList = productRepository.findAll();
-            List<ProductCardResponse> productCardResponses = productList.stream()
-                    .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
-                    .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
-                    .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
-                    .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
-                    .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
-                    .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
-                            Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("videoCardMemory")) == memory.byteValue()) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
-                            Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("memoryOfTablet")) == memory) ||
-                            (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone")) == memory) ||
-                            (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch")) == memory))
-                    .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone")) == ram) ||
-                            (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && Objects.equals(Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop")), ram)) ||
-                            (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet")) == ram))
+    public List<ProductCardResponse> filterByParameters(String text, String fieldToSort, String discountField, String categoryName, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors,
+                                                        Integer memory, Byte ram, String laptopCPU, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
+                                                        String wirelessInterface, String caseShape, String braceletMaterial, String housingMaterial, String gender, String waterProof, int size) throws NotFoundException {
+        try{
+        if (text != null) {
+            List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
                     .map(p -> new ProductCardResponse(p.getId(),
                             p.getProductImage(),
                             p.getProductName(),
@@ -335,6 +311,59 @@ public class ProductServiceImpl implements ProductService {
                             p.getProductStatus(),
                             p.getProductRating()))
                     .collect(Collectors.toList());
+            forEach(list);
+            return list;
+        }
+
+        List<Product> productList = productRepository.findAll();
+        List<ProductCardResponse> productCardResponses = productList.stream()
+                .filter(p -> categoryName == null || p.getCategory().getCategoryName().equalsIgnoreCase(categoryName))
+                .filter(p -> subCategoryName == null || p.getSubCategory().getSubCategoryName().equalsIgnoreCase(subCategoryName))
+                .filter(p -> minPrice == null || p.getProductPrice() >= minPrice)
+                .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
+                .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
+                .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                        Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("videoCardMemory")) == memory.byteValue()) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
+                        Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("memoryOfTablet")) == memory) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone")) == memory) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch")) == memory))
+                .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone")) == ram) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && Objects.equals(Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop")), ram)) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet")) == ram))
+                .filter(p -> laptopCPU == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("laptopCPU").equalsIgnoreCase(laptopCPU)))
+                .filter(p -> screenResolution == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("screenResolutionLaptop").equalsIgnoreCase(screenResolution)) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && p.getSubproducts().get(0).getCharacteristics().get("screenResolutionOfTablet").equalsIgnoreCase(screenResolution)))
+                .filter(p -> screenSize == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("screenSizeLaptop").equalsIgnoreCase(screenSize)) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && p.getSubproducts().get(0).getCharacteristics().get("screenSizeOfTablet").equalsIgnoreCase(screenSize)))
+                .filter(p -> screenDiagonal == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("screenDiagonalOfTablet").equalsIgnoreCase(screenDiagonal)) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
+                                p.getSubproducts().get(0).getCharacteristics().get("screenDiagonalOfSmartWatch").equalsIgnoreCase(screenDiagonal)))
+                .filter(p -> batteryCapacity == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("batteryCapacity").equalsIgnoreCase(batteryCapacity)))
+                .filter(p -> wirelessInterface == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("wirelessInterface").equalsIgnoreCase(wirelessInterface)))
+                .filter(p -> caseShape == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("caseShape").equalsIgnoreCase(caseShape)))
+                .filter(p -> braceletMaterial == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("braceletMaterial").equalsIgnoreCase(braceletMaterial)))
+                .filter(p -> housingMaterial == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("housingMaterial").equalsIgnoreCase(housingMaterial)))
+                .filter(p -> gender == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("gender").equalsIgnoreCase(waterProof)))
+                .filter(p -> waterProof == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("waterProof").equalsIgnoreCase(waterProof)))
+                .map(p -> new ProductCardResponse(p.getId(),
+                        p.getProductImage(),
+                        p.getProductName(),
+                        p.getProductCount(),
+                        p.getProductPrice(),
+                        p.getProductStatus(),
+                        p.getProductRating()))
+                .collect(Collectors.toList());
 
             int toIndex = Math.min(size, productCardResponses.size());
             productCardResponses = productCardResponses.subList(0, toIndex);
@@ -346,7 +375,7 @@ public class ProductServiceImpl implements ProductService {
             }
             log.info("successfully works the filter by parameters method");
             return productCardResponses;
-        } catch (NotFoundException e) {
+        } catch (NotFoundException | NullPointerException e) {
             log.error("Product not found");
             throw new NotFoundException("Product not found");
         }
@@ -441,7 +470,6 @@ public class ProductServiceImpl implements ProductService {
             inforgraphics.setPreviousPeriodPerYear(productRepository.getPreviousPeriodPerYear());
             log.info("successfully works the infographics method");
             return inforgraphics;
-
         } catch (AopInvocationException e) {
             log.error("Infographic is null");
             throw new BadRequestException("Inforgraphic is null");
