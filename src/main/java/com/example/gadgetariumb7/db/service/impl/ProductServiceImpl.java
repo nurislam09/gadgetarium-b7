@@ -4,6 +4,7 @@ import com.example.gadgetariumb7.db.entity.*;
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.ProductService;
+import com.example.gadgetariumb7.dto.converter.ColorNameMapper;
 import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
 import com.example.gadgetariumb7.dto.request.ProductRequest;
 import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
@@ -33,8 +34,8 @@ public class ProductServiceImpl implements ProductService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
-    private final OrderRepository orderRepository;
     private final SubproductRepository subproductRepository;
+    private final ColorNameMapper colorNameMapper;
 
     private User getAuthenticateUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -456,7 +457,7 @@ public class ProductServiceImpl implements ProductService {
             log.error("We don't have the product with such id");
             throw new NotFoundException("we don't have the product with such id");});
         List<SubproductResponse> subproducts = p.getSubproducts().stream().map(s -> new SubproductResponse(s.getId(), s.getCountOfSubproduct(),
-                s.getImages(), s.getPrice(), s.getColor(), s.getCharacteristics())).toList();
+                s.getImages(), s.getPrice(), colorNameMapper.getColorName(s.getColor()), s.getCharacteristics())).toList();
         productSingleResponse = new ProductSingleResponse(p.getId(), p.getProductName(), p.getProductCount(),
                 p.getProductVendorCode(), p.getCategory().getCategoryName(), p.getSubCategory().getSubCategoryName(),
                 p.getUsersReviews().size(), p.getProductPrice(), p.getProductRating(), subproducts);
@@ -473,12 +474,10 @@ public class ProductServiceImpl implements ProductService {
                 String description = p.getDescription();
                 productSingleResponse.setAttribute("Описание", description);
                 productSingleResponse.setVideoReview(p.getVideoReview());
-                return productSingleResponse;
             }
             case "Характеристики" -> {
                 Map<String, String> characteristics = p.getSubproducts().get(0).getCharacteristics();
                 productSingleResponse.setAttribute("Характеристики", characteristics);
-                return productSingleResponse;
             }
             case "Отзывы" -> {
                 List<Review> reviews = p.getUsersReviews();
@@ -494,9 +493,10 @@ public class ProductServiceImpl implements ProductService {
                 int toIndex = Math.min(size, reviewMainResponses.size());
                 reviewMainResponses = reviewMainResponses.subList(0, toIndex);
                 productSingleResponse.setAttribute("Отзывы", reviewMainResponses);
-                return productSingleResponse;
             }
         }
+        user.addViewedProduct(p);
+        userRepository.save(user);
         log.info("successfully works the productSingleResponse method");
         return productSingleResponse;
     }
