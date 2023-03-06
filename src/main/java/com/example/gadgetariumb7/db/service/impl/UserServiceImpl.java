@@ -196,14 +196,14 @@ public class UserServiceImpl implements UserService {
         List<SubproductCardResponse> responses = new ArrayList<>();
         Translate translate = TranslateOptions.newBuilder().setApiKey(googleAPI).build().getService();
         subproductsId.forEach(id -> {
-                Subproduct s = subproductRepository.findById(id).get();
-                Translation translation = translate.translate(colorNameMapper.getColorName(s.getColor()), Translate.TranslateOption.targetLanguage("ru"));
-                SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getProduct().getProductName(), s.getImages().get(0), s.getCharacteristics(), translation.getTranslatedText(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
-                if (s.getProduct().getDiscount() != null) {
-                    subproductCardResponse.setAmountOfDiscount(s.getProduct().getDiscount().getAmountOfDiscount());
-                }
-                responses.add(subproductCardResponse);
-            });
+            Subproduct s = subproductRepository.findById(id).get();
+            Translation translation = translate.translate(colorNameMapper.getColorName(s.getColor()), Translate.TranslateOption.targetLanguage("ru"));
+            SubproductCardResponse subproductCardResponse = new SubproductCardResponse(s.getId(), s.getProduct().getProductName(), s.getImages().get(0), s.getCharacteristics(), translation.getTranslatedText(), s.getProduct().getProductRating(), productRepository.getAmountOfFeedback(s.getProduct().getId()), s.getCountOfSubproduct(), s.getProduct().getProductVendorCode(), user.getBasketList().get(s), s.getPrice());
+            if (s.getProduct().getDiscount() != null) {
+                subproductCardResponse.setAmountOfDiscount(s.getProduct().getDiscount().getAmountOfDiscount());
+            }
+            responses.add(subproductCardResponse);
+        });
         log.info("successfully works the get all from basket list");
         return responses;
     }
@@ -211,10 +211,11 @@ public class UserServiceImpl implements UserService {
     public SimpleResponse addReview(ReviewSaveRequest request) {
         Product product = productRepository.findById(request.getProductId()).orElseThrow(() -> {
             log.error("Product not found");
-            throw new NotFoundException("Product not found");});
+            throw new NotFoundException("Product not found");
+        });
         User user = getAuthenticateUser();
 
-        if (!user.getOrderHistoryList().contains(product)){
+        if (!user.getOrderHistoryList().contains(product)) {
             log.error("This customer did not purchase this product");
             throw new BadRequestException("This customer did not purchase this product");
         }
