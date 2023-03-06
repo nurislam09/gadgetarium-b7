@@ -93,7 +93,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "subproducts.size," +
             "createAt," +
             "productPrice," +
-            "productStatus" +
+            "productStatus," +
+            "dateOfIssue" +
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
@@ -106,7 +107,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "subproducts.size," +
             "createAt," +
             "productPrice," +
-            "productStatus" +
+            "productStatus," +
+            "dateOfIssue" +
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdminWithoutPagination();
 
