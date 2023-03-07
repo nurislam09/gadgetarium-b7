@@ -51,8 +51,16 @@ public class User implements UserDetails {
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> orderHistoryList;
 
-    @OneToMany(cascade = {MERGE, DETACH, REFRESH})
+    @ManyToMany(cascade = {MERGE, DETACH, REFRESH})
     private List<Product> viewedProductsList;
+
+    public void addViewedProduct(Product product) {
+        if (!viewedProductsList.contains(product)) {
+            if (viewedProductsList.size() == 7)
+                viewedProductsList.remove(0);
+            viewedProductsList.add(product);
+        }
+    }
 
     @OneToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "user")
     private List<Order> orders;

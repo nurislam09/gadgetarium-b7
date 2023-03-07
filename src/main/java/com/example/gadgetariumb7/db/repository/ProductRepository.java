@@ -54,7 +54,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             " from Product p where p.productStatus = 1 order by p.id desc")
     List<ProductCardResponse> getAllRecommendationProduct(Pageable pageable);
 
-    @Query(nativeQuery = true,value = "select sum(o.count_of_product) from orders o where o.order_status like 'DELIVERED'")
+    @Query(nativeQuery = true, value = "select sum(o.count_of_product) from orders o where o.order_status like 'DELIVERED'")
     int getCountSoldProducts();
 
     @Query(nativeQuery = true, value = "select sum(o.total_sum) from orders o where o.order_status like 'DELIVERED'")
@@ -93,7 +93,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "subproducts.size," +
             "createAt," +
             "productPrice," +
-            "productStatus" +
+            "productStatus," +
+            "dateOfIssue" +
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
@@ -106,7 +107,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "subproducts.size," +
             "createAt," +
             "productPrice," +
-            "productStatus" +
+            "productStatus," +
+            "dateOfIssue" +
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdminWithoutPagination();
 
