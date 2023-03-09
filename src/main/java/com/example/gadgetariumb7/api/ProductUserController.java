@@ -1,24 +1,16 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
-import com.example.gadgetariumb7.dto.request.ProductUpdateRequest;
-import com.example.gadgetariumb7.dto.response.InforgraphicsResponse;
-import com.example.gadgetariumb7.dto.response.ProductAdminPaginationResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.gadgetariumb7.dto.request.ProductRequest;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -54,18 +46,12 @@ public class ProductUserController {
             "Also if the 'text' is null will work only the filter and sort, but if you write something int text then will work only searching. Required only the size")
     @GetMapping("/catalog")
     @PreAuthorize("isAuthenticated()")
-    public List<ProductCardResponse> filterByParameters(@RequestParam(value = "text", required = false) String text,
-                                                        @RequestParam(value = "categoryName", required = false) String categoryName,
-                                                        @RequestParam(value = "fieldToSort", required = false) String fieldToSort,
-                                                        @RequestParam(value = "discountField", required = false) String discountField,
-                                                        @RequestParam(value = "subCategoryName", required = false) String subCategoryName,
-                                                        @RequestParam(value = "min", required = false) Integer minPrice,
-                                                        @RequestParam(value = "max", required = false) Integer maxPrice,
-                                                        @RequestParam(value = "colors", required = false) List<String> colors,
-                                                        @RequestParam(value = "memory", required = false) Integer memory,
-                                                        @RequestParam(value = "ram", required = false) Byte ram,
-                                                        @RequestParam int size) throws NotFoundException {
-        return productService.filterByParameters(text, categoryName, fieldToSort, discountField, subCategoryName, minPrice, maxPrice, colors, memory, ram, size);
+    public List<ProductCardResponse> filterByParameters(@RequestParam(required = false) String text, @RequestParam(required = false) String fieldToSort, @RequestParam(required = false) String discountField, @RequestParam(required = false) String categoryName, @RequestParam(required = false) String subCategoryName, @RequestParam(required = false) Integer minPrice, @RequestParam(required = false) Integer maxPrice, @RequestParam(required = false) List<String> colors,
+                                                        @RequestParam(required = false) Integer memory, @RequestParam(required = false) Byte ram, @RequestParam(required = false) String laptopCPU, @RequestParam(required = false) String screenResolution, @RequestParam(required = false) String screenSize, @RequestParam(required = false) String screenDiagonal, @RequestParam(required = false) String batteryCapacity,
+                                                        @RequestParam(required = false) String wirelessInterface, @RequestParam(required = false) String caseShape, @RequestParam(required = false) String braceletMaterial, @RequestParam(required = false) String housingMaterial, @RequestParam(required = false) String gender, @RequestParam(required = false) String waterProof, @RequestParam() int size) throws NotFoundException {
+        return productService.filterByParameters(text, fieldToSort, discountField, categoryName, subCategoryName, minPrice, maxPrice, colors,
+                memory, ram, laptopCPU, screenResolution, screenSize, screenDiagonal, batteryCapacity,
+                wirelessInterface, caseShape, braceletMaterial, housingMaterial, gender, waterProof, size);
     }
 
     @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
@@ -79,7 +65,7 @@ public class ProductUserController {
             "size is required if you need attribute 'Отзывы'")
     @GetMapping("/product")
     @PreAuthorize("isAuthenticated()")
-    public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException{
+    public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException {
         return productService.getProductById(productId, attribute, size);
     }
 }

@@ -11,4 +11,5 @@ import java.util.List;
 public interface SubproductRepository extends JpaRepository<Subproduct, Long> {
     @Query(nativeQuery = true , value = "select subproduct_id from user_basket_list where user_id = :userId")
     List<Long> getAllFromUserBasketList(Long userId);
+
 }
