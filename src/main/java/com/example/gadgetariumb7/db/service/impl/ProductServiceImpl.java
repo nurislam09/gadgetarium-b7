@@ -57,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductCardResponse> getAllDiscountProductToMP(int page, int size) {
         List<ProductCardResponse> discountProducts = productRepository.getAllDiscountProduct(PageRequest.of(page - 1, size));
+        discountProducts.forEach(p -> p.setCategoryId(productRepository.findById(p.getProductId()).get().getCategory().getId().byteValue()));
         log.info("all discount product taken to main page successfully");
         return checkFavorite(discountProducts);
     }
@@ -64,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductCardResponse> getAllNewProductToMP(int page, int size) {
         List<ProductCardResponse> newProducts = productRepository.getAllNewProduct(PageRequest.of(page - 1, size));
+        newProducts.forEach(p -> p.setCategoryId(productRepository.findById(p.getProductId()).get().getCategory().getId().byteValue()));
         log.info("all new product taken to main page successfully");
         return checkFavorite(newProducts);
     }
@@ -71,6 +73,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductCardResponse> getAllRecommendationProductToMP(int page, int size) {
         List<ProductCardResponse> recommendations = productRepository.getAllRecommendationProduct(PageRequest.of(page - 1, size));
+        recommendations.forEach(p -> p.setCategoryId(productRepository.findById(p.getProductId()).get().getCategory().getId().byteValue()));
         log.info("all recommendation product taken to main page successfully");
         return checkFavorite(recommendations);
     }
