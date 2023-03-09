@@ -12,6 +12,7 @@ import com.example.gadgetariumb7.exceptions.NotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
 
@@ -38,4 +39,6 @@ public interface ProductService {
     ProductSingleResponse getProductById(Long productId, String attribute, Integer size);
 
     List<ProductCardResponse> getViewedProducts();
+
+    Map<String, String> getColorsFromDB();
 }

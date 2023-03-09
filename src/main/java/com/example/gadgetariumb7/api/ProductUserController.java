@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -41,7 +42,7 @@ public class ProductUserController {
         return productService.getAllRecommendationProductToMP(page, size);
     }
 
-    @Operation(summary = "get products from catalog", description = "the user can filter by 7 parameters and categoryName is always required in filtering, but others no because user shouldn't give them all." +
+    @Operation(summary = "Get products from catalog", description = "The user can filter by 7 parameters and categoryName is always required in filtering, but others no because user shouldn't give them all." +
             "The field 'fieldToSort' is using if the user wants to sort the products by next fields: Новинки, По акции(if you choose this field you need to write also to discountField one of next three: Все акции, До 50%, Свыше 50%), Рекомендуемые, По увеличению цены, По уменьшению цены.'" +
             "Also if the 'text' is null will work only the filter and sort, but if you write something int text then will work only searching. Required only the size")
     @GetMapping("/catalog")
@@ -67,5 +68,12 @@ public class ProductUserController {
     @PreAuthorize("isAuthenticated()")
     public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException {
         return productService.getProductById(productId, attribute, size);
+    }
+
+    @Operation(summary = "Get colors from database", description = "")
+    @GetMapping("/getColorFromDatabase")
+    @PreAuthorize("isAuthenticated()")
+    public Map<String, String> getColorsFromDB() {
+        return productService.getColorsFromDB();
     }
 }

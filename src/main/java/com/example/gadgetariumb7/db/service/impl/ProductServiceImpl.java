@@ -323,13 +323,13 @@ public class ProductServiceImpl implements ProductService {
                 .filter(p -> maxPrice == null || p.getProductPrice() <= maxPrice)
                 .filter(p -> colors == null || colors.isEmpty() || colors.stream().map(String::toLowerCase).toList().contains(p.getColor().toLowerCase()))
                 .filter(p -> memory == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
-                        Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("videoCardMemory")) == memory.byteValue()) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
-                        Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("memoryOfTablet")) == memory) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone")) == memory) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch")) == memory))
-                .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && Integer.parseInt(p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone")) == ram) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && Objects.equals(Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop")), ram)) ||
-                        (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && Byte.parseByte(p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet")) == ram))
+                        p.getSubproducts().get(0).getCharacteristics().get("videoCardMemory").equals(memory.toString())) || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
+                        p.getSubproducts().get(0).getCharacteristics().get("memoryOfTablet").equals(memory.toString())) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone").equalsIgnoreCase(memory.toString())) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch").equalsIgnoreCase(memory.toString())))
+                .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone").equalsIgnoreCase(ram.toString())) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop").equalsIgnoreCase(ram.toString())) ||
+                        (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet").equalsIgnoreCase(ram.toString())))
                 .filter(p -> laptopCPU == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
                         p.getSubproducts().get(0).getCharacteristics().get("laptopCPU").equalsIgnoreCase(laptopCPU)))
                 .filter(p -> screenResolution == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
@@ -396,6 +396,14 @@ public class ProductServiceImpl implements ProductService {
         log.info("successfully works the getViewedProducts");
         return responses;
 
+    }
+
+    @Override
+    public Map<String, String> getColorsFromDB() {
+        Map<String, String> response = new HashMap<>();
+        List<String> colorCodes = productRepository.getColorsFromDB();
+        colorCodes.forEach(x -> response.put(x, colorNameMapper.getColorName(x)));
+        return response;
     }
 
     private List<ProductCardResponse> sortingProduct2(String fieldToSort, String discountField, List<ProductCardResponse> productCardResponses) {
