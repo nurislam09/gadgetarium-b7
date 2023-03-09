@@ -535,6 +535,8 @@ public class ProductServiceImpl implements ProductService {
             }
         }
         user.addViewedProduct(p);
+        if (user.getUserReviews().stream().anyMatch(x -> x.getProduct().getId() == p.getId()))
+            productSingleResponse.setReviewed(true);
         userRepository.save(user);
         log.info("successfully works the productSingleResponse method");
         return productSingleResponse;
