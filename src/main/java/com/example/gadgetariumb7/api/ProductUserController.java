@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
+import com.example.gadgetariumb7.dto.response.CatalogResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
@@ -47,9 +48,9 @@ public class ProductUserController {
             "Also if the 'text' is null will work only the filter and sort, but if you write something int text then will work only searching. Required only the size")
     @GetMapping("/catalog")
     @PreAuthorize("isAuthenticated()")
-    public List<ProductCardResponse> filterByParameters(@RequestParam(required = false) String text, @RequestParam(required = false) String fieldToSort, @RequestParam(required = false) String discountField, @RequestParam(required = false) String categoryName, @RequestParam(required = false) String subCategoryName, @RequestParam(required = false) Integer minPrice, @RequestParam(required = false) Integer maxPrice, @RequestParam(required = false) List<String> colors,
-                                                        @RequestParam(required = false) Integer memory, @RequestParam(required = false) Byte ram, @RequestParam(required = false) String laptopCPU, @RequestParam(required = false) String screenResolution, @RequestParam(required = false) String screenSize, @RequestParam(required = false) String screenDiagonal, @RequestParam(required = false) String batteryCapacity,
-                                                        @RequestParam(required = false) String wirelessInterface, @RequestParam(required = false) String caseShape, @RequestParam(required = false) String braceletMaterial, @RequestParam(required = false) String housingMaterial, @RequestParam(required = false) String gender, @RequestParam(required = false) String waterProof, @RequestParam() int size) throws NotFoundException {
+    public CatalogResponse filterByParameters(@RequestParam(required = false) String text, @RequestParam(required = false) String fieldToSort, @RequestParam(required = false) String discountField, @RequestParam(required = false) String categoryName, @RequestParam(required = false) String subCategoryName, @RequestParam(required = false) Integer minPrice, @RequestParam(required = false) Integer maxPrice, @RequestParam(required = false) List<String> colors,
+                                              @RequestParam(required = false) Integer memory, @RequestParam(required = false) Byte ram, @RequestParam(required = false) String laptopCPU, @RequestParam(required = false) String screenResolution, @RequestParam(required = false) String screenSize, @RequestParam(required = false) String screenDiagonal, @RequestParam(required = false) String batteryCapacity,
+                                              @RequestParam(required = false) String wirelessInterface, @RequestParam(required = false) String caseShape, @RequestParam(required = false) String braceletMaterial, @RequestParam(required = false) String housingMaterial, @RequestParam(required = false) String gender, @RequestParam(required = false) String waterProof, @RequestParam() int size) throws NotFoundException {
         return productService.filterByParameters(text, fieldToSort, discountField, categoryName, subCategoryName, minPrice, maxPrice, colors,
                 memory, ram, laptopCPU, screenResolution, screenSize, screenDiagonal, batteryCapacity,
                 wirelessInterface, caseShape, braceletMaterial, housingMaterial, gender, waterProof, size);
@@ -68,12 +69,5 @@ public class ProductUserController {
     @PreAuthorize("isAuthenticated()")
     public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException {
         return productService.getProductById(productId, attribute, size);
-    }
-
-    @Operation(summary = "Get colors from database", description = "")
-    @GetMapping("/getColorFromDatabase")
-    @PreAuthorize("isAuthenticated()")
-    public Map<String, String> getColorsFromDB() {
-        return productService.getColorsFromDB();
     }
 }
