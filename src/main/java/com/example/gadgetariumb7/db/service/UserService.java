@@ -1,5 +1,7 @@
 package com.example.gadgetariumb7.db.service;
+
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
+import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -10,6 +12,7 @@ import java.util.List;
 public interface UserService {
 
     SimpleResponse addAndRemoveToFavorites(Long productId);
+
     SimpleResponse addAndRemoveToCompares(Long productId);
 
     List<ProductCardResponse> getAllFavorites();
@@ -24,4 +27,5 @@ public interface UserService {
 
     SimpleResponse addReview(ReviewSaveRequest request);
 
+    List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size);
 }

@@ -168,4 +168,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(nativeQuery = true, value = "select viewed_products_list_id from users_viewed_products_list where user_id = :userId")
     List<Long> getViewedProducts(Long userId);
+
+    @Query("select u.compareProductsList from User u where u.id = :userId")
+    List<Product> getAllFromUserCompareProductList(Long userId, Pageable pageable);
 }
