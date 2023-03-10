@@ -317,6 +317,8 @@ public class ProductServiceImpl implements ProductService {
                         .collect(Collectors.toList());
                 forEach(list);
 
+                catalogResponse.setProductCardResponses(list);
+                catalogResponse.setSizeOfProducts(list.size());
                 return catalogResponse;
             }
 
@@ -378,6 +380,9 @@ public class ProductServiceImpl implements ProductService {
             if (fieldToSort != null) {
                 productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
             }
+
+            catalogResponse.setProductCardResponses(productCardResponses);
+            catalogResponse.setSizeOfProducts(productCardResponses.size());
             log.info("successfully works the filter by parameters method");
             return catalogResponse;
         } catch (NotFoundException | NullPointerException e) {
