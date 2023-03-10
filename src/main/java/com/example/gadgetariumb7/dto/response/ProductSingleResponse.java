@@ -22,7 +22,7 @@ public class ProductSingleResponse {
     private boolean isFavorite;
     private Map<String, Object> attribute;
     private String videoReview;
-
+    private Map<Integer, Integer> reviewCount;
 
 
 

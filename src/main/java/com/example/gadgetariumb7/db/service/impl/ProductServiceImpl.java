@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class ProductServiceImpl implements ProductService {
+    private final ReviewRepository reviewRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final BrandRepository brandRepository;
@@ -520,6 +521,11 @@ public class ProductServiceImpl implements ProductService {
                 }
                 int toIndex = Math.min(size, reviewMainResponses.size());
                 reviewMainResponses = reviewMainResponses.subList(0, toIndex);
+                Map<Integer, Integer> counts = new HashMap<>();
+                for (int i = 1; i < 6; i++) {
+                    counts.put(i, reviewRepository.getCountReviewOfProduct(productSingleResponse.getId(), i));
+                }
+                productSingleResponse.setReviewCount(counts);
                 productSingleResponse.setAttribute("Отзывы", reviewMainResponses);
             }
         }
