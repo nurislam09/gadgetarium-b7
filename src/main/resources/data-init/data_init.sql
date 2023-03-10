@@ -612,11 +612,13 @@ values (26, '2388x1668', 'screenResolutionOfTablet'),
        (26, '64', 'memoryOfTablet'),
        (26, '6', 'ramOfTablet'),
        (26, '9 - 11', 'screenDiagonalOfTablet'),
+       (26, '2400 - 4799мА/час', 'batteryCapacityOfTablet'),
        (27, '2388x1668', 'screenResolutionOfTablet'),
        (27, '11', 'screenSizeOfTablet'),
        (27, '128', 'memoryOfTablet'),
        (27, '4', 'ramOfTablet'),
        (27, '9 - 11', 'screenDiagonalOfTablet'),
+       (27, '2400 - 4799мА/час', 'batteryCapacityOfTablet'),
        (28, '2388x1668', 'screenResolutionOfTablet'),
        (28, '11', 'screenSizeOfTablet'),
        (28, '64', 'memoryOfTablet'),
@@ -626,7 +628,8 @@ values (26, '2388x1668', 'screenResolutionOfTablet'),
        (29, '11', 'screenSizeOfTablet'),
        (29, '256', 'memoryOfTablet'),
        (29, '6', 'ramOfTablet'),
-       (29, '9 - 11', 'screenDiagonalOfTablet');
+       (29, '9 - 11', 'screenDiagonalOfTablet'),
+       (29, '2400 - 4799мА/час', 'batteryCapacityOfTablet');
 
 insert into subproduct_images(id, image_url)
 values (26, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_646_0_1.jpg'),
@@ -668,7 +671,8 @@ values (30, '2388x1668', 'screenResolutionOfTablet'),
        (30, '11', 'screenSizeOfTablet'),
        (30, '64', 'memoryOfTablet'),
        (30, '6', 'ramOfTablet'),
-       (30, '9 - 11', 'screenDiagonalOfTablet');
+       (30, '9 - 11', 'screenDiagonalOfTablet'),
+       (30, '2400 - 4799мА/час', 'batteryCapacityOfTablet');
 
 insert into subproduct_images(id, image_url)
 values (30, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_765_8_1.jpg'),
@@ -776,7 +780,8 @@ values (33, 'Wi-Fi', 'wirelessInterface'),
        (33, 'Silicon', 'braceletMaterial'),
        (33, 'Unisex', 'gender'),
        (33, 'Yes', 'waterProof'),
-       (33, '13', 'screenDiagonalOfSmartWatch');
+       (33, '13', 'screenDiagonalOfSmartWatch'),
+       (33, 'aluminum', 'housingMaterial');
 
 insert into subproduct_images(id, image_url)
 values (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_0_6.png'),

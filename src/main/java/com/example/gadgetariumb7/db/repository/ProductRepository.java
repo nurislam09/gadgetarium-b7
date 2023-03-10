@@ -171,4 +171,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select u.compareProductsList from User u where u.id = :userId")
     List<Product> getAllFromUserCompareProductList(Long userId, Pageable pageable);
+
+    @Query("select id from Product where category.id = :categoryId")
+    List<Long> getCategoryProducts(Long categoryId);
 }
