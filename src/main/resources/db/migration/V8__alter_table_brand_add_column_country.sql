@@ -1,1 +1,0 @@
-ALTER  table brands add column country varchar(255);

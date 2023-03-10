@@ -1,1 +1,0 @@
-ALTER TABLE test drop column size;
