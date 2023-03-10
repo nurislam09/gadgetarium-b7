@@ -2,13 +2,14 @@ package com.example.gadgetariumb7.db.service;
 
 import com.example.gadgetariumb7.db.entity.Subscription;
 import com.example.gadgetariumb7.dto.request.SubscriptionRequest;
+import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface SubscriptionService {
 
-    ResponseEntity<String> save(SubscriptionRequest subscriptionRequest);
+    SimpleResponse save(SubscriptionRequest subscriptionRequest);
 
     List<Subscription> findAll();
 

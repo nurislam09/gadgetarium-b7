@@ -55,4 +55,8 @@ public class ProductRequest {
     @NotNull(message = "Subproducts should be not null")
     @NotBlank(message = "Subproducts should be not blank")
     private List<SubProductRequest> subProductRequests;
+
+    @NotNull(message = "Product datOfIssue should be not null")
+    @NotBlank(message = "Product datOfIssue should be not blank")
+    private String dateOfIssue;
 }

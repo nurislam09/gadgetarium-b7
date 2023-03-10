@@ -6,6 +6,7 @@ import com.example.gadgetariumb7.db.service.BannerService;
 import com.example.gadgetariumb7.dto.request.BannerRequest;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BannerServiceImpl implements BannerService {
     private final BannerRepository bannerRepository;
 
@@ -26,6 +28,7 @@ public class BannerServiceImpl implements BannerService {
                 })
                 .collect(Collectors.toList());
         bannerRepository.saveAll(banners);
+        log.info("successfully works the add banner method");
         return new SimpleResponse("Banners added successfully", "ok");
     }
 }

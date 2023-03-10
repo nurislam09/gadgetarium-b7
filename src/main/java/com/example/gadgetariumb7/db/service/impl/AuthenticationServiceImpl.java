@@ -8,6 +8,7 @@ import com.example.gadgetariumb7.db.service.AuthenticationService;
 import com.example.gadgetariumb7.dto.request.AuthenticationRequest;
 import com.example.gadgetariumb7.dto.request.RegisterRequest;
 import com.example.gadgetariumb7.dto.response.AuthenticationResponse;
+import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -16,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,6 +29,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -36,17 +39,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 
     @PostConstruct
-    void init() throws IOException {
-        GoogleCredentials googleCredentials = GoogleCredentials.fromStream(new ClassPathResource("gadgetarium.json").getInputStream());
-        FirebaseOptions firebaseOptions = FirebaseOptions.builder()
-                .setCredentials(googleCredentials)
-                .build();
-
-        FirebaseApp firebaseApp = FirebaseApp.initializeApp(firebaseOptions);
+    void init() {
+        try {
+            GoogleCredentials googleCredentials = GoogleCredentials.fromStream(new ClassPathResource("gadgetarium.json").getInputStream());
+            FirebaseOptions firebaseOptions = FirebaseOptions.builder()
+                    .setCredentials(googleCredentials)
+                    .build();
+            log.info("successfully works the init method");
+            FirebaseApp firebaseApp = FirebaseApp.initializeApp(firebaseOptions);
+        }catch (IOException e){
+            log.error("IOException");
+        }
     }
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
+        if(repository.existsByEmail(request.getEmail()))
+            throw new BadRequestException(String.format("User with email %s already exist", request.getEmail()));
+
         var user = User.builder()
                 .firstName(request.getFirstname())
                 .lastName(request.getLastname())
@@ -57,6 +67,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
+        log.info("successfully works the register method");
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .roleName(user.getRole().getRoleName())
@@ -76,6 +87,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         String jwtToken = jwtService.generateToken(user);
+        log.info("successfully works the authenticate method");
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .roleName(user.getRole().getRoleName())
@@ -98,10 +110,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             repository.save(newUser);
         }
         User user = repository.findByEmail(firebaseToken.getEmail()).orElseThrow(() -> {
+            log.error(String.format("Пользователь с таким электронным адресом %s не найден!", firebaseToken.getEmail()));
             throw new NotFoundException(String.format("Пользователь с таким электронным адресом %s не найден!", firebaseToken.getEmail()));
         });
         String token = jwtService.generateToken(user);
+        log.info("successfully works the authorization with google method");
         return new AuthenticationResponse(token, user.getRole().getRoleName(), user.getEmail());
+    }
+
+    @Override
+    public AuthenticationResponse getToken(User user) {
+        String jwtToken = jwtService.generateToken(user);
+        log.info("successfully works the get token method");
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .roleName(user.getRole().getRoleName())
+                .email(user.getEmail())
+                .build();
     }
 
 }

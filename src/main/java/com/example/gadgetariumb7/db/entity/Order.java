@@ -25,7 +25,7 @@ import static javax.persistence.CascadeType.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_gen")
-    @SequenceGenerator(name = "order_gen", sequenceName = "order_seq", allocationSize = 1)
+    @SequenceGenerator(name = "order_gen", sequenceName = "order_seq", allocationSize = 1, initialValue = 6)
     private Long id;
 
     private String firstName;
@@ -65,4 +65,24 @@ public class Order {
 
     @ManyToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "orders")
     private List<Subproduct> subproducts;
+
+
+    public Order(String firstName, String lastName, String email, String phoneNumber, String address, int countOfProduct, int totalSum, int totalDiscount, Payment payment, OrderType orderType, List<Subproduct> subproducts, User user, int orderNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.countOfProduct = countOfProduct;
+        this.totalSum = totalSum;
+        this.totalDiscount = totalDiscount;
+        this.payment = payment;
+        this.subproducts = subproducts;
+        this.orderStatus = OrderStatus.IN_PROCESSING;
+        this.orderType = orderType;
+        this.deliveryStatus = DeliveryStatus.IN_PROCESS;
+        this.dateOfOrder = LocalDateTime.now();
+        this.user = user;
+        this.orderNumber = orderNumber;
+    }
 }

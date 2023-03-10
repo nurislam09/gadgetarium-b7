@@ -6,8 +6,11 @@ import com.example.gadgetariumb7.db.repository.MailingRepository;
 import com.example.gadgetariumb7.db.service.MailingService;
 import com.example.gadgetariumb7.db.service.SubscriptionService;
 import com.example.gadgetariumb7.dto.request.MailingRequest;
+import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -16,19 +19,23 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MailingServiceImpl implements MailingService {
 
     private final SubscriptionService subscriptionService;
     private final JavaMailSender emailSender;
     private final MailingRepository mailingRepository;
+    @Value("${spring.mail.username}")
+    private String sender;
 
     @Override
     public void saveMailing(Mailing mailing) {
+        log.info("successfully works the save mailing method");
         mailingRepository.save(mailing);
     }
 
     @Override
-    public void sendMailing(MailingRequest mailingRequest) {
+    public SimpleResponse sendMailing(MailingRequest mailingRequest) {
         Mailing mailing = new Mailing();
         BeanUtils.copyProperties(mailingRequest, mailing);
         List<Subscription> subscribers = subscriptionService.findAll();
@@ -36,17 +43,20 @@ public class MailingServiceImpl implements MailingService {
             sendEmail(subscriber.getEmail(), mailing);
         }
         saveMailing(mailing);
+        log.info("successfully works the send mailing method");
+        return new SimpleResponse("Successfully sent", "ok");
     }
 
     @Override
     public void sendEmail(String email, Mailing mailing) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("zhumataev.03@gmail.com");
+        message.setFrom(sender);
         message.setTo(email);
         message.setSubject(mailing.getMailingName());
         message.setText(mailing.getDescription() + "\n" + mailing.getImage()
                 + "\n" + "Дата начала акции: " + mailing.getMailingDateOfStart() + "\n" + "Дата окончании акции: " + mailing.getMailingDateOfEnd());
         message.setBcc();
         emailSender.send(message);
+        log.info("successfully works the send email method");
     }
 }

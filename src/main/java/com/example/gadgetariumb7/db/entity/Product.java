@@ -46,11 +46,13 @@ public class Product {
 
     private ProductStatus productStatus;
 
-    private Byte productRating;
+    private Double productRating;
 
     private LocalDateTime createAt;
 
     private String color;
+
+    private String dateOfIssue;
 
     @OneToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;
@@ -64,6 +66,7 @@ public class Product {
     @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
     private Subcategory subCategory;
 
+    @Column(length = 1000000)
     private String productImage;
 
     @OneToMany(cascade = {DETACH, MERGE, REFRESH, REMOVE}, mappedBy = "product")
@@ -76,6 +79,7 @@ public class Product {
         this.brand = brand;
         this.category = category;
         this.subCategory = subCategory;
+      //  this.dateOfIssue =dateOfIssue;
         this.productName = productRequest.getProductName();
         this.productVendorCode = productRequest.getProductVendorCode();
         this.guarantee = productRequest.getGuarantee();
