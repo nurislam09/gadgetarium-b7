@@ -14,5 +14,4 @@ import java.util.List;
 public class CatalogResponse {
     private List<ProductCardResponse> productCardResponses;
     private int sizeOfProducts;
-    private List<ColorResponse> colorResponses;
 }
