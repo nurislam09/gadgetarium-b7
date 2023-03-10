@@ -2,6 +2,7 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.ProductService;
 import com.example.gadgetariumb7.dto.response.CatalogResponse;
+import com.example.gadgetariumb7.dto.response.ColorResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductSingleResponse;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
-import java.util.Map;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -69,5 +68,12 @@ public class ProductUserController {
     @PreAuthorize("isAuthenticated()")
     public ProductSingleResponse getProductById(@RequestParam(value = "id") Long productId, @RequestParam String attribute, @RequestParam(required = false) Integer size) throws NotFoundException {
         return productService.getProductById(productId, attribute, size);
+    }
+
+    @Operation(summary = "Get category colors", description = "This method for get colors count from category response")
+    @GetMapping("/getColors")
+    @PreAuthorize("isAuthenticated()")
+    public List<ColorResponse> getColorsFromCategory(@RequestParam Long categoryId){
+        return productService.colorCount(categoryId);
     }
 }

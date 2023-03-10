@@ -317,7 +317,6 @@ public class ProductServiceImpl implements ProductService {
                         .collect(Collectors.toList());
                 forEach(list);
 
-                colorCount(catalogResponse, list);
                 return catalogResponse;
             }
 
@@ -334,7 +333,7 @@ public class ProductServiceImpl implements ProductService {
                             (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && p.getSubproducts().get(0).getCharacteristics().get("memoryOfPhone").equalsIgnoreCase(memory.toString())) ||
                             (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") && p.getSubproducts().get(0).getCharacteristics().get("memoryOfSmartWatch").equalsIgnoreCase(memory.toString())))
                     .filter(p -> ram == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смартфоны") && p.getSubproducts().get(0).getCharacteristics().get("ramOfPhone").equalsIgnoreCase(ram.toString())) ||
-                            (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && p.getSubproducts().get(0).getCharacteristics().get("ramOfLaptop").equalsIgnoreCase(ram.toString())) ||
+                            (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") && p.getSubproducts().get(0).getCharacteristics().get("ramLaptop").equalsIgnoreCase(ram.toString())) ||
                             (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && p.getSubproducts().get(0).getCharacteristics().get("ramOfTablet").equalsIgnoreCase(ram.toString())))
                     .filter(p -> laptopCPU == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
                             p.getSubproducts().get(0).getCharacteristics().get("laptopCPU").equalsIgnoreCase(laptopCPU)))
@@ -344,12 +343,12 @@ public class ProductServiceImpl implements ProductService {
                     .filter(p -> screenSize == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
                             p.getSubproducts().get(0).getCharacteristics().get("screenSizeLaptop").equalsIgnoreCase(screenSize)) ||
                             (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") && p.getSubproducts().get(0).getCharacteristics().get("screenSizeOfTablet").equalsIgnoreCase(screenSize)))
-                    .filter(p -> screenDiagonal == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Ноутбуки") &&
+                    .filter(p -> screenDiagonal == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
                             p.getSubproducts().get(0).getCharacteristics().get("screenDiagonalOfTablet").equalsIgnoreCase(screenDiagonal)) ||
                             (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
                                     p.getSubproducts().get(0).getCharacteristics().get("screenDiagonalOfSmartWatch").equalsIgnoreCase(screenDiagonal)))
                     .filter(p -> batteryCapacity == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Планшеты") &&
-                            p.getSubproducts().get(0).getCharacteristics().get("batteryCapacity").equalsIgnoreCase(batteryCapacity)))
+                            p.getSubproducts().get(0).getCharacteristics().get("batteryCapacityOfTablet").equalsIgnoreCase(batteryCapacity)))
                     .filter(p -> wirelessInterface == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
                             p.getSubproducts().get(0).getCharacteristics().get("wirelessInterface").equalsIgnoreCase(wirelessInterface)))
                     .filter(p -> caseShape == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
@@ -359,7 +358,7 @@ public class ProductServiceImpl implements ProductService {
                     .filter(p -> housingMaterial == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
                             p.getSubproducts().get(0).getCharacteristics().get("housingMaterial").equalsIgnoreCase(housingMaterial)))
                     .filter(p -> gender == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
-                            p.getSubproducts().get(0).getCharacteristics().get("gender").equalsIgnoreCase(waterProof)))
+                            p.getSubproducts().get(0).getCharacteristics().get("gender").equalsIgnoreCase(gender)))
                     .filter(p -> waterProof == null || (p.getCategory().getCategoryName().equalsIgnoreCase("Смарт-часы и браслеты") &&
                             p.getSubproducts().get(0).getCharacteristics().get("waterProof").equalsIgnoreCase(waterProof)))
                     .map(p -> new ProductCardResponse(p.getId(),
@@ -379,7 +378,6 @@ public class ProductServiceImpl implements ProductService {
             if (fieldToSort != null) {
                 productCardResponses = sortingProduct2(fieldToSort, discountField, productCardResponses);
             }
-            colorCount(catalogResponse, productCardResponses);
             log.info("successfully works the filter by parameters method");
             return catalogResponse;
         } catch (NotFoundException | NullPointerException e) {
@@ -388,17 +386,17 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    private void colorCount(CatalogResponse catalogResponse, List<ProductCardResponse> list) {
+    @Override
+    public List<ColorResponse> colorCount(Long categoryId) {
+        List<Long> productsId = productRepository.getCategoryProducts(categoryId);
         List<ColorResponse> colorResponses = new ArrayList<>();
-        for (ProductCardResponse x: list) {
-            Product product = productRepository.findById(x.getProductId()).orElseThrow(() -> new NotFoundException("Product not found"));
+        for (Long x: productsId) {
+            Product product = productRepository.findById(x).orElseThrow(() -> new NotFoundException("Product not found"));
             if(colorResponses.isEmpty() || colorResponses.stream().noneMatch(c -> c.getColorName().equalsIgnoreCase(colorNameMapper.getColorName(product.getColor())))){
-                colorResponses.add(new ColorResponse(product.getColor(), colorNameMapper.getColorName(product.getColor()), (int) list.stream().filter(p -> productRepository.findById(p.getProductId()).orElseThrow(() -> new NotFoundException("Product not found")).getColor().equals(product.getColor())).count()));
+                colorResponses.add(new ColorResponse(product.getColor(), colorNameMapper.getColorName(product.getColor()), (int) productsId.stream().filter(p -> productRepository.findById(p).orElseThrow(() -> new NotFoundException("Product not found")).getColor().equals(product.getColor())).count()));
             }
         }
-        catalogResponse.setColorResponses(colorResponses);
-        catalogResponse.setProductCardResponses(list);
-        catalogResponse.setSizeOfProducts(list.size());
+        return colorResponses;
     }
 
     @Override
