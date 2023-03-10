@@ -36,7 +36,8 @@ public class ProductCardResponse {
         this.productStatus = productStatus;
         this.productRating = productRating;
     }
-    public ProductCardResponse(Long productId, String productName, String productImage, Byte productRating, int productPrice) {
+
+    public ProductCardResponse(Long productId, String productName, String productImage, Double productRating, int productPrice) {
         this.productId = productId;
         this.productName = productName;
         this.productImage = productImage;
@@ -51,5 +52,6 @@ public class ProductCardResponse {
         this.productRating = productRating;
         this.countOfReview = countOfReview;
         this.productPrice = productPrice;
+        isViewed = true;
     }
 }

@@ -412,6 +412,7 @@ public class ProductServiceImpl implements ProductService {
             responses.add(new ProductCardResponse(p.getId(), p.getProductName(), p.getProductImage(), p.getProductRating(),
                     productRepository.getAmountOfFeedback(p.getId()), p.getProductPrice()));
         });
+        responses.forEach(p -> p.setCategoryId(productRepository.findById(p.getProductId()).orElseThrow(() -> new NotFoundException("Product not found")).getCategory().getId().byteValue()));
         log.info("successfully works the getViewedProducts");
         return responses;
 
