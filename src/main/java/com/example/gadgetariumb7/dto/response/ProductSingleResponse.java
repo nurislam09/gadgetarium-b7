@@ -23,7 +23,7 @@ public class ProductSingleResponse {
     private Map<String, Object> attribute;
     private String videoReview;
     private Map<Integer, Integer> reviewCount;
-
+    private boolean isReviewed = false;
 
 
     public ProductSingleResponse(long id, String productName, int productCount, long productVendorCode, String categoryName, String subCategoryName,

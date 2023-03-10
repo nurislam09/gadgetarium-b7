@@ -409,15 +409,15 @@ values (20, '#686868', 34, 91990, 6),
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (20, 'Apple M1', 'laptopCPU'),
-       (20, '2560x1600', 'screenResolutionOfLaptop'),
+       (20, '2560x1600', 'screenResolutionLaptop'),
        (20, '4', 'videoCardMemory'),
-       (20, '4', 'ramOfLaptop'),
-       (20, '13.3', 'screenSizeOfLaptop'),
+       (20, '4', 'ramLaptop'),
+       (20, '13.3', 'screenSizeLaptop'),
        (21, 'Apple M1', 'laptopCPU'),
-       (21, '2560x1600', 'screenResolutionOfLaptop'),
+       (21, '2560x1600', 'screenResolutionLaptop'),
        (21, '6', 'videoCardMemory'),
-       (21, '6', 'ramOfLaptop'),
-       (21, '13.3', 'screenSizeOfLaptop');
+       (21, '6', 'ramLaptop'),
+       (21, '13.3', 'screenSizeLaptop');
 
 insert into subproduct_images(id, image_url)
 values (20,
@@ -465,10 +465,10 @@ values (22, '#CCCCCC', 29, 189990, 7);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (22, 'Apple M1 Pro', 'laptopCPU'),
-       (22, '3024×1964', 'screenResolutionOfLaptop'),
-       (22, '8', 'videoCardMemoryOfLaptop'),
-       (22, '32', 'ramOfLaptop'),
-       (22, '14', 'screenSizeOfLaptop');
+       (22, '3024×1964', 'screenResolutionLaptop'),
+       (22, '8', 'videoCardMemory'),
+       (22, '32', 'ramLaptop'),
+       (22, '14', 'screenSizeLaptop');
 
 insert into subproduct_images(id, image_url)
 values (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_0_1.jpg'),
@@ -499,10 +499,10 @@ values (23, '#000000', 54, 149990, 8);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (23, 'AMD Ryzen 5', 'laptopCPU'),
-       (23, '1920х1080', 'screenResolutionOfLaptop'),
+       (23, '1920х1080', 'screenResolutionLaptop'),
        (23, '8', 'videoCardMemory'),
-       (23, '16', 'ramOfLaptop'),
-       (23, '15.6', 'screenSizeOfLaptop');
+       (23, '16', 'ramLaptop'),
+       (23, '15.6', 'screenSizeLaptop');
 
 insert into subproduct_images(id, image_url)
 values (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_0_1.jpg'),
@@ -534,10 +534,10 @@ values (24, '#000000', 87, 69990, 9);
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
 values (24, 'Intel Core i5', 'laptopCPU'),
-       (24, '1920х1080', 'screenResolutionOfLaptop'),
+       (24, '1920х1080', 'screenResolutionLaptop'),
        (24, '4', 'videoCardMemory'),
-       (24, '8', 'ramOfLaptop'),
-       (24, '15.6', 'screenSizeOfLaptop');
+       (24, '8', 'ramLaptop'),
+       (24, '15.6', 'screenSizeLaptop');
 
 insert into subproduct_images(id, image_url)
 values (24, 'https://content.rozetka.com.ua/goods/images/big/269677917.jpg'),
