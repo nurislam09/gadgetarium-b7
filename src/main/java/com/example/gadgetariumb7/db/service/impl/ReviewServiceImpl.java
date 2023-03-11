@@ -64,7 +64,7 @@ public class ReviewServiceImpl implements ReviewService {
     public Map<Integer, Integer> countReviewsGrade() {
         Map<Integer, Integer> counts = new HashMap<>();
         for (int i = 1; i < 6; i++) {
-            counts.put(i, reviewRepository.countReviewByProductGrade((byte) i));
+            counts.put(i, reviewRepository.countReviewByProductGrade(i));
         }
         log.info("successfully works the count reviews grade method");
         return counts;

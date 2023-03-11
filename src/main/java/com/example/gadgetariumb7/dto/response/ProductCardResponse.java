@@ -23,6 +23,7 @@ public class ProductCardResponse {
     private int countOfReview;
     private boolean isFavorite;
     private boolean isCompared;
+    private byte categoryId;
 
     public ProductCardResponse(Long productId, String productImage, String productName, int count, int productPrice, ProductStatus productStatus, Double productRating) {
         this.productId = productId;

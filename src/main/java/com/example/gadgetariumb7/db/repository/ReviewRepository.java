@@ -15,7 +15,7 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select count(productGrade) from Review where productGrade = :productGrade ")
-    int countReviewByProductGrade(byte productGrade);
+    int countReviewByProductGrade(double productGrade);
 
     @Query("select count(r) from Review r where r.statusOfResponse = false ")
     int countReviewUnAnswered();
@@ -58,4 +58,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "r.reviewTime," +
             "r.productGrade) from Review r where r.statusOfResponse = true")
     List<ReviewResponse> getAllReviewByStatusTrue();
+
+    @Query("select count(id) from Review where product.id = :productId and productGrade = :grade")
+    int getCountReviewOfProduct(Long productId, double grade);
 }
