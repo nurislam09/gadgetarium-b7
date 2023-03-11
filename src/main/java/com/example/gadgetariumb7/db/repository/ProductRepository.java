@@ -174,7 +174,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(nativeQuery = true, value = "select count(o) from users_compare_products_list p, products o where o.id = p.compare_products_list_id group by o.category_id")
     void countOfProductInCompare(Long id);
-}
 
     @Query("select u.compareProductsList from User u where u.id = :userId")
     List<Product> getAllFromUserCompareProductList(Long userId, Pageable pageable);
