@@ -79,7 +79,6 @@ public class Product {
         this.brand = brand;
         this.category = category;
         this.subCategory = subCategory;
-      //  this.dateOfIssue =dateOfIssue;
         this.productName = productRequest.getProductName();
         this.productVendorCode = productRequest.getProductVendorCode();
         this.guarantee = productRequest.getGuarantee();
