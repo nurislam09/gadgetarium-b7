@@ -150,7 +150,10 @@ public class OrderServiceImpl implements OrderService {
         if (getAuthenticateUserForAutofill().isPresent()) {
             User user = getAuthenticateUserForAutofill().get();
             log.info("successfully works the autofill user information method");
-            return new UserAutofillResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getAddress());
+            UserAutofillResponse userAutofillResponse = new UserAutofillResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber(), user.getAddress());
+            if (user.getAddress() == null)
+                userAutofillResponse.setAddress("");
+            return userAutofillResponse;
         } else {
             log.error("User is not authenticate");
             throw new NotFoundException("User is not authenticate");
