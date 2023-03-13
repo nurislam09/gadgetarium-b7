@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCardResponse {
+    @JsonIgnore
     private Long productId;
     private String productImage;
     private String productName;
@@ -23,6 +24,7 @@ public class ProductCardResponse {
     private int countOfReview;
     private boolean isFavorite;
     private boolean isCompared;
+    private boolean isViewed;
     private byte categoryId;
 
     public ProductCardResponse(Long productId, String productImage, String productName, int count, int productPrice, ProductStatus productStatus, Double productRating) {
@@ -34,6 +36,15 @@ public class ProductCardResponse {
         this.productStatus = productStatus;
         this.productRating = productRating;
     }
+
+    public ProductCardResponse(Long productId, String productName, String productImage, Double productRating, int productPrice) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productImage = productImage;
+        this.productRating = productRating;
+        this.productPrice = productPrice;
+    }
+
     public ProductCardResponse(Long productId, String productName, String productImage, Double productRating, int countOfReview, int productPrice) {
         this.productId = productId;
         this.productName = productName;
@@ -41,5 +52,6 @@ public class ProductCardResponse {
         this.productRating = productRating;
         this.countOfReview = countOfReview;
         this.productPrice = productPrice;
+        isViewed = true;
     }
 }
