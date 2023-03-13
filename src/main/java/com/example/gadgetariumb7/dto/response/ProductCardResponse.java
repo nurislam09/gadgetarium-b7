@@ -12,7 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCardResponse {
-    @JsonIgnore
     private Long productId;
     private String productImage;
     private String productName;
