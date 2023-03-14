@@ -291,6 +291,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCreateAt(LocalDateTime.now());
         product.setProductStatus(ProductStatus.NEW);
         product.setSubproducts(subproducts);
+        product.setProductRating(0.0);
         product.setDateOfIssue(productRequest.getDateOfIssue());
         subproducts.forEach(s -> s.setProduct(product));
         productRepository.save(product);
