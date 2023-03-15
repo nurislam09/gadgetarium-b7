@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +29,18 @@ public class UserCompareController {
 
     @Operation(summary = "Get all products from users compare list", description = "This endpoint return products from users compare list")
     @GetMapping
-    public List<ProductCompareResponse> getAllFromCompareList(@RequestParam String categoryName, @RequestParam int size) {
-        return userService.getAllFromUserCompareProductList(categoryName, size);
+    public List<ProductCompareResponse> getAllFromCompareList(@RequestParam String categoryName, @RequestParam int size, int page) {
+        return userService.getAllFromUserCompareProductList(categoryName, size, page);
+    }
+    @Operation(summary = "Clean compareTo list", description = "This endpoint clean all compare list where user id is equal")
+    @DeleteMapping("/{id}")
+    public void cleanCompare(@PathVariable Long id) {
+        userService.cleanCompareTO(id);
+    }
+
+    @Operation(summary = "Get count of all products in compare list", description = "This endpoint get count all product in compare list")
+    @GetMapping("/{id}")
+    public Map<String, Integer> countOfCompareTO(@PathVariable Long id) {
+        return userService.countOfCompareList(id);
     }
 }
