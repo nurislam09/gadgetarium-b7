@@ -30,8 +30,10 @@ public interface UserService {
 
     List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size, int page);
 
-    Map<String, Integer> countOfCompareList(Long id);
+    Map<String, Integer> countOfCompareList();
 
-    void cleanCompareTO(Long id);
+    SimpleResponse cleanCompareProducts();
+
+    SimpleResponse cleanFavoriteProducts();
 
 }
