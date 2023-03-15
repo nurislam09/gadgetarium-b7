@@ -23,8 +23,8 @@ public class UserCompareController {
 
     @Operation(summary = "Add or remove product from compareList", description = "This method for add or remove product from User's compareList")
     @PostMapping
-    public SimpleResponse addAndRemoveToFavoriteList(@RequestParam Long productId) {
-        return userService.addAndRemoveToFavorites(productId);
+    public SimpleResponse addAndRemoveToCompares(@RequestParam Long productId) {
+        return userService.addAndRemoveToCompares(productId);
     }
 
     @Operation(summary = "Get all products from users compare list", description = "This endpoint return products from users compare list")
@@ -32,15 +32,15 @@ public class UserCompareController {
     public List<ProductCompareResponse> getAllFromCompareList(@RequestParam String categoryName, @RequestParam int size, int page) {
         return userService.getAllFromUserCompareProductList(categoryName, size, page);
     }
-    @Operation(summary = "Clean compareTo list", description = "This endpoint clean all compare list where user id is equal")
-    @DeleteMapping("/{id}")
-    public void cleanCompare(@PathVariable Long id) {
-        userService.cleanCompareTO(id);
+    @Operation(summary = "Clean compare products", description = "This endpoint clean all compare list where user id is equal")
+    @DeleteMapping
+    public SimpleResponse cleanCompare() {
+        return userService.cleanCompareProducts();
     }
 
     @Operation(summary = "Get count of all products in compare list", description = "This endpoint get count all product in compare list")
-    @GetMapping("/{id}")
-    public Map<String, Integer> countOfCompareTO(@PathVariable Long id) {
-        return userService.countOfCompareList(id);
+    @GetMapping("/count")
+    public Map<String, Integer> countOfCompareTO() {
+        return userService.countOfCompareList();
     }
 }

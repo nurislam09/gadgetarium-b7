@@ -270,17 +270,29 @@ public class UserServiceImpl implements UserService {
         return productCompareResponses;
     }
 
-    public Map<String, Integer> countOfCompareList(Long id) {
+    public Map<String, Integer> countOfCompareList() {
+        User user = getAuthenticateUser();
         Map<String, Integer> compares = new HashMap<>();
-        LinkedList<Integer> counts = productRepository.countOfProductInCompare(id);
-        LinkedList<String> names = productRepository.categoryNameInCompare(id);
+        LinkedList<Integer> counts = productRepository.countOfProductInCompare(user.getId());
+        LinkedList<String> names = productRepository.categoryNameInCompare(user.getId());
         for (int i = 0; i < names.size(); i++) {
             compares.put(names.get(i), counts.get(i));
         }
         return compares;
     }
 
-    public void cleanCompareTO(Long id) {
-        productRepository.cleanCompareList(id);
+    public SimpleResponse cleanCompareProducts() {
+        User user = getAuthenticateUser();
+        user.getCompareProductsList().clear();
+        userRepository.save(user);
+        return new SimpleResponse("User compare products successfully", "ok");
+    }
+
+    @Override
+    public SimpleResponse cleanFavoriteProducts() {
+        User user = getAuthenticateUser();
+        user.getFavoritesList().clear();
+        userRepository.save(user);
+        return new SimpleResponse("User's favorite list successfully cleaned", "ok");
     }
 }

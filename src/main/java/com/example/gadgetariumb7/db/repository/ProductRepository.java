@@ -174,11 +174,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(nativeQuery = true, value = "select viewed_products_list_id from users_viewed_products_list where user_id = :userId")
     List<Long> getViewedProducts(Long userId);
 
-    @Modifying
-    @Transactional
-    @Query(nativeQuery = true, value = "delete from users_compare_products_list where user_id =:id")
-    void cleanCompareList(Long id);
-
     @Query(nativeQuery = true, value = "select count(o) from users_compare_products_list p, products o where o.id = p.compare_products_list_id and p.user_id = :id group by o.category_id")
     LinkedList<Integer> countOfProductInCompare(Long id);
 
