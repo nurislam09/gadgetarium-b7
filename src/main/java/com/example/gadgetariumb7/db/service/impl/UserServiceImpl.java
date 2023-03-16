@@ -4,10 +4,7 @@ import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.entity.Review;
 import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.entity.User;
-import com.example.gadgetariumb7.db.repository.ProductRepository;
-import com.example.gadgetariumb7.db.repository.ReviewRepository;
-import com.example.gadgetariumb7.db.repository.SubproductRepository;
-import com.example.gadgetariumb7.db.repository.UserRepository;
+import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.UserService;
 import com.example.gadgetariumb7.dto.converter.ColorNameMapper;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
@@ -24,19 +21,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
+    private final CategoryRepository categoryRepository;
 
     private final UserRepository userRepository;
 
@@ -259,9 +256,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size) {
+    public List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size, int page) {
+        Pageable pageable = PageRequest.of(page - 1, size);
         User user = getAuthenticateUser();
-        List<Product> products = productRepository.getAllFromUserCompareProductList(user.getId(), PageRequest.ofSize(size));
+        List<Product> products = productRepository.getAllFromUserCompareProductList(user.getId(), pageable);
         List<ProductCompareResponse> productCompareResponses = new ArrayList<>();
         for (Product product : products) {
             ProductCompareResponse productCompareResponse
@@ -270,5 +268,31 @@ public class UserServiceImpl implements UserService {
             productCompareResponses.add(productCompareResponse);
         }
         return productCompareResponses;
+    }
+
+    public Map<String, Integer> countOfCompareList() {
+        User user = getAuthenticateUser();
+        Map<String, Integer> compares = new HashMap<>();
+        LinkedList<Integer> counts = productRepository.countOfProductInCompare(user.getId());
+        LinkedList<String> names = productRepository.categoryNameInCompare(user.getId());
+        for (int i = 0; i < names.size(); i++) {
+            compares.put(names.get(i), counts.get(i));
+        }
+        return compares;
+    }
+
+    public SimpleResponse cleanCompareProducts() {
+        User user = getAuthenticateUser();
+        user.getCompareProductsList().clear();
+        userRepository.save(user);
+        return new SimpleResponse("User compare products successfully", "ok");
+    }
+
+    @Override
+    public SimpleResponse cleanFavoriteProducts() {
+        User user = getAuthenticateUser();
+        user.getFavoritesList().clear();
+        userRepository.save(user);
+        return new SimpleResponse("User's favorite list successfully cleaned", "ok");
     }
 }

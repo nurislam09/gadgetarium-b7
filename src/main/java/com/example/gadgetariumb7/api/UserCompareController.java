@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,13 +23,24 @@ public class UserCompareController {
 
     @Operation(summary = "Add or remove product from compareList", description = "This method for add or remove product from User's compareList")
     @PostMapping
-    public SimpleResponse addAndRemoveToFavoriteList(@RequestParam Long productId) {
-        return userService.addAndRemoveToFavorites(productId);
+    public SimpleResponse addAndRemoveToCompares(@RequestParam Long productId) {
+        return userService.addAndRemoveToCompares(productId);
     }
 
     @Operation(summary = "Get all products from users compare list", description = "This endpoint return products from users compare list")
     @GetMapping
-    public List<ProductCompareResponse> getAllFromCompareList(@RequestParam String categoryName, @RequestParam int size) {
-        return userService.getAllFromUserCompareProductList(categoryName, size);
+    public List<ProductCompareResponse> getAllFromCompareList(@RequestParam String categoryName, @RequestParam int size, int page) {
+        return userService.getAllFromUserCompareProductList(categoryName, size, page);
+    }
+    @Operation(summary = "Clean compare products", description = "This endpoint clean all compare list where user id is equal")
+    @DeleteMapping
+    public SimpleResponse cleanCompare() {
+        return userService.cleanCompareProducts();
+    }
+
+    @Operation(summary = "Get count of all products in compare list", description = "This endpoint get count all product in compare list")
+    @GetMapping("/count")
+    public Map<String, Integer> countOfCompareTO() {
+        return userService.countOfCompareList();
     }
 }

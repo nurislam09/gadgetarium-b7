@@ -7,6 +7,7 @@ import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface UserService {
@@ -27,5 +28,12 @@ public interface UserService {
 
     SimpleResponse addReview(ReviewSaveRequest request);
 
-    List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size);
+    List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size, int page);
+
+    Map<String, Integer> countOfCompareList();
+
+    SimpleResponse cleanCompareProducts();
+
+    SimpleResponse cleanFavoriteProducts();
+
 }
