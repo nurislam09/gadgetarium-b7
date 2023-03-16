@@ -301,8 +301,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public CatalogResponse filterByParameters(String text, String fieldToSort, String discountField, String categoryName, String subCategoryName, Integer minPrice, Integer maxPrice, List<String> colors,
-                                                        Integer memory, Byte ram, String laptopCPU, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
-                                                        String wirelessInterface, String caseShape, String braceletMaterial, String housingMaterial, String gender, String waterProof, int size) throws NotFoundException {
+                                              Integer memory, Byte ram, String laptopCPU, String screenResolution, String screenSize, String screenDiagonal, String batteryCapacity,
+                                              String wirelessInterface, String caseShape, String braceletMaterial, String housingMaterial, String gender, String waterProof, int size) throws NotFoundException {
         try {
             CatalogResponse catalogResponse = new CatalogResponse();
 
@@ -396,9 +396,9 @@ public class ProductServiceImpl implements ProductService {
     public List<ColorResponse> colorCount(Long categoryId) {
         List<Long> productsId = productRepository.getCategoryProducts(categoryId);
         List<ColorResponse> colorResponses = new ArrayList<>();
-        for (Long x: productsId) {
+        for (Long x : productsId) {
             Product product = productRepository.findById(x).orElseThrow(() -> new NotFoundException("Product not found"));
-            if(colorResponses.isEmpty() || colorResponses.stream().noneMatch(c -> c.getColorName().equalsIgnoreCase(colorNameMapper.getColorName(product.getColor())))){
+            if (colorResponses.isEmpty() || colorResponses.stream().noneMatch(c -> c.getColorName().equalsIgnoreCase(colorNameMapper.getColorName(product.getColor())))) {
                 colorResponses.add(new ColorResponse(product.getColor(), colorNameMapper.getColorName(product.getColor()), (int) productsId.stream().filter(p -> productRepository.findById(p).orElseThrow(() -> new NotFoundException("Product not found")).getColor().equals(product.getColor())).count()));
             }
         }
@@ -542,6 +542,12 @@ public class ProductServiceImpl implements ProductService {
                         r.getUser().getId(), r.getUser().getFirstName() + " " + r.getUser().getLastName(),
                         r.getUser().getImage())
                 )).toList();
+
+                for (ReviewMainResponse review : reviewMainResponses) {
+                    if (review.getUserMainResponse().getId().equals(user.getId()))
+                        review.setMyReview(true);
+                }
+
                 if (size == null) {
                     size = 3;
                 }
@@ -562,4 +568,5 @@ public class ProductServiceImpl implements ProductService {
         log.info("successfully works the productSingleResponse method");
         return productSingleResponse;
     }
+
 }

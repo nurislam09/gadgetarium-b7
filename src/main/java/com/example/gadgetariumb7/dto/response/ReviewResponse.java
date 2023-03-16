@@ -2,7 +2,6 @@
 package com.example.gadgetariumb7.dto.response;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -14,7 +13,6 @@ public class ReviewResponse {
     private Long id;
     private String userReview;
     private String responseOfReview;
-
     private List<String> reviewImages;
     private LocalDateTime reviewTime;
     private Double productGrade;
