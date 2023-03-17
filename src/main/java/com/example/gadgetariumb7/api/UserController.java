@@ -2,6 +2,7 @@ package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.UserService;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
+import com.example.gadgetariumb7.dto.request.ReviewSingleRequest;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,5 +23,19 @@ public class UserController {
     @PreAuthorize("hasAuthority('Customer')")
     public SimpleResponse save(@RequestBody ReviewSaveRequest reviewSaveRequest) {
         return userService.addReview(reviewSaveRequest);
+    }
+
+    @Operation(summary = "To edit the review", description = "user could edit only his own review")
+    @PutMapping("/review")
+    @PreAuthorize("hasAuthority('Customer')")
+    public SimpleResponse edit(@RequestBody ReviewSingleRequest reviewRequest){
+        return userService.editReview(reviewRequest);
+    }
+
+    @Operation(summary = "To delete the review", description = "user could delete only his own review")
+    @DeleteMapping("/review")
+    @PreAuthorize("hasAuthority('Customer')")
+    public SimpleResponse delete(@RequestParam(name = "review id") Long reviewId){
+        return userService.deleteReview(reviewId);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.db.service;
 
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
+import com.example.gadgetariumb7.dto.request.ReviewSingleRequest;
 import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
@@ -36,4 +37,7 @@ public interface UserService {
 
     SimpleResponse cleanFavoriteProducts();
 
+    SimpleResponse editReview(ReviewSingleRequest reviewRequest);
+
+    SimpleResponse deleteReview(Long id);
 }
