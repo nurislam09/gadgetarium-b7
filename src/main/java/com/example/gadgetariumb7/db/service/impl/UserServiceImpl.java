@@ -8,10 +8,12 @@ import com.example.gadgetariumb7.db.repository.*;
 import com.example.gadgetariumb7.db.service.UserService;
 import com.example.gadgetariumb7.dto.converter.ColorNameMapper;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
+import com.example.gadgetariumb7.dto.request.ReviewSingleRequest;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
+import com.example.gadgetariumb7.exceptions.BadCredentialsException;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import com.google.cloud.translate.Translate;
@@ -33,7 +35,6 @@ import java.util.*;
 @RequiredArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
-    private final CategoryRepository categoryRepository;
 
     private final UserRepository userRepository;
 
@@ -85,7 +86,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public SimpleResponse addAndRemoveToCompares(Long productId) {
         User user = getAuthenticateUser();
-        Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product not found"));
+        Product product = productRepository.findById(productId).orElseThrow(() -> {
+            log.error("Product not found");
+            return new NotFoundException("Product not found");
+        });
 
         if (user.getCompareProductsList() == null) {
             user.setCompareProductsList(Arrays.asList(product));
@@ -97,6 +101,7 @@ public class UserServiceImpl implements UserService {
             } else user.getCompareProductsList().add(product);
         }
         userRepository.save(user);
+        log.info("successfully works the add and remove to compares method");
         return new SimpleResponse("Product successfully added to User's compares", "ok");
     }
 
@@ -220,7 +225,7 @@ public class UserServiceImpl implements UserService {
         if (product.getUsersReviews() != null) {
             for (Review r : product.getUsersReviews()) {
                 if (r.getUser().getId().equals(user.getId())) {
-                    log.error("User has alreaady added a review for this product");
+                    log.error("User has already added a review for this product");
                     throw new BadRequestException("User has already added a review for this product");
                 }
             }
@@ -294,5 +299,45 @@ public class UserServiceImpl implements UserService {
         user.getFavoritesList().clear();
         userRepository.save(user);
         return new SimpleResponse("User's favorite list successfully cleaned", "ok");
+    }
+
+    @Override
+    public SimpleResponse editReview(ReviewSingleRequest reviewRequest) {
+        User user = getAuthenticateUser();
+        Review review = reviewRepository.findById(reviewRequest.getId()).orElseThrow(() -> {
+            log.error("No such review id");
+            return new NotFoundException("No such review id");
+        });
+        if (review.getUser().getId().equals(user.getId()) && review.getUser().getEmail().equals(user.getEmail())) {
+            if (!reviewRequest.getUserReview().equals(review.getUserReview()))
+                review.setUserReview(reviewRequest.getUserReview());
+
+            if (!reviewRequest.getImages().equals(review.getImages()))
+                review.setImages(reviewRequest.getImages());
+
+            if (!reviewRequest.getProductGrade().equals(review.getProductGrade()))
+                review.setProductGrade(reviewRequest.getProductGrade());
+        }else {
+            log.error("You couldn't edit this review");
+            throw new BadCredentialsException("you couldn't edit this review");
+        }
+        reviewRepository.save(review);
+        System.out.println(review);
+        log.info(String.format("Review with %s id successfully deleted", review.getId()));
+        return new SimpleResponse(String.format("Review with %s id successfully edited", reviewRequest.getId()), "ok");
+    }
+
+    @Override
+    public SimpleResponse deleteReview(Long reviewId) {
+        User user = getAuthenticateUser();
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new NotFoundException("No such review id"));
+        if (review.getUser().getId().equals(user.getId()) && review.getUser().getEmail().equals(user.getEmail()))
+            reviewRepository.deleteById(review.getId());
+        else {
+            log.error("You couldn't edit this review");
+            throw new BadCredentialsException("you couldn't edit this review");
+        }
+        log.info(String.format("Review with %s id successfully deleted", reviewId));
+        return new SimpleResponse(String.format("Review with %s id successfully deleted", reviewId), "ok");
     }
 }

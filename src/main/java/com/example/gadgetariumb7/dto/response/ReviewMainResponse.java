@@ -14,9 +14,18 @@ import java.time.LocalDateTime;
 public class ReviewMainResponse {
     private Long id;
     private String userReview;
+    private boolean isMyReview;
     private String responseOfReview;
     private LocalDateTime reviewTime;
     private Double productGrade;
     private UserMainResponse userMainResponse;
 
+    public ReviewMainResponse(Long id, String userReview, String responseOfReview, LocalDateTime reviewTime, Double productGrade, UserMainResponse userMainResponse) {
+        this.id = id;
+        this.userReview = userReview;
+        this.responseOfReview = responseOfReview;
+        this.reviewTime = reviewTime;
+        this.productGrade = productGrade;
+        this.userMainResponse = userMainResponse;
+    }
 }
