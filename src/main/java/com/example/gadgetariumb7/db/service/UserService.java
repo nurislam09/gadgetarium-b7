@@ -29,9 +29,11 @@ public interface UserService {
 
     SimpleResponse addReview(ReviewSaveRequest request);
 
-    List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size, int page);
+    List<ProductCompareResponse> getAllFromUserCompareProductList(Long categoryId, boolean isUnique, int size, int page);
 
     Map<String, Integer> countOfCompareList();
+
+    SimpleResponse deleteFromCompareList(Long id);
 
     SimpleResponse cleanCompareProducts();
 
