@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -261,29 +262,69 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ProductCompareResponse> getAllFromUserCompareProductList(String categoryName, int size, int page) {
+    public List<ProductCompareResponse> getAllFromUserCompareProductList(Long categoryId, boolean isUnique, int size, int page) {
         Pageable pageable = PageRequest.of(page - 1, size);
         User user = getAuthenticateUser();
-        List<Product> products = productRepository.getAllFromUserCompareProductList(user.getId(), pageable);
-        List<ProductCompareResponse> productCompareResponses = new ArrayList<>();
-        for (Product product : products) {
-            ProductCompareResponse productCompareResponse
-                    = new ProductCompareResponse(product.getId(), product.getProductName(), product.getProductImage(), product.getSubproducts().get(0).getCharacteristics(),
-                    product.getBrand().getBrandName(), product.getColor(), product.getProductPrice());
-            productCompareResponses.add(productCompareResponse);
-        }
+        List<Product> products = productRepository.getAllFromUserCompareProductList(user.getId(), pageable).stream().filter(x -> Objects.equals(x.getCategory().getId(), categoryId)).toList();
+        List<ProductCompareResponse> productCompareResponses = products
+                .stream()
+                .map(p -> {
+                    Map<String, String> characteristics = p.getSubproducts().get(0).getCharacteristics();
+                    if (isUnique) {
+                        Map<String, String> uniqueCharacteristics = new HashMap<>();
+                        for (String key : characteristics.keySet()) {
+                            String value = characteristics.get(key);
+                            boolean isUniqueValue = products.stream()
+                                    .filter(prod -> prod.getId() != p.getId())
+                                    .map(prod -> prod.getSubproducts().get(0).getCharacteristics().get(key))
+                                    .noneMatch(value::equals);
+                            if (isUniqueValue) {
+                                uniqueCharacteristics.put(key, value);
+                            }
+                        }
+                        characteristics = uniqueCharacteristics;
+                    }
+                    return new ProductCompareResponse(
+                            p.getId(),
+                            p.getProductName(),
+                            p.getProductImage(),
+                            characteristics,
+                            p.getBrand().getBrandName(),
+                            p.getColor(),
+                            p.getProductPrice()
+                    );
+                })
+                .collect(Collectors.toList());
+
+
         return productCompareResponses;
     }
 
     public Map<String, Integer> countOfCompareList() {
         User user = getAuthenticateUser();
         Map<String, Integer> compares = new HashMap<>();
-        LinkedList<Integer> counts = productRepository.countOfProductInCompare(user.getId());
-        LinkedList<String> names = productRepository.categoryNameInCompare(user.getId());
-        for (int i = 0; i < names.size(); i++) {
-            compares.put(names.get(i), counts.get(i));
+        Long[] categoryIds = {1L, 2L, 3L, 4L};
+        String[] categoryNames = {"Смартфоны", "Ноутбуки", "Планшеты", "Смарт-часы и браслеты"};
+        for (int i = 0; i < categoryIds.length; i++) {
+            int count = productRepository.countCompare(user.getId(), categoryIds[i]);
+            if (count != 0) {
+                compares.put(categoryNames[i], count);
+            }
         }
         return compares;
+    }
+
+    @Override
+    public SimpleResponse deleteFromCompareList(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
+        User user = getAuthenticateUser();
+        if (user.getCompareProductsList() != null && user.getCompareProductsList().contains(product)){
+            user.getCompareProductsList().remove(product);
+        }else {
+            throw new NotFoundException("Product not contains or user compare products is null");
+        }
+        userRepository.save(user);
+        return new SimpleResponse("Product succesfully from user's compare products", "ok");
     }
 
     public SimpleResponse cleanCompareProducts() {

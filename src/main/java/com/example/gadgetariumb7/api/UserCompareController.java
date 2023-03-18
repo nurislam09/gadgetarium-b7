@@ -29,13 +29,20 @@ public class UserCompareController {
 
     @Operation(summary = "Get all products from users compare list", description = "This endpoint return products from users compare list")
     @GetMapping
-    public List<ProductCompareResponse> getAllFromCompareList(@RequestParam String categoryName, @RequestParam int size, int page) {
-        return userService.getAllFromUserCompareProductList(categoryName, size, page);
+    public List<ProductCompareResponse> getAllFromCompareList(@RequestParam Long categoryId, @RequestParam boolean isUnique, @RequestParam int size, int page) {
+        return userService.getAllFromUserCompareProductList(categoryId, isUnique, size, page);
     }
+
     @Operation(summary = "Clean compare products", description = "This endpoint clean all compare list where user id is equal")
     @DeleteMapping
     public SimpleResponse cleanCompare() {
         return userService.cleanCompareProducts();
+    }
+
+    @Operation(summary = "Delete compare products", description = "This endpoint delete compare product")
+    @DeleteMapping("/{id}")
+    public SimpleResponse deleteById(@PathVariable Long id) {
+        return userService.deleteFromCompareList(id);
     }
 
     @Operation(summary = "Get count of all products in compare list", description = "This endpoint get count all product in compare list")
