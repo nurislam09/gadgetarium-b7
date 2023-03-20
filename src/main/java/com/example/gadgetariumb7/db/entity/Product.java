@@ -54,7 +54,7 @@ public class Product {
 
     private String dateOfIssue;
 
-    @OneToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Discount discount;
 
     @ManyToOne(cascade = {DETACH, REFRESH, MERGE})
