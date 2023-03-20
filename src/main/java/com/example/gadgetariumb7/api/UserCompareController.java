@@ -35,8 +35,8 @@ public class UserCompareController {
 
     @Operation(summary = "Clean compare products", description = "This endpoint clean all compare list where user id is equal")
     @DeleteMapping
-    public SimpleResponse cleanCompare() {
-        return userService.cleanCompareProducts();
+    public SimpleResponse cleanCompare(@RequestParam Long id) {
+        return userService.cleanCompareProducts(id);
     }
 
     @Operation(summary = "Delete compare products", description = "This endpoint delete compare product")
