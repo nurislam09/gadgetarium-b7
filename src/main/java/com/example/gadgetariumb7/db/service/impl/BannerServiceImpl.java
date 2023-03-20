@@ -31,4 +31,9 @@ public class BannerServiceImpl implements BannerService {
         log.info("successfully works the add banner method");
         return new SimpleResponse("Banners added successfully", "ok");
     }
+
+    @Override
+    public List<String> getAll() {
+        return bannerRepository.findAll().stream().map(Banner::getImage).toList();
+    }
 }

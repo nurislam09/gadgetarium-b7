@@ -12,6 +12,7 @@ import java.util.Map;
 public class ProductCompareResponse {
     private Long id;
     private String productName;
+    private String categoryName;
     private String image;
     private Map<String, String> characteristics;
     private String brandName;

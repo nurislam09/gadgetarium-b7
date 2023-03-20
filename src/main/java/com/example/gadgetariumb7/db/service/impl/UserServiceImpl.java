@@ -287,6 +287,7 @@ public class UserServiceImpl implements UserService {
                     return new ProductCompareResponse(
                             p.getId(),
                             p.getProductName(),
+                            p.getCategory().getCategoryName(),
                             p.getProductImage(),
                             characteristics,
                             p.getBrand().getBrandName(),
