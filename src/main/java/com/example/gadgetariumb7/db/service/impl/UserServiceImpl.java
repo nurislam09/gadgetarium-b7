@@ -328,9 +328,9 @@ public class UserServiceImpl implements UserService {
         return new SimpleResponse("Product succesfully from user's compare products", "ok");
     }
 
-    public SimpleResponse cleanCompareProducts() {
+    public SimpleResponse cleanCompareProducts(Long id) {
         User user = getAuthenticateUser();
-        user.getCompareProductsList().clear();
+        user.getCompareProductsList().removeIf(p -> p.getCategory().getId().equals(id));
         userRepository.save(user);
         return new SimpleResponse("User compare products successfully", "ok");
     }
