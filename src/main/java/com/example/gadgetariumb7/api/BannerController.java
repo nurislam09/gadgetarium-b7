@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/banners")
 @RequiredArgsConstructor
@@ -22,6 +24,12 @@ public class BannerController {
     @PreAuthorize("hasAuthority('Admin')")
     public SimpleResponse save(@RequestBody BannerRequest bannerRequest) {
         return bannerService.addBanner(bannerRequest);
+    }
+
+    @Operation(summary = "Get all banners")
+    @GetMapping
+    public List<String> getAll() {
+        return bannerService.getAll();
     }
 
 }
