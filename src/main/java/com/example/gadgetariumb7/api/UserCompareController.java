@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.UserService;
+import com.example.gadgetariumb7.dto.response.CompareProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -49,5 +50,10 @@ public class UserCompareController {
     @GetMapping("/count")
     public Map<String, Integer> countOfCompareTO() {
         return userService.countOfCompareList();
+    }
+    @Operation(summary = "Simple get All product from CompareList",description = "This endpoint get all product from compareList vision comparison")
+    @GetMapping("/get")
+    public List<CompareProductResponse> simpleGetAll() {
+        return userService.simpleGetAll();
     }
 }
