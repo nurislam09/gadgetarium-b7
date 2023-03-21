@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static javax.persistence.CascadeType.*;
 
@@ -27,6 +28,6 @@ public class Discount {
 
     private LocalDate discountEndDate;
 
-    @OneToOne(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "discount")
-    private Product product;
+    @OneToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "discount")
+    private List<Product> products;
 }

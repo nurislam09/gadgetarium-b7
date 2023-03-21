@@ -35,7 +35,7 @@ public interface UserService {
 
     SimpleResponse deleteFromCompareList(Long id);
 
-    SimpleResponse cleanCompareProducts();
+    SimpleResponse cleanCompareProducts(Long id);
 
     SimpleResponse cleanFavoriteProducts();
 

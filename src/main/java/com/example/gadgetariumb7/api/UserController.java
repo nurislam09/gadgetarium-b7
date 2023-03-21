@@ -33,9 +33,9 @@ public class UserController {
     }
 
     @Operation(summary = "To delete the review", description = "user could delete only his own review")
-    @DeleteMapping("/review")
+    @DeleteMapping("/revie")
     @PreAuthorize("hasAuthority('Customer')")
-    public SimpleResponse delete(@RequestParam(name = "review id") Long reviewId){
+    public SimpleResponse delete(@RequestParam(name = "review") Long reviewId){
         return userService.deleteReview(reviewId);
     }
 }

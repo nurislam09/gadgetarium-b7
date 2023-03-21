@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Mailing;
+import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.entity.Subscription;
 import com.example.gadgetariumb7.db.repository.MailingRepository;
 import com.example.gadgetariumb7.db.service.MailingService;
@@ -55,6 +56,18 @@ public class MailingServiceImpl implements MailingService {
         message.setSubject(mailing.getMailingName());
         message.setText(mailing.getDescription() + "\n" + mailing.getImage()
                 + "\n" + "Дата начала акции: " + mailing.getMailingDateOfStart() + "\n" + "Дата окончании акции: " + mailing.getMailingDateOfEnd());
+        message.setBcc();
+        emailSender.send(message);
+        log.info("successfully works the send email method");
+    }
+
+    @Override
+    public void sendEmail(String email, Order order) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(sender);
+        message.setTo(email);
+        message.setSubject(order.getOrderStatus().name());
+        message.setText("Hello " + order.getFirstName() + "!" + ".Your order " + order.getOrderNumber() + " now has status " + order.getOrderStatus().name());
         message.setBcc();
         emailSender.send(message);
         log.info("successfully works the send email method");
