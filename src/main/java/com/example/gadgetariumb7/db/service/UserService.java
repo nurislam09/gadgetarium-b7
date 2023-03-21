@@ -1,11 +1,9 @@
 package com.example.gadgetariumb7.db.service;
 
+import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.request.ReviewSingleRequest;
-import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
-import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
+import com.example.gadgetariumb7.dto.response.*;
 
 import java.util.List;
 import java.util.Map;
@@ -42,4 +40,6 @@ public interface UserService {
     SimpleResponse editReview(ReviewSingleRequest reviewRequest);
 
     SimpleResponse deleteReview(Long id);
+
+    List<CompareProductResponse> simpleGetAll();
 }

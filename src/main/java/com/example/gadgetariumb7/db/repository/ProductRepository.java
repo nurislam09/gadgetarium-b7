@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.db.repository;
 
 import com.example.gadgetariumb7.db.entity.Product;
+import com.example.gadgetariumb7.dto.response.CompareProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.ProductSearchResponse;

@@ -9,10 +9,7 @@ import com.example.gadgetariumb7.db.service.UserService;
 import com.example.gadgetariumb7.dto.converter.ColorNameMapper;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.request.ReviewSingleRequest;
-import com.example.gadgetariumb7.dto.response.ProductCardResponse;
-import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
-import com.example.gadgetariumb7.dto.response.SimpleResponse;
-import com.example.gadgetariumb7.dto.response.SubproductCardResponse;
+import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.exceptions.BadCredentialsException;
 import com.example.gadgetariumb7.exceptions.BadRequestException;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
@@ -319,9 +316,9 @@ public class UserServiceImpl implements UserService {
     public SimpleResponse deleteFromCompareList(Long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
         User user = getAuthenticateUser();
-        if (user.getCompareProductsList() != null && user.getCompareProductsList().contains(product)){
+        if (user.getCompareProductsList() != null && user.getCompareProductsList().contains(product)) {
             user.getCompareProductsList().remove(product);
-        }else {
+        } else {
             throw new NotFoundException("Product not contains or user compare products is null");
         }
         userRepository.save(user);
@@ -359,7 +356,7 @@ public class UserServiceImpl implements UserService {
 
             if (!reviewRequest.getProductGrade().equals(review.getProductGrade()))
                 review.setProductGrade(reviewRequest.getProductGrade());
-        }else {
+        } else {
             log.error("You couldn't edit this review");
             throw new BadCredentialsException("you couldn't edit this review");
         }
@@ -381,5 +378,16 @@ public class UserServiceImpl implements UserService {
         }
         log.info(String.format("Review with %s id successfully deleted", reviewId));
         return new SimpleResponse(String.format("Review with %s id successfully deleted", reviewId), "ok");
+    }
+
+    @Override
+    public List<CompareProductResponse> simpleGetAll() {
+        User user = getAuthenticateUser();
+        List<Product> products = productRepository.getAllFromUserCompareProductList(user.getId(), null);
+        List<CompareProductResponse> productResponses = new ArrayList<>();
+        for (Product product : products) {
+            productResponses.add(new CompareProductResponse(product));
+        }
+        return productResponses;
     }
 }
