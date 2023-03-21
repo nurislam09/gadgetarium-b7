@@ -28,7 +28,7 @@ public class OrderUserController {
 
     @Operation(summary = "Save", description = "This method for save order")
     @PostMapping
-    public OrderCompleteResponse save(OrderRequest orderRequest){
+    public OrderCompleteResponse save(@RequestBody OrderRequest orderRequest){
         return orderService.saveOrder(orderRequest);
     }
 }

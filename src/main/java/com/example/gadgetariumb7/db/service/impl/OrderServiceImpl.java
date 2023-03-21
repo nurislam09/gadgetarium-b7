@@ -8,6 +8,7 @@ import com.example.gadgetariumb7.db.enums.OrderStatus;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
 import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
+import com.example.gadgetariumb7.db.service.MailingService;
 import com.example.gadgetariumb7.db.service.OrderService;
 import com.example.gadgetariumb7.dto.response.*;
 import com.example.gadgetariumb7.dto.request.OrderRequest;
@@ -36,6 +37,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final SubproductRepository subproductRepository;
+    private final MailingService mailingService;
     private int orderGenerateNumber = 100006;
 
     private Optional<User> getAuthenticateUserForAutofill() {
@@ -108,6 +110,7 @@ public class OrderServiceImpl implements OrderService {
         if (orderStatus != null) order.setOrderStatus(orderStatus);
         orderRepository.save(order);
         log.info("successfully works the order update method");
+        mailingService.sendEmail(order.getEmail().strip(), order);
         return new SimpleResponse("Order successfully updated", "ok");
     }
 
@@ -185,6 +188,7 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
         orderGenerateNumber++;
         log.info("successfully works the save order method");
+        mailingService.sendEmail(order.getEmail().strip(), order);
         return new OrderCompleteResponse(order.getOrderNumber(), order.getDateOfOrder());
     }
 }
