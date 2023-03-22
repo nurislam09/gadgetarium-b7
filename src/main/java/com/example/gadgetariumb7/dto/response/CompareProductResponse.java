@@ -10,11 +10,14 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompareProductResponse {
+
+    private Long id;
     private String productName;
     private String image;
     private int price;
 
     public CompareProductResponse(Product product) {
+        this.id = product.getId();
         this.productName = product.getProductName();
         this.image = product.getProductImage();
         this.price = product.getProductPrice();
