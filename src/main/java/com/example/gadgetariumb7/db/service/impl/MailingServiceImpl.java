@@ -67,7 +67,7 @@ public class MailingServiceImpl implements MailingService {
         message.setFrom(sender);
         message.setTo(email);
         message.setSubject(order.getOrderStatus().name());
-        message.setText("Hello " + order.getFirstName() + "!" + ".Your order " + order.getOrderNumber() + " now has status " + order.getOrderStatus().name());
+        message.setText("Hello " + order.getFirstName() + "!" + " Your order " + order.getOrderNumber() + " now has status " + order.getOrderStatus().name());
         message.setBcc();
         emailSender.send(message);
         log.info("successfully works the send email method");
