@@ -110,6 +110,7 @@ public class UserServiceImpl implements UserService {
         List<ProductCardResponse> favorites = new ArrayList<>();
         for (Long productId : userRepository.getAllFavoritesByUserId(user.getId())) {
             ProductCardResponse productCardResponse = productRepository.convertToResponse(productId);
+            productCardResponse.setFirstSubproductId(getSubroductsId(productCardResponse.getProductId()));
             productCardResponse.setFavorite(true);
             favorites.add(productCardResponse);
         }
@@ -389,5 +390,9 @@ public class UserServiceImpl implements UserService {
             productResponses.add(new CompareProductResponse(product));
         }
         return productResponses;
+    }
+
+    private List<Long> getSubroductsId(Long id){
+        return subproductRepository.findAll().stream().filter(x -> x.getProduct().getId() == id).map(Subproduct::getId).toList();
     }
 }

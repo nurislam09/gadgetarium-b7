@@ -6,12 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCardResponse {
     private Long productId;
+    private List<Long> firstSubproductId;
     private String productImage;
     private String productName;
     private int count;

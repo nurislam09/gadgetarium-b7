@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +13,7 @@ import javax.persistence.Enumerated;
 @AllArgsConstructor
 public class ProductSearchResponse {
     private Long id;
+    private List<Long> firstSubproductId;
     private String productName;
     private String productImage;
     private int productCount;
@@ -32,7 +32,7 @@ public class ProductSearchResponse {
     private String description;
     private Long productVendorCode;
     private String color;
-    public ProductSearchResponse(Long id,String productImage, String productName, int productCount, int productPrice, ProductStatus productStatus, Double productRating,
+    public ProductSearchResponse(Long id, String productImage, String productName, int productCount, int productPrice, ProductStatus productStatus, Double productRating,
                                  String brandName, String categoryName, String subCategoryName, Byte amountOfDiscount,
                                  String description, Long productVendorCode, String color) {
         this.id = id;
