@@ -28,14 +28,14 @@ public class UserController {
     @Operation(summary = "To edit the review", description = "user could edit only his own review")
     @PutMapping("/review")
     @PreAuthorize("hasAuthority('Customer')")
-    public SimpleResponse edit(@RequestBody ReviewSingleRequest reviewRequest){
+    public SimpleResponse edit(@RequestBody ReviewSingleRequest reviewRequest) {
         return userService.editReview(reviewRequest);
     }
 
     @Operation(summary = "To delete the review", description = "user could delete only his own review")
     @DeleteMapping("/revie")
     @PreAuthorize("hasAuthority('Customer')")
-    public SimpleResponse delete(@RequestParam(name = "review") Long reviewId){
+    public SimpleResponse delete(@RequestParam(name = "review") Long reviewId) {
         return userService.deleteReview(reviewId);
     }
 }

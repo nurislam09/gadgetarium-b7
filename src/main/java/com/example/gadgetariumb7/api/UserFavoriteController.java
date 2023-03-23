@@ -34,7 +34,7 @@ public class UserFavoriteController {
 
     @Operation(summary = "Remove all from favorite products")
     @DeleteMapping
-    public SimpleResponse cleanFavoriteList(){
+    public SimpleResponse cleanFavoriteList() {
         return userService.cleanFavoriteProducts();
     }
 

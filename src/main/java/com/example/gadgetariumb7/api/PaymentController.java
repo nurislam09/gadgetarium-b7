@@ -20,7 +20,7 @@ public class PaymentController {
     @PostMapping("/charge")
     @PreAuthorize("isAuthenticated()")
     public SimpleResponse chargeCreditCard(@RequestBody PaymentRequest paymentRequest) throws StripeException {
-     return paymentService.chargeCreditCard(paymentRequest);
+        return paymentService.chargeCreditCard(paymentRequest);
     }
 
     @PostMapping("/webhook")

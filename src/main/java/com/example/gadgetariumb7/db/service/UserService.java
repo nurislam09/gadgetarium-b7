@@ -1,6 +1,5 @@
 package com.example.gadgetariumb7.db.service;
 
-import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.request.ReviewSingleRequest;
 import com.example.gadgetariumb7.dto.response.*;

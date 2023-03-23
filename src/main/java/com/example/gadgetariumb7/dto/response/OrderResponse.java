@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class OrderResponse {
 
-    private Long  id;
+    private Long id;
 
     private String fullName;
 
@@ -43,7 +43,7 @@ public class OrderResponse {
     }
 
     public OrderResponse(Long id, String fullName, int orderNumber, LocalDateTime dateOfOrder,
-                         int countOfProduct, int totalSum, OrderType orderType,OrderStatus orderStatus) {
+                         int countOfProduct, int totalSum, OrderType orderType, OrderStatus orderStatus) {
         this.id = id;
         this.fullName = fullName;
         this.orderNumber = orderNumber;
@@ -51,6 +51,6 @@ public class OrderResponse {
         this.countOfProduct = countOfProduct;
         this.totalSum = totalSum;
         this.orderType = orderType;
-        this.orderStatus=orderStatus;
+        this.orderStatus = orderStatus;
     }
 }

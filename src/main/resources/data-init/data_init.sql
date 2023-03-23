@@ -77,8 +77,10 @@ VALUES (1, 5, '2023-02-01', '2023-02-20'),
        (7, 10, '2023-06-01', '2023-02-25'),
        (8, 5, '2023-06-01', '2023-02-25');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (1,
         'https://9to5mac.com/wp-content/uploads/sites/6/2021/03/Screenshot-2021-03-26-at-11.06.19.png',
         '#000000',
@@ -93,7 +95,7 @@ VALUES (1,
         0,
         341351332,
         'https://youtu.be/6wccuJTE3nY',
-        1, 1, 1, 1,'03.03.23');
+        1, 1, 1, 1, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (1, '#000000', 125, 100000, 1),
@@ -141,8 +143,10 @@ values (1, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3153_0_1.jpg'),
        (4, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3156_4_1.jpg');
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (2,
         'https://english.onlinekhabar.com/wp-content/uploads/2022/02/galaxy-s22_banner_ar.jpg',
         '#FFEBBE',
@@ -157,7 +161,7 @@ VALUES (2,
         0,
         1324132,
         'https://youtu.be/9RmCoWuN8RI',
-        2, 1, 2, 2,'03.03.23');
+        2, 1, 2, 2, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (5, '#FFEBBE', 254, 75440, 2),
@@ -204,8 +208,10 @@ values (5, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3395_2_1.jpg'),
        (8, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3651_2_6.png');
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (3,
         'https://awsimages.detik.net.id/community/media/visual/2022/07/04/xiaomi-12-lite-1_169.jpeg?w=1200',
         '#000000',
@@ -220,10 +226,10 @@ VALUES (3,
         0,
         289476592,
         'https://youtu.be/VMO6rN_dTxk',
-        3, 1, null, 5,'03.03.23');
+        3, 1, null, 5, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
-values (9,  '#000000', 387, 65990, 3),
+values (9, '#000000', 387, 65990, 3),
        (10, '#FFEBBE', 273, 63990, 3),
        (11, '#5C8944', 145, 68990, 3);
 
@@ -257,8 +263,10 @@ values (9, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3624_0_1.jpg'),
 
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (4,
         'https://cdn.osxdaily.com/wp-content/uploads/2022/09/iphone-14-pro-iphone-14-pro-max.jpg',
         '#73004C',
@@ -273,7 +281,7 @@ VALUES (4,
         1,
         43252435,
         'https://youtu.be/4QmRq3EkQeo',
-        1, 1, null, 1,'03.03.23');
+        1, 1, null, 1, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (12, '#73004C', 132, 124990, 4),
@@ -322,8 +330,10 @@ values (12, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3814_4_6.png'),
 
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (5,
         'https://it-here.ru/wp-content/uploads/2021/09/iPhone-13-hero-1536x482-1.png',
         '#0370CB',
@@ -338,7 +348,7 @@ VALUES (5,
         1,
         27634823,
         'https://youtu.be/4QmRq3EkQeo',
-        1, 1, 3, 1,'03.03.23');
+        1, 1, 3, 1, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (16, '#0370CB', 78, 69990, 5),
@@ -384,8 +394,10 @@ values (16, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3127_4_1.jpg'),
        (19, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3123_6_1.jpg'),
        (19, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_3123_5_1.jpg');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (6,
         'https://www.apple.com/v/macbook-pro-13/p/images/meta/macbook-pro-13_overview__bcsyunk73i2a_og.jpg',
         '#686868',
@@ -400,11 +412,11 @@ VALUES (6,
         0,
         12367471,
         'https://youtu.be/Hw7iB-zkYrk',
-        1, 2, 4, 8,'03.03.23');
+        1, 2, 4, 8, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (20, '#686868', 34, 91990, 6),
-       (21, '#E69800', 23,91990, 6);
+       (21, '#E69800', 23, 91990, 6);
 
 
 insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
@@ -442,8 +454,10 @@ values (20,
        (21,
         'https://asiastore.kg/image/cache/catalog/mac/macbookair13-m1/gold/115a6efdea4238cf240f55c5ac4871f8-670x540.jpg');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (7,
         'https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/csm_FBlmFlnX0AIbDre_b05127ba75.jpg',
         '#CCCCCC',
@@ -458,7 +472,7 @@ VALUES (7,
         1,
         24352453,
         'https://youtu.be/yGjb3vBnuJo',
-        1, 2, null, 8,'03.03.23');
+        1, 2, null, 8, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (22, '#CCCCCC', 29, 189990, 7);
@@ -476,8 +490,10 @@ values (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_0_1.jpg'),
        (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_2_1.jpg'),
        (22, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2448_3_1.jpg');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (8,
         'https://images.acer.com/is/image/acer/Nitro_5_main_2560-1?$responsive$',
         '#000000',
@@ -492,7 +508,7 @@ VALUES (8,
         1,
         98245425,
         'https://youtu.be/KlmopqEx2w0',
-        4, 2, null, 6,'03.03.23');
+        4, 2, null, 6, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (23, '#000000', 54, 149990, 8);
@@ -510,8 +526,10 @@ values (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_0_1.jpg'),
        (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_2_1.jpg'),
        (23, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2684_3_1.jpg');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 
 VALUES (9,
         'http://reviewcentralme.com/wp-content/uploads/2022/09/Vivobook-15_X1502_M150.jpg',
@@ -527,7 +545,7 @@ VALUES (9,
         0,
         123987985,
         'https://youtu.be/bjZ0kymy-Zs',
-        5, 2, 5, 7,'03.03.23');
+        5, 2, 5, 7, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (24, '#000000', 87, 69990, 9);
@@ -547,8 +565,10 @@ values (24, 'https://content.rozetka.com.ua/goods/images/big/269677917.jpg'),
        (24, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2521_1_6.png'),
        (24, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2521_0_6.png');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (10,
         'https://cdnb.artstation.com/p/assets/images/images/014/956/421/large/marcus-ryden-asuszenbook.jpg?1546467187',
         '#000000',
@@ -563,7 +583,7 @@ VALUES (10,
         1,
         3489534,
         'https://youtu.be/cUAwfZtoGYM',
-        5, 2, null, 7,'03.03.23');
+        5, 2, null, 7, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (25, '#000000', 39, 75990, 10);
@@ -582,8 +602,10 @@ values (25, 'https://www.asus.com/media/global/gallery/o4znfiih78dmqfwh_setting_
        (25, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2145_2_6.png');
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (11,
         'https://appleinsider.ru/wp-content/uploads/2022/03/iPad_air_5_2022_000989-740x462.jpg',
         '#3B3AC4',
@@ -598,7 +620,7 @@ VALUES (11,
         0,
         62435243,
         'https://youtu.be/Kb_kIq5tMGQ',
-        1, 3, null, 19,'03.03.23');
+        1, 3, null, 19, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (26, '#3B3AC4', 23, 69990, 11),
@@ -645,8 +667,10 @@ values (26, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_646_0_1.jpg'),
        (29, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_644_1_1.jpg');
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (12,
         'https://appleinsider.ru/wp-content/uploads/2022/03/iPad_air_5_2022_000989-740x462.jpg',
         '#0071FF',
@@ -661,7 +685,7 @@ VALUES (12,
         1,
         423524,
         'https://youtu.be/LBEGCC5oMCw',
-        1, 3, null, 19,'03.03.23');
+        1, 3, null, 19, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (30, '#0071FF', 56, 59990, 12);
@@ -680,8 +704,10 @@ values (30, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_765_8_1.jpg'),
        (30, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_765_6_1.jpg');
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (13,
         'https://www.apple.com/newsroom/images/product/ipad/standard/apple_ipad-pro-spring21_lp_04202021.jpg.og.jpg?202301192200',
         '#000000',
@@ -715,8 +741,10 @@ values (31, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_697_0_1.jpg'),
        (31, 'https://object.pscloud.io/cms/cms/Photo/img_0_64_697_2_1.jpg');
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (14,
         'https://www.m1.com.sg/-/media/Images/Personal/Promotions/applewatch7/1440x671_watchs7.jpg',
         '#0071FF',
@@ -731,7 +759,7 @@ VALUES (14,
         1,
         52452435,
         'https://youtu.be/JRsEa7YTOiE',
-        1, 4, 7, 28,'03.03.23');
+        1, 4, 7, 28, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (32, '#0071FF', 37, 49990, 14);
@@ -752,8 +780,10 @@ values (32, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_598_0_1.jpg'),
        (32, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_598_2_1.jpg');
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (15,
         'https://my-apple-store.ru/wa-data/public/site/watch-7/nike-banner.jpg',
         '#B2B2B2',

@@ -122,18 +122,18 @@ public class ProductServiceImpl implements ProductService {
         if (searchText == null) {
             productAdminResponses = sortingProduct(fieldToSort, discountField, productRepository.getAllProductsAdmin(PageRequest.of(page - 1, size)), startDate, endDate);
             productAdminPaginationResponse.setResponseList(productAdminResponses);
-            if (productRepository.getCountOfProducts() % size == 0){
+            if (productRepository.getCountOfProducts() % size == 0) {
                 productAdminPaginationResponse.setPages(productRepository.getCountOfProducts() / size);
-            }else {
+            } else {
                 productAdminPaginationResponse.setPages((productRepository.getCountOfProducts() / size) + 1);
             }
             productAdminPaginationResponse.setCurrentPage(page);
         } else {
             productAdminResponses = sortingProduct(fieldToSort, discountField, productRepository.search(searchText, PageRequest.of(page - 1, size)), startDate, endDate);
             productAdminPaginationResponse.setResponseList(productAdminResponses);
-            if (productRepository.searchCount(searchText) % size == 0){
+            if (productRepository.searchCount(searchText) % size == 0) {
                 productAdminPaginationResponse.setPages(productRepository.searchCount(searchText) / size);
-            }else {
+            } else {
                 productAdminPaginationResponse.setPages((productRepository.searchCount(searchText) / size) + 1);
             }
             productAdminPaginationResponse.setCurrentPage(page);
@@ -331,7 +331,8 @@ public class ProductServiceImpl implements ProductService {
                                 p.getProductCount(),
                                 p.getProductPrice(),
                                 p.getProductStatus(),
-                                p.getProductRating()))
+                                p.getProductRating(),
+                                p.getCategoryId().byteValue()))
                         .collect(Collectors.toList());
                 forEach(list);
 
@@ -386,7 +387,8 @@ public class ProductServiceImpl implements ProductService {
                             p.getProductCount(),
                             p.getProductPrice(),
                             p.getProductStatus(),
-                            p.getProductRating()))
+                            p.getProductRating(),
+                            p.getCategory().getId().byteValue()))
                     .collect(Collectors.toList());
 
             int toIndex = Math.min(size, productCardResponses.size());

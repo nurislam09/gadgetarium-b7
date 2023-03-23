@@ -145,7 +145,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.discount.amountOfDiscount," +
             "p.description," +
             "p.productVendorCode," +
-            "p.color" +
+            "p.color," +
+            "p.category.id" +
             ") from Product p where " +
             "upper(p.productName) like upper(concat('%',:text,'%')) OR " +
             "cast(p.productPrice as string) like concat(:text,'%') OR " +

@@ -23,49 +23,49 @@ public class PersonalController {
     @Operation(summary = "This method for get all user's orders")
     @GetMapping("/orders")
     @PreAuthorize("isAuthenticated()")
-    List<PersonalOrderResponse> orders(){
+    List<PersonalOrderResponse> orders() {
         return personalService.getAllPersonalOrders();
     }
 
     @Operation(summary = "This method for get by id user's order")
     @GetMapping("/getOrder")
     @PreAuthorize("isAuthenticated()")
-    PersonalOrderByIdResponse getByIdOrder(@RequestParam Long orderId){
+    PersonalOrderByIdResponse getByIdOrder(@RequestParam Long orderId) {
         return personalService.getByIdPersonalOrder(orderId);
     }
 
     @Operation(summary = "This method for get all from user's favorite list")
     @GetMapping("/favorites")
     @PreAuthorize("isAuthenticated()")
-    List<ProductCardResponse> getAllFavorites(){
+    List<ProductCardResponse> getAllFavorites() {
         return personalService.getAllPersonalFavorite();
     }
 
     @Operation(summary = "This method for update user")
     @PutMapping("/updateUser")
     @PreAuthorize("isAuthenticated()")
-    Object updateUserInfo(@RequestBody UserUpdateRequest userUpdateRequest){
+    Object updateUserInfo(@RequestBody UserUpdateRequest userUpdateRequest) {
         return personalService.updateUser(userUpdateRequest);
     }
 
     @Operation(summary = "This method return user's personal information")
     @GetMapping("/userInfo")
     @PreAuthorize("isAuthenticated()")
-    PersonalUserResponse getUserInfo(){
+    PersonalUserResponse getUserInfo() {
         return personalService.getPersonalUser();
     }
 
     @Operation(summary = "This method for clear user order history")
     @DeleteMapping()
     @PreAuthorize("isAuthenticated()")
-    SimpleResponse clearOrderHistory(){
+    SimpleResponse clearOrderHistory() {
         return personalService.clearOrdersHistory();
     }
 
     @Operation(summary = "This method for change user's password")
     @PutMapping("/changePassword")
     @PreAuthorize("isAuthenticated()")
-    SimpleResponse changePassword(@RequestBody ChangePasswordRequest changePasswordRequest){
+    SimpleResponse changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
         return personalService.changePassword(changePasswordRequest);
     }
 }

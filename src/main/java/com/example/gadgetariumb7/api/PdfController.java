@@ -19,7 +19,7 @@ public class PdfController {
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<InputStreamResource> createPdf(@RequestParam Long subproductId){
+    public ResponseEntity<InputStreamResource> createPdf(@RequestParam Long subproductId) {
         return pdfService.createPdf(subproductId);
     }
 
