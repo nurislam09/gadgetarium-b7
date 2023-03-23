@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonalOrderResponse {
+    private Long id;
     private LocalDateTime dateOfOrder;
     private int orderNumber;
     private OrderStatus orderStatus;

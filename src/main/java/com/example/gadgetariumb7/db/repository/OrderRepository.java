@@ -47,6 +47,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Page<OrderResponse> search(@Param("keyWord") String keyWord, Pageable pageable, OrderStatus orderStatus);
 
     @Query("select new com.example.gadgetariumb7.dto.response.PersonalOrderResponse(" +
+            "o.id," +
             "o.dateOfOrder," +
             "o.orderNumber," +
             "o.orderStatus," +
