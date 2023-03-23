@@ -100,19 +100,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
-    @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
-            "(id," +
-            "productImage," +
-            "productVendorCode," +
-            "productName," +
-            "productCount," +
-            "subproducts.size," +
-            "createAt," +
-            "productPrice," +
-            "productStatus," +
-            "dateOfIssue" +
-            ") from Product")
-    List<ProductAdminResponse> getAllProductsAdminWithoutPagination();
+    @Query("select count(id) from Product")
+    int getCountOfProducts();
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(p.id," +
