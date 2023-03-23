@@ -52,4 +52,15 @@ public class ProductCardResponse {
         this.productPrice = productPrice;
         isViewed = true;
     }
+
+    public ProductCardResponse(Long productId, String productImage, String productName, int count, int productPrice, ProductStatus productStatus, Double productRating, byte categoryId) {
+        this.productId = productId;
+        this.productImage = productImage;
+        this.productName = productName;
+        this.count = count;
+        this.productPrice = productPrice;
+        this.productStatus = productStatus;
+        this.productRating = productRating;
+        this.categoryId = categoryId;
+    }
 }

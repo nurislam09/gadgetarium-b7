@@ -22,13 +22,13 @@ public class OrderUserController {
 
     @Operation(summary = "Autofill", description = "This method return user's information if user is authenticated")
     @GetMapping("/autofill")
-    public UserAutofillResponse autofill(){
+    public UserAutofillResponse autofill() {
         return orderService.autofillUserInformation();
     }
 
     @Operation(summary = "Save", description = "This method for save order")
     @PostMapping
-    public OrderCompleteResponse save(@RequestBody OrderRequest orderRequest){
+    public OrderCompleteResponse save(@RequestBody OrderRequest orderRequest) {
         return orderService.saveOrder(orderRequest);
     }
 }

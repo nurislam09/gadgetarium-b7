@@ -8,7 +8,10 @@ import java.util.Map;
 
 public interface ReviewService {
     ReviewResponses getAll(String statusOfReviews);
-    Map<Integer, Integer> countReviewsGrade() ;
+
+    Map<Integer, Integer> countReviewsGrade();
+
     SimpleResponse update(Long id, ReviewRequest reviewRequest);
+
     SimpleResponse deleteReviewById(Long id);
 }

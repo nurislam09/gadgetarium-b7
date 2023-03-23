@@ -17,10 +17,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class UserUpdateRequest {
     @NotNull(message = "First name should be not null")
-    @Size(min = 2,max = 25)
+    @Size(min = 2, max = 25)
     private String firstName;
 
-    @Size(min = 2,max = 25)
+    @Size(min = 2, max = 25)
     @NotNull(message = "Last name should be not null")
     private String lastName;
 

@@ -1,7 +1,6 @@
 package com.example.gadgetariumb7.db.repository;
 
 import com.example.gadgetariumb7.db.entity.Product;
-import com.example.gadgetariumb7.dto.response.CompareProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductCardResponse;
 import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.ProductSearchResponse;
@@ -144,7 +143,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.discount.amountOfDiscount," +
             "p.description," +
             "p.productVendorCode," +
-            "p.color" +
+            "p.color," +
+            "p.category.id" +
             ") from Product p where " +
             "upper(p.productName) like upper(concat('%',:text,'%')) OR " +
             "cast(p.productPrice as string) like concat(:text,'%') OR " +

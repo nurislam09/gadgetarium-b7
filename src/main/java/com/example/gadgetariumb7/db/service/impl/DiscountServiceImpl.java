@@ -1,4 +1,5 @@
 package com.example.gadgetariumb7.db.service.impl;
+
 import com.example.gadgetariumb7.db.entity.Discount;
 import com.example.gadgetariumb7.db.entity.Product;
 import com.example.gadgetariumb7.db.repository.DiscountRepository;

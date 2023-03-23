@@ -82,7 +82,7 @@ public class PersonalServiceImpl implements PersonalService {
     @Override
     public List<ProductCardResponse> getAllPersonalFavorite() {
         User user = getAuthenticateUser();
-        if (CollectionUtils.isEmpty(user.getFavoritesList())){
+        if (CollectionUtils.isEmpty(user.getFavoritesList())) {
             log.error("User's favorites products is empty");
             throw new NotFoundException("User's favorites products is empty");
         }
@@ -112,10 +112,10 @@ public class PersonalServiceImpl implements PersonalService {
         }
 
         if (!user.getEmail().equals(request.getEmail().replace(" ", ""))) {
-            if (userRepository.existsByEmail(request.getEmail())){
+            if (userRepository.existsByEmail(request.getEmail())) {
                 log.error(String.format("User with email %s already exist", request.getEmail()));
                 throw new BadRequestException(String.format("User with email %s already exist", request.getEmail()));
-        }
+            }
             user.setEmail(request.getEmail());
 
             AuthenticationResponse authenticationResponse = authenticationService.getToken(user);

@@ -51,7 +51,8 @@ public class UserCompareController {
     public Map<String, Integer> countOfCompareTO() {
         return userService.countOfCompareList();
     }
-    @Operation(summary = "Simple get All product from CompareList",description = "This endpoint get all product from compareList vision comparison")
+
+    @Operation(summary = "Simple get All product from CompareList", description = "This endpoint get all product from compareList vision comparison")
     @GetMapping("/get")
     public List<CompareProductResponse> simpleGetAll() {
         return userService.simpleGetAll();

@@ -1,12 +1,10 @@
 package com.example.gadgetariumb7.dto.response;
+
 import com.example.gadgetariumb7.db.enums.ProductStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Getter
 @Setter
@@ -26,15 +24,17 @@ public class ProductSearchResponse {
     private boolean isCompared;
 
     private String brandName;
-    private String categoryName ;
+    private String categoryName;
     private String subCategoryName;
     private Byte amountOfDiscount;
     private String description;
     private Long productVendorCode;
     private String color;
-    public ProductSearchResponse(Long id,String productImage, String productName, int productCount, int productPrice, ProductStatus productStatus, Double productRating,
+    private Long categoryId;
+
+    public ProductSearchResponse(Long id, String productImage, String productName, int productCount, int productPrice, ProductStatus productStatus, Double productRating,
                                  String brandName, String categoryName, String subCategoryName, Byte amountOfDiscount,
-                                 String description, Long productVendorCode, String color) {
+                                 String description, Long productVendorCode, String color, Long categoryId) {
         this.id = id;
         this.productImage = productImage;
         this.productName = productName;
@@ -49,6 +49,7 @@ public class ProductSearchResponse {
         this.description = description;
         this.productVendorCode = productVendorCode;
         this.color = color;
+        this.categoryId = categoryId;
     }
 }
 
