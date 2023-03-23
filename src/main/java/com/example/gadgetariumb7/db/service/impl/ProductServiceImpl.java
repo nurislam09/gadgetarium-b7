@@ -58,7 +58,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductCardResponse> getAllDiscountProductToMP(int page, int size) {
         List<ProductCardResponse> discountProducts = productRepository.getAllDiscountProduct(PageRequest.of(page - 1, size));
-        discountProducts.forEach(p -> p.setCategoryId(productRepository.findById(p.getProductId()).orElseThrow(() -> new NotFoundException("Product not found")).getCategory().getId().byteValue()));
+        discountProducts.forEach(p -> {
+            p.setFirstSubproductId(getSubroductsId(p.getProductId()));
+            p.setCategoryId(productRepository.findById(p.getProductId()).orElseThrow(() -> new NotFoundException("Product not found")).getCategory().getId().byteValue());
+        });
         log.info("all discount product taken to main page successfully");
         return checkFavorite(discountProducts);
     }
@@ -66,7 +69,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductCardResponse> getAllNewProductToMP(int page, int size) {
         List<ProductCardResponse> newProducts = productRepository.getAllNewProduct(PageRequest.of(page - 1, size));
-        newProducts.forEach(p -> p.setCategoryId(productRepository.findById(p.getProductId()).orElseThrow(() -> new NotFoundException("Product not found")).getCategory().getId().byteValue()));
+        newProducts.forEach(p -> {
+            p.setFirstSubproductId(getSubroductsId(p.getProductId()));
+            p.setCategoryId(productRepository.findById(p.getProductId()).orElseThrow(() -> new NotFoundException("Product not found")).getCategory().getId().byteValue());
+        });
         log.info("all new product taken to main page successfully");
         return checkFavorite(newProducts);
     }
@@ -74,13 +80,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductCardResponse> getAllRecommendationProductToMP(int page, int size) {
         List<ProductCardResponse> recommendations = productRepository.getAllRecommendationProduct(PageRequest.of(page - 1, size));
-        recommendations.forEach(p -> p.setCategoryId(productRepository.findById(p.getProductId()).orElseThrow(() -> new NotFoundException("Product not found")).getCategory().getId().byteValue()));
+        recommendations.forEach(p -> {
+            p.setFirstSubproductId(getSubroductsId(p.getProductId()));
+            p.setCategoryId(productRepository.findById(p.getProductId()).orElseThrow(() -> new NotFoundException("Product not found")).getCategory().getId().byteValue());
+        });
         log.info("all recommendation product taken to main page successfully");
         return checkFavorite(recommendations);
     }
 
     private List<ProductCardResponse> checkFavorite(List<ProductCardResponse> productCardResponses) {
         productCardResponses.forEach(r -> {
+            r.setFirstSubproductId(getSubroductsId(r.getProductId()));
             setDiscountToResponse(r, null);
             r.setCountOfReview(productRepository.getAmountOfFeedback(r.getProductId()));
         });
@@ -463,6 +473,7 @@ public class ProductServiceImpl implements ProductService {
 
     public void forEach(List<ProductCardResponse> productCardResponses) {
         for (ProductCardResponse productCardResponse : productCardResponses) {
+            productCardResponse.setFirstSubproductId(getSubroductsId(productCardResponse.getProductId()));
             User user = getAuthenticateUser();
             Optional<Product> productOptional = productRepository.findById(productCardResponse.getProductId());
             if (productOptional.isPresent()) {
@@ -575,6 +586,10 @@ public class ProductServiceImpl implements ProductService {
         userRepository.save(user);
         log.info("successfully works the productSingleResponse method");
         return productSingleResponse;
+    }
+
+    private List<Long> getSubroductsId(Long id){
+        return subproductRepository.findAll().stream().filter(x -> x.getProduct().getId() == id).map(Subproduct::getId).toList();
     }
 
 }

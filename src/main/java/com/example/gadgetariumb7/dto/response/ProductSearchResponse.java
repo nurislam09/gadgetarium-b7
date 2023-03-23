@@ -6,12 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductSearchResponse {
     private Long id;
+    private List<Long> firstSubproductId;
     private String productName;
     private String productImage;
     private int productCount;

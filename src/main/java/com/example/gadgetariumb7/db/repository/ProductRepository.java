@@ -11,11 +11,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+    @Transactional
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
             "p.productImage," +
