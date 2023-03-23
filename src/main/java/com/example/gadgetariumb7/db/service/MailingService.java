@@ -15,4 +15,4 @@ public interface MailingService {
 
     void sendEmail(String email, Order order);
 
-    }
+}

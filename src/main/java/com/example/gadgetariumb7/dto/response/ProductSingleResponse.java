@@ -1,4 +1,5 @@
 package com.example.gadgetariumb7.dto.response;
+
 import lombok.*;
 
 import java.util.*;
@@ -40,8 +41,8 @@ public class ProductSingleResponse {
         this.subproducts = subproducts;
     }
 
-    public void setAttribute(String name, Object value){
-        if(attribute == null){
+    public void setAttribute(String name, Object value) {
+        if (attribute == null) {
             attribute = new HashMap<>();
         }
         attribute.put(name, value);

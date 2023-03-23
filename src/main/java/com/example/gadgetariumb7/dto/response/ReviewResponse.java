@@ -21,7 +21,7 @@ public class ReviewResponse {
 
     private UserResponse userResponse;
 
-    public ReviewResponse(Long id, String userReview, String responseOfReview,LocalDateTime reviewTime, Double productGrade) {
+    public ReviewResponse(Long id, String userReview, String responseOfReview, LocalDateTime reviewTime, Double productGrade) {
         this.id = id;
         this.userReview = userReview;
         this.responseOfReview = responseOfReview;
