@@ -47,15 +47,15 @@ public class ProductUserController {
             "Also if the 'text' is null will work only the filter and sort, but if you write something int text then will work only searching. Required only the size")
     @GetMapping("/catalog")
     @PreAuthorize("isAuthenticated()")
-    public CatalogResponse filterByParameters(@RequestParam(required = false) String text, @RequestParam(required = false) String fieldToSort, @RequestParam(required = false) String discountField, @RequestParam(required = false) String categoryName, @RequestParam(required = false) String subCategoryName, @RequestParam(required = false) Integer minPrice, @RequestParam(required = false) Integer maxPrice, @RequestParam(required = false) List<String> colors,
-                                              @RequestParam(required = false) Integer memory, @RequestParam(required = false) Byte ram, @RequestParam(required = false) String laptopCPU, @RequestParam(required = false) String screenResolution, @RequestParam(required = false) String screenSize, @RequestParam(required = false) String screenDiagonal, @RequestParam(required = false) String batteryCapacity,
-                                              @RequestParam(required = false) String wirelessInterface, @RequestParam(required = false) String caseShape, @RequestParam(required = false) String braceletMaterial, @RequestParam(required = false) String housingMaterial, @RequestParam(required = false) String gender, @RequestParam(required = false) String waterProof, @RequestParam() int size) throws NotFoundException {
-        return productService.filterByParameters(text, fieldToSort, discountField, categoryName, subCategoryName, minPrice, maxPrice, colors,
-                memory, ram, laptopCPU, screenResolution, screenSize, screenDiagonal, batteryCapacity,
-                wirelessInterface, caseShape, braceletMaterial, housingMaterial, gender, waterProof, size);
-    }
+    public CatalogResponse filterByParameters(@RequestParam(required = false) String text, @RequestParam(required = false) String fieldToSort, @RequestParam(required = false) String discountField, @RequestParam(required = false) String categoryName, @RequestParam(required = false) List<String> subCategoryNames, @RequestParam(required = false) Integer minPrice, @RequestParam(required = false) Integer maxPrice, @RequestParam(required = false) List<String> colors,
+                                              @RequestParam(required = false) List<Integer> memories, @RequestParam(required = false) List<Byte> rams, @RequestParam(required = false) List<String> laptopCPUs, @RequestParam(required = false) List<String> screenResolutions, @RequestParam(required = false) List<String> screenSizes, @RequestParam(required = false) List<String> screenDiagonals, @RequestParam(required = false) List<String> batteryCapacities,
+                                              @RequestParam(required = false) List<String> wirelessInterfaces, @RequestParam(required = false) List<String> caseShapes, @RequestParam(required = false) List<String> braceletMaterials, @RequestParam(required = false) List<String> housingMaterials, @RequestParam(required = false) List<String> genders, @RequestParam(required = false) List<String> waterProofs, @RequestParam() int size) throws NotFoundException {
+        return productService.filterByParameters(text, fieldToSort, discountField, categoryName, subCategoryNames, minPrice, maxPrice, colors,
+                memories, rams, laptopCPUs, screenResolutions, screenSizes, screenDiagonals, batteryCapacities,
+                 wirelessInterfaces, caseShapes, braceletMaterials, housingMaterials, genders, waterProofs, size);}
 
-    @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
+
+        @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
     @GetMapping("/viewed")
     @PreAuthorize("isAuthenticated()")
     public List<ProductCardResponse> getViewedProducts() {
