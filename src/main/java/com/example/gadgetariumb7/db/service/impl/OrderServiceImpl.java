@@ -174,7 +174,7 @@ public class OrderServiceImpl implements OrderService {
             throw new NotFoundException(String.format("Subproduct with id %d not found", s));
         })).toList();
         Order order = new Order(req.getFirstName(), req.getLastName(), req.getEmail(), req.getPhoneNumber(), req.getAddress(), req.getCountOfProduct(), req.getTotalSum(), req.getTotalDiscount(), req.getPayment(), req.getOrderType(), subproducts, user, orderGenerateNumber);
-
+        order.setOrderStatus(OrderStatus.WAITING);
         user.getBasketList().forEach((key, value) -> key.setCountOfSubproduct(key.getCountOfSubproduct() - value));
 
         subproducts.forEach(x -> {
@@ -185,8 +185,9 @@ public class OrderServiceImpl implements OrderService {
                 throw new NotFoundException(String.format("Subproduct with id %d not exist in user's basket list with id %d", x.getId(), user.getId()));
             }
         });
-        orderRepository.save(order);
         orderGenerateNumber++;
+        user.getOrderHistoryList().addAll(order.getSubproducts().stream().map(Subproduct::getProduct).distinct().toList());
+        orderRepository.save(order);
         log.info("successfully works the save order method");
         mailingService.sendEmail(order.getEmail().strip(), order);
         return new OrderCompleteResponse(order.getOrderNumber(), order.getDateOfOrder());
