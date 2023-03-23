@@ -185,8 +185,9 @@ public class OrderServiceImpl implements OrderService {
                 throw new NotFoundException(String.format("Subproduct with id %d not exist in user's basket list with id %d", x.getId(), user.getId()));
             }
         });
-        orderRepository.save(order);
         orderGenerateNumber++;
+        user.getOrderHistoryList().addAll(order.getSubproducts().stream().map(Subproduct::getProduct).distinct().toList());
+        orderRepository.save(order);
         log.info("successfully works the save order method");
         mailingService.sendEmail(order.getEmail().strip(), order);
         return new OrderCompleteResponse(order.getOrderNumber(), order.getDateOfOrder());
