@@ -111,14 +111,21 @@ public class ProductServiceImpl implements ProductService {
         List<ProductAdminResponse> productAdminResponses;
         if (searchText == null) {
             productAdminResponses = sortingProduct(fieldToSort, discountField, productRepository.getAllProductsAdmin(PageRequest.of(page - 1, size)), startDate, endDate);
-            int number = sortingProduct(fieldToSort, discountField, productRepository.getAllProductsAdminWithoutPagination(), startDate, endDate).size();
             productAdminPaginationResponse.setResponseList(productAdminResponses);
-            productAdminPaginationResponse.setPages(number / size);
+            if (productRepository.getCountOfProducts() % size == 0){
+                productAdminPaginationResponse.setPages(productRepository.getCountOfProducts() / size);
+            }else {
+                productAdminPaginationResponse.setPages((productRepository.getCountOfProducts() / size) + 1);
+            }
             productAdminPaginationResponse.setCurrentPage(page);
         } else {
             productAdminResponses = sortingProduct(fieldToSort, discountField, productRepository.search(searchText, PageRequest.of(page - 1, size)), startDate, endDate);
             productAdminPaginationResponse.setResponseList(productAdminResponses);
-            productAdminPaginationResponse.setPages(productRepository.searchCount(searchText) / size);
+            if (productRepository.searchCount(searchText) % size == 0){
+                productAdminPaginationResponse.setPages(productRepository.searchCount(searchText) / size);
+            }else {
+                productAdminPaginationResponse.setPages((productRepository.searchCount(searchText) / size) + 1);
+            }
             productAdminPaginationResponse.setCurrentPage(page);
         }
         if (productType != null) {
