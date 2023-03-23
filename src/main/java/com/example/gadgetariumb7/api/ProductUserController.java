@@ -52,10 +52,11 @@ public class ProductUserController {
                                               @RequestParam(required = false) List<String> wirelessInterfaces, @RequestParam(required = false) List<String> caseShapes, @RequestParam(required = false) List<String> braceletMaterials, @RequestParam(required = false) List<String> housingMaterials, @RequestParam(required = false) List<String> genders, @RequestParam(required = false) List<String> waterProofs, @RequestParam() int size) throws NotFoundException {
         return productService.filterByParameters(text, fieldToSort, discountField, categoryName, subCategoryNames, minPrice, maxPrice, colors,
                 memories, rams, laptopCPUs, screenResolutions, screenSizes, screenDiagonals, batteryCapacities,
-                 wirelessInterfaces, caseShapes, braceletMaterials, housingMaterials, genders, waterProofs, size);}
+                wirelessInterfaces, caseShapes, braceletMaterials, housingMaterials, genders, waterProofs, size);
+    }
 
 
-        @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
+    @Operation(summary = "Get last viewed products", description = "This method shows last viewed products")
     @GetMapping("/viewed")
     @PreAuthorize("isAuthenticated()")
     public List<ProductCardResponse> getViewedProducts() {
@@ -73,7 +74,7 @@ public class ProductUserController {
     @Operation(summary = "Get category colors", description = "This method for get colors count from category response")
     @GetMapping("/getColors")
     @PreAuthorize("isAuthenticated()")
-    public List<ColorResponse> getColorsFromCategory(@RequestParam Long categoryId){
+    public List<ColorResponse> getColorsFromCategory(@RequestParam Long categoryId) {
         return productService.colorCount(categoryId);
     }
 }
