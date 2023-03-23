@@ -174,7 +174,7 @@ public class OrderServiceImpl implements OrderService {
             throw new NotFoundException(String.format("Subproduct with id %d not found", s));
         })).toList();
         Order order = new Order(req.getFirstName(), req.getLastName(), req.getEmail(), req.getPhoneNumber(), req.getAddress(), req.getCountOfProduct(), req.getTotalSum(), req.getTotalDiscount(), req.getPayment(), req.getOrderType(), subproducts, user, orderGenerateNumber);
-
+        order.setOrderStatus(OrderStatus.WAITING);
         user.getBasketList().forEach((key, value) -> key.setCountOfSubproduct(key.getCountOfSubproduct() - value));
 
         subproducts.forEach(x -> {
