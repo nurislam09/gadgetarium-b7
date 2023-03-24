@@ -876,6 +876,13 @@ values (2, 1),
        (2, 3),
        (2, 4);
 
+insert into feedbacks(id, email, first_name, last_name, phone_number)
+values (1, 'megaline@gmail.com', 'Aibek', 'Abdurasulov', '+996123453621'),
+       (2, 'brand@gmail.com', 'Aizada', 'Abdurasulova', '+996123453634'),
+       (3, 'batken@gmail.com', 'Gapyr', 'Agai', '+996123453622'),
+       (4, 'kgz@gmail.com', 'Uson', 'Rasulov', '+996123453424'),
+       (5, 'shoro@gmail.com', 'Balanca', 'Balanchaev', '+996123453424');
+
 insert into reviews(id, product_grade, response_of_review, review_time, status_of_response, user_review, product_id,
                     user_id)
 values (1, 5, null, '2023-09-13 18:20:03', false, '- Размер (разумный - достаточно большой для чтения/просмотра контента, но не чрезмерный)
