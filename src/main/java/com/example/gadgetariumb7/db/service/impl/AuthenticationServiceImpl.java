@@ -47,14 +47,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     .build();
             log.info("successfully works the init method");
             FirebaseApp firebaseApp = FirebaseApp.initializeApp(firebaseOptions);
-        }catch (IOException e){
+        } catch (IOException e) {
             log.error("IOException");
         }
     }
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
-        if(repository.existsByEmail(request.getEmail()))
+        if (repository.existsByEmail(request.getEmail()))
             throw new BadRequestException(String.format("User with email %s already exist", request.getEmail()));
 
         var user = User.builder()

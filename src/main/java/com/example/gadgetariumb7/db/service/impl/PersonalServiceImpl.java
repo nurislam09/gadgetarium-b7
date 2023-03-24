@@ -2,9 +2,11 @@ package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Order;
 import com.example.gadgetariumb7.db.entity.Product;
+import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.OrderRepository;
 import com.example.gadgetariumb7.db.repository.ProductRepository;
+import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.db.repository.UserRepository;
 import com.example.gadgetariumb7.db.service.PersonalService;
 import com.example.gadgetariumb7.dto.request.ChangePasswordRequest;
@@ -27,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class PersonalServiceImpl implements PersonalService {
+    private final SubproductRepository subproductRepository;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
@@ -73,7 +76,9 @@ public class PersonalServiceImpl implements PersonalService {
                 log.error(String.format("Product with id %d not found", s.getProduct().getId()));
                 throw new NotFoundException(String.format("Product with id %d not found", s.getProduct().getId()));
             });
-            subproductsResponses.add(new ProductCardResponse(s.getId(), p.getProductName(), s.getImages().get(0), p.getProductRating(), p.getUsersReviews().size(), s.getPrice()));
+            ProductCardResponse response = new ProductCardResponse(s.getId(), p.getProductName(), s.getImages().get(0), p.getProductRating(), p.getUsersReviews().size(), s.getPrice());
+            response.setFirstSubproductId(getSubroductsId(response.getProductId()));
+            subproductsResponses.add(response);
         });
         log.info("Successfully works the get by id personal order");
         return new PersonalOrderByIdResponse(order.getOrderNumber(), subproductsResponses, order.getDeliveryStatus(), user.getFirstName() + " " + user.getLastName(), user.getFirstName(), user.getLastName(), order.getAddress(), user.getPhoneNumber(), user.getEmail(), order.getDateOfOrder().toLocalDate(), order.getPayment(), order.getTotalSum() - order.getTotalDiscount(), order.getTotalSum());
@@ -82,12 +87,16 @@ public class PersonalServiceImpl implements PersonalService {
     @Override
     public List<ProductCardResponse> getAllPersonalFavorite() {
         User user = getAuthenticateUser();
-        if (CollectionUtils.isEmpty(user.getFavoritesList())){
+        if (CollectionUtils.isEmpty(user.getFavoritesList())) {
             log.error("User's favorites products is empty");
             throw new NotFoundException("User's favorites products is empty");
         }
         log.info("Successfully works the get all personal favorite");
-        return user.getFavoritesList().stream().map(x -> new ProductCardResponse(x.getId(), x.getProductName(), x.getProductImage(), x.getProductRating(), x.getUsersReviews().size(), x.getProductPrice())).toList();
+        return user.getFavoritesList().stream().map(x -> {
+            ProductCardResponse response = new ProductCardResponse(x.getId(), x.getProductName(), x.getProductImage(), x.getProductRating(), x.getUsersReviews().size(), x.getProductPrice());
+            response.setFirstSubproductId(getSubroductsId(response.getProductId()));
+            return response;
+        }).toList();
     }
 
     @Override
@@ -112,10 +121,10 @@ public class PersonalServiceImpl implements PersonalService {
         }
 
         if (!user.getEmail().equals(request.getEmail().replace(" ", ""))) {
-            if (userRepository.existsByEmail(request.getEmail())){
+            if (userRepository.existsByEmail(request.getEmail())) {
                 log.error(String.format("User with email %s already exist", request.getEmail()));
                 throw new BadRequestException(String.format("User with email %s already exist", request.getEmail()));
-        }
+            }
             user.setEmail(request.getEmail());
 
             AuthenticationResponse authenticationResponse = authenticationService.getToken(user);
@@ -134,7 +143,11 @@ public class PersonalServiceImpl implements PersonalService {
     public PersonalUserResponse getPersonalUser() {
         User u = getAuthenticateUser();
         log.info("Successfully works the get personal user");
-        return new PersonalUserResponse(u.getFirstName(), u.getLastName(), u.getEmail(), u.getPhoneNumber(), u.getAddress());
+        PersonalUserResponse personalUserResponse = new PersonalUserResponse(u.getFirstName(), u.getLastName(), u.getEmail(), u.getPhoneNumber(), u.getAddress());
+        if (u.getImage() != null){
+            personalUserResponse.setImage(u.getImage());
+        }
+        return personalUserResponse;
     }
 
     @Override
@@ -168,5 +181,9 @@ public class PersonalServiceImpl implements PersonalService {
         userRepository.save(user);
         log.info("Password successfully updated");
         return new SimpleResponse("Password successfully updated", "ok");
+    }
+
+    private List<Long> getSubroductsId(Long id) {
+        return subproductRepository.findAll().stream().filter(x -> x.getProduct().getId() == id).map(Subproduct::getId).toList();
     }
 }

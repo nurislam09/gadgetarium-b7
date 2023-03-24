@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static javax.persistence.CascadeType.*;
 
@@ -18,7 +19,7 @@ import static javax.persistence.CascadeType.*;
 public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discount_gen")
-    @SequenceGenerator(name = "discount_gen", sequenceName = "discount_seq", allocationSize = 1 ,initialValue = 10)
+    @SequenceGenerator(name = "discount_gen", sequenceName = "discount_seq", allocationSize = 1, initialValue = 10)
     private Long id;
 
     private Byte amountOfDiscount;
@@ -27,6 +28,6 @@ public class Discount {
 
     private LocalDate discountEndDate;
 
-    @OneToOne(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "discount")
-    private Product product;
+    @OneToMany(cascade = {MERGE, DETACH, REFRESH}, mappedBy = "discount")
+    private List<Product> products;
 }

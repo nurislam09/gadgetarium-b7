@@ -1,6 +1,7 @@
 package com.example.gadgetariumb7.api;
 
 import com.example.gadgetariumb7.db.service.UserService;
+import com.example.gadgetariumb7.dto.response.CompareProductResponse;
 import com.example.gadgetariumb7.dto.response.ProductCompareResponse;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,18 +30,31 @@ public class UserCompareController {
 
     @Operation(summary = "Get all products from users compare list", description = "This endpoint return products from users compare list")
     @GetMapping
-    public List<ProductCompareResponse> getAllFromCompareList(@RequestParam String categoryName, @RequestParam int size, int page) {
-        return userService.getAllFromUserCompareProductList(categoryName, size, page);
+    public List<ProductCompareResponse> getAllFromCompareList(@RequestParam Long categoryId, @RequestParam boolean isUnique, @RequestParam int size, int page) {
+        return userService.getAllFromUserCompareProductList(categoryId, isUnique, size, page);
     }
+
     @Operation(summary = "Clean compare products", description = "This endpoint clean all compare list where user id is equal")
     @DeleteMapping
-    public SimpleResponse cleanCompare() {
-        return userService.cleanCompareProducts();
+    public SimpleResponse cleanCompare(@RequestParam Long id) {
+        return userService.cleanCompareProducts(id);
+    }
+
+    @Operation(summary = "Delete compare products", description = "This endpoint delete compare product")
+    @DeleteMapping("/{id}")
+    public SimpleResponse deleteById(@PathVariable Long id) {
+        return userService.deleteFromCompareList(id);
     }
 
     @Operation(summary = "Get count of all products in compare list", description = "This endpoint get count all product in compare list")
     @GetMapping("/count")
     public Map<String, Integer> countOfCompareTO() {
         return userService.countOfCompareList();
+    }
+
+    @Operation(summary = "Simple get All product from CompareList", description = "This endpoint get all product from compareList vision comparison")
+    @GetMapping("/get")
+    public List<CompareProductResponse> simpleGetAll() {
+        return userService.simpleGetAll();
     }
 }

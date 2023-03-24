@@ -6,20 +6,18 @@ import com.example.gadgetariumb7.dto.response.ProductAdminResponse;
 import com.example.gadgetariumb7.dto.response.ProductSearchResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import javax.transaction.Transactional;
 
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.LinkedList;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+    @Transactional
     @Query("select new com.example.gadgetariumb7.dto.response.ProductCardResponse " +
             "(p.id," +
             "p.productImage," +
@@ -103,19 +101,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             ") from Product")
     List<ProductAdminResponse> getAllProductsAdmin(Pageable pageable);
 
-    @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
-            "(id," +
-            "productImage," +
-            "productVendorCode," +
-            "productName," +
-            "productCount," +
-            "subproducts.size," +
-            "createAt," +
-            "productPrice," +
-            "productStatus," +
-            "dateOfIssue" +
-            ") from Product")
-    List<ProductAdminResponse> getAllProductsAdminWithoutPagination();
+    @Query("select count(id) from Product")
+    int getCountOfProducts();
 
     @Query("select new com.example.gadgetariumb7.dto.response.ProductAdminResponse" +
             "(p.id," +
@@ -158,7 +145,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.discount.amountOfDiscount," +
             "p.description," +
             "p.productVendorCode," +
-            "p.color" +
+            "p.color," +
+            "p.category.id" +
             ") from Product p where " +
             "upper(p.productName) like upper(concat('%',:text,'%')) OR " +
             "cast(p.productPrice as string) like concat(:text,'%') OR " +
@@ -174,13 +162,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(nativeQuery = true, value = "select viewed_products_list_id from users_viewed_products_list where user_id = :userId")
     List<Long> getViewedProducts(Long userId);
 
-    @Query(nativeQuery = true, value = "select count(o) from users_compare_products_list p, products o where o.id = p.compare_products_list_id and p.user_id = :id group by o.category_id")
-    LinkedList<Integer> countOfProductInCompare(Long id);
+    @Query(nativeQuery = true, value = "select count(o) from users_compare_products_list p, products o where o.id = p.compare_products_list_id and p.user_id = :id and o.category_id = :categoryId")
+    int countCompare(Long id, Long categoryId);
 
-    @Query(nativeQuery = true, value = "select distinct (select category_name from categories c where c.id = o.category_id) from users_compare_products_list p, products o where o.id = p.compare_products_list_id and p.user_id =:id")
-    LinkedList<String> categoryNameInCompare(Long id);
-
-    @Query("select u.compareProductsList from User u where u.id = :userId")
+    @Query("select u.compareProductsList as p from User u where u.id = :userId")
     List<Product> getAllFromUserCompareProductList(Long userId, Pageable pageable);
 
     @Query("select id from Product where category.id = :categoryId")

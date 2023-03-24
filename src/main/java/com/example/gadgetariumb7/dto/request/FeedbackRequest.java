@@ -1,29 +1,22 @@
 package com.example.gadgetariumb7.dto.request;
 
-import com.example.gadgetariumb7.validation.password.PasswordValid;
 import com.example.gadgetariumb7.validation.phoneNumber.PhoneValid;
-import lombok.*;
+import lombok.Data;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Valid
-public class RegisterRequest {
-
+@Data
+public class FeedbackRequest {
     @NotNull(message = "First name should be not null")
     @Size(min = 2, max = 25)
-    private String firstname;
+    private String firstName;
 
     @Size(min = 2, max = 25)
     @NotNull(message = "Last name should be not null")
-    private String lastname;
+    private String lastName;
 
     @Email(message = "Email should be valid")
     @NotNull(message = "Email should be not null")
@@ -33,7 +26,5 @@ public class RegisterRequest {
     @PhoneValid(message = "Phone should be valid")
     private String phoneNumber;
 
-    @PasswordValid(message = "Password should be valid")
-    private String password;
-
+    private String text;
 }

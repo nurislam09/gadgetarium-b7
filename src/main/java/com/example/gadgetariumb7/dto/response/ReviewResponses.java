@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.util.List;
 import java.util.Map;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,7 +16,7 @@ public class ReviewResponses {
 
     private List<ReviewResponse> reviewResponses;
 
-    private Map<Integer,Integer> countGrade;
+    private Map<Integer, Integer> countGrade;
 
     private int countReviewUnAnswered;
 

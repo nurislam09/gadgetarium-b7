@@ -1,6 +1,8 @@
 package com.example.gadgetariumb7.api;
 
+import com.example.gadgetariumb7.db.service.FeedbackService;
 import com.example.gadgetariumb7.db.service.UserService;
+import com.example.gadgetariumb7.dto.request.FeedbackRequest;
 import com.example.gadgetariumb7.dto.request.ReviewSaveRequest;
 import com.example.gadgetariumb7.dto.request.ReviewSingleRequest;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "User API")
 public class UserController {
     private final UserService userService;
+    private final FeedbackService feedbackService;
 
     @Operation(summary = "This method for save review", description = "This endpoint save review with array of images")
     @PostMapping("/review")
@@ -28,14 +31,21 @@ public class UserController {
     @Operation(summary = "To edit the review", description = "user could edit only his own review")
     @PutMapping("/review")
     @PreAuthorize("hasAuthority('Customer')")
-    public SimpleResponse edit(@RequestBody ReviewSingleRequest reviewRequest){
+    public SimpleResponse edit(@RequestBody ReviewSingleRequest reviewRequest) {
         return userService.editReview(reviewRequest);
     }
 
     @Operation(summary = "To delete the review", description = "user could delete only his own review")
     @DeleteMapping("/review")
     @PreAuthorize("hasAuthority('Customer')")
-    public SimpleResponse delete(@RequestParam(name = "review id") Long reviewId){
+    public SimpleResponse delete(@RequestParam(name = "review") Long reviewId) {
         return userService.deleteReview(reviewId);
+    }
+
+    @Operation(summary = "To save the feedback", description = "user could leave the feedback")
+    @PostMapping("/feedback")
+    @PreAuthorize("hasAuthority('Customer')")
+    public SimpleResponse saveFeedback(@RequestBody FeedbackRequest feedbackRequest) {
+        return feedbackService.saveFeedback(feedbackRequest);
     }
 }

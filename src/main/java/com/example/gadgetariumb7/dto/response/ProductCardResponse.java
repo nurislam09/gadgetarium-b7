@@ -6,12 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCardResponse {
     private Long productId;
+    private List<Long> firstSubproductId;
     private String productImage;
     private String productName;
     private int count;
@@ -51,5 +54,16 @@ public class ProductCardResponse {
         this.countOfReview = countOfReview;
         this.productPrice = productPrice;
         isViewed = true;
+    }
+
+    public ProductCardResponse(Long productId, String productImage, String productName, int count, int productPrice, ProductStatus productStatus, Double productRating, byte categoryId) {
+        this.productId = productId;
+        this.productImage = productImage;
+        this.productName = productName;
+        this.count = count;
+        this.productPrice = productPrice;
+        this.productStatus = productStatus;
+        this.productRating = productRating;
+        this.categoryId = categoryId;
     }
 }

@@ -49,9 +49,10 @@ public class ReviewServiceImpl implements ReviewService {
                     user.getImage()
             );
             Product product = reviewRepository.getProductReview(r.getId());
-            Review review = reviewRepository.findById(r.getId()).orElseThrow(() ->{
+            Review review = reviewRepository.findById(r.getId()).orElseThrow(() -> {
                 log.error("Review not found");
-                throw new NotFoundException("Review not found");});
+                throw new NotFoundException("Review not found");
+            });
             ProductReviewResponse productReviewResponse = new ProductReviewResponse(product);
             r.setProductReviewResponse(productReviewResponse);
             r.setUserResponse(userResponse);
@@ -87,7 +88,8 @@ public class ReviewServiceImpl implements ReviewService {
     public SimpleResponse deleteReviewById(Long id) {
         Review review = reviewRepository.findById(id).orElseThrow(() -> {
             log.error("not found!");
-            throw new NotFoundException(String.format("not found!"));});
+            throw new NotFoundException(String.format("not found!"));
+        });
         reviewRepository.delete(review);
         log.info("successfully works the delete review by id method");
         return new SimpleResponse("deleted", "ok");

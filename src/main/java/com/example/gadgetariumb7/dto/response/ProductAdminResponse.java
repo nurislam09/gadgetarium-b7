@@ -27,7 +27,7 @@ public class ProductAdminResponse {
     @JsonIgnore
     private ProductStatus productStatus;
 
-    public ProductAdminResponse(Long id, String productImage, Long productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice, ProductStatus productStatus,String dateOfIssue) {
+    public ProductAdminResponse(Long id, String productImage, Long productVendorCode, String productName, int productCount, int countSubproducts, LocalDateTime createAt, int productPrice, ProductStatus productStatus, String dateOfIssue) {
         this.id = id;
         this.productImage = productImage;
         this.productVendorCode = productVendorCode;
