@@ -21,6 +21,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedback.setFirstName(feedbackRequest.getFirstName());
         feedback.setLastName(feedbackRequest.getLastName());
         feedback.setPhoneNumber(feedbackRequest.getPhoneNumber());
+        feedback.setText(feedbackRequest.getText());
         feedbackRepository.save(feedback);
         log.info("Successfully works the save feedback method");
         return new SimpleResponse(String.format("the feedback with %d id is saved ", feedback.getId()), "200");
