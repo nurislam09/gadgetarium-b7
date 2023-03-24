@@ -143,7 +143,11 @@ public class PersonalServiceImpl implements PersonalService {
     public PersonalUserResponse getPersonalUser() {
         User u = getAuthenticateUser();
         log.info("Successfully works the get personal user");
-        return new PersonalUserResponse(u.getFirstName(), u.getLastName(), u.getEmail(), u.getPhoneNumber(), u.getAddress());
+        PersonalUserResponse personalUserResponse = new PersonalUserResponse(u.getFirstName(), u.getLastName(), u.getEmail(), u.getPhoneNumber(), u.getAddress());
+        if (u.getImage() != null){
+            personalUserResponse.setImage(u.getImage());
+        }
+        return personalUserResponse;
     }
 
     @Override
