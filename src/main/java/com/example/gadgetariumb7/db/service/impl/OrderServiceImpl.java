@@ -95,7 +95,10 @@ public class OrderServiceImpl implements OrderService {
         if (order.getUser() != null) {
             order.getUser().getOrders().remove(order);
         }
-        order.getSubproducts().forEach(x -> x.getOrders().remove(order));
+        List<Subproduct>subproducts = order.getSubproducts();
+        if (subproducts != null) {
+            subproducts.forEach(x -> x.getOrders().remove(order));
+        }
         orderRepository.delete(order);
         log.info("successfully works the delete order by id method");
         return new SimpleResponse("Order successfully deleted!", "ok");

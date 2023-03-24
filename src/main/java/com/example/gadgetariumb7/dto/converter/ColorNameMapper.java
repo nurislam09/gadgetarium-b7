@@ -78,8 +78,8 @@ public class ColorNameMapper {
         colorMap.put("#D7D79E", "Beige");
         colorMap.put("#267300", "Green");
         colorMap.put("#00734C", "Green");
-        colorMap.put("#004C73", "Green");
-        colorMap.put("#002673", "Green");
+        colorMap.put("#004C73", "Blue");
+        colorMap.put("#002673", "Blue");
         colorMap.put("#3B3AC4", "Blue");
         colorMap.put("#C29ED7", "Lavender");
         colorMap.put("#D69DBC", "Lavender");
