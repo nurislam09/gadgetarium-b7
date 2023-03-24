@@ -788,6 +788,259 @@ values (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_0_6.png'),
        (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_1_1.jpg'),
        (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_2_1.jpg');
 
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+VALUES (16,
+        'https://9to5mac.com/wp-content/uploads/sites/6/2023/03/yellow-iphone-14-1.jpg?quality=82&strip=all',
+        '#FFFFBE',
+        '2023-09-13 18:20:03',
+        'IPhone 14 Plus — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A15 Bionic обеспечивает исключительный пользовательский опыт. Pro также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
+        12,
+        200,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_4325_0_1.jpg',
+        'IPhone 14 Plus',
+        115990,
+        0,
+        0,
+        34124451332,
+        'https://youtu.be/jVw_Hj_netI',
+        1, 1, 1, 1,'03.03.23');
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (34, '#FFFFBE', 200, 115990, 16);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (34, '2', 'simCard'),
+       (34, '512', 'memoryOfPhone'),
+       (34, '4', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (34, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4325_0_1.jpg'),
+       (34, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4325_1_1.jpg'),
+       (34, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4325_2_1.jpg'),
+       (34, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4325_9_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+VALUES (17,
+        'https://www.androidauthority.com/wp-content/uploads/2020/04/iPhone-SE-review-header.jpg',
+        '#FF0000',
+        '2020-09-13 18:20:03',
+        'Iphone SE 2020 — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A15 Bionic обеспечивает исключительный пользовательский опыт. Pro также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
+        12,
+        27,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_2388_0_1.jpg',
+        'IPhone SE 2020',
+        42990,
+        0,
+        1,
+        342454781332,
+        'https://youtu.be/jVUlApyShaA',
+        1, 1, 1, 1,'03.03.20');
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (35, '#FF0000', 27, 42990, 17);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (35, '1', 'simCard'),
+       (35, '64', 'memoryOfPhone'),
+       (35, '3', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (35, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2388_0_1.jpg'),
+       (35, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2388_2.png'),
+       (35, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2388_1.png'),
+       (35, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2388_0.png');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+VALUES (18,
+        'https://mobidevices.com/images/2019/09/iPhone-11-iPhone-11-Pro-and-iPhone-11-Pro-Max.jpeg',
+        '#FFFFFF',
+        '2020-09-13 18:20:03',
+        'Iphone 11 — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A15 Bionic обеспечивает исключительный пользовательский опыт. Pro также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
+        12,
+        132,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_2732_3_1.jpg',
+        'IPhone 11',
+        49990,
+        0,
+        0,
+        34245478233242,
+        'https://youtu.be/nVkcc03dDDU',
+        1, 1, 1, 1,'03.03.20');
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (36, '#FFFFFF', 132, 49990, 18);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (36, '1', 'simCard'),
+       (36, '128', 'memoryOfPhone'),
+       (36, '3', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (36, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2732_3_1.jpg'),
+       (36, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2732_4_1.jpg'),
+       (36, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2732_2_1.jpg'),
+       (36, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2732_1_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+VALUES (19,
+        'https://softech.kg/image/catalog/Products/Phones/Samsung/01%20S23%20Ultra/1a.jpg',
+        '#267300',
+        '2023-09-13 18:20:03',
+        'Samsung Galaxy S23 — последнее дополнение к флагманской линейке смартфонов Samsung, предлагающее передовые технологии и стильный дизайн. Благодаря большому яркому 6,2-дюймовому дисплею, тройным задним камерам и мощному восьмиядерному процессору этот телефон обеспечивает непревзойденное удобство работы с пользователем. S22 также может похвастаться возможностью подключения 5G, обеспечивающей молниеносную скорость загрузки и выгрузки, а также аккумулятором с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии Android и имеет улучшенный помощник Bixby AI. В общем, Samsung Galaxy S22 — незаменимое устройство для тех, кто ищет высокопроизводительный и стильный смартфон.',
+        8,
+        243,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_4_6.png',
+        'Samsung Galaxy S23',
+        100990,
+        0,
+        1,
+        13413434,
+        'https://youtu.be/tHHBYTVXVXA',
+        2, 1, 2, 2,'04.03.23');
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (37, '#267300', 243, 100990, 19),
+       (38, '#000000', 98, 111990, 19),
+       (39, '#C29ED7', 56, 113590, 19);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (37, '1', 'simCard'),
+       (37, '512', 'memoryOfPhone'),
+       (37, '4', 'ramOfPhone'),
+       (38, '2', 'simCard'),
+       (38, '256', 'memoryOfPhone'),
+       (38, '4', 'ramOfPhone'),
+       (39, '2', 'simCard'),
+       (39, '512', 'memoryOfPhone'),
+       (39, '4', 'ramOfPhone');
+
+
+insert into subproduct_images(id, image_url)
+values (37, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_4_6.png'),
+       (37, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_7_6.png'),
+       (37, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_9_6.png'),
+       (37, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_10_6.png'),
+       (37, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_15_6.png'),
+
+       (38, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4249_8_6.png'),
+       (38, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4249_9_6.png'),
+       (38, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4249_13_6.png'),
+       (38, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4249_14_6.png'),
+       (38, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4249_17_6.png'),
+
+       (39, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4246_3_6.png'),
+       (39, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4246_10_6.png'),
+       (39, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4246_11_6.png'),
+       (39, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4246_13_6.png'),
+       (39, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4246_2_6.png');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+VALUES (20,
+        'https://p.turbosquid.com/ts-thumb/6u/vgiKFu/a91bkiVt/iphonexryellow3dmodel001/jpg/1548182538/600x600/fit_q87/35c36b76b49bb175285e090e173815210e3caaf6/iphonexryellow3dmodel001.jpg',
+        '#F5CA7A',
+        '2019-09-13 18:20:03',
+        'Iphone XR — новейший флагманский смартфон Apple, предлагающий сочетание передовых технологий и стильного дизайна. Этот телефон с потрясающим 6,1-дюймовым дисплеем Super Retina XDR, тройными задними камерами с улучшенной производительностью при слабом освещении и мощным чипом A15 Bionic обеспечивает исключительный пользовательский опыт. Pro также имеет возможность подключения 5G, обеспечивая молниеносную скорость загрузки и выгрузки, а также аккумулятор с длительным сроком службы, чтобы вы могли оставаться на связи в течение всего дня. Кроме того, он работает на последней версии iOS и включает новые функции, такие как Face ID и Touch ID, обеспечивающие повышенную безопасность и удобство. iPhone 13 Pro — это незаменимое устройство для всех, кто ищет высокопроизводительный стильный смартфон с новейшими функциями и технологиями.',
+        6,
+        154,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_77_1742_0_1.jpg',
+        'IPhone XR',
+        49990,
+        0,
+        1,
+        3347035478233242,
+        'https://youtu.be/NOPNWo7tUgg',
+        1, 1, 1, 1,'03.03.20');
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (40, '#F5CA7A', 154, 49990, 20);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (40, '1', 'simCard'),
+       (40, '128', 'memoryOfPhone'),
+       (40, '3', 'ramOfPhone');
+
+insert into subproduct_images(id, image_url)
+values (40, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_1742_0_1.jpg'),
+       (40, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_1742_0.jpg'),
+       (40, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_1742_1.jpg'),
+       (40, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_1742_2.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+VALUES (21,
+        'https://softech.kg/image/catalog/Products/Notebook/Apple/Pro%20M2/5.jpg',
+        '#CCCCCC',
+        '2023-09-13 18:20:03',
+        'MacBook Pro 13 Pro — это мощный и универсальный ноутбук от Apple, разработанный для профессионалов и опытных пользователей. Этот ноутбук с потрясающим 14-дюймовым дисплеем Retina и быстрым процессором Apple M1 Pro обеспечивает исключительное удобство работы, независимо от того, работаете ли вы над сложными задачами или используете ресурсоемкие приложения. MacBook Pro также оснащен последней версией macOS, обеспечивающей плавный и интуитивно понятный пользовательский интерфейс, а также сенсорной панелью — сенсорной полосой стекла над клавиатурой, обеспечивающей быстрый доступ к распространенным инструментам и функциям. Кроме того, он имеет долговечную батарею, обеспечивающую до 14 часов работы без подзарядки, и поставляется с быстрым и надежным хранилищем SSD. MacBook Pro — идеальный ноутбук для тех, кто ищет мощное, универсальное и стильное устройство для работы или личного использования.',
+        8,
+        36,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_62_2592_2_1.jpg',
+        'Apple MacBook Pro 13',
+        189990,
+        0,
+        0,
+        243524345453,
+        'https://youtu.be/PS2bM9cLv-I',
+        1, 2, null, 8,'03.03.23');
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (41, '#CCCCCC', 36, 189990, 21);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (41, 'Apple M2 Pro', 'laptopCPU'),
+       (41, '3024×1964', 'screenResolutionLaptop'),
+       (41, '8', 'videoCardMemory'),
+       (41, '32', 'ramLaptop'),
+       (41, '14', 'screenSizeLaptop');
+
+insert into subproduct_images(id, image_url)
+values (41, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2592_2_1.jpg'),
+       (41, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2592_0_1.jpg'),
+       (41, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2592_1_1.jpg');
+
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+
+VALUES (22,
+        'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/S/aplus-media/vc/7e935bc1-c4e2-4309-9e41-c2adb6c33ab4.__CR0,0,970,300_PT0_SX970_V1___.jpg',
+        '#CCCCCC',
+        '2022-09-13 18:20:03',
+        'Lenovo IdeaPad 3 — это недорогой ноутбук с отличной производительностью и функциями для повседневного использования. Благодаря быстрому процессору Intel Core i5 и дисплею Full HD этот ноутбук обеспечивает плавную и быструю работу, независимо от того, работаете ли вы, просматриваете веб-страницы или смотрите видео. VivoBook 15 также отличается элегантным и стильным дизайном, тонким и легким форм-фактором, который позволяет легко носить его с собой и использовать в дороге. Кроме того, он имеет аккумулятор с длительным сроком службы, обеспечивающий до 6 часов работы без подзарядки, а также быстрые и надежные варианты хранения. Asus VivoBook 15 — отличный выбор для тех, кто ищет недорогой ноутбук, обеспечивающий производительность и функции, необходимые для повседневного использования.',
+        5,
+        34,
+        'https://object.pscloud.io/cms/cms/Photo/img_0_62_2765_0_1.jpg',
+        'Lenovo IdeaPad 3',
+        59990,
+        0,
+        0,
+        13987985,
+        'https://youtu.be/NvVFETD72pg',
+        5, 2, 5, 7,'03.03.23');
+
+insert into subproducts(id, color, count_of_subproduct, price, product_id)
+values (42, '#000000', 87, 69990, 9);
+
+insert into characteristics_subproduct(id, characteristics_value, characteristics_key)
+values (42, 'Intel Core i7', 'laptopCPU'),
+       (42, '1920х1080', 'screenResolutionLaptop'),
+       (42, '8', 'videoCardMemory'),
+       (42, '8', 'ramLaptop'),
+       (42, '15.6', 'screenSizeLaptop');
+
+insert into subproduct_images(id, image_url)
+values (42, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2765_0_1.jpg'),
+       (42, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2765_9_1.jpg'),
+       (42, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2765_8_1.jpg'),
+       (42, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2765_3_1.jpg'),
+       (42, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2765_4_1.jpg'),
+       (42, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2765_5_1.jpg');
+
 insert into banners(id, image)
 values (1, 'https://d16pnh712pyiwa.cloudfront.net/wp-content/uploads/2022/07/iPhone-13-pro-max-banner-image.png');
 
