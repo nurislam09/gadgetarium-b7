@@ -25,4 +25,6 @@ public class FeedbackRequest {
 
     @PhoneValid(message = "Phone should be valid")
     private String phoneNumber;
+
+    private String text;
 }

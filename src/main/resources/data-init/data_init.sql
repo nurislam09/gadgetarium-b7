@@ -876,12 +876,12 @@ values (2, 1),
        (2, 3),
        (2, 4);
 
-insert into feedbacks(id, email, first_name, last_name, phone_number)
-values (1, 'megaline@gmail.com', 'Aibek', 'Abdurasulov', '+996123453621'),
-       (2, 'brand@gmail.com', 'Aizada', 'Abdurasulova', '+996123453634'),
-       (3, 'batken@gmail.com', 'Gapyr', 'Agai', '+996123453622'),
-       (4, 'kgz@gmail.com', 'Uson', 'Rasulov', '+996123453424'),
-       (5, 'shoro@gmail.com', 'Balanca', 'Balanchaev', '+996123453424');
+insert into feedbacks(id, email, first_name, last_name, phone_number, text)
+values (1, 'megaline@gmail.com', 'Aibek', 'Abdurasulov', '+996123453621', 'my first feedback'),
+       (2, 'brand@gmail.com', 'Aizada', 'Abdurasulova', '+996123453634', 'second feedback'),
+       (3, 'batken@gmail.com', 'Gapyr', 'Agai', '+996123453622','third feedback'),
+       (4, 'kgz@gmail.com', 'Uson', 'Rasulov', '+996123453424','forth feedback'),
+       (5, 'shoro@gmail.com', 'Balanca', 'Balanchaev', '+996123453424','fifth feedback');
 
 insert into reviews(id, product_grade, response_of_review, review_time, status_of_response, user_review, product_id,
                     user_id)
