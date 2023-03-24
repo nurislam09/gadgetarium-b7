@@ -393,7 +393,7 @@ public class UserServiceImpl implements UserService {
         return productResponses;
     }
 
-    private List<Long> getSubroductsId(Long id){
+    private List<Long> getSubroductsId(Long id) {
         return subproductRepository.findAll().stream().filter(x -> x.getProduct().getId() == id).map(Subproduct::getId).toList();
     }
 }
