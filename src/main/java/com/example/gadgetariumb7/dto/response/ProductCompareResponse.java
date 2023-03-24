@@ -18,5 +18,6 @@ public class ProductCompareResponse {
     private String brandName;
     private String color;
     private int price;
+    private int productCount;
 }
 

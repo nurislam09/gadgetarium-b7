@@ -15,12 +15,14 @@ public class CompareProductResponse {
     private String productName;
     private String image;
     private int price;
+    private int ProductCount;
 
     public CompareProductResponse(Product product) {
         this.id = product.getId();
         this.productName = product.getProductName();
         this.image = product.getProductImage();
         this.price = product.getProductPrice();
+        this.ProductCount=product.getProductCount();
     }
 
 }

@@ -290,7 +290,8 @@ public class UserServiceImpl implements UserService {
                             characteristics,
                             p.getBrand().getBrandName(),
                             p.getColor(),
-                            p.getProductPrice()
+                            p.getProductPrice(),
+                            p.getProductCount()
                     );
                 })
                 .collect(Collectors.toList());
