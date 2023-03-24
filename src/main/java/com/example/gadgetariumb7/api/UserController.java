@@ -45,7 +45,7 @@ public class UserController {
     @Operation(summary = "To save the feedback", description = "user could leave the feedback")
     @PostMapping("/feedback")
     @PreAuthorize("hasAuthority('Customer')")
-    public SimpleResponse saveFeedback(@RequestBody FeedbackRequest feedbackRequest){
+    public SimpleResponse saveFeedback(@RequestBody FeedbackRequest feedbackRequest) {
         return feedbackService.saveFeedback(feedbackRequest);
     }
 }

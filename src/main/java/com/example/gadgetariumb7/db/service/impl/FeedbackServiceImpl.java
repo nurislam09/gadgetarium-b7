@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class FeedbackServiceImpl implements FeedbackService {
     private final FeedbackRepository feedbackRepository;
+
     @Override
     public SimpleResponse saveFeedback(FeedbackRequest feedbackRequest) {
         Feedback feedback = new Feedback();

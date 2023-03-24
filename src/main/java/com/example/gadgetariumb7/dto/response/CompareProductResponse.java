@@ -22,7 +22,7 @@ public class CompareProductResponse {
         this.productName = product.getProductName();
         this.image = product.getProductImage();
         this.price = product.getProductPrice();
-        this.ProductCount=product.getProductCount();
+        this.ProductCount = product.getProductCount();
     }
 
 }

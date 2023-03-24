@@ -1,15 +1,11 @@
 package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Subscription;
-import com.example.gadgetariumb7.db.entity.User;
 import com.example.gadgetariumb7.db.repository.SubscriptionRepository;
-import com.example.gadgetariumb7.db.repository.UserRepository;
-import com.example.gadgetariumb7.db.service.MailingService;
 import com.example.gadgetariumb7.db.service.SubscriptionService;
 import com.example.gadgetariumb7.dto.request.SubscriptionRequest;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
 import com.example.gadgetariumb7.exceptions.EmailAlreadyExistException;
-import com.example.gadgetariumb7.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
