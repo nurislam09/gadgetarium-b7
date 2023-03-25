@@ -317,29 +317,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public CatalogResponse filterByParameters(String text, String fieldToSort, String discountField, String categoryName, List<String> subCategoryNames, Integer minPrice, Integer maxPrice, List<String> colors,
+    public CatalogResponse filterByParameters(String fieldToSort, String discountField, String categoryName, List<String> subCategoryNames, Integer minPrice, Integer maxPrice, List<String> colors,
                                               List<Integer> memories, List<Byte> rams, List<String> laptopCPUs, List<String> screenResolutions, List<String> screenSizes, List<String> screenDiagonals, List<String> batteryCapacities,
                                               List<String> wirelessInterfaces, List<String> caseShapes, List<String> braceletMaterials, List<String> housingMaterials, List<String> genders, List<String> waterProofs, int size) throws NotFoundException {
         try {
             CatalogResponse catalogResponse = new CatalogResponse();
-
-            if (text != null) {
-                List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
-                        .map(p -> new ProductCardResponse(p.getId(),
-                                p.getProductImage(),
-                                p.getProductName(),
-                                p.getProductCount(),
-                                p.getProductPrice(),
-                                p.getProductStatus(),
-                                p.getProductRating(),
-                                p.getCategoryId().byteValue()))
-                        .collect(Collectors.toList());
-                forEach(list);
-
-                catalogResponse.setProductCardResponses(list);
-                catalogResponse.setSizeOfProducts(list.size());
-                return catalogResponse;
-            }
 
             List<Product> productList = productRepository.findAll();
             List<ProductCardResponse> productCardResponses = productList.stream()
@@ -408,6 +390,32 @@ public class ProductServiceImpl implements ProductService {
             log.error("Product not found");
             throw new NotFoundException("Product not found");
         }
+    }
+
+    @Override
+    public CatalogResponse filterByParameters(String text, int size) throws NotFoundException {
+        if (text != null) {
+            if(!text.isBlank()){
+                CatalogResponse catalogResponse = new CatalogResponse();
+                List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
+                        .map(p -> new ProductCardResponse(p.getId(),
+                                p.getProductImage(),
+                                p.getProductName(),
+                                p.getProductCount(),
+                                p.getProductPrice(),
+                                p.getProductStatus(),
+                                p.getProductRating(),
+                                p.getCategoryId().byteValue()))
+                        .collect(Collectors.toList());
+                forEach(list);
+
+                catalogResponse.setProductCardResponses(list);
+                catalogResponse.setSizeOfProducts(list.size());
+                return catalogResponse;
+            }else
+                throw new BadRequestException("Search text is blank");
+        }else
+            throw new BadRequestException("Search text is null");
     }
 
     @Override
