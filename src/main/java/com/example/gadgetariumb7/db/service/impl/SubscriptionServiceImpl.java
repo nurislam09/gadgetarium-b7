@@ -2,6 +2,7 @@ package com.example.gadgetariumb7.db.service.impl;
 
 import com.example.gadgetariumb7.db.entity.Subscription;
 import com.example.gadgetariumb7.db.repository.SubscriptionRepository;
+import com.example.gadgetariumb7.db.service.MailingService;
 import com.example.gadgetariumb7.db.service.SubscriptionService;
 import com.example.gadgetariumb7.dto.request.SubscriptionRequest;
 import com.example.gadgetariumb7.dto.response.SimpleResponse;
@@ -24,6 +25,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private final JavaMailSender emailSender;
     @Value("${spring.mail.username}")
     private String sender;
+    private final MailingService mailingService;
 
     @Override
     public SimpleResponse save(SubscriptionRequest subscriptionRequest) {
@@ -33,6 +35,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
             log.error("Email already registered");
             throw new EmailAlreadyExistException("Email already registered");
         }
+        mailingService.sendEmail("Hello, you are successfully subscribed to our mailings!", subscriptionRequest.getEmail());
         subscriptionRepository.save(subscription);
         log.info("successfully works the save method");
         sendEmail(subscription);

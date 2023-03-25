@@ -73,4 +73,15 @@ public class MailingServiceImpl implements MailingService {
         log.info("successfully works the send email method(order)");
     }
 
+    @Override
+    public void sendEmail(String messageText, String email) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(sender);
+        message.setTo(email);
+        message.setText(messageText);
+        message.setBcc();
+        emailSender.send(message);
+        log.info("successfully works the send email to user subscribe");
+    }
+
 }

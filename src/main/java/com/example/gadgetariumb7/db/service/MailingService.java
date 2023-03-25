@@ -14,4 +14,6 @@ public interface MailingService {
     void sendEmail(String email, Mailing mailing);
 
     void sendEmail(String email, Order order);
+
+    void sendEmail(String message, String email);
 }
