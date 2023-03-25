@@ -4,10 +4,15 @@ import com.example.gadgetariumb7.db.entity.Subproduct;
 import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.db.service.PdfService;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.Translate.TranslateOption;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,6 +27,8 @@ import java.io.ByteArrayOutputStream;
 @Slf4j
 public class PdfServiceImpl implements PdfService {
     private final SubproductRepository subproductRepository;
+    @Value("${google.cloud.apiKey}")
+    private String googleAPI;
 
     @Override
     public ResponseEntity<InputStreamResource> createPdf(Long subproductId) {
@@ -43,12 +50,23 @@ public class PdfServiceImpl implements PdfService {
         titleParagraph.setAlignment(Element.ALIGN_CENTER);
         document.add(titleParagraph);
 
-        Paragraph nameParagraph = new Paragraph(subproduct.getProduct().getProductName() + " characteristic:", nameFont);
+        Paragraph nameParagraph = new Paragraph("Характеристики " + subproduct.getProduct().getProductName() + ": ", nameFont);
         titleParagraph.setAlignment(Element.ALIGN_LEFT);
         document.add(nameParagraph);
 
         subproduct.getCharacteristics().forEach((key, value) -> {
-            String characteristic = key + ": " + value;
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < key.length(); i++) {
+                char c = key.charAt(i);
+                if (Character.isUpperCase(c)) {
+                    stringBuilder.append(" ").append(Character.toLowerCase(c));
+                } else {
+                    stringBuilder.append(c);
+                }
+            }
+            Translate translate = TranslateOptions.newBuilder().setApiKey(googleAPI).build().getService();
+            Translation translation = translate.translate(stringBuilder.toString(), Translate.TranslateOption.targetLanguage("ru"));
+            String characteristic = translation + ": " + value;
             Paragraph paragraph = new Paragraph(characteristic, paragraphFont);
             paragraph.setAlignment(Element.ALIGN_LEFT);
             document.add(paragraph);
