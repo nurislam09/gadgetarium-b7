@@ -21,7 +21,7 @@ import static javax.persistence.CascadeType.*;
 public class Subproduct {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subproduct_gen")
-    @SequenceGenerator(name = "subproduct_gen", sequenceName = "subproduct_seq", allocationSize = 1, initialValue = 35)
+    @SequenceGenerator(name = "subproduct_gen", sequenceName = "subproduct_seq", allocationSize = 1, initialValue = 43)
     private Long id;
     private int price;
     private int countOfSubproduct;
