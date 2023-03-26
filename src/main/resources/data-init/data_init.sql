@@ -1426,3 +1426,26 @@ values (1, 'https://gadgetarium-b7.s3.eu-central-1.amazonaws.com/1679820708493ba
        (3, 'https://gadgetarium-b7.s3.eu-central-1.amazonaws.com/1679821297764banner apple watch.png'),
        (4, 'https://gadgetarium-b7.s3.eu-central-1.amazonaws.com/1679821454995banner apple ipad.png');
 
+insert into users_order_history_list(user_id, order_history_list_id)
+values (2, 1),
+       (2, 2),
+       (2, 3),
+       (2, 4),
+       (2, 5),
+       (2, 6),
+       (2, 8),
+       (2, 9),
+       (2, 10),
+       (2, 11),
+       (2, 12),
+       (2, 13),
+       (2, 14),
+       (2, 15),
+       (2, 16),
+       (2, 17),
+       (2, 18),
+       (2, 19),
+       (2, 20),
+       (2, 21),
+       (2, 22),
+       (2, 23);
