@@ -7,23 +7,23 @@ VALUES (1, 'Арча Бешик 23', 'nurislam@gmail.com', 'Nurislam', 'https://
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996999219743', 1),
        (2, 'Манаса 2б', 'syimyk@gmail.com', 'Syimyk', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Ravshanbekov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996222219743', 2),
-       (3, 'Горький 67', 'ulukbekkochkorov@gmail.com', 'Ulukbek', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Kochkorov',
+       (3, 'Горький 67', 'ulukbekkochkorov@gmail.com', 'Ulukbek', 'https://ca.slack-edge.com/T023L1WBFLH-U039MSMK57X-4929313a09a1-512', 'Kochkorov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996777219743', 2),
        (4, 'Кара Балта', 'mirgul@gmail.com', 'Mirgul', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Abdinazarova',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996778219743', 2),
-       (5, 'Восток 5', 'baktygul@gmail.com', 'Baktygul', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Kushtarbek kyzy',
+       (5, 'Восток 5', 'baktygul@gmail.com', 'Baktygul', 'https://ca.slack-edge.com/T023L1WBFLH-U03MZ5ZUUTV-92902693f1ad-512', 'Kushtarbek kyzy',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996778219743', 2),
-       (6, 'Чуй 30', 'nursultan@gmail.com', 'Nursultan', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Zhumataev',
+       (6, 'Чуй 30', 'nursultan@gmail.com', 'Nursultan', 'https://ca.slack-edge.com/T023L1WBFLH-U03N11XCKA6-e1c7667fa3fa-512', 'Zhumataev',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996778219743', 2);
 
 insert into users(id, address, email, first_name, image, last_name, password, phone_number, role_id)
-VALUES (7, 'Арча Бешик 23', 'alisher@gmail.com', 'Alisher', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Zhumanov',
+VALUES (7, 'Арча Бешик 23', 'alisher@gmail.com', 'Alisher', 'https://ca.slack-edge.com/T023L1WBFLH-U024NTSN7A9-58ce1a0108ef-512', 'Zhumanov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996999219743', 2),
-       (8, 'Манаса 2б', 'albina@gmail.com', 'Albina', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Azamatova',
+       (8, 'Манаса 2б', 'albina@gmail.com', 'Albina', 'https://ca.slack-edge.com/T023L1WBFLH-U03MU256DDF-9943b3a9aa01-512', 'Azamatova',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996222219743', 2),
        (9, 'Горький 67', 'malik@gmail.com', 'Malik', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Kaamilov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996777219743', 2),
-       (10, 'Кара Балта', 'nurtilek@gmail.com', 'Nurtilek', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Maksatbek uulu',
+       (10, 'Кара Балта', 'nurtilek@gmail.com', 'Nurtilek', 'https://ca.slack-edge.com/T023L1WBFLH-U03LMNBD4RK-37804c461201-512', 'Maksatbek uulu',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996778219743', 2);
 
 insert into brands(id, brand_name, image)
@@ -1395,7 +1395,29 @@ values (1, 5, null, '2023-09-13 18:20:03', false, '- Размер (разумн�
 - Экран (приятная цветопередача, читать комфортно, повышенная герцовка в первые разы восхищала).', 23, 2),
        (20, 4, null, '2023-09-13 18:20:03', false, '- Размер (разумный - достаточно большой для чтения/просмотра контента, но не чрезмерный)
 - Камера (первое время режимом "мультикадр" был приятно удивлён + мегапикселей не пожалели на основную камеру, зум работает увереннее, чем у конкурентов)
-- Экран (приятная цветопередача, читать комфортно, повышенная герцовка в первые разы восхищала).', 23, 3);
+- Экран (приятная цветопередача, читать комфортно, повышенная герцовка в первые разы восхищала).', 23, 3),
+
+       (21, 5, null, '2023-09-13 18:20:03', false, '- Размер (разумный - достаточно большой для чтения/просмотра контента, но не чрезмерный)
+- Камера (первое время режимом "мультикадр" был приятно удивлён + мегапикселей не пожалели на основную камеру, зум работает увереннее, чем у конкурентов)
+- Экран (приятная цветопередача, читать комфортно, повышенная герцовка в первые разы восхищала).', 18, 8),
+       (22, 4, null, '2023-09-13 18:20:03', false, '- Размер (разумный - достаточно большой для чтения/просмотра контента, но не чрезмерный)
+- Камера (первое время режимом "мультикадр" был приятно удивлён + мегапикселей не пожалели на основную камеру, зум работает увереннее, чем у конкурентов)
+- Экран (приятная цветопередача, читать комфортно, повышенная герцовка в первые разы восхищала).', 18, 3);
+
+insert into review_images(id, image_url)
+values (1, 'https://appleinsider.ru/wp-content/uploads/2022/12/iphone_xr_2022.jpg'),
+       (1, 'https://imageio.forbes.com/blogs-images/davidphelan/files/2018/10/IMG_5155-1200x800.jpg?format=jpg&width=960'),
+       (2, 'https://apollo-singapore.akamaized.net/v1/files/09g28lmow8kf-ID/image'),
+       (2, 'https://apollo-singapore.akamaized.net/v1/files/09g28lmow8kf-ID/image'),
+       (10, 'https://www.notebookcheck-ru.com/fileadmin/_processed_/2/4/csm_Bild_Samsung_Galaxy_S23_Ultra_Intro_cd56f56a5b.jpg'),
+       (10, 'https://www.latercera.com/resizer/RXIG4suxiB_xe1viS18H9fDX13M=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/3JPVBTZIRZH3TIAVRFWNDWAZFA.webp'),
+       (11, 'https://petapixel.com/assets/uploads/2023/02/Samsung-Galaxy-S23-Ultra-taking-photo-upright-800x534.jpg'),
+       (11, 'https://www.deccanherald.com/sites/dh/files/styles/article_detail/public/articleimages/2023/02/10/sg23ultra-cov-sho-sel-1-1189596-1676004271.jpg?itok=8f0do1Th'),
+       (12, 'https://www.deccanherald.com/sites/dh/files/styles/article_detail/public/articleimages/2023/02/10/sg23ultra-cov-sho-sel-1-1189596-1676004271.jpg?itok=8f0do1Th'),
+       (19, 'https://www.deccanherald.com/sites/dh/files/styles/article_detail/public/articleimages/2023/02/10/sg23ultra-cov-sho-sel-1-1189596-1676004271.jpg?itok=8f0do1Th'),
+       (19, 'https://www.deccanherald.com/sites/dh/files/styles/article_detail/public/articleimages/2023/02/10/sg23ultra-cov-sho-sel-1-1189596-1676004271.jpg?itok=8f0do1Th'),
+       (21, 'https://media.karousell.com/media/photos/products/2022/6/26/iphone_11_64gb_white_1656221584_bbf67ddc.jpg'),
+       (22, 'https://media.karousell.com/media/photos/products/2023/2/5/iphone_11_128_gb_white_1675606884_06836f9f.jpg');
 
 insert into banners(id, image)
 values (1, 'https://gadgetarium-b7.s3.eu-central-1.amazonaws.com/1679820708493banner iphone 14 pro.png'),
