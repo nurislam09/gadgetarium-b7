@@ -187,10 +187,20 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException("Product for delete not found!");
         });
         userRepository.findAll().forEach(x -> {
-            x.getFavoritesList().remove(product);
+            if (x.getFavoritesList() != null && x.getFavoritesList().contains(product)){
+                x.getFavoritesList().remove(product);
+            }
             product.getSubproducts().forEach(i -> x.getBasketList().remove(i));
-            x.getCompareProductsList().remove(product);
-            x.getViewedProductsList().remove(product);
+            if (x.getCompareProductsList() != null && x.getCompareProductsList().contains(product)){
+                x.getCompareProductsList().remove(product);
+            }
+            if (x.getViewedProductsList() != null && x.getViewedProductsList().contains(product)){
+                x.getViewedProductsList().remove(product);
+            }
+            if (x.getOrderHistoryList() != null && x.getOrderHistoryList().contains(product)){
+                x.getOrderHistoryList().remove(product);
+            }
+            userRepository.save(x);
         });
         productRepository.delete(product);
         log.info("successfully works the delete method");
