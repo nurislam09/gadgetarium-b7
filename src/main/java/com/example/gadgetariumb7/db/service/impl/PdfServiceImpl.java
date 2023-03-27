@@ -5,7 +5,6 @@ import com.example.gadgetariumb7.db.repository.SubproductRepository;
 import com.example.gadgetariumb7.db.service.PdfService;
 import com.example.gadgetariumb7.exceptions.NotFoundException;
 import com.google.cloud.translate.Translate;
-import com.google.cloud.translate.Translate.TranslateOption;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import com.lowagie.text.*;

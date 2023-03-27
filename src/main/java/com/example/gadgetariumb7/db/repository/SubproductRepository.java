@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface SubproductRepository extends JpaRepository<Subproduct, Long> {
-    @Query(nativeQuery = true , value = "select subproduct_id from user_basket_list where user_id = :userId order by subproduct_id desc")
+    @Query(nativeQuery = true, value = "select subproduct_id from user_basket_list where user_id = :userId order by subproduct_id desc")
     List<Long> getAllFromUserBasketList(Long userId);
 
 }
