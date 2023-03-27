@@ -63,9 +63,7 @@ public class PdfServiceImpl implements PdfService {
                     stringBuilder.append(c);
                 }
             }
-            Translate translate = TranslateOptions.newBuilder().setApiKey(googleAPI).build().getService();
-            Translation translation = translate.translate(stringBuilder.toString(), Translate.TranslateOption.targetLanguage("ru"));
-            String characteristic = translation + ": " + value;
+            String characteristic = stringBuilder + ": " + value;
             Paragraph paragraph = new Paragraph(characteristic, paragraphFont);
             paragraph.setAlignment(Element.ALIGN_LEFT);
             document.add(paragraph);
