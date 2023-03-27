@@ -261,9 +261,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<ProductCompareResponse> getAllFromUserCompareProductList(Long categoryId, boolean isUnique, int size, int page) {
-        Pageable pageable = PageRequest.of(page - 1, size);
         User user = getAuthenticateUser();
-        List<Product> products = productRepository.getAllFromUserCompareProductList(user.getId(), pageable).stream().filter(x -> Objects.equals(x.getCategory().getId(), categoryId)).toList();
+        List<Product> products = productRepository.getAllFromUserCompareProductList(user.getId(), PageRequest.of(page - 1, size)).stream().filter(x -> Objects.equals(x.getCategory().getId(), categoryId)).toList();
         List<ProductCompareResponse> productCompareResponses = products
                 .stream()
                 .map(p -> {

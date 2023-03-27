@@ -3,27 +3,37 @@ VALUES (1, 'Admin'),
        (2, 'Customer');
 
 insert into users(id, address, email, first_name, image, last_name, password, phone_number, role_id)
-VALUES (1, 'Арча Бешик 23', 'nurislam@gmail.com', 'Nurislam', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Mamytov',
+VALUES (1, 'Арча Бешик 23', 'nurislam@gmail.com', 'Nurislam',
+        'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Mamytov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996999219743', 1),
-       (2, 'Манаса 2б', 'syimyk@gmail.com', 'Syimyk', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Ravshanbekov',
+       (2, 'Манаса 2б', 'syimyk@gmail.com', 'Syimyk',
+        'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Ravshanbekov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996222219743', 2),
-       (3, 'Горький 67', 'ulukbekkochkorov@gmail.com', 'Ulukbek', 'https://ca.slack-edge.com/T023L1WBFLH-U039MSMK57X-4929313a09a1-512', 'Kochkorov',
+       (3, 'Горький 67', 'ulukbekkochkorov@gmail.com', 'Ulukbek',
+        'https://ca.slack-edge.com/T023L1WBFLH-U039MSMK57X-4929313a09a1-512', 'Kochkorov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996777219743', 2),
-       (4, 'Кара Балта', 'mirgul@gmail.com', 'Mirgul', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Abdinazarova',
+       (4, 'Кара Балта', 'mirgul@gmail.com', 'Mirgul',
+        'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Abdinazarova',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996778219743', 2),
-       (5, 'Восток 5', 'baktygul@gmail.com', 'Baktygul', 'https://ca.slack-edge.com/T023L1WBFLH-U03MZ5ZUUTV-92902693f1ad-512', 'Kushtarbek kyzy',
+       (5, 'Восток 5', 'baktygul@gmail.com', 'Baktygul',
+        'https://ca.slack-edge.com/T023L1WBFLH-U03MZ5ZUUTV-92902693f1ad-512', 'Kushtarbek kyzy',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996778219743', 2),
-       (6, 'Чуй 30', 'nursultan@gmail.com', 'Nursultan', 'https://ca.slack-edge.com/T023L1WBFLH-U03N11XCKA6-e1c7667fa3fa-512', 'Zhumataev',
+       (6, 'Чуй 30', 'nursultan@gmail.com', 'Nursultan',
+        'https://ca.slack-edge.com/T023L1WBFLH-U03N11XCKA6-e1c7667fa3fa-512', 'Zhumataev',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996778219743', 2);
 
 insert into users(id, address, email, first_name, image, last_name, password, phone_number, role_id)
-VALUES (7, 'Арча Бешик 23', 'alisher@gmail.com', 'Alisher', 'https://ca.slack-edge.com/T023L1WBFLH-U024NTSN7A9-58ce1a0108ef-512', 'Zhumanov',
+VALUES (7, 'Арча Бешик 23', 'alisher@gmail.com', 'Alisher',
+        'https://ca.slack-edge.com/T023L1WBFLH-U024NTSN7A9-58ce1a0108ef-512', 'Zhumanov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996999219743', 2),
-       (8, 'Манаса 2б', 'albina@gmail.com', 'Albina', 'https://ca.slack-edge.com/T023L1WBFLH-U03MU256DDF-9943b3a9aa01-512', 'Azamatova',
+       (8, 'Манаса 2б', 'albina@gmail.com', 'Albina',
+        'https://ca.slack-edge.com/T023L1WBFLH-U03MU256DDF-9943b3a9aa01-512', 'Azamatova',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996222219743', 2),
-       (9, 'Горький 67', 'malik@gmail.com', 'Malik', 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Kaamilov',
+       (9, 'Горький 67', 'malik@gmail.com', 'Malik',
+        'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg', 'Kaamilov',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996777219743', 2),
-       (10, 'Кара Балта', 'nurtilek@gmail.com', 'Nurtilek', 'https://ca.slack-edge.com/T023L1WBFLH-U03LMNBD4RK-37804c461201-512', 'Maksatbek uulu',
+       (10, 'Кара Балта', 'nurtilek@gmail.com', 'Nurtilek',
+        'https://ca.slack-edge.com/T023L1WBFLH-U03LMNBD4RK-37804c461201-512', 'Maksatbek uulu',
         '$2a$12$j48u7W0s8v0DBjuE7qY/hOJfe/ivaMQXzFmGkrUHwnWL3s9vGnhRq', '+996778219743', 2);
 
 insert into brands(id, brand_name, image)
@@ -834,8 +844,10 @@ values (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_0_6.png'),
        (33, 'https://object.pscloud.io/cms/cms/Photo/img_0_911_456_2_1.jpg');
 
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (16,
         'https://9to5mac.com/wp-content/uploads/sites/6/2023/03/yellow-iphone-14-1.jpg?quality=82&strip=all',
         '#FFFFBE',
@@ -850,7 +862,7 @@ VALUES (16,
         0,
         34124451332,
         'https://youtu.be/jVw_Hj_netI',
-        1, 1, 1, 1,'03.03.23');
+        1, 1, 1, 1, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (34, '#FFFFBE', 200, 115990, 16);
@@ -866,8 +878,10 @@ values (34, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4325_0_1.jpg'),
        (34, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4325_2_1.jpg'),
        (34, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4325_9_1.jpg');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (17,
         'https://www.androidauthority.com/wp-content/uploads/2020/04/iPhone-SE-review-header.jpg',
         '#FF0000',
@@ -882,7 +896,7 @@ VALUES (17,
         1,
         342454781332,
         'https://youtu.be/jVUlApyShaA',
-        1, 1, 1, 1,'03.03.20');
+        1, 1, 1, 1, '03.03.20');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (35, '#FF0000', 27, 42990, 17);
@@ -898,8 +912,10 @@ values (35, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2388_0_1.jpg'),
        (35, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2388_1.png'),
        (35, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2388_0.png');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (18,
         'https://mobidevices.com/images/2019/09/iPhone-11-iPhone-11-Pro-and-iPhone-11-Pro-Max.jpeg',
         '#FFFFFF',
@@ -914,7 +930,7 @@ VALUES (18,
         0,
         34245478233242,
         'https://youtu.be/nVkcc03dDDU',
-        1, 1, 1, 1,'03.03.20');
+        1, 1, 1, 1, '03.03.20');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (36, '#FFFFFF', 132, 49990, 18);
@@ -930,8 +946,10 @@ values (36, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2732_3_1.jpg'),
        (36, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2732_2_1.jpg'),
        (36, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_2732_1_1.jpg');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (19,
         'https://softech.kg/image/catalog/Products/Phones/Samsung/01%20S23%20Ultra/1a.jpg',
         '#267300',
@@ -946,7 +964,7 @@ VALUES (19,
         1,
         13413434,
         'https://youtu.be/tHHBYTVXVXA',
-        2, 1, 2, 2,'04.03.23');
+        2, 1, 2, 2, '04.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (37, '#267300', 243, 100990, 19),
@@ -984,8 +1002,10 @@ values (37, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_4_6.png'),
        (39, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4246_13_6.png'),
        (39, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_4246_2_6.png');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (20,
         'https://p.turbosquid.com/ts-thumb/6u/vgiKFu/a91bkiVt/iphonexryellow3dmodel001/jpg/1548182538/600x600/fit_q87/35c36b76b49bb175285e090e173815210e3caaf6/iphonexryellow3dmodel001.jpg',
         '#F5CA7A',
@@ -1000,7 +1020,7 @@ VALUES (20,
         1,
         3347035478233242,
         'https://youtu.be/NOPNWo7tUgg',
-        1, 1, null, 1,'03.03.20');
+        1, 1, null, 1, '03.03.20');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (40, '#F5CA7A', 154, 49990, 20);
@@ -1016,8 +1036,10 @@ values (40, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_1742_0_1.jpg'),
        (40, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_1742_1.jpg'),
        (40, 'https://object.pscloud.io/cms/cms/Photo/img_0_77_1742_2.jpg');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 VALUES (21,
         'https://softech.kg/image/catalog/Products/Notebook/Apple/Pro%20M2/5.jpg',
         '#CCCCCC',
@@ -1032,7 +1054,7 @@ VALUES (21,
         0,
         243524345453,
         'https://youtu.be/PS2bM9cLv-I',
-        1, 2, null, 8,'03.03.23');
+        1, 2, null, 8, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (41, '#CCCCCC', 36, 189990, 21);
@@ -1049,8 +1071,10 @@ values (41, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2592_2_1.jpg'),
        (41, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2592_0_1.jpg'),
        (41, 'https://object.pscloud.io/cms/cms/Photo/img_0_62_2592_1_1.jpg');
 
-insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name, product_price,
-                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id, discount_id, sub_category_id, date_of_issue)
+insert into products(id, pdf, color, create_at, description, guarantee, product_count, product_image, product_name,
+                     product_price,
+                     product_rating, product_status, product_vendor_code, video_review, brand_id, category_id,
+                     discount_id, sub_category_id, date_of_issue)
 
 VALUES (22,
         'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/S/aplus-media/vc/7e935bc1-c4e2-4309-9e41-c2adb6c33ab4.__CR0,0,970,300_PT0_SX970_V1___.jpg',
@@ -1066,7 +1090,7 @@ VALUES (22,
         0,
         13987985,
         'https://youtu.be/NvVFETD72pg',
-        5, 2, null, 7,'03.03.23');
+        5, 2, null, 7, '03.03.23');
 
 insert into subproducts(id, color, count_of_subproduct, price, product_id)
 values (42, '#000000', 87, 69990, 22);
@@ -1091,7 +1115,8 @@ insert into orders(id, address, count_of_product, date_of_order, delivery_status
 values (1, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com',
         'Syimyk', 'Ravshanbekov', 0455247, 'IN_PROCESSING', 'DELIVERY', 'CASH', '+996222219743', 15750, 315000, 2),
 
-       (2, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com', 'Ulukbek',
+       (2, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com',
+        'Ulukbek',
         'Kochkorov', 455237, 'IN_PROCESSING', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 3),
 
        (3, 'г.Бишкек, Чуй 34 кв 23', 3, '2021-09-13 18:20:03', 'WAITING', 'mirgul@gmail.com', 'Mirgul', 'Abdinazarova',
@@ -1100,45 +1125,54 @@ values (1, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5',
        (4, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com', 'Baktygul',
         'Kushtarbek kyzy', 455289, 'IN_PROCESSING', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 5),
 
-       (5, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com', 'Nursultan',
-        'Zhumataev', 4545277, 'IN_PROCESSING', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 6),
+       (5, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com',
+        'Nursultan',
+        'Zhumataev', 4545277, 'IN_PROCESSING', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657,
+        6),
 
        (6, 'г.Бишкек, Гражданская, 119', 3, '2022-09-13 18:20:03', 'WAITING', 'alisher@gmail.com',
         'Alisher', 'Zhumanov', 0455247, 'IN_PROCESSING', 'DELIVERY', 'CASH', '+996222219743', 34521, 234567, 7),
 
-       (7, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com', 'Albina',
+       (7, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com',
+        'Albina',
         'Azamatova', 455237, 'IN_PROCESSING', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 8),
 
-       (8, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik', 'Kaamilov',
+       (8, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik',
+        'Kaamilov',
         466247, 'IN_PROCESSING', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 9),
 
        (9, 'г.Бишкек, Чуй 34 кв 23', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'nurtilek@gmail.com', 'nurtilek',
         'Maksatbek uulu', 455289, 'IN_PROCESSING', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 10),
 
-    ----------------------------------------------------------------------------------------------------------------------------
+       ----------------------------------------------------------------------------------------------------------------------------
 
        (10, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com',
         'Syimyk', 'Ravshanbekov', 0455247, 'CANCEL', 'DELIVERY', 'CASH', '+996222219743', 15750, 315000, 2),
 
-       (11, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com', 'Ulukbek',
+       (11, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com',
+        'Ulukbek',
         'Kochkorov', 455237, 'CANCEL', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 3),
 
        (12, 'г.Бишкек, Чуй 34 кв 23', 3, '2021-09-13 18:20:03', 'WAITING', 'mirgul@gmail.com', 'Mirgul', 'Abdinazarova',
         466247, 'CANCEL', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 4),
 
-       (13, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com', 'Baktygul',
+       (13, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com',
+        'Baktygul',
         'Kushtarbek kyzy', 455289, 'CANCEL', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 5),
 
-       (14, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com', 'Nursultan',
+       (14, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com',
+        'Nursultan',
         'Zhumataev', 4545277, 'CANCEL', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 6),
 
        (15, 'г.Бишкек, Гражданская, 119', 3, '2022-09-13 18:20:03', 'WAITING', 'alisher@gmail.com',
         'Alisher', 'Zhumanov', 0455247, 'CANCEL', 'DELIVERY', 'CASH', '+996222219743', 34521, 234567, 7),
 
-       (16, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com', 'Albina',
+       (16, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com',
+        'Albina',
         'Azamatova', 455237, 'CANCEL', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 8),
 
-       (17, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik', 'Kaamilov',
+       (17, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik',
+        'Kaamilov',
         466247, 'CANCEL', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 9),
 
        (18, 'г.Бишкек, Чуй 34 кв 23', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'nurtilek@gmail.com', 'nurtilek',
@@ -1149,25 +1183,30 @@ values (1, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5',
        (19, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com',
         'Syimyk', 'Ravshanbekov', 0455247, 'DELIVERED', 'DELIVERY', 'CASH', '+996222219743', 15750, 315000, 2),
 
-       (20, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com', 'Ulukbek',
+       (20, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com',
+        'Ulukbek',
         'Kochkorov', 455237, 'DELIVERED', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 3),
 
        (21, 'г.Бишкек, Чуй 34 кв 23', 3, '2021-09-13 18:20:03', 'WAITING', 'mirgul@gmail.com', 'Mirgul', 'Abdinazarova',
         466247, 'DELIVERED', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 4),
 
-       (22, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com', 'Baktygul',
+       (22, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com',
+        'Baktygul',
         'Kushtarbek kyzy', 455289, 'DELIVERED', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 5),
 
-       (23, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com', 'Nursultan',
+       (23, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com',
+        'Nursultan',
         'Zhumataev', 4545277, 'DELIVERED', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 6),
 
        (24, 'г.Бишкек, Гражданская, 119', 3, '2022-09-13 18:20:03', 'WAITING', 'alisher@gmail.com',
         'Alisher', 'Zhumanov', 0455247, 'DELIVERED', 'DELIVERY', 'CASH', '+996222219743', 34521, 234567, 7),
 
-       (25, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com', 'Albina',
+       (25, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com',
+        'Albina',
         'Azamatova', 455237, 'DELIVERED', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 8),
 
-       (26, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik', 'Kaamilov',
+       (26, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik',
+        'Kaamilov',
         466247, 'DELIVERED', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 9),
 
        (27, 'г.Бишкек, Чуй 34 кв 23', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'nurtilek@gmail.com', 'nurtilek',
@@ -1178,25 +1217,30 @@ values (1, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5',
        (28, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com',
         'Syimyk', 'Ravshanbekov', 0455247, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996222219743', 15750, 315000, 2),
 
-       (29, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com', 'Ulukbek',
+       (29, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com',
+        'Ulukbek',
         'Kochkorov', 455237, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 3),
 
        (30, 'г.Бишкек, Чуй 34 кв 23', 3, '2021-09-13 18:20:03', 'WAITING', 'mirgul@gmail.com', 'Mirgul', 'Abdinazarova',
         466247, 'ON_THE_WAY', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 4),
 
-       (31, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com', 'Baktygul',
+       (31, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com',
+        'Baktygul',
         'Kushtarbek kyzy', 455289, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 5),
 
-       (32, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com', 'Nursultan',
+       (32, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com',
+        'Nursultan',
         'Zhumataev', 4545277, 'ON_THE_WAY', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 6),
 
        (33, 'г.Бишкек, Гражданская, 119', 3, '2022-09-13 18:20:03', 'WAITING', 'alisher@gmail.com',
         'Alisher', 'Zhumanov', 0455247, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996222219743', 34521, 234567, 7),
 
-       (34, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com', 'Albina',
+       (34, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com',
+        'Albina',
         'Azamatova', 455237, 'ON_THE_WAY', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 8),
 
-       (35, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik', 'Kaamilov',
+       (35, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik',
+        'Kaamilov',
         466247, 'ON_THE_WAY', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 9),
 
        (36, 'г.Бишкек, Чуй 34 кв 23', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'nurtilek@gmail.com', 'nurtilek',
@@ -1207,25 +1251,30 @@ values (1, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5',
        (37, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com',
         'Syimyk', 'Ravshanbekov', 0455247, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 15750, 315000, 2),
 
-       (38, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com', 'Ulukbek',
+       (38, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com',
+        'Ulukbek',
         'Kochkorov', 455237, 'ORDER_READY', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 3),
 
        (39, 'г.Бишкек, Чуй 34 кв 23', 3, '2021-09-13 18:20:03', 'WAITING', 'mirgul@gmail.com', 'Mirgul', 'Abdinazarova',
         466247, 'ORDER_READY', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 4),
 
-       (40, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com', 'Baktygul',
+       (40, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com',
+        'Baktygul',
         'Kushtarbek kyzy', 455289, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 5),
 
-       (41, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com', 'Nursultan',
+       (41, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com',
+        'Nursultan',
         'Zhumataev', 4545277, 'ORDER_READY', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 6),
 
        (42, 'г.Бишкек, Гражданская, 119', 3, '2022-09-13 18:20:03', 'WAITING', 'alisher@gmail.com',
         'Alisher', 'Zhumanov', 0455247, 'ORDER_READY', 'DELIVERY', 'CASH', '+996222219743', 34521, 234567, 7),
 
-       (43, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com', 'Albina',
+       (43, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com',
+        'Albina',
         'Azamatova', 455237, 'ORDER_READY', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 8),
 
-       (44, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik', 'Kaamilov',
+       (44, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2021-09-13 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik',
+        'Kaamilov',
         466247, 'ORDER_READY', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 9),
 
        (45, 'г.Бишкек, Чуй 34 кв 23', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'nurtilek@gmail.com', 'nurtilek',
@@ -1236,25 +1285,30 @@ values (1, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5',
        (46, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2022-09-13 18:20:03', 'WAITING', 'syimyk@gmail.com',
         'Syimyk', 'Ravshanbekov', 0455247, 'WAITING', 'DELIVERY', 'CASH', '+996222219743', 15750, 315000, 2),
 
-       (47, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com', 'Ulukbek',
+       (47, 'г.Бишкек, Гражданская, 119', 3, '2023-09-13 18:20:03', 'IN_PROCESS', 'ulukbekkochkorov@gmail.com',
+        'Ulukbek',
         'Kochkorov', 455237, 'WAITING', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 3),
 
        (48, 'г.Бишкек, Чуй 34 кв 23', 3, '2021-09-13 18:20:03', 'WAITING', 'mirgul@gmail.com', 'Mirgul', 'Abdinazarova',
         466247, 'WAITING', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 4),
 
-       (49, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com', 'Baktygul',
+       (49, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'baktygul@gmail.com',
+        'Baktygul',
         'Kushtarbek kyzy', 455289, 'WAITING', 'DELIVERY', 'CASH', '+996222219743', 215076, 230675, 5),
 
-       (50, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com', 'Nursultan',
+       (50, 'г.Бишкек, Ахунбаева, 47 кв 12, дом 8', 3, '2023-09-13 18:20:03', 'WAITING', 'nursultan@gmail.com',
+        'Nursultan',
         'Zhumataev', 4545277, 'WAITING', 'PICKUP', 'PAYMENT_OFFLINE_WITH_CARD', '+996222219743', 239344, 240657, 6),
 
        (51, 'г.Бишкек, Гражданская, 119', 3, '2022-09-13 18:20:03', 'WAITING', 'alisher@gmail.com',
         'Alisher', 'Zhumanov', 0455247, 'WAITING', 'DELIVERY', 'CASH', '+996222219743', 34521, 234567, 7),
 
-       (52, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-03-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com', 'Albina',
+       (52, 'г.Бишкек, Токтоналиева, 145/7 кв 24, дом 5', 3, '2023-03-13 18:20:03', 'IN_PROCESS', 'albina@gmail.com',
+        'Albina',
         'Azamatova', 455237, 'WAITING', 'DELIVERY', 'CASH', '+996999219743', 249570, 270910, 8),
 
-       (53, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2023-03-21 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik', 'Kaamilov',
+       (53, 'г.Бишкек, Токтогулова, 123 кв 67', 3, '2023-03-21 18:20:03', 'WAITING', 'malik@gmail.com', 'Malik',
+        'Kaamilov',
         466247, 'WAITING', 'PICKUP', 'PAYMENT_WITH_CARD', '+996222219743', 204387, 217900, 9),
 
        (54, 'г.Бишкек, Чуй 34 кв 23', 3, '2020-09-13 18:20:03', 'IN_PROCESS', 'nurtilek@gmail.com', 'nurtilek',
@@ -1317,9 +1371,9 @@ values (1, 'megaline@gmail.com', 'Aibek', 'Abdurasulov', '+996123453621', 'my fi
        (4, 'kgz@gmail.com', 'Uson', 'Rasulov', '+996123453424', 'forth feedback'),
        (5, 'shoro@gmail.com', 'Balanca', 'Balanchaev', '+996123453424', 'fifth feedback');
 
-insert into reviews(id, product_grade, response_of_review, review_time, status_of_response, user_review, product_id, user_id)
-values
-    (1, 4, null, '2023-03-13 18:20:03', false, '- Размер (разумный - достаточно большой для чтения/просмотра контента, но не чрезмерный)
+insert into reviews(id, product_grade, response_of_review, review_time, status_of_response, user_review, product_id,
+                    user_id)
+values (1, 4, null, '2023-03-13 18:20:03', false, '- Размер (разумный - достаточно большой для чтения/просмотра контента, но не чрезмерный)
 - Камера (первое время режимом "мультикадр" был приятно удивлён + мегапикселей не пожалели на основную камеру, зум работает увереннее, чем у конкурентов)
 - Экран (приятная цветопередача, читать комфортно, повышенная герцовка в первые разы восхищала).', 20, 7),
        (2, 4, null, '2023-03-13 18:20:03', false, '- Размер (разумный - достаточно большой для чтения/просмотра контента, но не чрезмерный)
@@ -1339,8 +1393,7 @@ values
 - Экран (приятная цветопередача, читать комфортно, повышенная герцовка в первые разы восхищала).', 20, 6);
 
 insert into review_images(id, image_url)
-values
-       (2, 'https://apollo-singapore.akamaized.net/v1/files/09g28lmow8kf-ID/image'),
+values (2, 'https://apollo-singapore.akamaized.net/v1/files/09g28lmow8kf-ID/image'),
        (2, 'https://apollo-singapore.akamaized.net/v1/files/09g28lmow8kf-ID/image');
 
 insert into banners(id, image)

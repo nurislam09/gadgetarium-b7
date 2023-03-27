@@ -187,17 +187,17 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException("Product for delete not found!");
         });
         userRepository.findAll().forEach(x -> {
-            if (x.getFavoritesList() != null && x.getFavoritesList().contains(product)){
+            if (x.getFavoritesList() != null && x.getFavoritesList().contains(product)) {
                 x.getFavoritesList().remove(product);
             }
             product.getSubproducts().forEach(i -> x.getBasketList().remove(i));
-            if (x.getCompareProductsList() != null && x.getCompareProductsList().contains(product)){
+            if (x.getCompareProductsList() != null && x.getCompareProductsList().contains(product)) {
                 x.getCompareProductsList().remove(product);
             }
-            if (x.getViewedProductsList() != null && x.getViewedProductsList().contains(product)){
+            if (x.getViewedProductsList() != null && x.getViewedProductsList().contains(product)) {
                 x.getViewedProductsList().remove(product);
             }
-            if (x.getOrderHistoryList() != null && x.getOrderHistoryList().contains(product)){
+            if (x.getOrderHistoryList() != null && x.getOrderHistoryList().contains(product)) {
                 x.getOrderHistoryList().remove(product);
             }
             userRepository.save(x);
@@ -405,7 +405,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public CatalogResponse filterByParameters(String text, int size) throws NotFoundException {
         if (text != null) {
-            if(!text.isBlank()){
+            if (!text.isBlank()) {
                 CatalogResponse catalogResponse = new CatalogResponse();
                 List<ProductCardResponse> list = productRepository.searchCatalog(text, PageRequest.of(0, size)).stream()
                         .map(p -> new ProductCardResponse(p.getId(),
@@ -422,9 +422,9 @@ public class ProductServiceImpl implements ProductService {
                 catalogResponse.setProductCardResponses(list);
                 catalogResponse.setSizeOfProducts(list.size());
                 return catalogResponse;
-            }else
+            } else
                 throw new BadRequestException("Search text is blank");
-        }else
+        } else
             throw new BadRequestException("Search text is null");
     }
 

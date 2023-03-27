@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
         if (order.getUser() != null) {
             order.getUser().getOrders().remove(order);
         }
-        List<Subproduct>subproducts = order.getSubproducts();
+        List<Subproduct> subproducts = order.getSubproducts();
         if (subproducts != null) {
             subproducts.forEach(x -> x.getOrders().remove(order));
         }

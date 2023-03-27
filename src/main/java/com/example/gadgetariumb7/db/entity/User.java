@@ -105,6 +105,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
     public User(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
